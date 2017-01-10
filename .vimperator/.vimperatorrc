@@ -1,0 +1,24 @@
+source! ~/.vimperatorrc.local
+
+colorscheme luki
+
+" vim: set ft=vimperator:
+" highlight CmdLine background: #191919; color: #afafaf; font-size: 8pt;
+
+let mapleader=','
+
+noremap <Leader>r :source ~/.vimperatorrc.local<CR>
+noremap <Leader><Space> :nohlsearch<CR>
+
+noremap <Leader>[ gT
+noremap <Leader>] gt
+nnoremap j 4j
+nnoremap k 4k
+
+set incsearch
+set ignorecase
+set smartcase
+
+" useful for command-line completion
+set autocomplete
+set wildmode=list:longest,full
