@@ -1,0 +1,78 @@
+urxvt*title: urxvt
+urxvt*termName: rxvt-256color
+URxvt*loginShell: true
+
+! FONTS
+URxvt.font: xft:hack:size=7
+URxvt.letterSpace: -1
+
+! SCROLL
+URxvt.scrollBar: false
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*scrollWithBuffer: true
+! scroll back to the bottom on keypress
+URxvt*scrollTtyKeypress: true
+URxvt*skipScroll:  true
+URxvt.scrollStyle: rxvt
+
+! POINTERS
+URxvt.pointerBlank: true
+
+! COLORS
+! Background color
+URxvt*background: #1b1b1b
+! Font color
+URxvt*foreground: #d0d0d0
+URxvt.fadeColor: #3e3e3e
+! ANSI colours
+! black
+URxvt*color0  : #101218
+URxvt*color8  : #3f4146
+! red
+URxvt*color1  : #dc1e1e
+URxvt*color9  : #f35353
+! green
+URxvt*color2  : #96e04d
+URxvt*color10 : #b8ff70
+! yellow
+URxvt*color3  : #cda804
+URxvt*color11 : #eae373
+! blue
+URxvt*color4  : #0688b8
+URxvt*color12 : #379fc6
+! magenta
+URxvt*color5  : #75507B
+URxvt*color13 : #AD7FA8
+! cyan
+URxvt*color6  : #06989A
+URxvt*color14 : #34E2E2
+! white
+URxvt*color7  : #D3D7CF
+URxvt*color15 : #EEEEEC
+
+! CURSORS
+URxvt.cursorBlink: true
+URxvt.cursorColor: #09bfdf
+URxvt.cursorUnderline: false
+
+! URLS
+URxvt*colorUL: #86a2b0
+!enabling clickable links:
+URxvt.urlLauncher: /usr/bin/iceweasel
+URxvt.matcher.button: 1
+
+! TABS
+URxvt.tabbed.tabbar-fg:     8
+URxvt.tabbed.tabbar-bg:     11
+URxvt.tabbed.tab-fg:        11
+URxvt.tabbed.tab-bg:        8
+
+! KEYBOARD-SELECT
+! check /usr/lib/urxvt/perl and github.com/muennich/urxvt-perls
+! (for keyboard-select)
+URxvt.perl-ext-common: ...,keyboard-select
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-s: perl:keyboard-select:search
+
+URxvt*visualBell: true
+URxvt.saveLines: 10000
