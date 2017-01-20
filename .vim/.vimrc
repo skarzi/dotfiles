@@ -1,10 +1,12 @@
 set nocompatible
 
-if filereadable(expand('~/.vim/vundles.vim'))
-    source ~/.vim/vundles.vim
+if filereadable($HOME . "/.vim/vundles.vim")
+    source $HOME/.vim/vundles.vim
 endif
 
-source ~/.vim/settings.vim
+if filereadable($HOME . "/.vim/settings.vim")
+    source $HOME/.vim/settings.vim
+endif
 
 " Automatic reload of .vimrc
 if has('autocmd')

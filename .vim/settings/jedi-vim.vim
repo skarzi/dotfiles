@@ -1,4 +1,4 @@
-"JEDI-VIM SHORTCUTS
+" JEDI-VIM CONFIG
 " Completion <C-Space>
 " Goto assignments <leader>g    (typical goto function)
 " Goto definitions <leader>d    (follow identifier as far as possible, includes imports and statements)
@@ -7,4 +7,4 @@
 " Usages <leader>n              (shows all the usages of a name)
 
 let g:jedi#show_call_signatures=0
-" END JEDI-VIM SHORTCUTS
+" END JEDI-VIM CONFIG

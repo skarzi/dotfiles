@@ -21,13 +21,9 @@ set fileformat=unix
 if has("autocmd")
     " enable filetype detection
     filetype on
-    " makefiles
     autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
-    " html
     autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
-    " css
-    autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
-    " js
+    autocmd FileType css,scss setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType js setlocal ts=2 sts=2 sw=2 expandtab
 endif
 " END INDENTATION
