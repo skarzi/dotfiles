@@ -1,2 +1,3 @@
 " VIM WEBDEV PLUGINS
 Plugin 'mattn/emmet-vim'
+Plugin 'diepm/vim-rest-console'

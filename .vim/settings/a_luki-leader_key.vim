@@ -1,5 +1,5 @@
 " LEADER SHORTCUTS
-" [,],<space>,o,h,j,k,l,g,d,r,n,s,q,Q,w,z
+" [,],<space>,o,h,j,k,l,g,d,r,n,s,q,Q,w,z,R
 " set leader key
 let mapleader = ","
 
@@ -11,6 +11,4 @@ map <leader>[ :prev!<CR>
 nnoremap <leader><space> :nohlsearch<CR>
 " map <leader>o to execute current file via python
 map <leader>o :!python %<CR>
-" map sort function to a key
-" vnoremap <leader>s :sort<CR>
 " END LEADER SHORTCUTS
