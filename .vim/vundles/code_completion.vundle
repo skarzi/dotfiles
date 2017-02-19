@@ -1,0 +1,5 @@
+" CODE COMPLETIONS PLUGINS
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'neomake/neomake'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'

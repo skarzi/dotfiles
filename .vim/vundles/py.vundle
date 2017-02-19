@@ -1,0 +1,4 @@
+" VIM PYTHON DEV PLUGINS
+Plugin 'davidhalter/jedi-vim'
+Plugin 'nvie/vim-flake8'
+Plugin 'tweekmonster/impsort.vim'
