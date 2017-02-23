@@ -1,14 +1,26 @@
-snippet base_html "Basic HTML template to start from" b
-<!doctype html>
+snippet html5 "Basic HTML5 template to start from" b
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <title>$1</title>
+    <title>${1:title}</title>
     <link rel="stylesheet" href="${2:style}.css">
-    <script type="text/javascript" src="${3:script}.js"></script>
+    <script src="${3:script}.js"></script>
   </head>
   <body>
-    $4
+    $0
   </body>
 <html>
+endsnippet
+
+snippet css "CSS link" b
+<link rel="stylesheet" href="${1:style}.css">
+endsnippet
+
+snippet js "JS script src" b
+<script src="${1:script}.js"></script>
+endsnippet
+
+snippet <! "HTML comment" b
+<!-- $0 -->
 endsnippet

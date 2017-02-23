@@ -1,3 +1,55 @@
 snippet cl "console.log(...)" b
 console.log($0);
 endsnippet
+
+snippet ** "multiline comment" b
+/**
+ * $0
+ */
+endsnippet
+
+snippet ex "module.exports" b
+module.exports = ${1:module};
+endsnippet
+
+snippet css "set object's css attribute" b
+${1:object}.css('${2:attribute}', '${3:value}');
+endsnippet
+
+snippet tcf "try: catch: finally:" b
+try {
+  $1
+} catch (e) {
+  $2
+} finally {
+  $3
+}
+endsnippet
+
+snippet fun "function with dynamic docblock" b
+`!p
+# Currently Ultisnips does not support dynamic tabstops, so we cannot add
+# tabstops to the datatype for these param tags until that feature is added.
+def format_tag(argument):
+	return " * @param {{}} {0}".format(argument)
+
+arguments = [argument.strip() for argument in t[2].split(',') if argument]
+if len(arguments) > 0:
+	snip.rv = "/**"
+	for tag in map(format_tag, arguments):
+		snip += tag
+	snip += ' */'
+	snip += ''
+else:
+	snip.rv = ''
+`${1}: function(${2}) {
+  ${0:${VISUAL}}
+},
+endsnippet
+
+snippet => "array function" i
+(${1:args}) => {
+  $0
+}
+endsnippet
+
