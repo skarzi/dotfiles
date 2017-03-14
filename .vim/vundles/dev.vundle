@@ -1,5 +1,7 @@
-" CODE COMPLETIONS PLUGINS
+" DEV PLUGINS
+Plugin 'tpope/vim-fugitive'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'neomake/neomake'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'majutsushi/tagbar'

@@ -9,12 +9,12 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " run all vundles splitted to smaller categories
-runtime vim_improvements.vundle
+runtime utils.vundle
 runtime py.vundle
-runtime git.vundle
 runtime colorschemes.vundle
 runtime webdev.vundle
-runtime code_completion.vundle
+runtime dev.vundle
+runtime editors.vundle
 
 call vundle#end()            " required
 filetype plugin indent on
