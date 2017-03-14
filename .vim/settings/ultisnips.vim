@@ -1,5 +1,5 @@
 " ULTISNIPS CONFIG
-" expanf snippet
+" expand snippet
 let g:UltiSnipsExpandTrigger="<leader>q"
 " go to next input field
 let g:UltiSnipsJumpForwardTrigger="<leader>q"
@@ -9,6 +9,6 @@ let g:UltiSnipsJumpBackwardTrigger="<leader>w"
 let g:UltiSnipsListSnippets="<leader>Q"
 let g:UltiSnipsEditSplit="vertical"
 " ultisnips directory settings
-let g:UltiSnipsSnippetsDir = $HOME.'/.vim/ultisnips/'
-let g:UltiSnipsSnippetDirectories = ["ultisnips"]
+let g:UltiSnipsSnippetsDir=$HOME.'/.vim/ultisnips/'
+let g:UltiSnipsSnippetDirectories=["ultisnips"]
 " END ULTISNIPS CONFIG

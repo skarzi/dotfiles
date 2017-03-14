@@ -1,11 +1,11 @@
 " INDENTATION
 set autoindent
 " tabstop, sets how many spaces = tab
-set ts=4
+set tabstop=4
 " soft tab stops
-set sts=4
+set softtabstop=4
 " shift width
-set sw=4
+set shiftwidth=4
 " printing as many spaces as you check in sts instead tab
 set expandtab
 set shiftround
@@ -23,6 +23,7 @@ if has("autocmd")
     filetype on
     autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
     autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType xml,xsd setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType css,scss setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
 endif

@@ -1,6 +1,6 @@
 " EMMET CONFIG
 " enable just for html/css
-let g:user_emmet_install_global = 0
+let g:user_emmet_install_global=0
 if has('autocmd')
     autocmd filetype html,css,scss,xml EmmetInstall
 endif

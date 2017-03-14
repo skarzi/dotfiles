@@ -1,7 +1,7 @@
 " LEADER SHORTCUTS
 " [,],<space>,o,h,j,k,l,g,d,r,n,s,q,Q,w,z,R
 " set leader key
-let mapleader = ","
+let mapleader=","
 
 " next buffer
 nnoremap <leader>] :n!<CR>

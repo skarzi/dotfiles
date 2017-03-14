@@ -1,8 +1,8 @@
 function! <SID>strip_trailling_whitespaces()
     " Save last search and cursor position
     let _s=@/
-    let l = line(".")
-    let c = col(".")
+    let l=line(".")
+    let c=col(".")
     " Strip
     %s/\s\+$//e
     " Clean up: restore previous search history and cursor position

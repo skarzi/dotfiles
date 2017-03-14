@@ -17,7 +17,6 @@ nnoremap <leader>l <C-W>L
 nnoremap \| <C-W>\|
 " resize window vertically
 nnoremap _ <C-W>_
-
 " :sv = vericaly
 " :vs = horizontaly
 " :only = close everything apart active window

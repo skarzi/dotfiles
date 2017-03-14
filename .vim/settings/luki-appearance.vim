@@ -8,7 +8,6 @@ colorscheme hybrid
 set background=dark
 " END COLORS
 
-
 " UI LAYOUT
 " show relative line numbers
 set relativenumber

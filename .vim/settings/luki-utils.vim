@@ -21,10 +21,8 @@ set noswapfile
 set clipboard=unnamed
 " hide buffers not close them
 " set hidden
-
 " toggle between paste mode
 set pastetoggle=<F2>
-
 " map 'jk' to <ESC>
 inoremap jk <ESC>
 " map 'kj' to <ESC>
