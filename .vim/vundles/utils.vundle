@@ -1,3 +1,4 @@
 " VARIOUS, USEFUL VIM PLUGINS
 Plugin 'bling/vim-airline'
 Plugin 'bling/vim-bufferline'
+Plugin 'takac/vim-hardtime'

@@ -1,7 +1,7 @@
 " COLORS
 " use 256 colors
 set t_Co=256
-" let python_highlight_all=1
+let python_highlight_all=1
 " set syntax hightlighting depending on file type
 syntax on
 colorscheme hybrid

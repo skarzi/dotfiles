@@ -6,7 +6,7 @@ let g:neomake_list_height=3
 let g:neomake_python_flake8_maker={
     \ 'exe': 'flake8',
 \ }
-let g:neomake_python_enabled_makers=['flake8']
+let g:neomake_python_enabled_makers=['flake8', 'pyflakes', 'pep8']
 
 " javascript
 let g:neomake_javascript_eslint_maker={

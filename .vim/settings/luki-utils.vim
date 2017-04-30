@@ -23,8 +23,17 @@ set clipboard=unnamed
 " set hidden
 " toggle between paste mode
 set pastetoggle=<F2>
-" map 'jk' to <ESC>
-inoremap jk <ESC>
-" map 'kj' to <ESC>
-inoremap kj <ESC>
+
+" python with virtualenv support
+
+" Add the virtualenv's site-packages to vim path
+if has('python3')
+py3 << EOF
+import os.path
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    sys.path.insert(0, project_base_dir)
+EOF
+endif
 " END OTHER UTILS
