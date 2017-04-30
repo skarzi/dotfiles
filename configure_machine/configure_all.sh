@@ -4,6 +4,8 @@ source "./functions.sh"
 
 echo "Installing aptitude"
 install_aptitude
+
+echo "Installing packages, dependencies etc"
 install_all_via_aptitude
 
 echo "Creating symlinks"

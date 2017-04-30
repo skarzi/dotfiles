@@ -94,15 +94,16 @@ function install_git_prompt()
 function install_vimiv()
 {
     [ ! -d '/opt/vimiv' ] || exit 0
-    cd /opt/ || exit 1
-    git clone https://github.com/karlch/vimiv ./vimiv
-    cd "vimiv" || exit 2
+    git clone https://github.com/karlch/vimiv /opt/vimiv
+    cd "/opt/vimiv" || exit 1
     make install
+    cd - || exit 2
 }
 
 
 function create_symlinks()
 {
+    cd ~/dotfiles || exit 0
     FILES=(
         "./.Xmodmap"
         "./.Xresources"
