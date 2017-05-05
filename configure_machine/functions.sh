@@ -14,18 +14,18 @@ function install_all_via_aptitude()
     aptitude full-upgrade
     INSTALL='aptitude install -y'
 
-    $INSTALL git vim-nox rxvt-unicode-256color make bzip2 lbzip2
+    $INSTALL xorg git vim-nox rxvt-unicode-256color iceweasel make bzip2 lbzip2
     # python dependencies
     $INSTALL python-dev python-pip python-setuptools
     # i3wm stuff
-    $INSTALL i3-wm i3blocks i3lock feh
+    $INSTALL i3-wm i3blocks i3lock feh suckless-tools xbacklight pulseaudio
     # pyenv dependencies
     $INSTALL build-essential libssl-dev zlib1g-dev libbz2-dev \
         libreadline-dev libsqlite3-dev wget curl libncurses5-dev \
         libncursesw5-dev llvm xz-utils tk-dev
     # vimiv dependencies
-    $INSTALL python-gobject gtk3 python-pillow jhead
-    $INSTALL tmux task-warrior redshift cmus zathura mpv lm-sensors ranger xsel
+    $INSTALL python-gobject libgtk-3-dev python-pillow jhead
+    $INSTALL tmux taskwarrior redshift cmus zathura mpv lm-sensors ranger xsel
     $INSTALL scrot keepassx icedove libreoffice lxappearance
     $INSTALL fonts-hack-ttf
 }
@@ -101,9 +101,18 @@ function install_vimiv()
 }
 
 
+function install_vundle()
+{
+    cd "${HOME}" || exit 0
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    cd - || exit 1
+}
+
+
 function create_symlinks()
 {
     cd ~/dotfiles || exit 0
+    # change all ./ to /home/luki/dotfiles/
     FILES=(
         "./.Xmodmap"
         "./.Xresources"
@@ -125,7 +134,7 @@ function create_symlinks()
         "${HOME}/.vim"
         "${HOME}/.vimrc"
         "${HOME}/.vimperator"
-        "${HOME}/.vimperatorrc"
+        "${HOME}/.vimperator/.vimperatorrc"
         "${HOME}/.tmux.conf"
     )
 
