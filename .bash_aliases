@@ -19,3 +19,6 @@ alias time='time -p'
 alias i3conf='vim ~/.i3/config'
 alias reload_Xre='xrdb -load ~/.Xresources'
 alias pip_upgrade_all='pip freeze | cut -d = -f 1 | xargs pip install -U'
+
+alias add_ssh_key='eval "$(ssh-agent -s)" && ssh-add'
+alias pingg='ping 8.8.8.8'

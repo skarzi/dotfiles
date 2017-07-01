@@ -39,7 +39,7 @@ set $indicator #09bfdf
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 
-font pango:Hack 6
+font pango:Hack 7
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -102,16 +102,19 @@ bindsym $mod+a focus parent
 # focus the child container
 # bindsym $mod+d focus child
 
-set $workspace1 "1:  "
+set $workspace1 "1: "
 set $workspace2 "2: "
-set $workspace3 "3: "
+set $workspace3 "3: "
 set $workspace4 "4: "
 set $workspace5 "5: "
 set $workspace6 "6: "
 set $workspace7 "7: "
 set $workspace8 "8: "
-set $workspace9 "9: "
+set $workspace9 "9: "
 set $workspace10 "10: "
+set $workspace_work0 "work0: "
+set $workspace_work9 "work9: "
+set $workspace_work8 "work8: "
 
 
 # switch to workspace
@@ -125,6 +128,9 @@ bindsym $mod+7 workspace $workspace7
 bindsym $mod+8 workspace $workspace8
 bindsym $mod+9 workspace $workspace9
 bindsym $mod+0 workspace $workspace10
+bindsym $mod+Ctrl+0 workspace $workspace_work0
+bindsym $mod+Ctrl+9 workspace $workspace_work9
+bindsym $mod+Ctrl+8 workspace $workspace_work8
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $workspace1
@@ -137,17 +143,23 @@ bindsym $mod+Shift+7 move container to workspace $workspace7
 bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
+bindsym $mod+Shift+Ctrl+0 move container to workspace $workspace_work0
+bindsym $mod+Shift+Ctrl+9 move container to workspace $workspace_work9
+bindsym $mod+Shift+Ctrl+8 move container to workspace $workspace_work8
 
-workspace $workspace1 output HDMI1
-workspace $workspace2 output HDMI1
-workspace $workspace3 output HDMI1
-workspace $workspace4 output HDMI1
-workspace $workspace5 output HDMI1
-workspace $workspace6 output HDMI1
-workspace $workspace7 output LVDS1
-workspace $workspace8 output LVDS1
-workspace $workspace9 output LVDS1
-workspace $workspace10 output LVDS1
+workspace $workspace1 output HDMI2
+workspace $workspace2 output HDMI2
+workspace $workspace3 output HDMI2
+workspace $workspace4 output HDMI2
+workspace $workspace5 output HDMI2
+workspace $workspace6 output HDMI2
+workspace $workspace7 output eDP1
+workspace $workspace8 output eDP1
+workspace $workspace9 output eDP1
+workspace $workspace10 output eDP1
+workspace $workspace_work0 output HDMI2
+workspace $workspace_work9 output HDMI2
+workspace $workspace_work8 output HDMI2
 
 # switch to next/previous workspace
 bindsym $mod+bracketright workspace next
@@ -166,11 +178,9 @@ bindsym $mod+s exec --no-startup-id redshift
 bindsym $mod+shift+s exec --no-startup-id pkill -TERM redshift
 
 
-# assigning apps to workspace
-assign [class="Zathura"] $workspace9
-assign [class="Evince"] $workspace5
+# assign apps to workspace
 assign [class="mpv"] $workspace6
-assign [class="Icedove"] $workspace8
+assign [class="Thunderbird"] $workspace8
 assign [class="Firefox"] $workspace5
 
 # reload the configuration file
@@ -238,7 +248,7 @@ focus_follows_mouse no
 
 # startup programs
 # set wallpaper using feh
-exec_always --no-startup-id feh --bg-scale ~/.i3/.python_wlp.jpg
+exec_always --no-startup-id feh --bg-scale ~/pictures/python_wallpaper.jpg
 # exec redshift -c ~/.config/redshift.conf
 exec iceweasel
 exec icedove
@@ -253,6 +263,16 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 
 # screen brightness controls
 # increase screen brightness
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5
 # decrease screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5
+
+# TODO: |
+#  XF86Display (fn + F7) to xrandr --output HDMI2 --auto --left=of eDP1
+#  XF86Tools (Fn + F9) to open new terminal in dotfiles directory
+#  XF86Search (Fn + F10) to dmenu_run -fn 'Hack-7'
+#  XF86LaunchA (Fn + F11)
+#  XF86Explorer (Fn + F12)
+
+# initial workspace
+exec i3-msg workspace $workspace1

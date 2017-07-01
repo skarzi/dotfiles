@@ -51,7 +51,7 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='\[\e[0;32m\]\u\[\e[m\]@\[\e[0;32m\]\h\[\e[m\] \[\e[m\][\[\e[0;34m\]\w\[\e[m\]\[\e[m\]] \[\e[0;32m\]\n\$\[\e[m\] '
+    PS1='\[\e[0;32m\]\u\[\e[m\]@\[\e[0;32m\]\h\[\e[m\] \[\e[m\][\[\e[0;34m\]\w\[\e[m\]\[\e[m\]] \n\[\e[0;32m\]\$\[\e[m\] '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -87,6 +87,10 @@ export EDITOR=vim
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
+# android
+export ANDROID_HOME="$HOME/Android/Sdk"
+export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+
 # git-prompt
 GIT_PROMPT_ONLY_IN_REPO=1
 GIT_PROMPT_THEME=Solarized
@@ -96,6 +100,7 @@ source ~/.bash-git-prompt/gitprompt.sh
 source /usr/local/bin/virtualenvwrapper.sh
 
 # pyenv virtualenvwrapper
+# export PYENV_VIRTUALENVWRAPPER_PYENV_VERSION="2.7.13"
 export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 
 # pyenv

@@ -3,7 +3,7 @@ urxvt*termName: rxvt-256color
 URxvt*loginShell: true
 
 ! FONTS
-URxvt.font: xft:hack:size=7
+URxvt.font: xft:hack:size=8
 URxvt.letterSpace: -1
 
 ! SCROLL
@@ -57,7 +57,7 @@ URxvt.cursorUnderline: false
 
 ! URLS
 URxvt*colorUL: #86a2b0
-!enabling clickable links:
+! clickable links:
 URxvt.urlLauncher: /usr/bin/iceweasel
 URxvt.matcher.button: 1
 
@@ -68,7 +68,6 @@ URxvt.tabbed.tab-fg:        11
 URxvt.tabbed.tab-bg:        8
 
 ! KEYBOARD-SELECT
-! check /usr/lib/urxvt/perl and github.com/muennich/urxvt-perls
 ! (for keyboard-select)
 URxvt.perl-ext-common: ...,keyboard-select
 URxvt.keysym.M-Escape: perl:keyboard-select:activate

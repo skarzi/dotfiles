@@ -1,0 +1,33 @@
+[user]
+	name = "Łukasz Skarżyński"
+	email = skarzynski_lukasz@protonmail.com
+[core]
+	editor = vim
+[merge]
+    tool = vimdiff
+[alias]
+    count = "!f() {\
+            branch_to_compare=${1-master};\
+            git rev-list --count HEAD ^$branch_to_compare;\
+        }; f"
+    squashbase = "!f() {\
+            branch_name=${1-master};\
+            commits_count=$(git count $branch_name);\
+            git rebase -i HEAD~$commits_count;\
+        }; f"
+    pullbase = "!f() {\
+            branch_name=${1-master};\
+            git checkout $branch_name && git pull && git checkout - && \
+            git rebase -i $branch_name;\
+        }; f"
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" \
+             --decorate
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" \
+             --decorate --numstat
+    grep = grep -Ii
+    graphlog = log --graph --oneline --decorate --all
+    st = status
+    s = status -s
+    please = push --force-with-lease
+    commend = commit --amend --no-edit --reset-author
+    init-with-commit = "!git init && git commit -m 'initial commit' --allow-empty"
