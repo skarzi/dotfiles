@@ -22,3 +22,5 @@ set smartcase
 " useful for command-line completion
 set autocomplete
 set wildmode=list:longest,full
+
+set editor="urxvt -e vim"

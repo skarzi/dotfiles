@@ -15,9 +15,12 @@ alias lla='ls -lA'
 alias lls='ls -l'
 
 alias time='time -p'
+alias sscrot='scrot -s -e "mv \$f ~/pictures/screenshots"'
 
 alias i3conf='vim ~/.i3/config'
 alias reload_Xre='xrdb -load ~/.Xresources'
+
+alias de='deactivate'
 alias pip_upgrade_all='pip freeze | cut -d = -f 1 | xargs pip install -U'
 
 alias add_ssh_key='eval "$(ssh-agent -s)" && ssh-add'

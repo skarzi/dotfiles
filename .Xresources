@@ -69,7 +69,7 @@ URxvt.tabbed.tab-bg:        8
 
 ! KEYBOARD-SELECT
 ! (for keyboard-select)
-URxvt.perl-ext-common: ...,keyboard-select
+URxvt.perl-ext-common: keyboard-select
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-s: perl:keyboard-select:search
 
