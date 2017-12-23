@@ -7,7 +7,7 @@ colorscheme luki
 
 let mapleader=','
 
-noremap <Leader>r :source ~/.vimperatorrc.local<CR>
+noremap <Leader>r :source ~/.vimperatorrc<CR>
 noremap <Leader><Space> :nohlsearch<CR>
 
 noremap <Leader>[ gT

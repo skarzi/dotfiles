@@ -1,0 +1,14 @@
+#!/usr/bin/tmux source-file
+
+new-session -d -s 'personal' -c ~
+# personal window
+split-window -d -t 0 -h -p 40
+split-window -d -t 1 -v -p 40
+# pane 0 - weechat
+send-keys -t 0 'weechat' enter
+# pane 1 - pass
+# pane 2 - taskwarrior
+send-keys -t 2 'task next' enter
+
+select-window -t 'personal'
+select-pane -t 0

@@ -21,6 +21,7 @@ alias i3conf='vim ~/.i3/config'
 alias reload_Xre='xrdb -load ~/.Xresources'
 
 alias de='deactivate'
+alias mk='pyenv virtualenvwrapper && mkvirtualenv'
 alias pip_upgrade_all='pip freeze | cut -d = -f 1 | xargs pip install -U'
 
 alias add_ssh_key='eval "$(ssh-agent -s)" && ssh-add'
