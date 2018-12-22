@@ -9,4 +9,6 @@ set ignorecase
 set smartcase
 " show the matching part of the pair for [] {} and ()
 set showmatch
+" search down into subdirectories
+set path+=**
 " END SEARCHING

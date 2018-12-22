@@ -9,9 +9,4 @@ set foldnestmax=10
 set foldmethod=indent
 " space open/closes folds
 nnoremap <space> za
-" width of document (used by gd)
-set textwidth=79
-" set coloring for 80 column
-set colorcolumn=80
-highlight ColorColumn ctermbg=25
 " END FOLDING
