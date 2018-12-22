@@ -33,7 +33,8 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-export TERM="xterm-256color"
+# export TERM="xterm-256color"
+export TERM="rxvt-unicode"
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
@@ -90,25 +91,35 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 # android
 export ANDROID_HOME="$HOME/Android/Sdk"
 export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+export PATH="${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools"
+export PATH="${PATH}:/opt/gradle/gradle-4.10.2/bin"
+
+# nvm
+export NVM_DIR="/home/luki/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # git-prompt
-GIT_PROMPT_ONLY_IN_REPO=1
-GIT_PROMPT_THEME=Solarized
-source ~/.bash-git-prompt/gitprompt.sh
+export GIT_PROMPT_ONLY_IN_REPO=1
+export GIT_PROMPT_THEME="Solarized"
+source "${HOME}/.bash-git-prompt/gitprompt.sh"
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="${PYENV_ROOT}/bin:${PATH}"
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi
 
 # virtualenvwrapper
-source /usr/local/bin/virtualenvwrapper.sh
+# source /usr/local/bin/virtualenvwrapper.sh
 
 # pyenv virtualenvwrapper
 # export PYENV_VIRTUALENVWRAPPER_PYENV_VERSION="2.7.13"
 export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
-
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+pyenv virtualenvwrapper
 
 # startx when current tty == tty 1
-if [ -z "$DISPLAY" -a $XDG_VTNR -eq 1 ]; then
+if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
     startx
 fi
