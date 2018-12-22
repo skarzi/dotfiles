@@ -19,36 +19,65 @@ URxvt.scrollStyle: rxvt
 URxvt.pointerBlank: true
 
 ! COLORS
+! OLD COLORS CONFIG
 ! Background color
-URxvt*background: #1b1b1b
-! Font color
-URxvt*foreground: #d0d0d0
-URxvt.fadeColor: #3e3e3e
-! ANSI colours
+! URxvt*background: #1b1b1b
+! ! Font color
+! URxvt*foreground: #d0d0d0
+! URxvt.fadeColor: #3e3e3e
+! ! ANSI colours
+! ! black
+! URxvt*color0  : #101218
+! URxvt*color8  : #3f4146
+! ! red
+! URxvt*color1  : #dc1e1e
+! URxvt*color9  : #f35353
+! ! green
+! URxvt*color2  : #96e04d
+! URxvt*color10 : #b8ff70
+! ! yellow
+! URxvt*color3  : #cda804
+! URxvt*color11 : #eae373
+! ! blue
+! URxvt*color4  : #0688b8
+! URxvt*color12 : #379fc6
+! ! magenta
+! URxvt*color5  : #75507B
+! URxvt*color13 : #AD7FA8
+! ! cyan
+! URxvt*color6  : #06989A
+! URxvt*color14 : #34E2E2
+! ! white
+! URxvt*color7  : #D3D7CF
+! URxvt*color15 : #EEEEEC
+
+*background: #1D1F21
+*foreground: #C5C8C6
 ! black
-URxvt*color0  : #101218
-URxvt*color8  : #3f4146
+*color0: #282A2E
+*color8: #373B41
 ! red
-URxvt*color1  : #dc1e1e
-URxvt*color9  : #f35353
+*color1: #A54242
+*color9: #CC6666
 ! green
-URxvt*color2  : #96e04d
-URxvt*color10 : #b8ff70
+*color2: #8C9440
+*color10: #B5BD68
 ! yellow
-URxvt*color3  : #cda804
-URxvt*color11 : #eae373
+*color3: #DE935F
+*color11: #F0C674
 ! blue
-URxvt*color4  : #0688b8
-URxvt*color12 : #379fc6
+*color4: #5F819D
+*color12: #81A2BE
 ! magenta
-URxvt*color5  : #75507B
-URxvt*color13 : #AD7FA8
+*color5: #85678F
+*color13: #B294BB
 ! cyan
-URxvt*color6  : #06989A
-URxvt*color14 : #34E2E2
+*color6: #5E8D87
+*color14: #8ABEB7
 ! white
-URxvt*color7  : #D3D7CF
-URxvt*color15 : #EEEEEC
+*color7: #707880
+*color15: #C5C8C6
+
 
 ! CURSORS
 URxvt.cursorBlink: true
@@ -67,11 +96,18 @@ URxvt.tabbed.tabbar-bg:     11
 URxvt.tabbed.tab-fg:        11
 URxvt.tabbed.tab-bg:        8
 
+! PLUGINS
+URxvt.perl-ext-common: default,keyboard-select,font-size
+
 ! KEYBOARD-SELECT
-! (for keyboard-select)
-URxvt.perl-ext-common: keyboard-select
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-s: perl:keyboard-select:search
+
+! FONT SIZE DYNAMIC RESIZING
+URxvt.keysym.C-S-Up:   font-size:incglobal
+URxvt.keysym.C-S-Down: font-size:decglobal
+URxvt.keysym.C-equal:  font-size:reset
+URxvt.keysym.C-slash:  font-size:show
 
 URxvt*visualBell: true
 URxvt.saveLines: 10000
