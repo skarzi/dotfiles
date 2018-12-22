@@ -18,14 +18,19 @@ set smarttab
 " to avoid trouble with conversion
 set fileformat=unix
 " set local indentatnion settings per filetype
-if has("autocmd")
+if has('autocmd')
     " enable filetype detection
     filetype on
-    autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
-    autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType xml,xsd setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType css,scss setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+    augroup vimrc_autocmds
+        autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
+        autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
+        autocmd FileType htmldjango setlocal ts=2 sts=2 sw=2 expandtab
+        autocmd FileType xml,xsd setlocal ts=2 sts=2 sw=2 expandtab
+        autocmd FileType css,scss setlocal ts=2 sts=2 sw=2 expandtab
+        autocmd FileType javascript,js setlocal ts=2 sts=2 sw=2 expandtab
+        autocmd FileType yaml,yml setlocal ts=2 sts=2 sw=2 expandtab
+        autocmd FileType vue setlocal ts=2 sts=2 sw=2 expandtab
+        autocmd FileType groovy setlocal ts=2 sts=2 sw=2 expandtab
+    augroup END
 endif
 " END INDENTATION

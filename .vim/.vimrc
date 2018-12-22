@@ -1,10 +1,10 @@
 set nocompatible
 
-if filereadable($HOME . "/.vim/vundles.vim")
+if filereadable($HOME . '/.vim/vundles.vim')
     source $HOME/.vim/vundles.vim
 endif
 
-if filereadable($HOME . "/.vim/settings.vim")
+if filereadable($HOME . '/.vim/settings.vim')
     source $HOME/.vim/settings.vim
 endif
 

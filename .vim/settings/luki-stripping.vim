@@ -1,17 +1,19 @@
 function! <SID>strip_trailling_whitespaces()
     " Save last search and cursor position
-    let _s=@/
-    let l=line(".")
-    let c=col(".")
+    let s:_s=@/
+    let s:l=line('.')
+    let s:c=col('.')
     " Strip
     %s/\s\+$//e
     " Clean up: restore previous search history and cursor position
-    let @/=_s
-    call cursor(l, c)
+    let @/=s:_s
+    call cursor(s:l, s:c)
 endfunction
 
 nnoremap <silent> <leader>s :call <SID>strip_trailling_whitespaces()<CR>
 
-if has("autocmd")
-    autocmd BufWritePre *.py,*.js,*c,*cpp,*.pl,*html,*.css,*.scss :call <SID>strip_trailling_whitespaces()
+if has('autocmd')
+    augroup vimrc_autocmds
+        autocmd BufWritePre *.py,*.js,*.c,*.cpp,*.pl,*.vue,*html,*.css,*.scss :call <SID>strip_trailling_whitespaces()
+    augroup END
 endif
