@@ -2,8 +2,8 @@
 " enable just for html/css
 let g:user_emmet_install_global=0
 if has('autocmd')
-    autocmd filetype html,css,scss,xml EmmetInstall
+    autocmd filetype html,css,scss,xml,vue,htmldjango EmmetInstall
 endif
-" set / as trigger key
+" set \ as trigger key
 let g:user_emmet_leader_key='\'
 " END EMMET CONFIG
