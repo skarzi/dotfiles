@@ -1,7 +1,8 @@
 " DEV PLUGINS
 Plugin 'tpope/vim-fugitive'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'neomake/neomake'
+Plugin 'w0rp/ale'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'majutsushi/tagbar'
+Plugin 'tomlion/vim-solidity'
+Plugin 'benmills/vimux'
