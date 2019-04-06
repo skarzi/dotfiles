@@ -1,6 +1,7 @@
 " VIM PYTHON DEV PLUGINS
 Plugin 'davidhalter/jedi-vim'
 Plugin 'tmhedberg/SimpylFold'
+Plugin 'raimon49/requirements.txt.vim'
 
 " DJANGO
 Plugin 'tweekmonster/django-plus.vim'
