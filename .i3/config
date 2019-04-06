@@ -38,7 +38,6 @@ set $indicator #09bfdf
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-
 font pango:Hack 7
 
 # Before i3 v4.8, we used to recommend this one as the default:
@@ -275,6 +274,10 @@ bindsym XF86Search exec dmenu_run -fn 'Hack-7'
 #    or custom script allowing interactivly configure screens.
 #  - XF86LaunchA (Fn + F11) ?
 #  - XF86Explorer (Fn + F12) ?
+
+# disable border in some windows
+for_window [class="^Google-chrome$" title=" - Google Chrome$"] border none
+for_window [class="^Firefox$" title=" - Mozilla Firefox$"] border none
 
 # initial workspace
 exec i3-msg workspace $workspace1
