@@ -6,6 +6,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'posva/vim-vue'
 Plugin 'elzr/vim-json'
+Plugin 'lilydjwg/colorizer'
 
 " API
 Plugin 'diepm/vim-rest-console'
