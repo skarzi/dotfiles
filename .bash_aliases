@@ -24,7 +24,7 @@ alias de='deactivate'
 alias mk='pyenv virtualenvwrapper && mkvirtualenv'
 alias pip_upgrade_all='pip freeze | cut -d = -f 1 | xargs pip install -U'
 
-alias add_ssh_key='bash ~/dotfiles/bin/add_ssh_key.sh'
+# alias add_ssh_key='source ${HOME}/dotfiles/bin/add_ssh_key.sh'
 alias toggle_trackpad='bash ~/dotfiles/bin/toggle_trackpad.sh'
 alias pingg='ping 8.8.8.8'
 
@@ -34,3 +34,15 @@ alias dc_run='docker-compose run --rm'
 alias rm_pyc="find . -type d -name __pycache__  \
     -o \( -type f -name '*.py[co]' \) -print0 \
     | xargs -0 rm -rf"
+
+alias xrandr_home="xmodmap ~/.Xmodmap \
+    && xrandr \
+        --output DP2-1 --rotate left --auto --right-of eDP1 \
+        --output DP2-2 --auto --right-of DP2-1"
+alias xrandr_work="xmodmap ~/.Xmodmap \
+    && xrandr \
+        --output HDMI1 --rotate left --auto --left-of HDMI2 --dpi 90/HDMI1 \
+        --output HDMI2 --auto --above eDP1 --dpi 90/HDMI2"
+
+
+source "${HOME}/dotfiles/aliases.sh"
