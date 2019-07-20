@@ -29,7 +29,7 @@ send-keys -t 1 'workon {{ project_name }}' enter
 send-keys -t 1 'add_ssh_key ~/.ssh/{{ ssh_key }}' enter
 # pane 2 - server
 send-keys -t 2 'workon {{ project_name }}' enter
-send-keys -t 2 'docker-compose up app'
+send-keys -t 2 'dc up app'
 # pane 3 - bash
 send-keys -t 3 'workon {{ project_name }}' enter
 send-keys -t 3 'add_ssh_key ~/.ssh/{{ ssh_key }}' enter
@@ -46,7 +46,22 @@ split-window -d \
 # pane 0 - shell
 send-keys -t 0 'workon {{ project_name }}' enter
 # pane 1 - vpn
-send-keys -t 1 'sudo openvpn --config {{ vpn_config_file }}' enter
+send-keys -t 1 'sudo openvpn --config {{ vpn_config_file }}'
+
+# tests window
+new-window -a \
+           -c {{ project_path }} \
+           -n 'tests'
+split-window -d \
+             -c {{ project_path }} \
+             -t 0 \
+             -h \
+             -p 50
+# pane 0 - shell
+send-keys -t 0 'workon {{ project_name }}' enter
+# pane 1 - tests
+send-keys -t 1 'workon {{ project_name }}' enter
+send-keys -t 1 'dc_run app pytest'
 
 select-window -t 'dev'
 select-pane -t 0
