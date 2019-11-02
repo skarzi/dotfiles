@@ -5,7 +5,7 @@ let g:ale_lint_on_enter = 1
 
 let g:ale_open_list = 1
 let g:ale_set_loclist = 1
-let g:ale_list_window_size = 3
+let g:ale_list_window_size = 4
 
 " airline
 let g:airline#extensions#ale#enabled = 1
@@ -20,6 +20,7 @@ let g:ale_linter_aliases = {
 
 let g:ale_linters = {
 \     'vue': ['eslint', 'vls'],
+\     'python': ['mypy', 'pylama', 'flake8']
 \ }
 
 " python
