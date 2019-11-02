@@ -2,3 +2,5 @@
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'lervag/vimtex'
+Plugin 'junegunn/goyo.vim'
+Plugin 'editorconfig/editorconfig-vim'
