@@ -195,7 +195,7 @@ bindsym $mod+shift+s exec --no-startup-id pkill -TERM redshift
 # assign apps to workspace
 assign [class="mpv"] $workspace6
 assign [class="Thunderbird"] $workspace8
-assign [class="Firefox"] $workspace5
+assign [class="firefox"] $workspace5
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -297,7 +297,7 @@ bindsym XF86Search exec dmenu_run -fn 'Hack-7'
 
 # disable border in some windows
 for_window [class="^Google-chrome$" title=" - Google Chrome$"] border none
-for_window [class="^Firefox$" title=" - Mozilla Firefox$"] border none
+for_window [class="firefox" title=" - Mozilla Firefox$"] border none
 
 # initial workspace
 exec i3-msg workspace $workspace1
