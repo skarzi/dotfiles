@@ -100,9 +100,10 @@ export NVM_DIR="/home/luki/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # git-prompt
-export GIT_PROMPT_ONLY_IN_REPO=1
-export GIT_PROMPT_THEME="Solarized"
-source "${HOME}/.bash-git-prompt/gitprompt.sh"
+if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
+    GIT_PROMPT_ONLY_IN_REPO=1
+    source "${HOME}/.bash-git-prompt/gitprompt.sh"
+fi
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -123,3 +124,6 @@ pyenv virtualenvwrapper
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
     startx
 fi
+for BCFILE in ~/.bash_completion.d/* ; do
+    . ${BCFILE}
+done
