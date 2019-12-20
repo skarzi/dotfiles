@@ -4,6 +4,8 @@ if has('autocmd')
     filetype on
     augroup vimrc_autocmds
         autocmd BufNewFile,BufRead Jenkinsfile setf groovy
+        autocmd BufNewFile,BufRead */ansible/hosts setf yaml.ansible
+        autocmd BufNewFile,BufRead */playbooks/*.yml setf yaml.ansible
     augroup END
 endif
 " END FILETYPES
