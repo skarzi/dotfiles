@@ -120,10 +120,15 @@ fi
 export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 pyenv virtualenvwrapper
 
+# BASH completion
+for BCFILE in ~/.bash_completion.d/* ; do
+    source "${BCFILE}"
+done
+
+# GO language version manager
+[[ -s "/home/luki/.gvm/scripts/gvm" ]] && source "/home/luki/.gvm/scripts/gvm"
+
 # startx when current tty == tty 1
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
     startx
 fi
-for BCFILE in ~/.bash_completion.d/* ; do
-    . ${BCFILE}
-done
