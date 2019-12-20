@@ -1,14 +1,14 @@
 #!/usr/bin/tmux source-file
 
 new-session -d \
-            -c ~ \
+            -c "${HOME}" \
             -s 'personal' \
             -n 'personal'
 # personal window
 split-window -d -t 0 -h -p 40
 split-window -d -t 1 -v -p 40
 # pane 0 - dotfiles repo
-send-keys -t 0 'cd ~/dotfiles' enter
+send-keys -t 0 'cd ${HOME}/dotfiles' enter
 # pane 1 - pass
 # pane 2 - taskwarrior
 send-keys -t 2 'task next' enter
