@@ -1,8 +1,8 @@
 " VIM COLORSCHEMES
-Plugin 'sjl/badwolf'
 Plugin 'reedes/vim-colors-pencil'
 Plugin 'w0ng/vim-hybrid'
 Plugin 'chase/focuspoint-vim'
+Plugin 'liuchengxu/space-vim-dark'
 
 " VIM-AIRLINE THEMES
 Plugin 'chase/vim-airline-focuspoint'

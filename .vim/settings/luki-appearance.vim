@@ -6,7 +6,7 @@ let g:python_highlight_all=1
 syntax on
 set background=dark
 let g:hybrid_custom_term_colors = 1
-colorscheme hybrid
+colorscheme space-vim-dark
 " line number colors
 highlight Normal ctermbg=none
 " TODO: find better color
