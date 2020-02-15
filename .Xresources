@@ -1,5 +1,5 @@
-urxvt*title: urxvt
-urxvt*termName: rxvt-256color
+Urxvt*title: urxvt
+Urxvt*termName: rxvt-256color
 URxvt*loginShell: true
 
 ! FONTS
@@ -97,6 +97,7 @@ URxvt.tabbed.tab-fg:        11
 URxvt.tabbed.tab-bg:        8
 
 ! PLUGINS
+URxvt.perl-lib: /usr/lib/urxvt/perl
 URxvt.perl-ext-common: default,keyboard-select,font-size
 
 ! KEYBOARD-SELECT
@@ -109,5 +110,7 @@ URxvt.keysym.C-S-Down: font-size:decglobal
 URxvt.keysym.C-equal:  font-size:reset
 URxvt.keysym.C-slash:  font-size:show
 
-URxvt*visualBell: true
-URxvt.saveLines: 10000
+! turn off screen flashing
+URxvt*visualBell: false
+
+URxvt.saveLines: 500
