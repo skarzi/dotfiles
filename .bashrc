@@ -1,6 +1,6 @@
 # if not running interactively, don't do anything
 case $- in
-*i*) ;;
+    *i*) ;;
     *) return;;
 esac
 
@@ -34,7 +34,7 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
 fi
 
 # export TERM="xterm-256color"
-export TERM="rxvt-unicode"
+export TERM="rxvt-unicode-256color"
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
@@ -111,9 +111,6 @@ export PATH="${PYENV_ROOT}/bin:${PATH}"
 if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
 fi
-
-# virtualenvwrapper
-# source /usr/local/bin/virtualenvwrapper.sh
 
 # pyenv virtualenvwrapper
 # export PYENV_VIRTUALENVWRAPPER_PYENV_VERSION="2.7.13"
