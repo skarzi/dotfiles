@@ -147,9 +147,9 @@ bindsym $mod+Shift+Ctrl+9 move container to workspace $workspace_work9
 bindsym $mod+Shift+Ctrl+8 move container to workspace $workspace_work8
 
 workspace $workspace1 output DP2-2 eDP1
-workspace $workspace2 output DP2-1 DP1
+workspace $workspace2 output DP2-1 DP1 HDMI1
 workspace $workspace3 output DP2-2 eDP1
-workspace $workspace4 output DP2-1 DP1
+workspace $workspace4 output DP2-1 DP1 HDMI1
 workspace $workspace5 output DP2-2 eDP1
 workspace $workspace6 output DP2-2 DP1
 workspace $workspace7 output DP2-2 HDMI2 eDP1
@@ -194,7 +194,7 @@ bindsym $mod+shift+s exec --no-startup-id pkill -TERM redshift
 
 # assign apps to workspace
 assign [class="mpv"] $workspace6
-assign [class="Thunderbird"] $workspace8
+assign [class="thunderbird"] $workspace8
 assign [class="firefox"] $workspace5
 
 # reload the configuration file
