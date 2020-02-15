@@ -28,6 +28,7 @@ alias pip_upgrade_all='pip freeze | cut -d = -f 1 | xargs pip install -U'
 alias toggle_trackpad='bash ~/dotfiles/bin/toggle_trackpad.sh'
 alias pingg='ping 8.8.8.8'
 
+alias dr='docker'
 alias dc='docker-compose'
 alias dc_run='docker-compose run --rm'
 
@@ -39,10 +40,13 @@ alias xrandr_home="xmodmap ~/.Xmodmap \
     && xrandr \
         --output DP2-1 --rotate left --auto --right-of eDP1 \
         --output DP2-2 --auto --right-of DP2-1"
+alias xrandr_home_2="xmodmap ~/.Xmodmap \
+    && xrandr \
+        --output HDMI1 --auto --left-of eDP1"
 alias xrandr_work="xmodmap ~/.Xmodmap \
     && xrandr \
-        --output HDMI1 --rotate left --auto --left-of HDMI2 --dpi 90/HDMI1 \
-        --output HDMI2 --auto --above eDP1 --dpi 90/HDMI2"
+        --output HDMI2 --auto --above eDP1 \
+        --output DP1 --auto --rotate left --left-of HDMI2"
 
 
 source "${HOME}/dotfiles/aliases.sh"
