@@ -22,7 +22,7 @@ if has('autocmd')
     " enable filetype detection
     filetype on
     augroup vimrc_autocmds
-        autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
+        autocmd FileType make,Makefile setlocal ts=8 sts=8 sw=8 noexpandtab
         autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
         autocmd FileType htmldjango setlocal ts=2 sts=2 sw=2 expandtab
         autocmd FileType xml,xsd setlocal ts=2 sts=2 sw=2 expandtab
