@@ -7,6 +7,8 @@
     autocrlf = false
 [merge]
     tool = vimdiff
+[pull]
+    rebase = false
 [alias]
     count = "!f() {\
             branch_to_compare=${1-master};\
