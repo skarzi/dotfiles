@@ -1,8 +1,8 @@
 [user]
-	name = "Łukasz Skarżyński"
-	email = skarzynski_lukasz@protonmail.com
+    name = "Łukasz Skarżyński"
+    email = skarzynski_lukasz@protonmail.com
 [core]
-	editor = vim
+    editor = vim
 [merge]
     tool = vimdiff
 [alias]
@@ -21,12 +21,18 @@
             git rebase -i $branch_name;\
         }; f"
     last = log -n 1
-    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" \
-             --decorate
-    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" \
-             --decorate --numstat
-    llast = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" \
-                --decorate --numstat -n 1
+    ls = log \
+            --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" \
+            --decorate
+    ll = log \
+            --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" \
+            --decorate \
+            --numstat
+    llast = log \
+            --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" \
+            --decorate \
+            --numstat \
+            -n 1
     grep = grep -Ii
     graphlog = log --graph --oneline --decorate --all
     st = status
