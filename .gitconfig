@@ -47,3 +47,5 @@
     please = push --force-with-lease
     commend = commit --amend --no-edit --reset-author
     init-with-commit = "!git init && git commit -m 'initial commit' --allow-empty"
+    addp = add --patch
+    undo=reset --soft HEAD^
