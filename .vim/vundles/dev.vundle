@@ -1,6 +1,7 @@
 " DEV PLUGINS
 " GIT
 Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
 " Linting
 Plugin 'w0rp/ale'
 " Snippets
