@@ -3,6 +3,8 @@
     email = skarzynski_lukasz@protonmail.com
 [core]
     editor = vim
+    eol = lf
+    autocrlf = false
 [merge]
     tool = vimdiff
 [alias]
