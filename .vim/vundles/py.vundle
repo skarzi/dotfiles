@@ -3,3 +3,6 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'raimon49/requirements.txt.vim'
 Plugin 'cespare/vim-toml'
+Plugin 'vim-scripts/indentpython.vim'
+" TODO: test following plugins
+" Plugin 'alfredodeza/pytest.vim'
