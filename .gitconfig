@@ -38,7 +38,10 @@
             --numstat \
             -n 1
     grep = grep -Ii
-    graphlog = log --graph --oneline --decorate --all
+    graphlog = log \
+        --graph \
+        --pretty='''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset''' \
+        --abbrev-commit
     st = status
     s = status -s
     please = push --force-with-lease
