@@ -6,9 +6,8 @@ let g:UltiSnipsJumpForwardTrigger='<leader>q'
 " go to prev input field
 let g:UltiSnipsJumpBackwardTrigger='<leader>w'
 " list snippets
-let g:UltiSnipsListSnippets='<leader>Q'
+let g:UltiSnipsListSnippets='<leader>t'
 let g:UltiSnipsEditSplit='vertical'
 " ultisnips directory settings
-let g:UltiSnipsSnippetsDir=$HOME.'/.vim/ultisnips/'
-let g:UltiSnipsSnippetDirectories=['ultisnips']
+let g:UltiSnipsSnippetDirectories=['ultisnips', 'UltiSnips']
 " END ULTISNIPS CONFIG

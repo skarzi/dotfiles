@@ -6,6 +6,7 @@ let g:python_highlight_all=1
 syntax on
 set background=dark
 let g:hybrid_custom_term_colors = 1
+" hybrid, gotham, dracula, space-vim-dark, onedark
 colorscheme space-vim-dark
 " line number colors
 highlight Normal ctermbg=none
