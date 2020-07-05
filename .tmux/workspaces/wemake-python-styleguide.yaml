@@ -1,0 +1,35 @@
+---
+session_name: wemake-python-styleguide
+start_directory: /home/luki/dev/github_projects/wemake-python-styleguide
+windows:
+  - window_name: dev
+    focus: true
+    layout: 9a2a,80x24,0,0{47x24,0,0,14,32x24,48,0,15}
+    options:
+      automatic-rename: false
+    panes:
+      - focus: true
+        shell_command:
+          - workon wemake-python-styleguide
+          - clear
+          - eval "$(ssh-agent -s)" && ssh-add ~/.ssh/github_rsa
+      - shell_command:
+          - workon wemake-python-styleguide
+          - clear
+  - window_name: tests
+    layout: 6cb5,318x79,0,0,16
+    suppress_history: false
+    options:
+      automatic-rename: false
+    panes:
+      - focus: true
+        shell_command:
+          - workon wemake-python-styleguide
+          - clear
+          - >-
+              # grep --include="*.py" -Rin 'needle' .
+      - shell_command:
+          - workon wemake-python-styleguide
+          - clear
+          - >-
+              # make test

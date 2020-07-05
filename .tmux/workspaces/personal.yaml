@@ -1,0 +1,22 @@
+---
+session_name: personal
+start_directory: "/home/luki/"
+windows:
+  - window_name: management
+    focus: true
+    layout: f86d,318x79,0,0{166x79,0,0,10,151x79,167,0[151x42,167,0,11,151x36,167,43,12]}
+    options:
+      automatic-rename: false
+    panes:
+      - start_directory: "/home/luki/dotfiles/"
+        focus: true
+        shell_command:
+          - cd /home/luki/dotfiles
+          - workon dotfiles
+          - clear
+          - eval "$(ssh-agent -s)" && ssh-add ~/.ssh/github_rsa
+      - suppress_history: false
+        shell_command:
+          - >-
+              # pass -c
+      - blank
