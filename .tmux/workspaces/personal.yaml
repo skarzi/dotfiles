@@ -4,7 +4,7 @@ start_directory: "/home/luki/"
 windows:
   - window_name: management
     focus: true
-    layout: f86d,318x79,0,0{166x79,0,0,10,151x79,167,0[151x42,167,0,11,151x36,167,43,12]}
+    layout: 3a87,318x79,0,0{205x79,0,0,52,112x79,206,0[112x39,206,0,53,112x39,206,40,54]}
     options:
       automatic-rename: false
     panes:

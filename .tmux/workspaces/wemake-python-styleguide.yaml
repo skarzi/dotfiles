@@ -4,7 +4,7 @@ start_directory: /home/luki/dev/github_projects/wemake-python-styleguide
 windows:
   - window_name: dev
     focus: true
-    layout: 9a2a,80x24,0,0{47x24,0,0,14,32x24,48,0,15}
+    layout: even-horizontal
     options:
       automatic-rename: false
     panes:
@@ -17,7 +17,7 @@ windows:
           - workon wemake-python-styleguide
           - clear
   - window_name: tests
-    layout: 6cb5,318x79,0,0,16
+    layout: even-horizontal
     suppress_history: false
     options:
       automatic-rename: false

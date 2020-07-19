@@ -4,7 +4,7 @@ start_directory: /home/luki/dev/github_projects/django-test-migrations
 windows:
   - window_name: dev
     focus: true
-    layout: 2dd1,198x143,0,0{106x143,0,0,1,91x143,107,0,2}
+    layout: even-horizontal
     options:
       automatic-rename: false
     panes:
@@ -17,7 +17,7 @@ windows:
           - workon django-test-migration
           - clear
   - window_name: tests
-    layout: d900,318x79,0,0,3
+    layout: even-horizontal
     suppress_history: false
     options:
       automatic-rename: false
