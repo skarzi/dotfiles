@@ -125,6 +125,10 @@ done
 # GO language version manager
 [[ -s "/home/luki/.gvm/scripts/gvm" ]] && source "/home/luki/.gvm/scripts/gvm"
 
+# use buildkit to build docker-compose services' images
+COMPOSE_DOCKER_CLI_BUILD=1
+DOCKER_BUILDKIT=1
+
 # startx when current tty == tty 1
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
     startx
