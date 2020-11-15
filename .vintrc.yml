@@ -2,3 +2,4 @@
 cmdargs:
   severity: style_problem
   color: true
+  stat: true
