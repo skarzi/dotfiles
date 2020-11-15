@@ -2,6 +2,5 @@
 tmuxp==1.5.4
 
 # development
-isort==5.0.2
 vim-vint==0.3.21
-wemake-python-styleguide==0.14.0
+yamllint==1.25.0
