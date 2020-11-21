@@ -2,7 +2,7 @@ SHELL:=/usr/bin/env bash
 
 .PHONY: lint_yaml
 lint_yaml:
-	yamllint .
+	yamllint --format github .
 
 .PHONY: lint_vim
 lint_vim:
