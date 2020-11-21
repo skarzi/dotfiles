@@ -1,0 +1,21 @@
+---
+name: CI/CD
+'on':
+  - push
+  - pull_request
+  - workflow_dispatch
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup python 3
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8.x'
+      - name: install dependencies.
+        run: |
+          sudo apt-get install shellcheck
+          pip install -r requirements.txt
+      - name: lint files
+        run: make lint
