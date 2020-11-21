@@ -16,10 +16,11 @@ set -o nounset
 #   None
 ###############################################################################
 ensure_dotfiles_venv_activated () {
-    local dotfiles_venv="${1:-dotfiles}"
+    local dotfiles_venv="${1:-./venv/}"
 
     if [[ -z "${VIRTUAL_ENV+x}" ]] || [[ ! "${VIRTUAL_ENV}" =~ ^.*"${dotfiles_venv}"$ ]];
     then
+        # shellcheck source=/dev/null
         source "${dotfiles_venv}/bin/activate" \
         || ( \
             echo "${dotfiles_venv} does not exist. Please create it firstly." \
@@ -54,5 +55,5 @@ load_all_tmux_session_workspaces () {
 
 cd ~/dotfiles \
 && ensure_dotfiles_venv_activated "${HOME}/.virtualenvs/dotfiles" \
-&& load_all_tmux_session_workspaces \
+&& load_all_tmux_session_workspaces "${HOME}/dotfiles/.tmux/workspaces/" \
 ; deactivate; (cd - 1> /dev/null)
