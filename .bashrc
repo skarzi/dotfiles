@@ -13,7 +13,7 @@ HISTCONTROL=ignoreboth
 # append to the history file, don't overwrite it
 shopt -s histappend
 
-# set history lenght
+# set history length
 HISTSIZE="nolimit"
 HISTFILESIZE="nolimit"
 
