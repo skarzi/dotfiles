@@ -1,4 +1,7 @@
+" to use some advanced ViM features, it need to be 'iMproved'
+" vint: -ProhibitSetNoCompatible
 set nocompatible
+" vint: +ProhibitSetNoCompatible
 
 if filereadable($HOME . '/.vim/vundles.vim')
     source $HOME/.vim/vundles.vim
@@ -8,7 +11,9 @@ if filereadable($HOME . '/.vim/settings.vim')
     source $HOME/.vim/settings.vim
 endif
 
-" Automatic reload of .vimrc
+" automatic reload of .vimrc
 if has('autocmd')
-    autocmd! bufwritepost $MYVIMRC source $MYVIMRC
+    augroup vimrc_self
+        autocmd! bufwritepost $MYVIMRC source $MYVIMRC
+    augroup END
 endif
