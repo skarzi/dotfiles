@@ -47,6 +47,3 @@ alias xrandr_work="xmodmap ~/.Xmodmap \
     && xrandr \
         --output HDMI2 --auto --above eDP1 \
         --output DP1 --auto --rotate left --left-of HDMI2"
-
-
-source "${HOME}/dotfiles/aliases.sh"
