@@ -160,21 +160,6 @@ workspace $workspace_work0 output DP2-2 eDP1
 workspace $workspace_work9 output DP2-2 HDMI2
 workspace $workspace_work8 output DP2-2 eDP1
 
-# WORK
-# workspace $workspace1 output eDP1
-# workspace $workspace2 output HDMI1
-# workspace $workspace3 output eDP1
-# workspace $workspace4 output HDMI1
-# workspace $workspace5 output eDP1
-# workspace $workspace6 output HDMI1
-# workspace $workspace7 output HDMI2
-# workspace $workspace8 output HDMI2
-# workspace $workspace9 output HDMI2
-# workspace $workspace10 output HDMI2
-# workspace $workspace_work0 output eDP1
-# workspace $workspace_work9 output HDMI2
-# workspace $workspace_work8 output eDP1
-
 # switch to next/previous workspace
 bindsym $mod+bracketright workspace next
 bindsym $mod+bracketleft workspace prev
@@ -196,6 +181,7 @@ bindsym $mod+shift+s exec --no-startup-id pkill -TERM redshift
 assign [class="mpv"] $workspace6
 assign [class="thunderbird"] $workspace8
 assign [class="firefox"] $workspace5
+assign [class="^Google-chrome$" title=" - Google Chrome$"] $workspace_work8
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -264,9 +250,9 @@ focus_follows_mouse no
 # set wallpaper using feh
 exec_always --no-startup-id feh --bg-scale ~/pictures/python_wallpaper.jpg
 # exec redshift -c ~/.config/redshift.conf
-exec iceweasel
+# start email client
 exec thunderbird
-# exec notification deamon - dunst
+# start notification deamon
 exec --no-startup-id dunst -config ~/dotfiles/dunstrc
 
 
@@ -295,9 +281,9 @@ bindsym XF86Search exec dmenu_run -fn 'Hack-7'
 #  - XF86LaunchA (Fn + F11) ?
 #  - XF86Explorer (Fn + F12) ?
 
-# disable border in some windows
+# disable border in browsers
 for_window [class="^Google-chrome$" title=" - Google Chrome$"] border none
-for_window [class="firefox" title=" - Mozilla Firefox$"] border none
+for_window [class="Firefox" title=" - Mozilla Firefox$"] border none
 
 # initial workspace
 exec i3-msg workspace $workspace1
