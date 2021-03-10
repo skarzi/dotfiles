@@ -16,5 +16,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: 'fixes by misspell-fixer'
           title: 'typos fixes by misspell-fixer'
+          branch: fix/misspell-fixer/typos
           delete-branch: true
           reviewers: skarzi
