@@ -7,7 +7,7 @@ syntax on
 set background=dark
 let g:hybrid_custom_term_colors = 1
 " hybrid, gotham, dracula, space-vim-dark, onedark
-colorscheme space-vim-dark
+colorscheme onedark
 " line number colors
 highlight Normal ctermbg=none
 " TODO: find better color

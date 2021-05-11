@@ -15,7 +15,7 @@ let g:airline_symbols.whitespace='Ξ'
 " enable tabline extensions
 let g:airline#extensions#tabline#enabled=1
 
-let g:airline_theme='ravenpower'
+let g:airline_theme='onedark'
 
 " BUFFERLINE
 " enable vim-bufferline integration
