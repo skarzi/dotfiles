@@ -113,7 +113,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 # pyenv virtualenvwrapper
-# export PYENV_VIRTUALENVWRAPPER_PYENV_VERSION="2.7.13"
+export PYENV_VIRTUALENVWRAPPER_PYENV_VERSION="system"
 export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 pyenv virtualenvwrapper
 
