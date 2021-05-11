@@ -126,8 +126,8 @@ done
 [[ -s "/home/luki/.gvm/scripts/gvm" ]] && source "/home/luki/.gvm/scripts/gvm"
 
 # use buildkit to build docker-compose services' images
-COMPOSE_DOCKER_CLI_BUILD=1
-DOCKER_BUILDKIT=1
+export DOCKER_BUILDKIT=1
+export COMPOSE_DOCKER_CLI_BUILD=1
 
 # startx when current tty == tty 1
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
