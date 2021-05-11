@@ -10,4 +10,3 @@ Plugin 'lilydjwg/colorizer'
 
 " API
 Plugin 'diepm/vim-rest-console'
-Plugin 'kylef/apiblueprint.vim'
