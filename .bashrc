@@ -106,16 +106,16 @@ if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
 fi
 
 # pyenv
-export PYENV_ROOT="$HOME/.pyenv"
+export PYENV_ROOT="${HOME}/.pyenv"
 export PATH="${PYENV_ROOT}/bin:${PATH}"
 if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init --path)"
     eval "$(pyenv init -)"
 fi
 
 # pyenv virtualenvwrapper
 export PYENV_VIRTUALENVWRAPPER_PYENV_VERSION="system"
-export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
-pyenv virtualenvwrapper
+pyenv virtualenvwrapper_lazy
 
 # BASH completion
 for BCFILE in ~/.bash_completion.d/* ; do
