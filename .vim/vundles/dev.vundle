@@ -19,5 +19,7 @@ Plugin 'pearofducks/ansible-vim'
 Plugin 'andrewstuart/vim-kubernetes'
 " Rust
 Plugin 'rust-lang/rust.vim'
+" Dart
+Plugin 'dart-lang/dart-vim-plugin'
 " Utilities
 Plugin 'majutsushi/tagbar'
