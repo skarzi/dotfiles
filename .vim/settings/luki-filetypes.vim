@@ -14,6 +14,7 @@ if has('autocmd')
         autocmd BufNewFile,BufRead .importlinter set filetype=cfg
         autocmd BufNewFile,BufRead *.py.template set filetype=python
         autocmd BufNewFile,BufRead *.py.example set filetype=python
+        autocmd BufNewFile,BufRead *.ini.example set filetype=dosini
     augroup END
 endif
 " END FILETYPES
