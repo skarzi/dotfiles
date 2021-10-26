@@ -273,12 +273,12 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 5
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 # start terminal inside dotfiles directory and activate venv
 bindsym XF86Tools exec i3-sensible-terminal -cd ~/dotfiles
-bindsym XF86Search exec dmenu_run -fn 'Hack-7'
+bindsym XF86Search exec find-cursor --color=$base07 --follow --size=150 --repeat=15
+bindsym XF86LaunchA exec dmenu_run -fn 'Hack-7'
 
 # TODO:
 #  - XF86Display (fn + F7) to xrandr --output DP2-1 --auto --left=of eDP1
 #    or custom script allowing interactivly configure screens.
-#  - XF86LaunchA (Fn + F11) ?
 #  - XF86Explorer (Fn + F12) ?
 
 # disable border in browsers
