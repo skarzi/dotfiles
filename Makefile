@@ -15,5 +15,9 @@ lint_shell_scripts:
 	| paste -sd ' ' \
 	| xargs shellcheck
 
+.PHONY: lint_markdown
+lint_markdown:
+	markdownlint .
+
 .PHONY: lint
-lint: lint_yaml lint_vim lint_shell_scripts
+lint: lint_yaml lint_vim lint_shell_scripts lint_markdown
