@@ -21,4 +21,4 @@ updates:
     reviewers:
       - skarzi
     commit-message:
-      prefix: "chode(deps): "
+      prefix: "chore(deps): "
