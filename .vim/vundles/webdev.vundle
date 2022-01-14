@@ -2,10 +2,6 @@
 Plugin 'mattn/emmet-vim'
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'Valloric/MatchTagAlways'
-Plugin 'pangloss/vim-javascript'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'posva/vim-vue'
-Plugin 'elzr/vim-json'
 Plugin 'lilydjwg/colorizer'
 
 " API

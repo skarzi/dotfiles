@@ -7,19 +7,15 @@ Plugin 'w0rp/ale'
 " Snippets
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-" Blockchain
-Plugin 'tomlion/vim-solidity'
 " Time tracking
 Plugin 'wakatime/vim-wakatime'
 " Tmux
 Plugin 'benmills/vimux'
 " DevOps
-Plugin 'chr4/nginx.vim'
-Plugin 'pearofducks/ansible-vim'
 Plugin 'andrewstuart/vim-kubernetes'
 " Rust
 Plugin 'rust-lang/rust.vim'
-" Dart
-Plugin 'dart-lang/dart-vim-plugin'
 " Utilities
 Plugin 'majutsushi/tagbar'
+" Syntax
+Plugin 'sheerun/vim-polyglot'
