@@ -43,7 +43,7 @@ alias xrandr_home="xmodmap ~/.Xmodmap \
         --output DP2-2 --auto --right-of DP2-1"
 alias xrandr_home2="xmodmap ~/.Xmodmap \
     && xrandr \
-        --output HDMI1 --auto --left-of eDP1"
+        --output HDMI1 --auto --above eDP1"
 alias xrandr_work="xmodmap ~/.Xmodmap \
     && xrandr \
         --output HDMI2 --auto --above eDP1 \
