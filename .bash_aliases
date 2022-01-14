@@ -29,8 +29,9 @@ alias toggle_trackpad='bash ~/dotfiles/bin/toggle_trackpad.sh'
 alias pingg='ping 8.8.8.8'
 
 alias dr='docker'
-alias dc='docker-compose'
-alias dc_run='docker-compose run --rm'
+alias docker-compose='docker compose'
+alias dc='docker compose'
+alias dc_run='docker compose run --rm'
 
 alias rm_pyc="find . -type d -name __pycache__  \
     -o \( -type f -name '*.py[co]' \) -print0 \
