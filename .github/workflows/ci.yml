@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: setup python 3.x
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: '3.x'
       - uses: actions/cache@v2.1.7
@@ -24,7 +24,7 @@ jobs:
           key: "${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}"
           restore-keys: ${{ runner.os }}-pip
       - name: setup latest node
-        uses: actions/setup-node@v2.5.1
+        uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
       - uses: actions/cache@v2.1.7
