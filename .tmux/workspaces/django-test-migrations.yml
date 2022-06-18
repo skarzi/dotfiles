@@ -1,35 +1,38 @@
 ---
 session_name: django-test-migrations
 start_directory: /home/luki/dev/github_projects/django-test-migrations
+environment:
+  PROJECT__NAME: django-test-migrations
+  PROJECT__SSH_KEY: ~/.ssh/github_rsa
+shell_command_before:
+  shell_command:
+    - cmd: workon "${PROJECT__NAME}"
+      enter: true
+    - cmd: clear
+      enter: true
 windows:
   - window_name: dev
     focus: true
     layout: even-horizontal
     options:
-      automatic-rename: false
+      automatic-rename: true
     panes:
       - focus: true
+        enter: false
         shell_command:
-          - workon django-test-migration
-          - clear
-          - eval "$(ssh-agent -s)" && ssh-add ~/.ssh/github_rsa
-      - shell_command:
-          - workon django-test-migration
-          - clear
+          - enter: false
+            cmd: eval "$(ssh-agent -s)" && ssh-add "${PROJECT__SSH_KEY}"
+      - blank
   - window_name: tests
-    layout: even-horizontal
+    layout: main-vertical
     suppress_history: false
     options:
-      automatic-rename: false
+      automatic-rename: true
     panes:
       - focus: true
         shell_command:
-          - workon django-test-migrations
-          - clear
-          - >-
-              # grep --include="*.py" -Rin 'needle' .
+          - enter: false
+            cmd: make test
       - shell_command:
-          - workon django-test-migrations
-          - clear
-          - >-
-              # make test
+          - enter: false
+            cmd: grep --include="*.py" -Rin 'needle' .

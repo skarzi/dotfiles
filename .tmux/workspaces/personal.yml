@@ -2,23 +2,28 @@
 session_name: personal
 start_directory: "/home/luki/"
 windows:
-  - window_name: management
+  - window_name: dotfiles
     focus: true
-    layout: >-
-      3a87,318x79,0,0
-      {205x79,0,0,52,112x79,206,0[112x39,206,0,53,112x39,206,40,54]}
-    options:
-      automatic-rename: false
+    layout: even-horizontal
     panes:
       - start_directory: "/home/luki/dotfiles/"
         focus: true
         shell_command:
-          - cd /home/luki/dotfiles
-          - workon dotfiles
-          - clear
-          - eval "$(ssh-agent -s)" && ssh-add ~/.ssh/github_rsa
+          - cmd: workon dotfiles
+          - cmd: clear
+          - enter: false
+            cmd: eval "$(ssh-agent -s)" && ssh-add ~/.ssh/github_rsa
       - suppress_history: false
         shell_command:
-          - >-
-              # pass -c
-      - blank
+          - enter: false
+            cmd: 'pass -c '
+  - window_name: tools
+    layout: even-horizontal
+    options:
+      automatic-rename: false
+    panes:
+      - start_directory: "/home/luki/.pyenv/"
+        focus: true
+        shell_command:
+          - enter: false
+            cmd: git pull
