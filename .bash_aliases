@@ -42,12 +42,9 @@ alias rm_pyc="find . -type d -name __pycache__  \
 
 alias xrandr_home="xmodmap ~/.Xmodmap \
     && xrandr \
-        --output DP2-1 --rotate left --auto --right-of eDP1 \
-        --output DP2-2 --auto --right-of DP2-1"
+    --output DP2-2 --mode 1920x1200 --pos 0x0 \
+    --output eDP1 --mode 1920x1080 --pos 1990x0"
 alias xrandr_home2="xmodmap ~/.Xmodmap \
     && xrandr \
-        --output HDMI1 --auto --above eDP1"
-alias xrandr_work="xmodmap ~/.Xmodmap \
-    && xrandr \
-        --output HDMI2 --auto --above eDP1 \
-        --output DP1 --auto --rotate left --left-of HDMI2"
+        --output DP2-2 --auto --left-of eDP1"
+alias xrandr_notebook="xmodmap ~/.Xmodmap && xrandr --output eDP1 --auto"
