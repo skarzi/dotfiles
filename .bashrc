@@ -125,6 +125,7 @@ done
 # GO language version manager
 [[ -s "/home/luki/.gvm/scripts/gvm" ]] && source "/home/luki/.gvm/scripts/gvm"
 
+export DOCKER_CONFIG="${DOCKER_CONFIG:-$HOME/.docker}"
 # use buildkit to build docker-compose services' images
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
