@@ -5,6 +5,9 @@
     editor = vim
     eol = lf
     autocrlf = false
+    excludesfile = /home/luki/.gitignore
+[init]
+    defaultBranch = main
 [merge]
     tool = vimdiff
 [pull]
