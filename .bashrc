@@ -68,8 +68,8 @@ xterm*|rxvt*)
 esac
 
 # alias definitions stored in .bashrc
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f "${HOME}/.bash_aliases" ]; then
+    . "${HOME}/.bash_aliases"
 fi
 
 # enable programmable completion flatures
@@ -95,7 +95,7 @@ export PATH="${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools"
 export PATH="${PATH}:/opt/gradle/gradle-4.10.2/bin"
 
 # nvm
-export NVM_DIR="/home/luki/.nvm"
+export NVM_DIR="${HOME}/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
@@ -118,12 +118,13 @@ export PYENV_VIRTUALENVWRAPPER_PYENV_VERSION="system"
 pyenv virtualenvwrapper_lazy
 
 # BASH completion
-for BCFILE in ~/.bash_completion.d/* ; do
+for BCFILE in ${HOME}/.bash_completion.d/* ; do
     source "${BCFILE}"
 done
 
 # GO language version manager
-[[ -s "/home/luki/.gvm/scripts/gvm" ]] && source "/home/luki/.gvm/scripts/gvm"
+export GVM_DIR="${HOME}/.gvm"
+[[ -s "${GVM_DIR}/scripts/gvm" ]] && source "${GVM_DIR}/scripts/gvm"
 
 export DOCKER_CONFIG="${DOCKER_CONFIG:-$HOME/.docker}"
 # use buildkit to build docker-compose services' images
