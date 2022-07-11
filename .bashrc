@@ -135,5 +135,11 @@ export COMPOSE_DOCKER_CLI_BUILD=1
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
     startx
 fi
+
+# rust
+export CARGO_HOME="${HOME}/.cargo"
+export PATH="${CARGO_HOME}/bin:${PATH}"
+source "${CARGO_HOME}/env"
+
 # alacritty
 export ALACRITTY_HOME="${HOME}/alacritty"
