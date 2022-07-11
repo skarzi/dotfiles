@@ -3,4 +3,4 @@ tmuxp==1.11.1
 
 # development
 vim-vint==0.3.21
-yamllint==1.26.3
+yamllint==1.27.1
