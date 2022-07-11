@@ -37,7 +37,7 @@ fi
 export TERM="rxvt-unicode-256color"
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
+    xterm-color|*-256color|alacritty) color_prompt=yes;;
 esac
 
 # color prompt
@@ -58,9 +58,9 @@ else
 fi
 unset color_prompt force_color_prompt
 
-# if this is an xterm or urxvt set the title to user@host:dir
+# if this is an xterm, urxvt or alacritty set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
+xterm*|rxvt*|alacritty*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
 *)
@@ -135,3 +135,5 @@ export COMPOSE_DOCKER_CLI_BUILD=1
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
     startx
 fi
+# alacritty
+export ALACRITTY_HOME="${HOME}/alacritty"
