@@ -1,6 +1,6 @@
 ---
 session_name: django-test-migrations
-start_directory: /home/luki/dev/github_projects/django-test-migrations
+start_directory: "${HOME}/dev/github_projects/django-test-migrations"
 environment:
   PROJECT__NAME: django-test-migrations
   PROJECT__SSH_KEY: ~/.ssh/github_rsa

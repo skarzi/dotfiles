@@ -1,12 +1,12 @@
 ---
 session_name: personal
-start_directory: "/home/luki/"
+start_directory: "${HOME}"
 windows:
   - window_name: dotfiles
     focus: true
     layout: even-horizontal
     panes:
-      - start_directory: "/home/luki/dotfiles/"
+      - start_directory: "${HOME}/dotfiles/"
         focus: true
         shell_command:
           - cmd: workon dotfiles
@@ -22,7 +22,7 @@ windows:
     options:
       automatic-rename: false
     panes:
-      - start_directory: "/home/luki/.pyenv/"
+      - start_directory: "${HOME}/.pyenv/"
         focus: true
         shell_command:
           - enter: false
