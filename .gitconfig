@@ -5,7 +5,7 @@
     editor = vim
     eol = lf
     autocrlf = false
-    excludesfile = /home/luki/.gitignore
+    excludesfile = ~/dotfiles/Global.gitignore
 [init]
     defaultBranch = main
 [merge]
