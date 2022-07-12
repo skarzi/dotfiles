@@ -42,6 +42,7 @@ esac
 
 # color prompt
 force_color_prompt=yes
+export CLICOLOR=1
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
