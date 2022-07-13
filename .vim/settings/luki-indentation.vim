@@ -1,11 +1,11 @@
 " INDENTATION
 set autoindent
 " tabstop, sets how many spaces = tab
-set tabstop=4
+set tabstop=2
 " soft tab stops
-set softtabstop=4
+set softtabstop=2
 " shift width
-set shiftwidth=4
+set shiftwidth=2
 " printing as many spaces as you check in sts instead tab
 set expandtab
 set shiftround
@@ -22,14 +22,8 @@ if has('autocmd')
     " enable filetype detection
     filetype on
     augroup vimrc_indentantions
+        autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
         autocmd FileType make,Makefile setlocal ts=8 sts=8 sw=8 noexpandtab
-        autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
-        autocmd FileType htmldjango setlocal ts=2 sts=2 sw=2 expandtab
-        autocmd FileType xml,xsd setlocal ts=2 sts=2 sw=2 expandtab
-        autocmd FileType css,scss setlocal ts=2 sts=2 sw=2 expandtab
-        autocmd FileType javascript,js setlocal ts=2 sts=2 sw=2 expandtab
-        autocmd FileType yaml,yml,yaml.gotexttmpl setlocal ts=2 sts=2 sw=2 expandtab
-        autocmd FileType vue setlocal ts=2 sts=2 sw=2 expandtab
         autocmd FileType groovy setlocal ts=4 sts=4 sw=4 expandtab
     augroup END
 endif
