@@ -8,13 +8,14 @@ if has('autocmd')
         autocmd BufNewFile,BufRead */playbooks/*.yml set filetype=yaml.ansible
         autocmd BufNewFile,BufRead */playbooks/*.yaml set filetype=yaml.ansible
         autocmd BufNewFile,BufRead *.yaml.example set filetype=yaml
+        autocmd BufNewFile,BufRead *.yml.example set filetype=yaml
         autocmd BufNewFile,BufRead .ansible-lint set filetype=yaml
         autocmd BufNewFile,BufRead .yamllint set filetype=yaml
-        autocmd BufNewFile,BufRead *.yml.example set filetype=yaml
         autocmd BufNewFile,BufRead .importlinter set filetype=cfg
         autocmd BufNewFile,BufRead *.py.template set filetype=python
         autocmd BufNewFile,BufRead *.py.example set filetype=python
         autocmd BufNewFile,BufRead *.ini.example set filetype=dosini
+        autocmd BufNewFile,BufRead *.ini.template set filetype=dosini
     augroup END
 endif
 " END FILETYPES
