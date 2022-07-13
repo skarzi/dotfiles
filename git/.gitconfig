@@ -5,7 +5,7 @@
     editor = vim
     eol = lf
     autocrlf = false
-    excludesfile = ~/dotfiles/Global.gitignore
+    excludesfile = ~/dotfiles/git/Global.gitignore
 [init]
     defaultBranch = main
 [merge]
@@ -53,3 +53,6 @@
     init-with-commit = "!git init && git commit -m 'initial commit' --allow-empty"
     addp = add --patch
     undo=reset --soft HEAD^
+
+[includeIf "gitdir:**/work/**"]
+    path = ~/dotfiles/git/Work.gitconfig
