@@ -1,2 +1,5 @@
 [user]
     email = lskarzynski@rippling.com
+
+[blame]
+    ignoreRevsFile = .git-blame-ignore-revs
