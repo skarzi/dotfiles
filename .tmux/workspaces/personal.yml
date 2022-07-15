@@ -1,29 +1,32 @@
 ---
 session_name: personal
 start_directory: "${HOME}"
+environment:
+  DOTFILES_ROOT: "${HOME}/dotfiles"
 windows:
   - window_name: dotfiles
+    start_directory: "${DOTFILES_ROOT}"
     focus: true
     layout: even-horizontal
     panes:
-      - start_directory: "${HOME}/dotfiles/"
-        focus: true
+      - focus: true
         shell_command:
           - cmd: workon dotfiles
           - cmd: clear
-          - enter: false
-            cmd: eval "$(ssh-agent -s)" && ssh-add ~/.ssh/github_rsa
+          - cmd: eval "$(ssh-agent -s)" && ssh-add ~/.ssh/github_rsa
+            enter: false
       - suppress_history: false
         shell_command:
-          - enter: false
-            cmd: 'pass -c '
+          - cmd: 'pass -c '
+            enter: false
   - window_name: tools
     layout: even-horizontal
     options:
       automatic-rename: false
     panes:
-      - start_directory: "${HOME}/.pyenv/"
-        focus: true
+      - focus: true
         shell_command:
-          - enter: false
-            cmd: git pull
+          - cmd: cd .pyenv
+          - cmd: git pull
+            enter: false
+      - blank
