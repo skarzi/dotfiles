@@ -17,6 +17,8 @@ Plugin 'andrewstuart/vim-kubernetes'
 Plugin 'rust-lang/rust.vim'
 " Terraform
 Plugin 'hashivim/vim-terraform'
+" Emails
+Plugin 'amadeus/vim-mjml'
 " Utilities
 Plugin 'majutsushi/tagbar'
 " Syntax
