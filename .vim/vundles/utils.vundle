@@ -2,3 +2,4 @@
 Plugin 'bling/vim-airline'
 Plugin 'bling/vim-bufferline'
 Plugin 'takac/vim-hardtime'
+Plugin 'tpope/vim-vinegar'
