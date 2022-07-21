@@ -33,3 +33,15 @@ set textwidth=79
 set colorcolumn=80
 highlight ColorColumn ctermbg=25
 " END UI LAYOUT
+
+" JS HIGHLIGHTING
+" Reference: https://vim.fandom.com/wiki/Fix_syntax_highlighting
+if has('autocmd')
+    " enable filetype detection
+    filetype on
+    augroup vimrc_js_highlighting
+        autocmd BufEnter *.{js,jsx,ts,tsx,vue} :syntax sync fromstart
+        autocmd BufLeave *.{js,jsx,ts,tsx,vue} :syntax sync clear
+    augroup END
+endif
+" END JS HIGHLIGHTING
