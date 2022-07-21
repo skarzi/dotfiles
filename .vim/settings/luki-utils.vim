@@ -56,7 +56,7 @@ if has('autocmd')
         autocmd FileType markdown setlocal spell spelllang=en,pl
         autocmd FileType html setlocal spell spelllang=en,pl
         autocmd FileType tex setlocal spell spelllang=en,pl
-        autocmd FileType gitcommit setlocal spell spelllang=en,pl
+        autocmd FileType gitcommit setlocal spell spelllang=en
     augroup END
 endif
 " EDN SPELL CHECKING
