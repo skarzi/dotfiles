@@ -12,7 +12,7 @@ lint_vim:
 lint_shell_scripts:
 	find . -type f -name "*.sh" \
 	| grep -v ".vim/bundle" \
-	| paste -sd ' ' \
+	| paste -sd ' ' - \
 	| xargs shellcheck
 
 .PHONY: lint_markdown
