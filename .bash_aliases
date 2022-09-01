@@ -36,6 +36,9 @@ alias docker-compose='docker compose'
 alias dc='docker compose'
 alias dc_run='docker compose run --rm'
 
+alias tm='tmux'
+alias tat='tmux attach -t'
+
 alias rm_pyc="find . -type d -name __pycache__  \
     -o \( -type f -name '*.py[co]' \) -print0 \
     | xargs -0 rm -rf"
