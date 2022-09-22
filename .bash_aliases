@@ -25,7 +25,7 @@ alias de='deactivate'
 alias mk='pyenv virtualenvwrapper && mkvirtualenv'
 alias pip_upgrade_all='pip freeze | cut -d = -f 1 | xargs pip install -U'
 
-# alias add_ssh_key='source ${HOME}/dotfiles/bin/add_ssh_key.sh'
+alias add_ssh_key='bash ~/dotfiles/bin/add_ssh_key.sh'
 alias toggle_trackpad='bash ~/dotfiles/bin/toggle_trackpad.sh'
 alias pingg='ping 8.8.8.8'
 
