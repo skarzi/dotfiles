@@ -7,6 +7,8 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+alias ..="cd .."
+
 alias l='ls -CF'
 alias sl='ls'
 alias ll='ls -l'
@@ -15,21 +17,25 @@ alias lla='ls -lA'
 alias lls='ls -l'
 
 alias time='time -p'
-# shellcheck disable=SC2154
-alias sscrot='scrot -s -e "mv \$f ~/pictures/screenshots"'
+alias pingg='ping 8.8.8.8'
 
 alias i3conf='vim ~/.i3/config'
 alias reload_Xre='xrdb -load ~/.Xresources'
+# shellcheck disable=SC2154
+alias sscrot='scrot -s -e "mv \$f ~/pictures/screenshots"'
 
 alias de='deactivate'
 alias mk='pyenv virtualenvwrapper && mkvirtualenv'
 alias pip_upgrade_all='pip freeze | cut -d = -f 1 | xargs pip install -U'
+alias rm_pyc="find . -type d -name __pycache__  \
+    -o \( -type f -name '*.py[co]' \) -print0 \
+    | xargs -0 rm -rf"
 
 alias add_ssh_key='bash ~/dotfiles/bin/add_ssh_key.sh'
 alias toggle_trackpad='bash ~/dotfiles/bin/toggle_trackpad.sh'
-alias pingg='ping 8.8.8.8'
 
 alias gi='git'
+alias gt='cd "$(git rev-parse --show-toplevel)"'
 
 alias dr='docker'
 alias docker-compose='docker compose'
@@ -38,10 +44,6 @@ alias dc_run='docker compose run --rm'
 
 alias tm='tmux'
 alias tat='tmux attach -t'
-
-alias rm_pyc="find . -type d -name __pycache__  \
-    -o \( -type f -name '*.py[co]' \) -print0 \
-    | xargs -0 rm -rf"
 
 alias xrandr_home="xmodmap ~/.Xmodmap \
     && xrandr \
