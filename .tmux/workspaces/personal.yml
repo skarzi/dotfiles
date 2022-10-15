@@ -17,6 +17,8 @@ windows:
             enter: false
       - suppress_history: false
         shell_command:
+          - cmd: workon dotfiles
+          - cmd: clear
           - cmd: 'pass -c '
             enter: false
   - window_name: tools
