@@ -3,7 +3,7 @@
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 " Linting
-Plugin 'w0rp/ale'
+Plugin 'dense-analysis/ale'
 " Snippets
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'

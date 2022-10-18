@@ -1,3 +1,5 @@
+scriptencoding utf-8
+
 " ALE CONFIG
 " TODO(skarzi): configure ALE to run via Docker
 " https://github.com/dense-analysis/ale#5xx-how-can-i-run-linters-or-fixers-via-docker-or-a-vm
@@ -10,10 +12,9 @@ let g:ale_open_list = 1
 let g:ale_set_loclist = 1
 let g:ale_list_window_size = 5
 
-" airline
-let g:airline#extensions#ale#enabled = 1
-let g:airline#extensions#ale#error_symbol = 'E:'
-let g:airline#extensions#ale#warning_symbol = 'W:'
+let g:ale_sign_error = '🐛'
+let g:ale_sign_warning = '⚠️'
+let g:ale_sign_info = 'ℹ️'
 
 nmap <F7> :ALELint<CR>
 nmap <F8> :ALEFix<CR>
@@ -37,5 +38,4 @@ let g:ale_fixers = {
 " python
 " `isort` fixer
 nnoremap <Leader>z :<C-U>ALEFix isort<CR>
-
 " END ALE CONFIG
