@@ -55,7 +55,7 @@
     ad = add
     addp = add --patch
     adp = addp
-    undo=reset --soft HEAD^
+    undo = reset --soft HEAD^
 
 [includeIf "gitdir:**/work/**"]
     path = ~/dotfiles/git/Work.gitconfig
