@@ -17,6 +17,6 @@ nnoremap <silent> <leader>s :call <SID>strip_trailling_whitespaces()<CR>
 
 if has('autocmd')
     augroup vimrc_autocmds
-        autocmd BufWritePre *.py,*.js,*.c,*.cpp,*.pl,*.vue,*html,*.css,*.scss :call <SID>strip_trailling_whitespaces()
+        autocmd BufWritePre *.py,*.pyi,*.js,*.jsx,*.ts,*.tsx,*.c,*.cpp,*.pl,*.vue,*html,*.css,*.scss :call <SID>strip_trailling_whitespaces()
     augroup END
 endif
