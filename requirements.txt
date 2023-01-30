@@ -1,5 +1,5 @@
 # production
-tmuxp==1.26.0
+tmuxp==1.27.0
 
 # development
 vim-vint==0.3.21
