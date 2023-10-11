@@ -28,11 +28,11 @@ let g:ale_linter_aliases = {
 let g:ale_linters = {
 \    'vue': ['eslint', 'vls'],
 \    'jsx': ['css', 'javascript'],
-\    'python': ['bandit', 'flake8', 'mypy', 'pydocstyle'],
+\    'python': ['bandit', 'flake8', 'mypy', 'pydocstyle', 'ruff'],
 \ }
 let g:ale_fixers = {
 \    '*': ['remove_trailing_lines', 'trim_whitespace'],
-\    'python': ['black', 'isort', 'remove_trailing_lines', 'trim_whitespace'],
+\    'python': ['black', 'isort', 'ruff', 'remove_trailing_lines', 'trim_whitespace'],
 \ }
 
 " python
