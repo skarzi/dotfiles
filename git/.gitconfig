@@ -6,6 +6,7 @@
     eol = lf
     autocrlf = false
     excludesfile = ~/dotfiles/git/Global.gitignore
+    fsmonitor = true
 [init]
     defaultBranch = main
 [merge]
@@ -58,6 +59,7 @@
     addp = add --patch
     adp = addp
     undo = reset --soft HEAD^
+    # Reference: https://adamj.eu/tech/2022/10/27/git-how-to-alias-master-as-main/
     alias-branch = "!f() { \
         branch=${1}; \
         target_branch=${2:-main}; \
