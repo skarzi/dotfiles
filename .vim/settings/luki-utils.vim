@@ -59,4 +59,14 @@ if has('autocmd')
         autocmd FileType gitcommit setlocal spell spelllang=en
     augroup END
 endif
-" EDN SPELL CHECKING
+" END SPELL CHECKING
+
+" MACROS IN VISUAL MODE
+" Reference: https://www.rockyourcode.com/run-macro-on-multiple-lines-in-vim/
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
+" END MACROS IN VISUAL MODE
