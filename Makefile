@@ -1,5 +1,10 @@
 SHELL:=/usr/bin/env bash
 
+.PHONY: install
+install:
+	@pip install --upgrade pip setuptools
+	@pip install --requirement requirements.txt
+
 .PHONY: lint_yaml
 lint_yaml:
 	yamllint --format github .

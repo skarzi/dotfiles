@@ -36,7 +36,7 @@ jobs:
       - name: install dependencies
         run: |
           sudo apt-get install shellcheck
-          pip install -r requirements.txt
+          make install
           npm install --global markdownlint-cli
       - name: lint files
         run: make lint
