@@ -13,14 +13,10 @@ windows:
         shell_command:
           - cmd: workon dotfiles
           - cmd: clear
-          - cmd: eval "$(ssh-agent -s)" && ssh-add ~/.ssh/github_rsa
-            enter: false
       - suppress_history: false
         shell_command:
           - cmd: workon dotfiles
           - cmd: clear
-          - cmd: 'pass -c '
-            enter: false
   - window_name: tools
     layout: even-horizontal
     options:
@@ -28,7 +24,6 @@ windows:
     panes:
       - focus: true
         shell_command:
-          - cmd: cd .pyenv
-          - cmd: git pull
+          - cmd: pyenv update
             enter: false
       - blank
