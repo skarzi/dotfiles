@@ -1,4 +1,4 @@
-const Configuration = {
+export default {
   extends: ['@commitlint/config-conventional'],
   defaultIgnores: true,
   ignores: [
@@ -8,6 +8,4 @@ const Configuration = {
       || commit.startsWith('build(deps):')
     )
   ]
-};
-
-module.exports = Configuration;
+}
