@@ -41,6 +41,6 @@ jobs:
       - name: lint files
         run: make lint
       - name: lint commit messages
-        uses: wagoid/commitlint-github-action@v6.0.1
+        uses: wagoid/commitlint-github-action@v6.1.1
         with:
           failOnWarnings: true
