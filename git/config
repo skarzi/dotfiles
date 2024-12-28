@@ -68,6 +68,5 @@
             refs/remotes/origin/$branch \
             refs/remotes/origin/$target_branch; \
     }; f"
-
 [includeIf "gitdir:**/work/**"]
     path = ~/dotfiles/git/Work.gitconfig
