@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: sobolevn/misspell-fixer-action@master
-      - uses: peter-evans/create-pull-request@v7.0.5
+      - uses: peter-evans/create-pull-request@v7.0.6
         with:
           token: "${{ secrets.GITHUB_TOKEN }}"
           commit-message: "fix: fix typos by misspell-fixer"
