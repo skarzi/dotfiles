@@ -28,7 +28,7 @@ jobs:
       - name: setup latest node
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version-file: '.nvmrc'
       - uses: actions/cache@v4.2.0
         with:
           path: ~/.npm
@@ -36,7 +36,6 @@ jobs:
       - name: install dependencies
         run: |
           sudo apt-get install shellcheck
-          nvm install
           make install
           npm install
       - name: lint files
