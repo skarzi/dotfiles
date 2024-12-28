@@ -36,8 +36,9 @@ jobs:
       - name: install dependencies
         run: |
           sudo apt-get install shellcheck
+          nvm install
           make install
-          npm install --global markdownlint-cli
+          npm install
       - name: lint files
         run: make lint
       - name: lint commit messages

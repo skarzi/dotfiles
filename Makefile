@@ -4,6 +4,7 @@ SHELL:=/usr/bin/env bash
 install:
 	@pip install --upgrade pip setuptools
 	@pip install --requirement requirements.txt
+	@npm install
 
 .PHONY: lint_yaml
 lint_yaml:
@@ -22,7 +23,17 @@ lint_shell_scripts:
 
 .PHONY: lint_markdown
 lint_markdown:
-	markdownlint .
+	npx markdownlint .
 
 .PHONY: lint
 lint: lint_yaml lint_vim lint_shell_scripts lint_markdown
+
+.PHONY: test
+test: lint
+
+.PHONY: clean
+clean:
+	@rm -rf node_modules/
+
+.PHONY: all
+all: install test
