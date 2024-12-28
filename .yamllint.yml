@@ -2,3 +2,4 @@
 extends: default
 ignore: |
   .vim/bundle/
+  node_modules/
