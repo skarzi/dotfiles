@@ -84,6 +84,10 @@ export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 export PATH="${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools"
 export PATH="${PATH}:/opt/gradle/gradle-4.10.2/bin"
 
+# homebrew
+export HOMEBREW_PREFIX="/opt/homebrew"
+export PATH="${HOMEBREW_PREFIX}/bin:${PATH}"
+
 # nvm
 export NVM_DIR="${HOME}/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
