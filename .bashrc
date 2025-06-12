@@ -71,15 +71,6 @@ if [ -f "${HOME}/.bash_aliases" ]; then
     . "${HOME}/.bash_aliases"
 fi
 
-# enable programmable completion flatures
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
-
 # open man pages with less
 export PAGER=less
 # default editor
@@ -120,6 +111,17 @@ export PYENV_VIRTUALENVWRAPPER_PYENV_VERSION="system"
 pyenv virtualenvwrapper_lazy
 
 # BASH completion
+if ! shopt -oq posix; then
+  if [ -f "${HOMEBREW_PREFIX}/share/bash-completion/bash_completion" ]; then
+    source "${HOMEBREW_PREFIX}/share/bash-completion/bash_completion"
+  elif [ -f /usr/share/bash-completion/bash_completion ]; then
+    source /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    source /etc/bash_completion
+  fi
+fi
+export BASH_COMPLETION_COMPAT_DIR="${HOMEBREW_PREFIX}/etc/bash_completion.d"
+[[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]] && . "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
 for BCFILE in ${HOME}/.bash_completion.d/* ; do
     source "${BCFILE}"
 done
