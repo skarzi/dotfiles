@@ -146,3 +146,6 @@ source "${CARGO_HOME}/env"
 
 # alacritty
 export ALACRITTY_HOME="${HOME}/alacritty"
+
+# direnv
+eval "$(direnv hook bash)"
