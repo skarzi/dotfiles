@@ -33,9 +33,7 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# export TERM="xterm-256color"
-export TERM="rxvt-unicode-256color"
-# set a fancy prompt (non-color, unless we know we "want" color)
+export TERM="xterm-256color"  # NOTE: use `"rxvt-unicode-256color"` for urxvt.
 case "$TERM" in
     xterm-color|*-256color|alacritty) color_prompt=yes;;
 esac
