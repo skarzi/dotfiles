@@ -106,6 +106,9 @@ if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
     source "${HOME}/.bash-git-prompt/gitprompt.sh"
 fi
 
+# starship
+eval "$(starship init bash)"
+
 # pyenv
 export PYENV_ROOT="${HOME}/.pyenv"
 export PATH="${PYENV_ROOT}/bin:${PATH}"
