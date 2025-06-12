@@ -16,6 +16,11 @@ alias la='ls -A'
 alias lla='ls -lA'
 alias lls='ls -l'
 
+alias v='vim'
+alias ivm='vim'
+alias vmi='vim'
+alias vin='vim'
+
 alias time='time -p'
 alias pingg='ping 8.8.8.8'
 
@@ -34,7 +39,9 @@ alias rm_pyc="find . -type d -name __pycache__  \
 alias add_ssh_key='bash ~/dotfiles/bin/add_ssh_key.sh'
 alias toggle_trackpad='bash ~/dotfiles/bin/toggle_trackpad.sh'
 
+alias g='git'
 alias gi='git'
+alias igt='git'
 alias gt='cd "$(git rev-parse --show-toplevel)"'
 
 alias dr='docker'
