@@ -9,13 +9,13 @@ style = "Regular"
 action = "ToggleViMode"
 key = "Escape"
 mode = "~Search"
-# NOTE: Update to "Command" on MacOS
-mods = "Super"
+# NOTE: Update to "Super" on Linux.
+mods = "Command"
 
 [scrolling]
 # Maximum number of lines in the scrollback buffer.
 # Specifying '0' will disable scrolling.
-history = 100000
+history = 7500
 multiplier = 3
 
 [colors.cursor]
