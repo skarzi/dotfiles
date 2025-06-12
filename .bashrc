@@ -89,15 +89,10 @@ export HOMEBREW_PREFIX="/opt/homebrew"
 export PATH="${HOMEBREW_PREFIX}/bin:${PATH}"
 
 # nvm
-export NVM_DIR="${HOME}/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# git-prompt
-if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
-    GIT_PROMPT_ONLY_IN_REPO=1
-    source "${HOME}/.bash-git-prompt/gitprompt.sh"
-fi
+export NVM_AUTO_USE=true
+export NVM_DIR="${HOMEBREW_PREFIX}/opt/nvm"
+[ -s "${NVM_DIR}/nvm.sh" ] && \. "${NVM_DIR}/nvm.sh"
+[ -s "${NVM_DIR}/bash_completion" ] && \. "${NVM_DIR}/bash_completion"
 
 # starship
 eval "$(starship init bash)"
