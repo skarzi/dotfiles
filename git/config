@@ -11,6 +11,8 @@
     defaultBranch = main
 [merge]
     tool = vimdiff
+[push]
+  autoSetupRemote = true
 [pull]
     rebase = false
 [alias]
