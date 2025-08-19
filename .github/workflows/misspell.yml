@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: sobolevn/misspell-fixer-action@master
       - uses: peter-evans/create-pull-request@v7.0.8
         with:
