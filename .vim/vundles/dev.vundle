@@ -23,3 +23,5 @@ Plugin 'amadeus/vim-mjml'
 Plugin 'majutsushi/tagbar'
 " Syntax
 Plugin 'sheerun/vim-polyglot'
+" LLMs
+Plugin 'github/copilot.vim'
