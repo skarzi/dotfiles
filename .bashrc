@@ -7,15 +7,19 @@ esac
 # run bash in vi mode
 set -o vi
 
-# don't put duplicate lines or lines starting with space in the history.
+export LANG="en_US.UTF-8"
+
+# Bash history
+# Don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
-
-# append to the history file, don't overwrite it
+# Immediately append to the history file, don't overwrite it
 shopt -s histappend
-
 # set history length
-HISTSIZE="nolimit"
-HISTFILESIZE="nolimit"
+export HISTSIZE="2000"
+export HISTFILESIZE="10000"
+# Try to share history between all bash sessions.
+# export PROMPT_COMMAND="history -a; history -r; $PROMPT_COMMAND"
+export PROMPT_COMMAND="bash ${HOME}/dotfiles/bin/manage_bash_history.sh"
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
