@@ -7,6 +7,7 @@
     autocrlf = false
     excludesfile = ~/dotfiles/git/Global.gitignore
     fsmonitor = true
+    untrackedCache = true
 [init]
     defaultBranch = main
 [merge]
