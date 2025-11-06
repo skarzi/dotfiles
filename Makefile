@@ -1,10 +1,16 @@
 SHELL := /usr/bin/env bash
 
-.PHONY: install
-install:
+.PHONY: install_python
+install_python:
 	@pip install --upgrade pip setuptools
 	@pip install --requirement requirements.txt
+
+.PHONY: install-node
+install_node:
 	@npm install
+
+.PHONY: install
+install: install_python install_node
 
 .PHONY: lint_yaml
 lint_yaml:

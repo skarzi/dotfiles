@@ -20,26 +20,27 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: '3.x'
-      - uses: actions/cache@v4.3.0
-        with:
-          path: ~/.cache/pip
-          key: "${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}"
-          restore-keys: ${{ runner.os }}-pip
+          cache: pip
       - name: setup latest node
         uses: actions/setup-node@v6
         with:
           node-version-file: '.nvmrc'
-      - uses: actions/cache@v4.3.0
-        with:
-          path: ~/.npm
-          key: "${{ runner.os }}-npm"
+          cache: 'npm'
       - name: install dependencies
         run: |
           sudo apt-get install shellcheck
+          curl \
+            --fail \
+            --silent \
+            --show-error \
+            --location https://git.io/shellspec \
+          | sh -s -- --yes
           make install
           npm install
       - name: lint files
         run: make lint
+      - name: test scripts
+        run: make test_bin
       - name: lint commit messages
         uses: wagoid/commitlint-github-action@v6.2.1
         with:
