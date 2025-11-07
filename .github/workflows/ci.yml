@@ -4,11 +4,8 @@ name: CI
   push:
     branches:
       - main
-    tags:
-      - '**'
   pull_request:
   workflow_dispatch:
-
 jobs:
   tests:
     runs-on: ubuntu-latest
@@ -16,32 +13,61 @@ jobs:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      - name: setup python 3.x
+      - name: "Setup python 3.x"
         uses: actions/setup-python@v6
         with:
-          python-version: '3.x'
+          python-version: "3.x"
           cache: pip
-      - name: setup latest node
+      - name: "Setup node"
         uses: actions/setup-node@v6
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
-      - name: install dependencies
+      - name: "Setup Go"
+        uses: actions/setup-go@v6
+        with:
+          go-version: "stable"
+          cache: true
+      - name: "Install actionlint"
+        shell: bash
         run: |
-          sudo apt-get install shellcheck
+          set -euo pipefail
+
+          _ACTIONLINT_INSTALL_URL="https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash"
+          bash <(curl "${_ACTIONLINT_INSTALL_URL}") latest /usr/local/bin
+      - name: "Install checkmake"
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          go install github.com/checkmake/checkmake/cmd/checkmake@latest
+          echo "${HOME}/go/bin" >> "${GITHUB_PATH}"
+      - name: "Install ShellSpec"
+        shell: bash
+        run: |
+          set -euo pipefail
+
           curl \
             --fail \
             --silent \
             --show-error \
             --location https://git.io/shellspec \
           | sh -s -- --yes
+      - name: "Install pre-commit"
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          pip install --user pre-commit
+          echo "${HOME}/.local/bin" >> "${GITHUB_PATH}"
+      - name: "Install dependencies"
+        run: |
+          set -euo pipefail
+
+          sudo apt-get update
+          sudo apt-get install --yes shellcheck
           make install
-          npm install
-      - name: lint files
-        run: make lint
-      - name: test scripts
-        run: make test_bin
-      - name: lint commit messages
-        uses: wagoid/commitlint-github-action@v6.2.1
-        with:
-          failOnWarnings: true
+      - name: "Lint"
+        run: pre-commit run --all-files
+      - name: "Test shell scripts"
+        run: make test-bin

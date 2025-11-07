@@ -1,5 +1,12 @@
 {
-  "devDependencies": {
-    "markdownlint-cli": "^0.45.0"
+  "type": "module",
+  "dependencies": {
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
+    "markdownlint-cli2": "^0.18.1"
+  },
+  "scripts": {
+    "lint:md": "markdownlint-cli2",
+    "lint:commit-message": "./node_modules/@commitlint/cli/cli.js --edit $1"
   }
 }
