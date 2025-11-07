@@ -46,4 +46,3 @@ Describe '_release_history_lock function'
     The status should be failure
   End
 End
-

@@ -26,4 +26,3 @@ Describe '_log_new_command function'
     The variable g_custom_hist_last_seen_histcmd should equal "$6"  # Use $6 for expected_new_last_seen_histcmd.
   End
 End
-

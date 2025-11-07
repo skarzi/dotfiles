@@ -40,4 +40,3 @@ Describe '_get_preserved_session_commands_stdout function'
     fi
   End
 End
-

@@ -105,4 +105,3 @@ Describe '_acquire_history_lock function'
     The variable _is_histfile_locked should equal 1
   End
 End
-
