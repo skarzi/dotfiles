@@ -113,6 +113,9 @@ fi
 export PYENV_VIRTUALENVWRAPPER_PYENV_VERSION="system"
 pyenv virtualenvwrapper_lazy
 
+# uv
+export PATH="${HOME}/.local/bin:${PATH}"
+
 # BASH completion
 if ! shopt -oq posix; then
   if [ -f "${HOMEBREW_PREFIX}/share/bash-completion/bash_completion" ]; then
