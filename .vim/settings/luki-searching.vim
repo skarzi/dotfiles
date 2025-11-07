@@ -11,4 +11,6 @@ set smartcase
 set showmatch
 " search down into subdirectories
 set path+=**
+" use fzf when searching in vim
+set runtimepath+=/opt/homebrew/opt/fzf
 " END SEARCHING

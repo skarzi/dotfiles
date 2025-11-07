@@ -154,5 +154,8 @@ source "${CARGO_HOME}/env"
 # alacritty
 export ALACRITTY_HOME="${HOME}/alacritty"
 
+# fzf
+eval "$(fzf --bash)"
+
 # direnv
 eval "$(direnv hook bash)"
