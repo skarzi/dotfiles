@@ -27,7 +27,7 @@ lint-pre-commit-hook-config:
 
 .PHONY: lint-github-actions
 lint-github-actions:
-	@actionlint
+	@actionlint $(filter-out $@,$(MAKECMDGOALS))
 
 .PHONY: lint-yaml
 lint-yaml:
@@ -55,7 +55,7 @@ lint: lint-yaml lint-vim lint-shell-scripts lint-fix-markdown \
 
 .PHONY: test-bin
 test-bin:
-	@shellspec
+	@shellspec $(filter-out $@,$(MAKECMDGOALS))
 
 .PHONY: test
 test: test-bin
@@ -66,7 +66,3 @@ clean:
 
 .PHONY: all
 all: install lint test
-
-# Prevent make from treating passed filenames as targets.
-%:
-	@:

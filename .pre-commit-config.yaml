@@ -49,13 +49,15 @@ repos:
         types:
           - "yaml"
         files: '^\.github/workflows/'
-        entry: make lint-github-actions
+        pass_filenames: true
+        entry: make lint-github-actions --
         stages:
           - pre-commit
       - id: lint-vim
         name: Lint Vim scripts
         language: system
         files: '^\.vim/'
+        pass_filenames: false
         entry: make lint-vim
         stages:
           - pre-commit
@@ -64,6 +66,7 @@ repos:
         language: system
         types:
           - "shell"
-        entry: make lint-shell-scripts
+        pass_filenames: true
+        entry: make lint-shell-scripts --
         stages:
           - pre-commit
