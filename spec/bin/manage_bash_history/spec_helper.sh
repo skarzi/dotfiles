@@ -24,7 +24,7 @@ setup_test_environment() {
 
   export _INITIAL_HISTCMD=1
   export PROMPT_COMMAND="fake_prompt_command_for_test"
-  
+
   # Path to captured history load file (captured by history spy before deletion)
   _captured_history_load_file_path="${TEST_TMPDIR}/captured_history_load_file"
 }
@@ -121,14 +121,14 @@ mock_history_command() {
   history() {
     # Use printf "%s\n" "$*" to reliably log all arguments as a single line.
     printf "%s\n" "$*" >> "${_history_command_spy_log_path}"
-    
+
     # If this is a history -r command and we're tracking a load file, capture its contents
     if [ "$1" = "-r" ] && [ -n "${2:-}" ] && [ -n "${_mock_history_load_file_path:-}" ] && [ "$2" = "${_mock_history_load_file_path}" ]; then
       if [ -f "${_mock_history_load_file_path}" ] && [ -n "${_captured_history_load_file_path:-}" ]; then
         cp "${_mock_history_load_file_path}" "${_captured_history_load_file_path}"
       fi
     fi
-    
+
     # Execute the original `history` command to maintain its real behavior.
     command history "$@"
   }
@@ -144,7 +144,7 @@ unmock_history_command() {
 #   $1: Exit status code (0 for success, non-zero for failure). Default: 0
 mock_flock_command() {
   _mock_flock_exit_status="${1:-0}"
-  
+
   flock() {
     if [[ "${_mock_flock_exit_status}" -eq 0 ]]; then
       command flock "$@" 2>/dev/null || return 0
