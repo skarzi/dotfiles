@@ -5,6 +5,10 @@ ifndef CI
 	NVM_SETUP_CMD := source $${NVM_DIR}/nvm.sh && nvm use
 endif
 
+# Dynamically extract Makefile stages from .PHONY declarations.
+_MAKEFILE_TARGETS := $(shell grep -h '^.PHONY:' $(firstword $(MAKEFILE_LIST)) | sed 's/^.PHONY: //' | tr ' ' '\n' | sort -u)
+EXTRA_ARGS = $(filter-out $(_MAKEFILE_TARGETS),$(MAKECMDGOALS))
+
 .PHONY: install-python
 install-python:
 	@pip install --upgrade pip setuptools
@@ -27,7 +31,7 @@ lint-pre-commit-hook-config:
 
 .PHONY: lint-github-actions
 lint-github-actions:
-	@actionlint $(filter-out $@,$(MAKECMDGOALS))
+	@actionlint $(EXTRA_ARGS)
 
 .PHONY: lint-yaml
 lint-yaml:
@@ -47,7 +51,7 @@ lint-shell-scripts:
 
 .PHONY: lint-fix-markdown
 lint-fix-markdown:
-	@$(NVM_SETUP_CMD) && npm run lint:md -- $(filter-out $@,$(MAKECMDGOALS))
+	@$(NVM_SETUP_CMD) && npm run lint:md -- $(or $(EXTRA_ARGS),**/*.md)
 
 .PHONY: lint
 lint: lint-yaml lint-vim lint-shell-scripts lint-fix-markdown \
@@ -55,7 +59,7 @@ lint: lint-yaml lint-vim lint-shell-scripts lint-fix-markdown \
 
 .PHONY: test-bin
 test-bin:
-	@shellspec $(filter-out $@,$(MAKECMDGOALS))
+	@shellspec $(EXTRA_ARGS)
 
 .PHONY: test
 test: test-bin
