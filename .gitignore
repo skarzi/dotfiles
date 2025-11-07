@@ -6,3 +6,4 @@
 .vimperator/info
 notes/
 node_modules/
+.shellspec*.log
