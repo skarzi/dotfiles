@@ -8,6 +8,7 @@ Feel free to use them!
 Local development requires the following tools:
 
 + [nvm](https://github.com/nvm-sh/nvm) - Node Version Manager
++ [rustup](https://rustup.rs/) - Rust toolchain installer
 + [checkmake](https://github.com/checkmake/checkmake) - Makefile linter
 + [shellcheck](https://github.com/koalaman/shellcheck) - Shell script linter
 + [actionlint](https://github.com/rhysd/actionlint) - GitHub Actions linter

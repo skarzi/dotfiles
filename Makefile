@@ -1,4 +1,5 @@
 SHELL := /usr/bin/env bash
+STYLUA_CMD := stylua --respect-ignores --verify
 
 NVM_SETUP_CMD := true  # `nvm` is not used on CI by default.
 ifndef CI
@@ -18,8 +19,12 @@ install-python:
 install-node:
 	@$(NVM_SETUP_CMD) && npm install
 
+.PHONY: install-rust
+install-rust:
+	@cargo install selene stylua
+
 .PHONY: install
-install: install-python install-node
+install: install-python install-node install-rust
 
 .PHONY: lint-commit-message
 lint-commit-message:
@@ -53,9 +58,14 @@ lint-shell-scripts:
 lint-fix-markdown:
 	@$(NVM_SETUP_CMD) && npm run lint:md -- $(or $(EXTRA_ARGS),**/*.md)
 
+.PHONY: lint-fix-lua
+lint-fix-lua:
+	@selene $(or $(EXTRA_ARGS),nvim/)
+	@$(STYLUA_CMD) --check $(or $(EXTRA_ARGS),nvim/) || ($(STYLUA_CMD) $(or $(EXTRA_ARGS),nvim/) && exit 1)
+
 .PHONY: lint
 lint: lint-yaml lint-vim lint-shell-scripts lint-fix-markdown \
-	lint-github-actions lint-pre-commit-hook-config
+	lint-github-actions lint-pre-commit-hook-config lint-fix-lua
 
 .PHONY: test-bin
 test-bin:

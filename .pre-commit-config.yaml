@@ -70,3 +70,12 @@ repos:
         entry: make lint-shell-scripts --
         stages:
           - pre-commit
+      - id: lint-fix-lua
+        name: Lint and fix Lua files
+        language: system
+        types:
+          - lua
+        pass_filenames: true
+        entry: make lint-fix-lua --
+        stages:
+          - pre-commit
