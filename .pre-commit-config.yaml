@@ -29,7 +29,7 @@ repos:
         name: Lint Makefile
         language: system
         types:
-          - "makefile"
+          - makefile
         pass_filenames: true
         entry: checkmake
         stages:
@@ -38,7 +38,7 @@ repos:
         name: Lint and fix Markdown files
         language: system
         types:
-          - "markdown"
+          - markdown
         pass_filenames: true
         entry: make lint-fix-markdown --
         stages:
@@ -47,7 +47,7 @@ repos:
         name: Lint GitHub Actions
         language: system
         types:
-          - "yaml"
+          - yaml
         files: '^\.github/workflows/'
         pass_filenames: true
         entry: make lint-github-actions --
@@ -65,7 +65,10 @@ repos:
         name: Lint Shell scripts
         language: system
         types:
-          - "shell"
+          - shell
+        # TODO(skarzi): Remove ``.bashrc`` and ``.bash_aliases`` from exclusion
+        # when they are compliant with ``shellcheck``.
+        exclude: "^(spec/|.vim/bundle/|.bashrc|.bash_aliases)"
         pass_filenames: true
         entry: make lint-shell-scripts --
         stages:

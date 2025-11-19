@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+
 # Manages Bash history across multiple sessions with a focus on preserving
 # recent commands from the current session at the top of the history.
 #
