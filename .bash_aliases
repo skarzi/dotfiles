@@ -1,5 +1,8 @@
+# Colors. Linux-only!
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    test -r ~/.dircolors \
+    && eval "$(dircolors -b ~/.dircolors)" \
+    || eval "$(dircolors -b)"
 
     alias ls='ls --color=auto'
     alias grep='grep --color=auto'
@@ -7,8 +10,10 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+# Filesystem Navigation
 alias ..="cd .."
 
+# File Listing
 alias l='ls -CF'
 alias sl='ls'
 alias ll='ls -l'
@@ -16,19 +21,24 @@ alias la='ls -A'
 alias lla='ls -lA'
 alias lls='ls -l'
 
+# Vim
 alias v='vim'
 alias ivm='vim'
 alias vmi='vim'
 alias vin='vim'
 
+# Utilities
+alias cat="bat --theme=TwoDark"
 alias time='time -p'
 alias pingg='ping 8.8.8.8'
 
+# System Configuration. Linux-only!
 alias i3conf='vim ~/.i3/config'
 alias reload_Xre='xrdb -load ~/.Xresources'
 # shellcheck disable=SC2154
 alias sscrot='scrot -s -e "mv \$f ~/pictures/screenshots"'
 
+# Python
 alias de='deactivate'
 alias mk='pyenv virtualenvwrapper && mkvirtualenv'
 alias pip_upgrade_all='pip freeze | cut -d = -f 1 | xargs pip install -U'
@@ -36,23 +46,28 @@ alias rm_pyc="find . -type d -name __pycache__  \
     -o \( -type f -name '*.py[co]' \) -print0 \
     | xargs -0 rm -rf"
 
+# Custom Scripts
 alias add_ssh_key='bash ~/dotfiles/bin/add_ssh_key.sh'
 alias toggle_trackpad='bash ~/dotfiles/bin/toggle_trackpad.sh'
 
+# Git
 alias g='git'
 alias gi='git'
 alias igt='git'
 alias gt='git'
 alias git-root='cd "$(git rev-parse --show-toplevel)"'
 
+# Docker
 alias dr='docker'
 alias docker-compose='docker compose'
 alias dc='docker compose'
 alias dc_run='docker compose run --rm'
 
+# Tmux
 alias tm='tmux'
 alias tat='tmux attach -t'
 
+# Display Configuration. Linux-only!
 alias xrandr_home="xmodmap ~/.Xmodmap \
     && xrandr \
     --output DP2-2 --mode 1920x1200 --pos 0x0 \
