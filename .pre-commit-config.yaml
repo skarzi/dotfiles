@@ -66,9 +66,9 @@ repos:
         language: system
         types:
           - shell
-        # TODO(skarzi): Remove ``.bashrc`` and ``.bash_aliases`` from exclusion
-        # when they are compliant with ``shellcheck``.
-        exclude: "^(spec/|.vim/bundle/|.bashrc|.bash_aliases)"
+        # TODO(skarzi): Remove ``.bashrc`` from exclusion when it is compliant
+        # with ``shellcheck``.
+        exclude: "^(spec/|.vim/bundle/|.bashrc)"
         pass_filenames: true
         entry: make lint-shell-scripts --
         stages:

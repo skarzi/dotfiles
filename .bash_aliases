@@ -1,8 +1,11 @@
+# shellcheck shell=bash
 # Colors. Linux-only!
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors \
-    && eval "$(dircolors -b ~/.dircolors)" \
-    || eval "$(dircolors -b)"
+if [[ -x /usr/bin/dircolors ]]; then
+    if [[ -r "${HOME}/.dircolors" ]]; then
+        eval "$(dircolors -b "${HOME}/.dircolors")"
+    else
+        eval "$(dircolors -b)"
+    fi
 
     alias ls='ls --color=auto'
     alias grep='grep --color=auto'
@@ -33,10 +36,10 @@ alias time='time -p'
 alias pingg='ping 8.8.8.8'
 
 # System Configuration. Linux-only!
-alias i3conf='vim ~/.i3/config'
-alias reload_Xre='xrdb -load ~/.Xresources'
-# shellcheck disable=SC2154
-alias sscrot='scrot -s -e "mv \$f ~/pictures/screenshots"'
+alias i3conf="vim \${HOME}/.i3/config"
+alias reload_Xre="xrdb -load \${HOME}/.Xresources"
+# shellcheck disable=SC2154  # Variable $f is provided by scrot command
+alias sscrot="scrot -s -e \"mv \\\$f \${HOME}/pictures/screenshots\""
 
 # Python
 alias de='deactivate'
@@ -47,8 +50,8 @@ alias rm_pyc="find . -type d -name __pycache__  \
     | xargs -0 rm -rf"
 
 # Custom Scripts
-alias add_ssh_key='bash ~/dotfiles/bin/add_ssh_key.sh'
-alias toggle_trackpad='bash ~/dotfiles/bin/toggle_trackpad.sh'
+alias add_ssh_key="bash \${HOME}/dotfiles/bin/add_ssh_key.sh"
+alias toggle_trackpad="bash \${HOME}/dotfiles/bin/toggle_trackpad.sh"
 
 # Git
 alias g='git'
@@ -68,11 +71,11 @@ alias tm='tmux'
 alias tat='tmux attach -t'
 
 # Display Configuration. Linux-only!
-alias xrandr_home="xmodmap ~/.Xmodmap \
+alias xrandr_home="xmodmap \${HOME}/.Xmodmap \
     && xrandr \
     --output DP2-2 --mode 1920x1200 --pos 0x0 \
     --output eDP1 --mode 1920x1080 --pos 1990x0"
-alias xrandr_home2="xmodmap ~/.Xmodmap \
+alias xrandr_home2="xmodmap \${HOME}/.Xmodmap \
     && xrandr \
         --output DP2-2 --auto --left-of eDP1"
-alias xrandr_notebook="xmodmap ~/.Xmodmap && xrandr --output eDP1 --auto"
+alias xrandr_notebook="xmodmap \${HOME}/.Xmodmap && xrandr --output eDP1 --auto"
