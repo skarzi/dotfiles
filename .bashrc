@@ -70,6 +70,7 @@ esac
 
 # Bash aliases.
 if [[ -f "${HOME}/.bash_aliases" ]]; then
+    # shellcheck source=.bash_aliases
     source "${HOME}/.bash_aliases"
 fi
 
@@ -95,14 +96,18 @@ export PATH="${HOMEBREW_PREFIX}/bin:${PATH}"
 export NVM_AUTO_USE=true
 export NVM_DIR="${HOMEBREW_PREFIX}/opt/nvm"
 if [[ -s "${NVM_DIR}/nvm.sh" ]]; then
+    # shellcheck source=/opt/homebrew/opt/nvm/nvm.sh
     source "${NVM_DIR}/nvm.sh"
 fi
 if [[ -s "${NVM_DIR}/bash_completion" ]]; then
+    # shellcheck source=/opt/homebrew/opt/nvm/bash_completion
     source "${NVM_DIR}/bash_completion"
 fi
 
 # starship
-eval "$(starship init bash)"
+if command -v starship >/dev/null 2>&1; then
+    eval "$(starship init bash)"
+fi
 
 # pyenv
 export PYENV_ROOT="${HOME}/.pyenv"
@@ -115,7 +120,9 @@ fi
 # pyenv virtualenvwrapper
 # Lazy-load virtualenvwrapper for pyenv.
 # Note: PYENV_VIRTUALENVWRAPPER_PYENV_VERSION can be set to "system" if needed.
-pyenv virtualenvwrapper_lazy
+if command -v pyenv >/dev/null 2>&1; then
+    pyenv virtualenvwrapper_lazy
+fi
 
 # uv
 export PATH="${HOME}/.local/bin:${PATH}"
@@ -123,18 +130,23 @@ export PATH="${HOME}/.local/bin:${PATH}"
 # BASH completion
 if ! shopt -oq posix; then
     if [[ -f "${HOMEBREW_PREFIX}/share/bash-completion/bash_completion" ]]; then
+        # shellcheck source=/opt/homebrew/share/bash-completion/bash_completion
         source "${HOMEBREW_PREFIX}/share/bash-completion/bash_completion"
     elif [[ -f /usr/share/bash-completion/bash_completion ]]; then
+        # shellcheck source=/usr/share/bash-completion/bash_completion
         source /usr/share/bash-completion/bash_completion
     elif [[ -f /etc/bash_completion ]]; then
+        # shellcheck source=/etc/bash_completion
         source /etc/bash_completion
     fi
 fi
 export BASH_COMPLETION_COMPAT_DIR="${HOMEBREW_PREFIX}/etc/bash_completion.d"
 if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+    # shellcheck source=/opt/homebrew/etc/profile.d/bash_completion.sh
     source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
 fi
 if [[ -d "${HOME}/.bash_completion.d" ]]; then
+    # shellcheck disable=SC1090
     for bcfile in "${HOME}"/.bash_completion.d/*; do
         if [[ -r "${bcfile}" ]]; then
             source "${bcfile}"
@@ -145,6 +157,7 @@ fi
 # GO language version manager
 export GVM_DIR="${HOME}/.gvm"
 if [[ -s "${GVM_DIR}/scripts/gvm" ]]; then
+    # shellcheck source=~/.gvm/scripts/gvm
     source "${GVM_DIR}/scripts/gvm"
 fi
 
@@ -165,17 +178,20 @@ export COMPOSE_DOCKER_CLI_BUILD=1
 # rust
 export CARGO_HOME="${HOME}/.cargo"
 export PATH="${CARGO_HOME}/bin:${PATH}"
-source "${CARGO_HOME}/env"
+if [[ -f "${CARGO_HOME}/env" ]]; then
+    # shellcheck source=~/.cargo/env
+    source "${CARGO_HOME}/env"
+fi
 
 # alacritty
 export ALACRITTY_HOME="${HOME}/alacritty"
 
 # fzf
-eval "$(fzf --bash)"
+if command -v fzf >/dev/null 2>&1; then
+    eval "$(fzf --bash)"
+fi
 
 # direnv
-eval "$(direnv hook bash)"
-
-# Rippling
-# CDE CLI bash configuration
-source "${HOME}/.cde/.venv/lib/python3.11/site-packages/cde_cli/cde_cli_sh_rc.sh"
+if command -v direnv >/dev/null 2>&1; then
+    eval "$(direnv hook bash)"
+fi
