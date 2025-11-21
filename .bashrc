@@ -36,7 +36,7 @@ fi
 
 # NOTE: Use "rxvt-unicode-256color" for urxvt.
 export TERM="xterm-256color"
-case "$TERM" in
+case "${TERM}" in
     xterm-color|*-256color|alacritty) color_prompt=yes;;
 esac
 
@@ -60,9 +60,9 @@ fi
 unset color_prompt force_color_prompt
 
 # Set the title to `user@host:dir`.
-case "$TERM" in
+case "${TERM}" in
 xterm*|rxvt*|alacritty*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    PS1="\[\e]0;${debian_chroot:+(${debian_chroot})}\u@\h: \w\a\]${PS1}"
     ;;
 *)
     ;;
@@ -82,7 +82,7 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 export MANPAGER="sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | bat -p -lman'"
 
 # Android Development
-export ANDROID_HOME="$HOME/Android/Sdk"
+export ANDROID_HOME="${HOME}/Android/Sdk"
 export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 export PATH="${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools"
 export PATH="${PATH}:/opt/gradle/gradle-4.10.2/bin"
@@ -148,7 +148,7 @@ if [[ -s "${GVM_DIR}/scripts/gvm" ]]; then
     source "${GVM_DIR}/scripts/gvm"
 fi
 
-export DOCKER_CONFIG="${DOCKER_CONFIG:-$HOME/.docker}"
+export DOCKER_CONFIG="${DOCKER_CONFIG:-${HOME}/.docker}"
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
 
