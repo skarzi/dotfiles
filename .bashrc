@@ -79,7 +79,7 @@ export EDITOR=vim
 # Enable colored GCC warnings and errors.
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 # Use bat for man pages with proper formatting.
-export MANPAGER="sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | bat -p -lman'"
+export MANPAGER="sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | bat --theme=TwoDark -p -lman'"
 
 # Android Development
 export ANDROID_HOME="${HOME}/Android/Sdk"
