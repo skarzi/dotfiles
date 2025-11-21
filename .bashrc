@@ -1,10 +1,10 @@
-# if not running interactively, don't do anything
+# If not running interactively, don't do anything.
 case $- in
     *i*) ;;
     *) return;;
 esac
 
-# run bash in vi mode
+# Vi mode for command line editing.
 set -o vi
 
 export LANG="en_US.UTF-8"
@@ -12,37 +12,35 @@ export LANG="en_US.UTF-8"
 # Bash history
 # Don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
-# Immediately append to the history file, don't overwrite it
+# Immediately append to the history file, don't overwrite it.
 shopt -s histappend
-# set history length
 export HISTSIZE="2000"
 export HISTFILESIZE="10000"
-# Try to share history between all bash sessions.
-# export PROMPT_COMMAND="history -a; history -r; $PROMPT_COMMAND"
+# Share history between all bash sessions using custom script.
+# To revert previous behavior, use the following command:
+# `history -a; history -r; $PROMPT_COMMAND`
 export PROMPT_COMMAND="bash ${HOME}/dotfiles/bin/manage_bash_history.sh"
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
+# Check the window size after each command and update it, if necessary.
 shopt -s checkwinsize
 
-# if set, the pattern "**" used in a pathname expansion context will
+# If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
 # shopt -s globstar
 
-# make less more friendly for non-text input files, see lesspipe(1)
-# [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# set variable identifying the chroot you work in (used in the prompt below)
+# Set variable identifying the chroot you work in (used in the prompt below).
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-export TERM="xterm-256color"  # NOTE: use `"rxvt-unicode-256color"` for urxvt.
+# NOTE: Use "rxvt-unicode-256color" for urxvt.
+export TERM="xterm-256color"
 case "$TERM" in
     xterm-color|*-256color|alacritty) color_prompt=yes;;
 esac
 
-# color prompt
+# Force color prompt and enable colors for `ls`.
 force_color_prompt=yes
 export CLICOLOR=1
 
@@ -61,7 +59,7 @@ else
 fi
 unset color_prompt force_color_prompt
 
-# if this is an xterm, urxvt or alacritty set the title to user@host:dir
+# Set the title to `user@host:dir`.
 case "$TERM" in
 xterm*|rxvt*|alacritty*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
@@ -70,19 +68,20 @@ xterm*|rxvt*|alacritty*)
     ;;
 esac
 
-# alias definitions stored in .bashrc
+# Bash aliases.
 if [ -f "${HOME}/.bash_aliases" ]; then
     . "${HOME}/.bash_aliases"
 fi
 
-# open man pages with less
+# Set some terminal defaults.
 export PAGER=less
-# default editor
 export EDITOR=vim
-# colored GCC warnings and errors
+# Enable colored GCC warnings and errors.
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+# Use bat for man pages with proper formatting.
+export MANPAGER="sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | bat -p -lman'"
 
-# android
+# Android Development
 export ANDROID_HOME="$HOME/Android/Sdk"
 export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 export PATH="${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools"
@@ -110,7 +109,8 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 # pyenv virtualenvwrapper
-export PYENV_VIRTUALENVWRAPPER_PYENV_VERSION="system"
+# Lazy-load virtualenvwrapper for pyenv.
+# Note: PYENV_VIRTUALENVWRAPPER_PYENV_VERSION can be set to "system" if needed.
 pyenv virtualenvwrapper_lazy
 
 # uv
@@ -137,14 +137,18 @@ export GVM_DIR="${HOME}/.gvm"
 [[ -s "${GVM_DIR}/scripts/gvm" ]] && source "${GVM_DIR}/scripts/gvm"
 
 export DOCKER_CONFIG="${DOCKER_CONFIG:-$HOME/.docker}"
-# use buildkit to build docker-compose services' images
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
 
-# startx when current tty == tty 1
-if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
-    startx
-fi
+# colima
+# Uncomment to use Colima Docker socket.
+# export DOCKER_HOST="$(colima status --json | jq --raw-output .docker_socket)"
+# export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
+
+# Uncomment the following lines on Linux systems to enable automatic X server startup on tty 1.
+# if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
+#     startx
+# fi
 
 # rust
 export CARGO_HOME="${HOME}/.cargo"
@@ -159,3 +163,7 @@ eval "$(fzf --bash)"
 
 # direnv
 eval "$(direnv hook bash)"
+
+# Rippling
+# CDE CLI bash configuration
+source "${HOME}/.cde/.venv/lib/python3.11/site-packages/cde_cli/cde_cli_sh_rc.sh"
