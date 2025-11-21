@@ -30,7 +30,7 @@ shopt -s checkwinsize
 
 
 # Set variable identifying the chroot you work in (used in the prompt below).
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+if [[ -z "${debian_chroot:-}" && -r /etc/debian_chroot ]]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
@@ -44,15 +44,15 @@ esac
 force_color_prompt=yes
 export CLICOLOR=1
 
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+if [[ -n "${force_color_prompt}" ]]; then
+    if [[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null; then
         color_prompt=yes
     else
         color_prompt=
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
+if [[ "${color_prompt}" = yes ]]; then
     PS1='\[\e[0;32m\]\u\[\e[m\]@\[\e[0;32m\]\h\[\e[m\] \[\e[m\][\[\e[0;34m\]\w\[\e[m\]\[\e[m\]] \n\[\e[0;32m\]\$\[\e[m\] '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
@@ -69,8 +69,8 @@ xterm*|rxvt*|alacritty*)
 esac
 
 # Bash aliases.
-if [ -f "${HOME}/.bash_aliases" ]; then
-    . "${HOME}/.bash_aliases"
+if [[ -f "${HOME}/.bash_aliases" ]]; then
+    source "${HOME}/.bash_aliases"
 fi
 
 # Set some terminal defaults.
@@ -94,8 +94,12 @@ export PATH="${HOMEBREW_PREFIX}/bin:${PATH}"
 # nvm
 export NVM_AUTO_USE=true
 export NVM_DIR="${HOMEBREW_PREFIX}/opt/nvm"
-[ -s "${NVM_DIR}/nvm.sh" ] && \. "${NVM_DIR}/nvm.sh"
-[ -s "${NVM_DIR}/bash_completion" ] && \. "${NVM_DIR}/bash_completion"
+if [[ -s "${NVM_DIR}/nvm.sh" ]]; then
+    source "${NVM_DIR}/nvm.sh"
+fi
+if [[ -s "${NVM_DIR}/bash_completion" ]]; then
+    source "${NVM_DIR}/bash_completion"
+fi
 
 # starship
 eval "$(starship init bash)"
@@ -118,23 +122,31 @@ export PATH="${HOME}/.local/bin:${PATH}"
 
 # BASH completion
 if ! shopt -oq posix; then
-  if [ -f "${HOMEBREW_PREFIX}/share/bash-completion/bash_completion" ]; then
-    source "${HOMEBREW_PREFIX}/share/bash-completion/bash_completion"
-  elif [ -f /usr/share/bash-completion/bash_completion ]; then
-    source /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    source /etc/bash_completion
-  fi
+    if [[ -f "${HOMEBREW_PREFIX}/share/bash-completion/bash_completion" ]]; then
+        source "${HOMEBREW_PREFIX}/share/bash-completion/bash_completion"
+    elif [[ -f /usr/share/bash-completion/bash_completion ]]; then
+        source /usr/share/bash-completion/bash_completion
+    elif [[ -f /etc/bash_completion ]]; then
+        source /etc/bash_completion
+    fi
 fi
 export BASH_COMPLETION_COMPAT_DIR="${HOMEBREW_PREFIX}/etc/bash_completion.d"
-[[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]] && . "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
-for BCFILE in ${HOME}/.bash_completion.d/* ; do
-    source "${BCFILE}"
-done
+if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+fi
+if [[ -d "${HOME}/.bash_completion.d" ]]; then
+    for bcfile in "${HOME}"/.bash_completion.d/*; do
+        if [[ -r "${bcfile}" ]]; then
+            source "${bcfile}"
+        fi
+    done
+fi
 
 # GO language version manager
 export GVM_DIR="${HOME}/.gvm"
-[[ -s "${GVM_DIR}/scripts/gvm" ]] && source "${GVM_DIR}/scripts/gvm"
+if [[ -s "${GVM_DIR}/scripts/gvm" ]]; then
+    source "${GVM_DIR}/scripts/gvm"
+fi
 
 export DOCKER_CONFIG="${DOCKER_CONFIG:-$HOME/.docker}"
 export DOCKER_BUILDKIT=1
@@ -146,7 +158,7 @@ export COMPOSE_DOCKER_CLI_BUILD=1
 # export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
 
 # Uncomment the following lines on Linux systems to enable automatic X server startup on tty 1.
-# if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
+# if [[ -z "${DISPLAY}" && "${XDG_VTNR}" -eq 1 ]]; then
 #     startx
 # fi
 
