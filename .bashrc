@@ -28,6 +28,23 @@ shopt -s checkwinsize
 # match all files and zero or more directories and subdirectories.
 # shopt -s globstar
 
+# BASH UTILITIES
+# Add a directory to `${PATH}` if it exists and is not already there.
+# Arguments:
+#   ${1}: Directory path to add
+# Returns:
+#   `0` if directory was added or already exists in `${PATH}`
+#   `1` if directory doesn't exist
+add_to_path() {
+    local dir="${1}"
+    if [[ ! -d "${dir}" ]]; then
+        return 1
+    fi
+    if [[ ":${PATH}:" != *":${dir}:"* ]]; then
+        PATH="${dir}:${PATH}"
+    fi
+    return 0
+}
 
 # Set variable identifying the chroot you work in (used in the prompt below).
 if [[ -z "${debian_chroot:-}" && -r /etc/debian_chroot ]]; then
@@ -85,12 +102,15 @@ export MANPAGER="sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08
 # Android Development
 export ANDROID_HOME="${HOME}/Android/Sdk"
 export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
-export PATH="${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools"
-export PATH="${PATH}:/opt/gradle/gradle-4.10.2/bin"
+if [[ -d "${ANDROID_HOME}" ]]; then
+    add_to_path "${ANDROID_HOME}/tools"
+    add_to_path "${ANDROID_HOME}/platform-tools"
+fi
+add_to_path "/opt/gradle/gradle-4.10.2/bin"
 
 # homebrew
 export HOMEBREW_PREFIX="/opt/homebrew"
-export PATH="${HOMEBREW_PREFIX}/bin:${PATH}"
+add_to_path "${HOMEBREW_PREFIX}/bin"
 
 # nvm
 export NVM_AUTO_USE=true
@@ -111,11 +131,11 @@ fi
 
 # pyenv
 export PYENV_ROOT="${HOME}/.pyenv"
-export PATH="${PYENV_ROOT}/bin:${PATH}"
 if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init --path)"
     eval "$(pyenv init -)"
 fi
+add_to_path "${PYENV_ROOT}/bin"
 
 # pyenv virtualenvwrapper
 # Lazy-load virtualenvwrapper for pyenv.
@@ -125,7 +145,7 @@ if command -v pyenv >/dev/null 2>&1; then
 fi
 
 # uv
-export PATH="${HOME}/.local/bin:${PATH}"
+add_to_path "${HOME}/.local/bin"
 
 # BASH completion
 if ! shopt -oq posix; then
@@ -177,11 +197,11 @@ export COMPOSE_DOCKER_CLI_BUILD=1
 
 # rust
 export CARGO_HOME="${HOME}/.cargo"
-export PATH="${CARGO_HOME}/bin:${PATH}"
 if [[ -f "${CARGO_HOME}/env" ]]; then
     # shellcheck source=~/.cargo/env
     source "${CARGO_HOME}/env"
 fi
+add_to_path "${CARGO_HOME}/bin"
 
 # alacritty
 export ALACRITTY_HOME="${HOME}/alacritty"
