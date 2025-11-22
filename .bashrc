@@ -46,44 +46,16 @@ add_to_path() {
     return 0
 }
 
-# Set variable identifying the chroot you work in (used in the prompt below).
-if [[ -z "${debian_chroot:-}" && -r /etc/debian_chroot ]]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
+# TERMINAL
 # NOTE: Use "rxvt-unicode-256color" for urxvt.
 export TERM="xterm-256color"
-case "${TERM}" in
-    xterm-color|*-256color|alacritty) color_prompt=yes;;
-esac
-
-# Force color prompt and enable colors for `ls`.
-force_color_prompt=yes
 export CLICOLOR=1
+export ALACRITTY_HOME="${HOME}/alacritty"
 
-if [[ -n "${force_color_prompt}" ]]; then
-    if [[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null; then
-        color_prompt=yes
-    else
-        color_prompt=
-    fi
+# starship
+if command -v starship >/dev/null 2>&1; then
+    eval "$(starship init bash)"
 fi
-
-if [[ "${color_prompt}" = yes ]]; then
-    PS1='\[\e[0;32m\]\u\[\e[m\]@\[\e[0;32m\]\h\[\e[m\] \[\e[m\][\[\e[0;34m\]\w\[\e[m\]\[\e[m\]] \n\[\e[0;32m\]\$\[\e[m\] '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
-# Set the title to `user@host:dir`.
-case "${TERM}" in
-xterm*|rxvt*|alacritty*)
-    PS1="\[\e]0;${debian_chroot:+(${debian_chroot})}\u@\h: \w\a\]${PS1}"
-    ;;
-*)
-    ;;
-esac
 
 # Bash aliases.
 if [[ -f "${HOME}/.bash_aliases" ]]; then
