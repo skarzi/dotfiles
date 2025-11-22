@@ -46,13 +46,10 @@ lint-yaml:
 lint-vim:
 	@vint .vim/.vimrc .vim/*.vim .vim/vundles/ .vim/settings/
 
-# TODO(skarzi): Add ``.bashrc`` to the default ones, after making it compliant
-# with ``shellcheck``:
-# `&& _DEFAULT_FILES=".bashrc .bash_aliases $${_DEFAULT_FILES}" \`
 .PHONY: lint-shell-scripts
 lint-shell-scripts:
 	@_DEFAULT_FILES="$$(find . -type f -name '*.sh' | grep -Ev '(\.vim/bundle/|spec/)' | paste -sd ' ' -)" \
-	&& _DEFAULT_FILES=".bash_aliases $${_DEFAULT_FILES}" \
+	&& _DEFAULT_FILES=".bashrc .bash_aliases $${_DEFAULT_FILES}" \
 	&& shellcheck $(or $(EXTRA_ARGS),$${_DEFAULT_FILES})
 
 .PHONY: lint-fix-markdown
