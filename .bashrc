@@ -42,13 +42,23 @@ export MANPAGER="sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08
 # Add a directory to `${PATH}` if it exists and is not already there.
 # Arguments:
 #   ${1}: Directory path to add
+#   ${2}: If `true`, removes the directory from `${PATH}` first (if present)
+#   and then prepends it, ensuring it is at the front (default: `false`).
 # Returns:
 #   `0` if directory was added or already exists in `${PATH}`
 #   `1` if directory doesn't exist
 add_to_path() {
     local dir="${1}"
+    local should_force_update="${2:-false}"
+
     if [[ ! -d "${dir}" ]]; then
         return 1
+    fi
+    if [[ "${should_force_update}" == "true" ]]; then
+        PATH=":${PATH}:"
+        PATH="${PATH//:${dir}:/:}"
+        PATH="${PATH#:}"
+        PATH="${PATH%:}"
     fi
     if [[ ":${PATH}:" != *":${dir}:"* ]]; then
         PATH="${dir}:${PATH}"
@@ -98,7 +108,7 @@ fi
 # TOOLS
 # homebrew
 export HOMEBREW_PREFIX="/opt/homebrew"
-add_to_path "${HOMEBREW_PREFIX}/bin"
+add_to_path "${HOMEBREW_PREFIX}/bin" "true"
 
 # nvm
 export NVM_AUTO_USE=true
