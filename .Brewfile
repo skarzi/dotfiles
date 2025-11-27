@@ -94,6 +94,7 @@ brew "ctags"
 brew "trufflehog"
 brew "vale"
 brew "mkcert"
+brew "gemini-cli"
 # Temporal CLI (tctl).
 brew "tctl"
 brew "mutagen-io/mutagen/mutagen"
