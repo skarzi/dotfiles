@@ -54,7 +54,7 @@ lint-shell-scripts:
 
 .PHONY: lint-fix-markdown
 lint-fix-markdown:
-	@$(NVM_SETUP_CMD) && npm run lint:md -- $(or $(EXTRA_ARGS),**/*.md)
+	@$(NVM_SETUP_CMD) && npm run lint:md -- $(or $(EXTRA_ARGS),"**/*.md")
 
 .PHONY: lint-fix-lua
 lint-fix-lua:
