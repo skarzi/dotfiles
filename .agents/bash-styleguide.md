@@ -69,7 +69,29 @@ fi
 - **Prefer `source`** over `.` for readability
 - **Why**: More explicit and self-documenting
 
-## 3. Command Existence Checks
+## 3. Numeric Comparisons
+
+### Use `(( ... ))` or `-eq` for Integers
+
+- **Prefer `(( ... ))`** for arithmetic expressions and numeric comparisons
+- **Use `-eq`, `-ne`, `-lt`, `-le`, `-gt`, `-ge`** inside `[[ ... ]]`
+- **Avoid** using `==`, `>`, `<` inside `[[ ... ]]` for numbers (they perform
+  string/lexicographical comparison)
+- **Why**: Clearer intent and prevents logic errors (e.g., string "10" is
+  lexicographically less than "2")
+
+```bash
+# Recommended
+if (( count > 10 )); then ...
+
+# Acceptable
+if [[ "${count}" -gt 10 ]]; then ...
+
+# Avoid (String comparison!)
+if [[ "${count}" > 10 ]]; then ...
+```
+
+## 4. Command Existence Checks
 
 ### Use `command -v` Instead of `which`
 
@@ -92,7 +114,7 @@ if which starship >/dev/null 2>&1; then
 fi
 ```
 
-## 4. Error Handling and Defensive Programming
+## 5. Error Handling and Defensive Programming
 
 ### File Existence and Readability Checks
 
@@ -127,7 +149,7 @@ fi
 [[ -s "${GVM_DIR}/scripts/gvm" ]] && source "${GVM_DIR}/scripts/gvm"
 ```
 
-## 5. Variable Management
+## 6. Variable Management
 
 ### Consistent Variable Expansion Format
 
@@ -191,7 +213,7 @@ add_to_path() {
 }
 ```
 
-## 6. PATH Management
+## 7. PATH Management
 
 ### Centralized PATH Management Function
 
@@ -214,16 +236,16 @@ add_to_path() {
         PATH=":${PATH}:"
         PATH="${PATH//:${dir}:/:}"
         PATH="${PATH#:}"
-        PATH="${PATH%:}"
+        PATH="${PATH%:} "
     fi
-    if [[ ":${PATH}:" != *":${dir}:"* ]]; then
+    if [[ ":${PATH}:" != ":${dir}:"* ]]; then
         PATH="${dir}:${PATH}"
     fi
     return 0
 }
 ```
 
-## 7. Function Design (Google Shell Style Guide)
+## 8. Function Design (Google Shell Style Guide)
 
 ### Function Naming
 
@@ -268,7 +290,7 @@ add_to_path() {
 - **Always declare function variables as `local`**
 - **Why**: Prevents variable leakage to global scope
 
-## 8. Comment Style
+## 9. Comment Style
 
 ### Standard Comment Format
 
@@ -288,7 +310,7 @@ HISTCONTROL="ignoreboth"
 HISTCONTROL="ignoreboth"
 ```
 
-## 9. Alias Best Practices
+## 10. Alias Best Practices
 
 ### Variable Expansion in Aliases
 
@@ -312,15 +334,13 @@ alias i3conf="vim ${HOME}/.i3/config"
 
 ```bash
 # Good
-alias cde-rsync="cd \${HOME}/work/rippling-main \
-    && rsync --recursive --archive --compress --hard-links --delete --progress \
-        --exclude \".git\" \
-        \"./\" \
-        cloud-dev:~/workspace/rippling-main \
-    && cd -"
+alias xrandr_home="xmodmap \${HOME}/.Xmodmap \
+    && xrandr \
+    --output DP2-2 --mode 1920x1200 --pos 0x0 \
+    --output eDP1 --mode 1920x1080 --pos 1990x0"
 ```
 
-## 10. Code Organization
+## 11. Code Organization
 
 ### Logical Section Grouping
 
@@ -352,7 +372,7 @@ fi
 add_to_path "${PYENV_ROOT}/bin"
 ```
 
-## 11. Conditional Expression Optimization
+## 12. Conditional Expression Optimization
 
 ### Combine Conditions When Appropriate
 
@@ -371,7 +391,7 @@ if [[ -z "${DISPLAY}" ]] && [[ "${XDG_VTNR}" -eq 1 ]]; then
 fi
 ```
 
-## 12. Redirection and Error Suppression
+## 13. Redirection and Error Suppression
 
 ### Proper Error Suppression
 
@@ -385,7 +405,7 @@ if command -v starship >/dev/null 2>&1; then
 fi
 ```
 
-## 13. Default Values
+## 14. Default Values
 
 ### Use Parameter Expansion for Defaults
 
@@ -405,7 +425,7 @@ else
 fi
 ```
 
-## 14. String Manipulation
+## 15. String Manipulation
 
 ### Safe String Operations
 
@@ -421,7 +441,7 @@ PATH="${PATH%:}"
 PATH="${PATH//:${dir}:/:}"
 ```
 
-## 15. Testing and Validation
+## 16. Testing and Validation
 
 ### Always Validate Inputs
 
