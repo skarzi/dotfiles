@@ -1,0 +1,5 @@
+std = "neovim"
+
+[lints]
+# Mixed tables are encouraged by the `lazy.nvim` plugin manager.
+mixed_table="allow"
