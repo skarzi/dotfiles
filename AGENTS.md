@@ -83,7 +83,8 @@ Refer to `nvim/vim-to-neovim-migration-plan.md` for specific architectural decis
   (e.g., `feat(nvim): add lsp`, `fix(bash): correct history path`).
   Validated by `commitlint` on `commit-msg` git hook.
 - **Shell:** Follow [`.agents/bash-styleguide.md`](.agents/bash-styleguide.md).
-- **Lua:** Strictly `selene` and `stylua` compliant.
+- **Lua:** Follow [`.agents/lua-styleguide.md`](.agents/lua-styleguide.md).
+  Strictly `selene` and `stylua` compliant.
 
 ## 6. Specific Constraints
 
