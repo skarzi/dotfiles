@@ -86,6 +86,7 @@ brew "fzf"
 brew "bat"
 # Search tool like grep and The Silver Searcher.
 brew "ripgrep"
+brew "fd"
 brew "jq"
 brew "yq"
 # Reimplementation of ctags(1).
