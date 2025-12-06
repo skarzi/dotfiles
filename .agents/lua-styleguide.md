@@ -94,7 +94,8 @@ configuration.
 ### Keymappings
 
 - **API**: Use `vim.keymap.set`.
-- **Description**: **Mandatory** `desc` field.
+- **Description**: **Mandatory** `desc` field. It should be a short, concise,
+  precise sentence **without** a trailing period.
 - **Structure**:
 
     ```lua
@@ -134,6 +135,11 @@ configuration.
 
 ### APIs
 
+- **No Aliasing**: Do not alias standard Neovim modules (like `vim.keymap`,
+  `vim.opt`, `vim.api`) to local variables. Use the fully qualified name for
+  clarity and consistency.
+  - *Bad*: `local keymap = vim.keymap; keymap.set(...)`
+  - *Good*: `vim.keymap.set(...)`
 - **Vimscript vs Lua**: Prefer Lua standard library or `vim.*` APIs over
   `vim.cmd` or `vim.fn` where a native Lua equivalent exists.
   - *Example*: Use `vim.tbl_contains` instead of calling a Vimscript function.
