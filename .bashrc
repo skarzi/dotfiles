@@ -124,15 +124,16 @@ fi
 
 # pyenv
 export PYENV_ROOT="${HOME}/.pyenv"
-if command -v pyenv >/dev/null 2>&1; then
-    eval "$(pyenv init --path)"
-    eval "$(pyenv init -)"
-fi
 add_to_path "${PYENV_ROOT}/bin"
+if command -v pyenv >/dev/null 2>&1; then
+    eval "$(pyenv init - bash)"
+fi
 
 # pyenv virtualenvwrapper
 # Lazy-load virtualenvwrapper for pyenv.
-# Note: PYENV_VIRTUALENVWRAPPER_PYENV_VERSION can be set to "system" if needed.
+# NOTE: PYENV_VIRTUALENVWRAPPER_PYENV_VERSION can be set to "system" if needed.
+# export
+export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 if command -v pyenv >/dev/null 2>&1; then
     pyenv virtualenvwrapper_lazy
 fi
