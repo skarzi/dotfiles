@@ -142,11 +142,14 @@ fi
 add_to_path "${HOME}/.local/bin"
 
 # GVM
-# GO language version manager
 export GVM_DIR="${HOME}/.gvm"
 if [[ -s "${GVM_DIR}/scripts/gvm" ]]; then
     # shellcheck source=/dev/null  # Variable path, may not be accessible
     source "${GVM_DIR}/scripts/gvm"
+fi
+if [[ -s "${GVM_DIR}/scripts/completion" ]]; then
+    # shellcheck source=/dev/null  # Variable path, may not be accessible
+    source "${GVM_DIR}/scripts/completion"
 fi
 
 # rust
