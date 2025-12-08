@@ -1,0 +1,22 @@
+---
+session_name: dotfiles
+start_directory: "${HOME}/dotfiles"
+shell_command_before:
+  - cmd: workon dotfiles
+  - cmd: clear
+windows:
+  - window_name: main
+    focus: true
+    layout: even-horizontal
+    panes:
+      - focus: true
+      - shell_command:
+          - cmd: gemini
+            enter: false
+  - window_name: tools
+    layout: even-horizontal
+    panes:
+      - shell_command:
+          - cmd: pyenv update
+            enter: false
+      - blank
