@@ -25,6 +25,15 @@ repos:
         always_run: true
         stages:
           - commit-msg
+      - id: lint-yaml
+        name: Lint YAML files
+        language: system
+        types:
+          - yaml
+        pass_filenames: false
+        entry: make lint-yaml
+        stages:
+          - pre-commit
       - id: lint-makefile
         name: Lint Makefile
         language: system
