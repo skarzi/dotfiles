@@ -1,6 +1,6 @@
 ---
 name: CI
-'on':
+"on":
   push:
     branches:
       - main
@@ -16,13 +16,13 @@ jobs:
       - name: "Setup python 3.x"
         uses: actions/setup-python@v6
         with:
-          python-version: "3.x"
+          python-version-file: ".python-version"
           cache: pip
       - name: "Setup node"
         uses: actions/setup-node@v6
         with:
-          node-version-file: '.nvmrc'
-          cache: 'npm'
+          node-version-file: ".nvmrc"
+          cache: "npm"
       - name: "Setup Go"
         uses: actions/setup-go@v6
         with:

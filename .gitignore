@@ -1,9 +1,9 @@
-.python-version
 .i3/i3log
 .vim/bundle
 .vim/spell
 .vim/.netrwhist
-.vimperator/info
 notes/
 node_modules/
 .shellspec*.log
+.gemini/
+gha-creds-*.json

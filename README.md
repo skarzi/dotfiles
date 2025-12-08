@@ -7,6 +7,7 @@ Feel free to use them!
 
 Local development requires the following tools:
 
++ [pyenv](https://github.com/pyenv/pyenv) - Python Version Manager
 + [nvm](https://github.com/nvm-sh/nvm) - Node Version Manager
 + [rustup](https://rustup.rs/) - Rust toolchain installer
 + [checkmake](https://github.com/checkmake/checkmake) - Makefile linter
