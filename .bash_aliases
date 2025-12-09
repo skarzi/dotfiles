@@ -29,6 +29,8 @@ alias v='vim'
 alias ivm='vim'
 alias vmi='vim'
 alias vin='vim'
+alias nv='nvim'
+alias n='nvim'
 
 # Utilities
 alias cat="bat --theme=TwoDark"
