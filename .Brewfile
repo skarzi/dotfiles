@@ -148,3 +148,6 @@ cask "basictex"
 
 # WEB & BROWSING
 cask "google-chrome"
+
+# SECURITY & PRIVACY
+brew "protonpass/tap/pass-cli"
