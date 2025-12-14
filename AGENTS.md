@@ -44,15 +44,24 @@ workflows for AI agents working on this `dotfiles` repository.
 
 ## 4. Operational Workflows
 
-### Verification (Mandatory!)
+### Verification & Quality Assurance (Mandatory!)
 
-Agents **must** verify **all** changes using the provided `Makefile`.
+**CRITICAL:** Agents **must** verify **all** changes by running linters and tests.
+A task is NOT complete until all checks pass.
+
+**Recommended Workflow:**
+
+1. Make changes.
+2. Run the appropriate `make` target or `pre-commit` to verify.
+3. Fix any reported issues.
+4. Repeat until clean.
 
 **Common Targets:**
 
 | Goal | Command | Notes |
 | :--- | :--- | :--- |
-| **Run Everything** | `make all` | Run linters & tests. Use before "Finish". |
+| **Run Everything** | `make all` | **Required** Runs all linters & tests. |
+| **Run Pre-commit** | `pre-commit run --all-files` | Alternative `make all`. |
 | **Run Tests** | `make test` | Runs `shellspec` tests in `spec/`. |
 | **Lint All** | `make lint` | Runs all configured linters. |
 | **Lint Shell** | `make lint-shell-scripts` | Uses `shellcheck`. |
