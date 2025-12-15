@@ -2,33 +2,25 @@
 cask "spotify"
 
 # DEVELOPMENT
-## Python
-brew "python@3.11"
-brew "pre-commit"
-brew "semgrep"
-vscode "charliermarsh.ruff"
-vscode "ms-python.debugpy"
-vscode "ms-python.python"
-vscode "toughtype.pydance"
-
 ## DevOps
 brew "awscli"
 brew "colima", restart_service: :changed
 brew "docker", link: false
-cask "docker-desktop"
-brew "kubernetes-cli"
 brew "kubectx"
+brew "kubernetes-cli"
+brew "semgrep"
 brew "skaffold"
 brew "terraform"
 brew "terragrunt"
 brew "tflint"
+cask "docker-desktop"
+cask "orbstack"
 # Plugin for AWS CLI to start and end sessions that connect to managed instances.
 cask "session-manager-plugin"
 
 ## Git
 brew "git"
 brew "git-delta"  # Syntax-highlighting pager for git and diff output.
-vscode "eamodio.gitlens"
 
 ## GitHub
 brew "gh"
@@ -53,12 +45,6 @@ vscode "vscodevim.vim"
 brew "openjdk"
 brew "maven"
 
-## Go
-brew "go@1.20"
-
-## Node.js
-brew "nvm"
-
 ## API development
 cask "bruno"
 
@@ -66,67 +52,57 @@ cask "bruno"
 brew "checkmake"
 
 ## Build Tools & Libraries
-cask "pants"
-tap "pantsbuild/tap"
-brew "pkgconf"
-brew "libtool"
-brew "protobuf"
-brew "libffi"
 # C/C++ and Java libraries for Unicode and globalization.
 brew "icu4c@76"
-
-## Testing
-vscode "hbenl.vscode-test-explorer"
-vscode "ms-vscode.test-adapter-converter"
+brew "libffi"
+brew "libtool"
+brew "pkgconf"
+brew "protobuf"
+cask "pants"
+tap "pantsbuild/tap"
 
 ## Development Tools
-brew "direnv"
-brew "fzf"
-# Clone of cat(1) with syntax highlighting and Git integration.
-brew "bat"
-# Search tool like grep and The Silver Searcher.
-brew "ripgrep"
+brew "bat"  # Clone of cat(1) with syntax highlighting and Git integration.
+brew "ctags"  # Reimplementation of ctags(1).
 brew "fd"
-brew "jq"
-brew "yq"
-# Reimplementation of ctags(1).
-brew "ctags"
-# Find and verify credentials.
-brew "trufflehog"
-brew "vale"
-brew "mkcert"
+brew "fzf"
 brew "gemini-cli"
-# Temporal CLI (tctl).
-brew "tctl"
+brew "jq"
+brew "mkcert"
 brew "mutagen-io/mutagen/mutagen"
-tap "mutagen-io/mutagen"
+brew "ripgrep"  # Search tool like grep and The Silver Searcher.
+brew "tctl"  # Temporal CLI (tctl).
+brew "trufflehog"  # Find and verify credentials.
+brew "vale"
+brew "yq"
 cask "claude-code"
 cask "cursor-cli"
+tap "mutagen-io/mutagen"
+tap "stripe/stripe-cli"
 vscode "anysphere.cursorpyright"
 vscode "ms-vscode.makefile-tools"
-tap "stripe/stripe-cli"
 
 # SYSTEM & UTILITIES
+brew "cairo"
 brew "coreutils"
 brew "curl"
-brew "wget"
-brew "rsync"
-brew "htop"
-brew "nmap"
-brew "watch"
-brew "cairo"
+brew "fontconfig"
 brew "graphviz"
+brew "htop"
 brew "imagemagick"
-brew "poppler"
-brew "xdot"
-tap "koekeishiya/formulae"
 brew "koekeishiya/formulae/skhd"
 brew "koekeishiya/formulae/yabai"
+brew "nmap"
+brew "poppler"
 brew "qemu"
-brew "fontconfig"
+brew "rsync"
+brew "watch"
+brew "wget"
+brew "xdot"
 cask "font-hack-nerd-font"
 cask "gpg-suite-no-mail"
 cask "karabiner-elements"
+tap "koekeishiya/formulae"
 
 # COMMUNICATION
 cask "signal"
@@ -135,16 +111,14 @@ cask "telegram"
 cask "zoom"
 
 # PRODUCTIVITY
-cask "thunderbird"
 cask "google-drive"
 cask "grammarly-desktop"
+cask "thunderbird"
 
 # DOCUMENTATION & READING
 brew "pandoc"
-brew "plantuml"
-cask "calibre"
-cask "foxitreader"
 cask "basictex"
+cask "calibre"
 
 # WEB & BROWSING
 cask "google-chrome"
