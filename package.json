@@ -3,7 +3,7 @@
   "dependencies": {
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.2.0",
-    "markdownlint-cli2": "^0.19.1"
+    "markdownlint-cli2": "^0.20.0"
   },
   "scripts": {
     "lint:md": "markdownlint-cli2",
