@@ -46,6 +46,7 @@ lint-yaml:
 lint-vim:
 	@vint .vim/.vimrc .vim/*.vim .vim/vundles/ .vim/settings/
 
+# TODO(skarzi): Add `shfmt` for shell script formatting.
 .PHONY: lint-shell-scripts
 lint-shell-scripts:
 	@_DEFAULT_FILES="$$(find . -type f -name '*.sh' | grep -Ev '(\.vim/bundle/|spec/)' | paste -sd ' ' -)" \
