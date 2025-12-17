@@ -60,14 +60,14 @@ A task is NOT complete until all checks pass.
 
 | Goal | Command | Notes |
 | :--- | :--- | :--- |
-| **Run Everything** | `make all` | **Required** Runs all linters & tests. |
-| **Run Pre-commit** | `pre-commit run --all-files` | Alternative `make all`. |
-| **Run Tests** | `make test` | Runs `shellspec` tests in `spec/`. |
-| **Lint All** | `make lint` | Runs all configured linters. |
-| **Lint Shell** | `make lint-shell-scripts` | Uses `shellcheck`. |
-| **Fix Lua** | `make lint-fix-lua` | Uses `selene` (lint) / `stylua` (format). |
-| **Fix Markdown** | `make lint-fix-markdown` | Uses `markdownlint-cli2`. |
-| **Lint YAML** | `make lint-yaml` | Uses `yamllint`. |
+| **Run Everything** | `make all` | **Required** Runs all linters and tests |
+| **Run Pre-commit** | `pre-commit run --all-files` | Alternative `make all` |
+| **Run Tests** | `make test` | Runs `shellspec` tests in `spec/` |
+| **Lint All** | `make lint` | Runs all configured linters |
+| **Lint Shell** | `make lint-shell-scripts` | Uses `shellcheck` |
+| **Fix Lua** | `make lint-fix-lua` | Uses `selene` and `stylua` |
+| **Fix Markdown** | `make lint-fix-markdown` | Uses `markdownlint-cli2` |
+| **Lint YAML** | `make lint-yaml` | Uses `yamllint` |
 
 **Targeting Specific Files:**
 Most lint targets accept arguments to run on specific files to save time:
