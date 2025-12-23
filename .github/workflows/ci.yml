@@ -45,7 +45,9 @@ jobs:
         run: |
           set -euo pipefail
 
-          go install github.com/checkmake/checkmake/cmd/checkmake@latest
+          # TODO(skarzi): Update user to `checkmake` when new version released.
+          # Reference: https://github.com/checkmake/checkmake/issues/216
+          go install github.com/mrtazz/checkmake/cmd/checkmake@latest
           echo "${HOME}/go/bin" >> "${GITHUB_PATH}"
       - name: "Install ShellSpec"
         shell: bash
