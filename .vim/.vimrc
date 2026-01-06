@@ -1,3 +1,4 @@
+" NOTE: ViM config is no longer actively maintained! Use Neovim instead!
 " to use some advanced ViM features, it need to be 'iMproved'
 " vint: -ProhibitSetNoCompatible
 set nocompatible
