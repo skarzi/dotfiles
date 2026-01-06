@@ -110,3 +110,5 @@ data:
     kDimTime: 300  # Turn off keyboard backlight after 5 minutes.
   com.apple.AppleMultitouchTrackpad:
     TrackpadCornerSecondaryClick: 2  # Bottom right click.
+  com.apple.screencapture:
+    location: "~/Pictures/Screenshots"
