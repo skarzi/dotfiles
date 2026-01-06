@@ -1,0 +1,13 @@
+Host *
+  ConnectTimeout 30
+  # NOTE: The `UseKeychain` option is specific to macOS.
+  IgnoreUnknown UseKeychain
+
+Host github.com
+  User git
+  Hostname ssh.github.com
+  Port 443
+  AddKeysToAgent yes
+  UseKeychain yes
+  UpdateHostKeys yes
+  IdentityFile ~/.ssh/id_ed25519

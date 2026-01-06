@@ -1,0 +1,112 @@
+---
+description: "skarzi's macOS defaults"
+current_host: false
+kill:
+  - cfprefsd
+  - Dock
+  - Finder
+  - SystemUIServer
+data:
+  NSGlobalDomain:
+    AppleInterfaceStyle: "Dark"
+    AppleKeyboardUIMode: 1
+    AppleLanguages:
+      - en-US
+      - pl-PL
+      - es-PL
+    AppleShowAllExtensions: true
+    AppleWindowTabbingMode: "fullscreen"
+    NSAutomaticCapitalizationEnabled: false
+    NSAutomaticDashSubstitutionEnabled: false
+    NSAutomaticPeriodSubstitutionEnabled: false
+    NSAutomaticQuoteSubstitutionEnabled: false
+    NSTableViewDefaultSizeMode: 1  # Small.
+    NSUserDictionaryReplacementItems:
+      - "on": 1
+        replace: ":wshrug:"
+        with: "¯\\_(ツ)_/¯"
+      - "on": 1
+        replace: ":wlenny:"
+        with: "( ͡° ͜ʖ ͡°)"
+    com.apple.keyboard.fnState: true
+    com.apple.mouse.tapBehavior: 1
+    com.apple.trackpad.scaling: 2
+  com.apple.finder:
+    AppleShowAllFiles: true
+    FXPreferredViewStyle: "clmv"
+    FXRemoveOldTrashItems: true
+    ShowExternalHardDrivesOnDesktop: true
+    ShowHardDrivesOnDesktop: false
+    ShowPathBar: true
+    ShowRemovableMediaOnDesktop: true
+    ShowStatusBar: true
+    _FXSortFoldersFirst: true
+  com.apple.dock:
+    autohide: true
+    tilesize: 21
+    orientation: "bottom"
+    show-recents: false
+    show-process-indicators: true
+    launchanim: true
+    mineffect: "genie"
+    wvous-tl-corner: 3
+    wvous-tl-modifier: 0
+    persistent-apps:
+      - tile-data:
+          dock-extra: false
+          file-data:
+            _CFURLStringType: 15
+            _CFURLString: "file:///Applications/Comet.app/"
+      - tile-data:
+          dock-extra: false
+          file-data:
+            _CFURLStringType: 15
+            _CFURLString: "file:///Applications/Thunderbird.app/"
+      - tile-data:
+          dock-extra: false
+          file-data:
+            _CFURLStringType: 15
+            _CFURLString: "file:///Applications/calibre.app/"
+          file-label: Calibre
+      - tile-data:
+          dock-extra: false
+          file-data:
+            _CFURLStringType: 15
+            _CFURLString: "file:///Applications/OrbStack.app/"
+      - tile-data:
+          dock-extra: false
+          file-data:
+            _CFURLStringType: 15
+            _CFURLString: "file:///Applications/Alacritty.app/"
+    persistent-others:
+      - tile-data:
+          dock-extra: false
+          file-data:
+            _CFURLStringType: 15
+            _CFURLString: "file:///Users/skarzi/Downloads/"
+      - tile-data:
+          dock-extra: false
+          file-data:
+            _CFURLStringType: 15
+            _CFURLString: "file:///System/Applications/System%20Settings.app/"
+      - tile-data:
+          dock-extra: false
+          file-data:
+            _CFURLStringType: 15
+            _CFURLString: >-
+              file:///System/Applications/Utilities/Activity%20Monitor.app/
+  com.apple.menuextra.clock:
+    ShowAMPM: true
+    ShowDate: false
+    ShowDayOfWeek: true
+  com.apple.SymbolicHotKeys:
+    AppleSymbolicHotKeys:
+      "60":  # Select the previous input source.
+        enabled: false
+      "61":  # Select the next input source in the menu.
+        enabled: false
+  com.apple.BezelServices:
+    kDim: true  # Automatically adjust keyboard brightness in low light.
+    kDimTime: 300  # Turn off keyboard backlight after 5 minutes.
+  com.apple.AppleMultitouchTrackpad:
+    TrackpadCornerSecondaryClick: 2  # Bottom right click.

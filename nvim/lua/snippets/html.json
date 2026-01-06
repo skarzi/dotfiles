@@ -1,0 +1,41 @@
+{
+  "HTML5 Template": {
+    "prefix": "html5",
+    "body": [
+      "<!DOCTYPE html>",
+      "<html>",
+      "  <head>",
+      "    <meta charset=\"utf-8\">",
+      "    <title>${1:title}</title>",
+      "    <link rel=\"stylesheet\" href=\"${2:style}.css\">",
+      "    <script src=\"${3:script}.js\"></script>",
+      "  </head>",
+      "  <body>",
+      "    $0",
+      "  </body>",
+      "<html>"
+    ],
+    "description": "Basic HTML5 template to start from"
+  },
+  "CSS Link": {
+    "prefix": "css",
+    "body": [
+      "<link rel=\"stylesheet\" href=\"${1:style}.css\">
+    ],
+    "description": "CSS link"
+  },
+  "JS Script Src": {
+    "prefix": "js",
+    "body": [
+      "<script src=\"${1:script}.js\"></script>"
+    ],
+    "description": "JS script src"
+  },
+  "HTML Comment": {
+    "prefix": "<!",
+    "body": [
+      "<!-- $0 -->"
+    ],
+    "description": "HTML comment"
+  }
+}

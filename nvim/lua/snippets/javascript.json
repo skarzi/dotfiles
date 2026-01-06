@@ -1,0 +1,70 @@
+{
+  "console.log": {
+    "prefix": "cl",
+    "body": [
+      "console.log($0);"
+    ],
+    "description": "console.log(...)"
+  },
+  "Multiline Comment": {
+    "prefix": "**",
+    "body": [
+      "/**",
+      " * $0",
+      " */"
+    ],
+    "description": "multiline comment"
+  },
+  "module.exports": {
+    "prefix": "ex",
+    "body": [
+      "module.exports = ${1:module};"
+    ],
+    "description": "module.exports"
+  },
+  "Object CSS Attribute": {
+    "prefix": "css",
+    "body": [
+      "${1:object}.css('${2:attribute}', '${3:value}');"
+    ],
+    "description": "set object's css attribute"
+  },
+  "Try Catch Finally": {
+    "prefix": "tcf",
+    "body": [
+      "try {",
+      "  $1",
+      "} catch (e) {",
+      "  $2",
+      "} finally {",
+      "  $3",
+      "}"
+    ],
+    "description": "try: catch: finally:"
+  },
+  "Function with Docblock": {
+    "prefix": "fun",
+    "body": [
+      "/**",
+      " * @param ${1:arg1}",
+      " * @param ${2:arg2}",
+      " */",
+      "function(${1:args}) {",
+      "  $0",
+      "},",
+      "// NOTE: Original UltiSnips snippet had dynamic docblock generation via Python.",
+      "// This has been converted to a static template for LuaSnip. Dynamic behavior",
+      "// would require implementing the logic in Lua."
+    ],
+    "description": "function with dynamic docblock (static for LuaSnip)"
+  },
+  "Arrow Function": {
+    "prefix": "=>",
+    "body": [
+      "(${1:args}) => {",
+      "  $0",
+      "}"
+    ],
+    "description": "array function"
+  }
+}

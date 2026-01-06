@@ -35,8 +35,8 @@ cleanup_session_history() {
 
   # Attempt to clean up any stray mktemp files from this script's pattern.
   rm -f "${TMPDIR:-/tmp}/bash_history_load."* \
-        "${TMPDIR:-/tmp}/bash_history_patterns."* \
-        "${TMPDIR:-/tmp}/bash_unique_hist."*
+    "${TMPDIR:-/tmp}/bash_history_patterns."* \
+    "${TMPDIR:-/tmp}/bash_unique_hist."*
 }
 
 # Logs a new command to the session log if a new, valid command was executed.
@@ -55,12 +55,12 @@ _log_new_command() {
   local is_new_command_executed=false
   local current_histcmd="${_INITIAL_HISTCMD:-$HISTCMD}"
 
-  if (( current_histcmd > g_custom_hist_last_seen_histcmd )); then
-    current_command_text="$(fc -ln -1 2>/dev/null)" # Suppress fc errors
+  if ((current_histcmd > g_custom_hist_last_seen_histcmd)); then
+    current_command_text="$(fc -ln -1 2> /dev/null)" # Suppress fc errors
 
-    if [[ -n "${current_command_text}" && \
-          "${current_command_text}" != "${PROMPT_COMMAND}" && \
-          "${current_command_text}" != "main" ]]; then # Assuming main function is named "main"
+    if [[ -n "${current_command_text}" &&
+      "${current_command_text}" != "${PROMPT_COMMAND}" &&
+      "${current_command_text}" != "main" ]]; then # Assuming main function is named "main"
       is_new_command_executed=true
     fi
   fi
@@ -84,10 +84,10 @@ _get_preserved_session_commands_stdout() {
   local preserve_count="$2"
 
   if [[ -f "${session_log_file_path}" ]]; then
-    tail --lines="${preserve_count}"  "${session_log_file_path}" | \
-    tac | \
-    awk '!b[$0]++ {print $0}' | \
-    tac
+    tail --lines="${preserve_count}" "${session_log_file_path}" \
+      | tac \
+      | awk '!b[$0]++ {print $0}' \
+      | tac
   fi
 }
 
@@ -104,12 +104,12 @@ _acquire_history_lock() {
   local lock_file="${1}.lock"
 
   if [[ ! -f "${lock_file}" ]]; then
-    touch "${lock_file}" 2>/dev/null || return 1
+    touch "${lock_file}" 2> /dev/null || return 1
   fi
 
   eval "exec ${HISTFILE_LOCK_FD}>${lock_file}" || return 1
 
-  if command -v flock >/dev/null 2>&1; then
+  if command -v flock > /dev/null 2>&1; then
     if [[ "${timeout}" -gt 0 ]]; then
       flock -w "${timeout}" "${HISTFILE_LOCK_FD}" || return 1
     else
@@ -135,7 +135,7 @@ _acquire_history_lock() {
 #   0 on success, 1 if no lock was held.
 _release_history_lock() {
   if [[ -n "${_is_histfile_locked:-}" ]]; then
-    eval "exec ${HISTFILE_LOCK_FD}>&-" 2>/dev/null || true
+    eval "exec ${HISTFILE_LOCK_FD}>&-" 2> /dev/null || true
     unset _is_histfile_locked
     return 0
   fi
@@ -195,14 +195,14 @@ _get_filtered_global_commands_stdout() {
 main() {
   local session_log_file
   local temp_hist_for_loading
-  local patterns_file="" # Path to temp file for patterns (session commands).
+  local patterns_file=""                # Path to temp file for patterns (session commands).
   local session_preserved_cmds_array=() # Array for preserved session commands.
-  local filtered_global_cmds_string # String for filtered global commands.
+  local filtered_global_cmds_string     # String for filtered global commands.
   local resolved_histfile
-  local lock_timeout=2  # Timeout in seconds for acquiring lock.
+  local lock_timeout=2 # Timeout in seconds for acquiring lock.
 
   session_log_file="${TMPDIR:-/tmp}/.bash_session_history_${BASHPID}"
-  resolved_histfile="${HISTFILE:-${HOME}/.bash_history}"  # Resolve HISTFILE path
+  resolved_histfile="${HISTFILE:-${HOME}/.bash_history}" # Resolve HISTFILE path
   HISTFILE="${resolved_histfile}"
 
   # 1. Log new command to session log and update
@@ -211,7 +211,7 @@ main() {
 
   # 2. Acquire lock on history file to prevent concurrent access.
   if ! _acquire_history_lock "${resolved_histfile}" "${HISTFILE_LOCK_TIMEOUT:-${lock_timeout}}"; then
-    return 0  # Another instance is running, skip this run.
+    return 0 # Another instance is running, skip this run.
   fi
 
   trap '_release_history_lock' EXIT INT TERM
@@ -220,8 +220,8 @@ main() {
   history -a
 
   # 4. Get preserved session commands into an array.
-  mapfile -t session_preserved_cmds_array < <( \
-    _get_preserved_session_commands_stdout "${session_log_file}" "${BASH_SESSION_PRESERVE_COUNT}" \
+  mapfile -t session_preserved_cmds_array < <(
+    _get_preserved_session_commands_stdout "${session_log_file}" "${BASH_SESSION_PRESERVE_COUNT}"
   )
 
   # 5. Prepare temporary file for loading new history.
@@ -255,7 +255,6 @@ main() {
     echo "Warning: Main: Failed to filter global commands. Global history might be incomplete." >&2
     # Proceeding with potentially empty `filtered_global_cmds_string`.
   fi
-
 
   # 8. Add preserved session commands to the temporary history load file.
   if [[ ${#session_preserved_cmds_array[@]} -gt 0 ]]; then

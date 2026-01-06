@@ -1,0 +1,21 @@
+---
+session_name: pytest-factoryboy
+start_directory: "${HOME}/dev/pytest-factoryboy"
+shell_command_before:
+  shell_command:
+    - cmd: clear
+      enter: true
+windows:
+  - window_name: dev
+    focus: true
+    layout: even-horizontal
+    suppress_history: false
+    options:
+      automatic-rename: true
+    panes:
+      - focus: true
+      - shell_command:
+          - enter: false
+            cmd: >-
+              pre-commit run --all-files
+              && tox -e py38-pytestlatest -e py38-mypy

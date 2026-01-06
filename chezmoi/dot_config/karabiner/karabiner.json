@@ -1,0 +1,199 @@
+{
+    "global": { "show_in_menu_bar": false },
+    "profiles": [
+        {
+            "name": "skarzi",
+            "selected": true,
+            "simple_modifications": [
+                {
+                    "from": { "key_code": "caps_lock" },
+                    "to": [{ "key_code": "escape" }]
+                },
+                {
+                    "from": { "key_code": "fn" },
+                    "to": [{ "key_code": "left_control" }]
+                },
+                {
+                    "from": { "key_code": "grave_accent_and_tilde" },
+                    "to": [{ "key_code": "non_us_backslash" }]
+                },
+                {
+                    "from": { "key_code": "left_control" },
+                    "to": [{ "apple_vendor_top_case_key_code": "keyboard_fn" }]
+                },
+                {
+                    "from": { "key_code": "non_us_backslash" },
+                    "to": [{ "key_code": "grave_accent_and_tilde" }]
+                }
+            ],
+            "complex_modifications": {
+                "parameters": {
+                    "basic.to_delayed_action_delay_milliseconds": 400,
+                    "basic.to_if_alone_timeout_milliseconds": 500
+                },
+                "rules": [
+                    {
+                        "description": "Remap Caps-Lock to Escape",
+                        "manipulators": [
+                            {
+                                "from": { "key_code": "caps_lock" },
+                                "to": [
+                                    {
+                                        "key_code": "escape",
+                                        "repeat": true
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "escape",
+                                        "repeat": true
+                                    }
+                                ],
+                                "to_if_held_down": [
+                                    {
+                                        "key_code": "escape",
+                                        "repeat": true
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "yabai",
+                        "manipulators": [
+                            {
+                                "description": "fn + enter: Open Alacritty",
+                                "from": {
+                                    "key_code": "return_or_enter",
+                                    "modifiers": { "mandatory": ["fn"] }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "nohup /Applications/Alacritty.app/Contents/MacOS/alacritty > /dev/null 2>&1 &"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "fn + shift + r: Restart yabai",
+                                "from": {
+                                    "key_code": "r",
+                                    "modifiers": { "mandatory": ["fn", "left_shift"] }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "launchctl kickstart -k \"gui/${UID}/homebrew.mxcl.yabai\""
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "fn + shift + q: Close Window",
+                                "from": {
+                                    "key_code": "q",
+                                    "modifiers": { "mandatory": ["fn", "left_shift"] }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/opt/homebrew/bin/yabai -m window --close"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "fn + f: Toggle Fullscreen",
+                                "from": {
+                                    "key_code": "f",
+                                    "modifiers": { "mandatory": ["fn"] }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/opt/homebrew/bin/yabai -m window --toggle zoom-fullscreen"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "fn + h: Focus Window Left",
+                                "from": { "key_code": "h", "modifiers": { "mandatory": ["fn"] } },
+                                "to": [{ "shell_command": "/opt/homebrew/bin/yabai -m window --focus west" }],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "fn + j: Focus Window Down",
+                                "from": { "key_code": "j", "modifiers": { "mandatory": ["fn"] } },
+                                "to": [{ "shell_command": "/opt/homebrew/bin/yabai -m window --focus south" }],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "fn + k: Focus Window Up",
+                                "from": { "key_code": "k", "modifiers": { "mandatory": ["fn"] } },
+                                "to": [{ "shell_command": "/opt/homebrew/bin/yabai -m window --focus north" }],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "fn + l: Focus Window Right",
+                                "from": { "key_code": "l", "modifiers": { "mandatory": ["fn"] } },
+                                "to": [{ "shell_command": "/opt/homebrew/bin/yabai -m window --focus east" }],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "fn + shift + h: Resize Window Left",
+                                "from": { "key_code": "h", "modifiers": { "mandatory": ["fn", "left_shift"] } },
+                                "to": [{ "shell_command": "/opt/homebrew/bin/yabai -m window --resize left:-10:0" }],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "fn + shift + j: Resize Window Down",
+                                "from": { "key_code": "j", "modifiers": { "mandatory": ["fn", "left_shift"] } },
+                                "to": [{ "shell_command": "/opt/homebrew/bin/yabai -m window --resize bottom:0:10" }],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "fn + shift + k: Resize Window Up",
+                                "from": { "key_code": "k", "modifiers": { "mandatory": ["fn", "left_shift"] } },
+                                "to": [{ "shell_command": "/opt/homebrew/bin/yabai -m window --resize top:0:-10" }],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "fn + shift + l: Resize Window Right",
+                                "from": { "key_code": "l", "modifiers": { "mandatory": ["fn", "left_shift"] } },
+                                "to": [{ "shell_command": "/opt/homebrew/bin/yabai -m window --resize right:10:0" }],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "fn + [: Swap Window Left",
+                                "from": { "key_code": "open_bracket", "modifiers": { "mandatory": ["fn"] } },
+                                "to": [{ "shell_command": "/opt/homebrew/bin/yabai -m window --swap west" }],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "fn + ]: Swap Window Right",
+                                "from": { "key_code": "close_bracket", "modifiers": { "mandatory": ["fn"] } },
+                                "to": [{ "shell_command": "/opt/homebrew/bin/yabai -m window --swap east" }],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "fn + v: Insert Split Vertical",
+                                "from": { "key_code": "v", "modifiers": { "mandatory": ["fn"] } },
+                                "to": [{ "shell_command": "/opt/homebrew/bin/yabai -m window --insert south" }],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "fn + g: Insert Split Horizontal",
+                                "from": { "key_code": "g", "modifiers": { "mandatory": ["fn"] } },
+                                "to": [{ "shell_command": "/opt/homebrew/bin/yabai -m window --insert east" }],
+                                "type": "basic"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "virtual_hid_keyboard": {
+                "country_code": 0,
+                "keyboard_type_v2": "ansi"
+            }
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+---
+session_name: resume
+start_directory: "${HOME}/dev/resume"
+windows:
+  - window_name: main
+    focus: true
+    layout: even-horizontal
+    panes:
+      - focus: true
+        shell_command:
+          - cmd: make install
+          - cmd: clear
+          - cmd: nvim resume.tex
+            enter: false
+      - shell_command:
+          - cmd: gemini
+            enter: false
+  - window_name: ci
+    layout: even-horizontal
+    panes:
+      - shell_command:
+          - cmd: make test
+            enter: false

@@ -1,0 +1,48 @@
+# Setup
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+# Debug
+yabai -m config debug_output on
+# General
+yabai -m config layout bsp
+# Workspaces
+yabai -m space 1 --label dotfiles
+yabai -m space 2 --label dev0
+yabai -m space 3 --label dev1
+yabai -m space 4 --label dev2
+yabai -m space 5 --label slack
+yabai -m space 6 --label email
+yabai -m space 7 --label comet
+yabai -m space 8 --label spotify
+yabai -m space 9 --label chats
+yabai -m space 10 --label other
+# Windows/panes
+# Keep floating windows always on top.
+yabai -m config window_topmost on
+# Shadow only floating windows
+yabai -m config window_shadow float
+# New window spawns to the right if vertical split, or bottom if horizontal one.
+yabai -m config window_placement second_child
+yabai -m config window_opacity on
+yabai -m config active_window_opacity 1.0
+yabai -m config normal_window_opacity 0.85
+yabai -m config insert_feedback_color 0x0FFFFFFF
+# Borders
+yabai -m config window_border on
+yabai -m config window_border_width 3
+yabai -m config window_border_radius 10
+yabai -m config active_window_border_color 0xFF004081
+yabai -m config normal_window_border_color 0x00FFFFFF
+# Apps
+yabai -m rule --add app="^System Preferences$" sticky=on sub-layer=above manage=off
+yabai -m rule --add app="^Karabiner-" sticky=on sub-layer=above manage=off
+yabai -m rule --add app="^Finder$" sticky=on sub-layer=above manage=off
+yabai -m rule --add app="^Disk Utility$" sticky=on sub-layer=above manage=off
+yabai -m rule --add app="^System Information$" sticky=on sub-layer=above manage=off
+yabai -m rule --add app="^Activity Monitor$" sticky=on sub-layer=above manage=off
+yabai -m rule --add app="^Zwift(App)?$" sticky=on sub-layer=above manage=off
+yabai -m rule --add app="^NordVPN$" sticky=on sub-layer=above manage=off
+yabai -m rule --add app="^Loom$" sticky=on sub-layer=above manage=off
+yabai -m rule --add app="^Docker\s" sticky=on sub-layer=above manage=off
+yabai -m rule --add app="^Path Finder$" manage=off
+yabai -m rule --add app="^AWS VPN Client$" manage=off

@@ -23,3 +23,8 @@ indent_style = tab
 
 [*.md]
 trim_trailing_whitespace = false
+
+[*.sh]
+binary_next_line = true
+switch_case_indent = true
+space_redirects = true

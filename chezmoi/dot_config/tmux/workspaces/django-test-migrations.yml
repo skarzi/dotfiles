@@ -1,0 +1,29 @@
+---
+session_name: django-test-migrations
+start_directory: "${HOME}/dev/django-test-migrations"
+shell_command_before:
+  shell_command:
+    - cmd: clear
+      enter: true
+windows:
+  - window_name: dev
+    focus: true
+    layout: even-horizontal
+    options:
+      automatic-rename: true
+    panes:
+      - blank
+      - blank
+  - window_name: tests
+    layout: main-vertical
+    suppress_history: false
+    options:
+      automatic-rename: true
+    panes:
+      - focus: true
+        shell_command:
+          - enter: false
+            cmd: make test
+      - shell_command:
+          - enter: false
+            cmd: grep --include="*.py" -Rin 'needle' .

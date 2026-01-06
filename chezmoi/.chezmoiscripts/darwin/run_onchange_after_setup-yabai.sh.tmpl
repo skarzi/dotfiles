@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# shellcheck shell=bash
+
+# yabai version: {{- output "yabai" "--version" | trim }}
+
+set -eufo pipefail
+
+_YABAI_PATH="$(command -v yabai)"
+
+if [[ -z "${_YABAI_PATH}" ]]; then
+  echo "Warning: 'yabai' not found. Skipping sudoers setup."
+  exit 0
+fi
+
+_YABAI_SHA256_HASH="$(shasum -a 256 "${_YABAI_PATH}" | cut -d " " -f 1)"
+_SUDOERS_LINE="${USER} ALL=(root) NOPASSWD: sha256:${_YABAI_SHA256_HASH} ${_YABAI_PATH} --load-sa"
+_SUDOERS_FILE="/private/etc/sudoers.d/yabai"
+
+_TMP_SUDOERS="$(mktemp)"
+echo "${_SUDOERS_LINE}" >"${_TMP_SUDOERS}"
+if ! sudo cmp -s "${_SUDOERS_FILE}" "${_TMP_SUDOERS}"; then
+  echo "Updating sudoers configuration for yabai..."
+  if [[ -f "${_SUDOERS_FILE}" ]]; then
+    echo "Diff:"
+    sudo diff "${_SUDOERS_FILE}" "${_TMP_SUDOERS}" || true
+  fi
+  sudo cp "${_TMP_SUDOERS}" "${_SUDOERS_FILE}"
+  sudo chmod 440 "${_SUDOERS_FILE}"
+  echo "Sudoers file updated."
+else
+  echo "Sudoers configuration for yabai is already up to date."
+fi
+rm -f "${_TMP_SUDOERS}"

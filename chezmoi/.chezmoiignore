@@ -1,0 +1,17 @@
+{{- if ne .env "work" }}
+.config/tmux/workspaces/rippling/
+{{- end }}
+{{- if eq .chezmoi.os "darwin" }}
+.Xmodmap
+.Xresources
+.i3/
+dunstrc
+redshift.conf
+{{ else if eq .chezmoi.os "linux" }}
+.bash_profile
+.config/brew/
+.config/karabiner/
+.config/yabai/
+.chezmoiscripts/darwin/
+{{- end }}
+.encrypted_data/

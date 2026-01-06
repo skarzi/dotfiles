@@ -1,9 +1,24 @@
+# Tools
+.gemini/
+
+# Window Managers
 .i3/i3log
+
+# Testing
+.shellspec*.log
+
+# Environments
+.venv/
+node_modules/
+
+# Editors
+.vim/.netrwhist
 .vim/bundle
 .vim/spell
-.vim/.netrwhist
-notes/
-node_modules/
-.shellspec*.log
-.gemini/
+nvim/lazy-lock.json
+
+# Credentials
 gha-creds-*.json
+
+# Personal
+notes/

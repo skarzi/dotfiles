@@ -28,7 +28,7 @@ workflows for AI agents working on this `dotfiles` repository.
 
 ### Window Management
 
-- **macOS:** `yabai` (tiling window manager) + `skhd` (hotkeys).
+- **macOS:** `yabai` (tiling window manager) + `Karabiner-Elements` (hotkeys).
 - **Linux:** `i3` (legacy configs in `.i3/`).
 
 ## 3. Directory Structure Map
@@ -63,10 +63,10 @@ A task is NOT complete until all checks pass.
 | **Run Everything** | `make all` | **Required** Runs all linters and tests |
 | **Run Pre-commit** | `pre-commit run --all-files` | Alternative `make all` |
 | **Run Tests** | `make test` | Runs `shellspec` tests in `spec/` |
-| **Lint All** | `make lint` | Runs all configured linters |
-| **Lint Shell** | `make lint-shell-scripts` | Uses `shellcheck` |
-| **Fix Lua** | `make lint-fix-lua` | Uses `selene` and `stylua` |
-| **Fix Markdown** | `make lint-fix-markdown` | Uses `markdownlint-cli2` |
+| **Lint/Fix All** | `make lint` | Runs all configured linters |
+| **Lint/Fix Shell** | `make lint-fix-shell-scripts` | Uses `shellcheck` |
+| **Lint/Fix Lua** | `make lint-fix-lua` | Uses `selene` and `stylua` |
+| **Lint/Fix Markdown** | `make lint-fix-markdown` | Uses `markdownlint-cli2` |
 | **Lint YAML** | `make lint-yaml` | Uses `yamllint` |
 
 **Targeting Specific Files:**
@@ -74,7 +74,7 @@ Most lint targets accept arguments to run on specific files to save time:
 
 ```bash
 make lint-fix-markdown -- AGENTS.md
-make lint-shell-scripts -- bin/my_script.sh
+make lint-fix-shell-scripts -- bin/my_script.sh
 ```
 
 ### Neovim Migration Rules
@@ -92,6 +92,8 @@ Refer to `nvim/vim-to-neovim-migration-plan.md` for specific architectural decis
   (e.g., `feat(nvim): add lsp`, `fix(bash): correct history path`).
   Validated by `commitlint` on `commit-msg` git hook.
 - **Shell:** Follow [`.agents/bash-styleguide.md`](.agents/bash-styleguide.md).
+- **Chezmoi:** Follow [`.agents/chezmoi-styleguide.md`](.agents/chezmoi-styleguide.md).
+  Includes guidelines for encryption and secret management.
 - **Lua:** Follow [`.agents/lua-styleguide.md`](.agents/lua-styleguide.md).
   Strictly `selene` and `stylua` compliant.
 

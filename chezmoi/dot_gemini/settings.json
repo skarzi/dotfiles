@@ -1,0 +1,37 @@
+{
+  "context": {
+    "fileName": [
+      "AGENTS.md",
+      "GEMINI.md",
+      "CLAUDE.md",
+      "INSTRUCTIONS.md"
+    ]
+  },
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "general": {
+    "enablePromptCompletion": true,
+    "preferredEditor": "nvim",
+    "previewFeatures": true,
+    "vimMode": true
+  },
+  "ui": {
+    "footer": {
+      "hideContextPercentage": false
+    },
+    "showCitations": true,
+    "showLineNumbers": true,
+    "showMemoryUsage": true,
+    "showModelInfoInChat": true,
+    "showStatusInTitle": true,
+    "useFullWidth": true
+  },
+  "tools": {
+    "shell": {
+      "showColor": true
+    }
+  }
+}

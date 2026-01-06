@@ -1,0 +1,2 @@
+{{- $_pass_uri := printf "%s/ssh %s macos" .pass_uri_prefix .env -}}
+{{- (protonPassJSON $_pass_uri).item.content.content.SshKey.private_key }}

@@ -1,11 +1,6 @@
 SHELL := /usr/bin/env bash
 STYLUA_CMD := stylua --respect-ignores --verify
 
-NVM_SETUP_CMD := true  # `nvm` is not used on CI by default.
-ifndef CI
-	NVM_SETUP_CMD := source $${NVM_DIR}/nvm.sh && nvm use
-endif
-
 # Dynamically extract Makefile stages from .PHONY declarations.
 _MAKEFILE_TARGETS := $(shell grep -h '^.PHONY:' $(firstword $(MAKEFILE_LIST)) | sed 's/^.PHONY: //' | tr ' ' '\n' | sort -u)
 EXTRA_ARGS = $(filter-out $(_MAKEFILE_TARGETS),$(MAKECMDGOALS))
@@ -17,18 +12,22 @@ install-python:
 
 .PHONY: install-node
 install-node:
-	@$(NVM_SETUP_CMD) && npm install
+	@npm install
 
 .PHONY: install-rust
 install-rust:
-	@cargo install selene stylua
+	@cargo install selene stylua $(EXTRA_ARGS)
+
+.PHONY: install-chezmoi
+install-chezmoi:
+	@bin/bootstrap_chezmoi.sh
 
 .PHONY: install
-install: install-python install-node install-rust
+install: install-python install-node install-rust install-chezmoi
 
 .PHONY: lint-commit-message
 lint-commit-message:
-	@$(NVM_SETUP_CMD) && npm run lint:commit-message
+	@npm run lint:commit-message
 
 .PHONY: lint-pre-commit-hook-config
 lint-pre-commit-hook-config:
@@ -46,25 +45,29 @@ lint-yaml:
 lint-vim:
 	@vint .vim/.vimrc .vim/*.vim .vim/vundles/ .vim/settings/
 
-# TODO(skarzi): Add `shfmt` for shell script formatting.
-.PHONY: lint-shell-scripts
-lint-shell-scripts:
+.PHONY: lint-fix-shell-scripts
+lint-fix-shell-scripts:
 	@_DEFAULT_FILES="$$(find . -type f -name '*.sh' | grep -Ev '(\.vim/bundle/|spec/)' | paste -sd ' ' -)" \
-	&& _DEFAULT_FILES=".bashrc .bash_aliases $${_DEFAULT_FILES}" \
-	&& shellcheck $(or $(EXTRA_ARGS),$${_DEFAULT_FILES})
+	&& shellcheck $(or $(EXTRA_ARGS),$${_DEFAULT_FILES}) \
+	&& shfmt --write --diff $(or $(EXTRA_ARGS),$${_DEFAULT_FILES})
 
 .PHONY: lint-fix-markdown
 lint-fix-markdown:
-	@$(NVM_SETUP_CMD) && npm run lint:md -- $(or $(EXTRA_ARGS),"**/*.md")
+	@npm run lint:md -- $(or $(EXTRA_ARGS),"**/*.md")
 
 .PHONY: lint-fix-lua
 lint-fix-lua:
 	@selene $(or $(EXTRA_ARGS),nvim/)
 	@$(STYLUA_CMD) --check $(or $(EXTRA_ARGS),nvim/) || ($(STYLUA_CMD) $(or $(EXTRA_ARGS),nvim/) && exit 1)
 
+.PHONY: lint-ssh-config
+lint-ssh-config:
+	@ssh -G -F chezmoi/dot_ssh/config dummy.host > /dev/null
+
 .PHONY: lint
-lint: lint-yaml lint-vim lint-shell-scripts lint-fix-markdown \
-	lint-github-actions lint-pre-commit-hook-config lint-fix-lua
+lint: lint-yaml lint-vim lint-fix-shell-scripts lint-fix-markdown \
+	lint-github-actions lint-pre-commit-hook-config lint-fix-lua \
+	lint-ssh-config
 
 .PHONY: test-bin
 test-bin:

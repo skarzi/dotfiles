@@ -1,0 +1,16 @@
+{
+  "pudb.set_trace": {
+    "prefix": "pudb",
+    "body": [
+      "import pudb; pudb.set_trace()"
+    ],
+    "description": "pudb.set_trace()"
+  },
+  "TODO(skarzi) comment": {
+    "prefix": "todo",
+    "body": [
+      "# TODO(skarzi): ${1}"
+    ],
+    "description": "TODO(skarzi) comment"
+  }
+}

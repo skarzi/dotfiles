@@ -1,0 +1,19 @@
+# vim: set filetype=toml:
+{{- $envs := list "personal" "work" -}}
+{{- $env := promptChoiceOnce . "env" "Local environment type" $envs -}}
+{{- $pass_vault_name := promptStringOnce . "pass_vault_name" "Proton-pass vault name" }}
+
+sourceDir = "{{ .chezmoi.homeDir }}/dotfiles/chezmoi/"
+encryption = "age"
+
+[data]
+env = {{- $env | quote }}
+pass_vault_name = {{- $pass_vault_name | quote }}
+pass_uri_prefix = "pass://{{- $pass_vault_name -}}"
+
+[age]
+command = "rage"
+identity = "{{ .chezmoi.homeDir }}/.config/age/keys.txt"
+{{- $_age_pass_uri :=  printf "%s/%s" .pass_uri_prefix "dotfiles age key" -}}
+{{- $_age_extra_fields := (protonPassJSON $_age_pass_uri).item.content.extra_fields }}
+recipient = {{ $_age_extra_fields | jq "map(select(.name == \"Public Key\")) | .[0].content.Text" | first | quote }}

@@ -1,8 +1,0 @@
-[blame]
-    ignoreRevsFile = .git-blame-ignore-revs
-
-[feature]
-    manyFiles = true
-
-[checkout]
-    workers = 0

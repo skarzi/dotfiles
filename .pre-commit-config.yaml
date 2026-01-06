@@ -70,14 +70,14 @@ repos:
         entry: make lint-vim
         stages:
           - pre-commit
-      - id: lint-shell-scripts
-        name: Lint Shell scripts
+      - id: lint-fix-shell-scripts
+        name: Lint and fix Shell scripts
         language: system
         types:
           - shell
         exclude: "^(spec/|.vim/bundle/)"
         pass_filenames: true
-        entry: make lint-shell-scripts --
+        entry: make lint-fix-shell-scripts --
         stages:
           - pre-commit
       - id: lint-fix-lua
@@ -87,5 +87,13 @@ repos:
           - lua
         pass_filenames: true
         entry: make lint-fix-lua --
+        stages:
+          - pre-commit
+      - id: lint-ssh-config
+        name: Lint SSH config
+        language: system
+        files: '^chezmoi/dot_ssh/config$'
+        pass_filenames: false
+        entry: make lint-ssh-config
         stages:
           - pre-commit

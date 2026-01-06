@@ -1,0 +1,130 @@
+# MUSIC
+cask "spotify"
+
+# DEVELOPMENT
+## DevOps
+brew "awscli"
+brew "docker"
+brew "kubectx"
+brew "kubernetes-cli"
+brew "skaffold"
+brew "terraform"
+brew "terragrunt"
+brew "tflint"
+cask "docker-desktop"
+cask "orbstack"
+# Plugin for AWS CLI to start and end sessions that connect to managed instances.
+cask "session-manager-plugin"
+
+## Git
+brew "git"
+brew "git-delta"  # Syntax-highlighting pager for git and diff output.
+
+## GitHub
+brew "gh"
+brew "act"
+brew "actionlint"
+
+## Shell
+brew "bash"
+brew "bash-completion@2"
+brew "shellcheck"
+brew "shellspec"
+brew "shfmt"
+brew "starship"
+brew "tmux"
+cask "alacritty"
+
+## Editors
+brew "neovim"
+brew "vim"
+
+## Java
+brew "openjdk"
+brew "maven"
+
+## API development
+cask "bruno"
+
+## Makefile
+brew "checkmake"
+
+## Build Tools & Libraries
+# C/C++ and Java libraries for Unicode and globalization.
+brew "icu4c@76"
+brew "libffi"
+brew "libtool"
+brew "mise"
+brew "pkgconf"
+brew "protobuf"
+
+## Development Tools
+brew "bat"  # Clone of cat(1) with syntax highlighting and Git integration.
+brew "ctags"  # Reimplementation of ctags(1).
+brew "fd"
+brew "fzf"
+brew "gemini-cli"
+brew "jq"
+brew "mkcert"
+brew "ripgrep"  # Search tool like grep and The Silver Searcher.
+brew "tctl"  # Temporal CLI (tctl).
+brew "tree-sitter"
+brew "tree-sitter-cli"
+brew "trufflehog"  # Find and verify credentials.
+brew "vale"
+brew "yq"
+
+# SYSTEM & UTILITIES
+tap "asmvik/formulae"
+tap "dsully/tap"
+brew "asmvik/formulae/yabai"
+brew "cairo"
+brew "chezmoi"
+brew "coreutils"
+brew "curl"
+brew "dsully/tap/macos-defaults"
+brew "flock"
+brew "fontconfig"
+brew "graphviz"
+brew "htop"
+brew "imagemagick"
+brew "nmap"
+brew "poppler"
+brew "qemu"
+brew "rage"
+brew "rsync"
+brew "watch"
+brew "wget"
+brew "xdot"
+cask "font-hack-nerd-font"
+cask "gpg-suite-no-mail"
+cask "karabiner-elements"
+
+# COMMUNICATION
+cask "signal"
+cask "slack"
+cask "telegram"
+cask "zoom"
+
+# PRODUCTIVITY
+cask "google-drive"
+cask "grammarly-desktop"
+cask "thunderbird"
+
+# DOCUMENTATION & READING
+brew "pandoc"
+cask "basictex"
+cask "calibre"
+
+# WEB & BROWSING
+cask "google-chrome"
+
+# SECURITY & PRIVACY
+brew "protonpass/tap/pass-cli"
+{{- if eq .env "personal" }}
+cask "nordvpn"
+{{- end -}}
+
+{{- if eq .env "work" -}}
+{{ include ".encrypted_data/work/Brewfile.age" | decrypt }}
+{{- end -}}

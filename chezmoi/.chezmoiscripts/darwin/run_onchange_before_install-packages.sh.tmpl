@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# shellcheck shell=bash
+
+set -eufo pipefail
+
+brew bundle install --file=- <<EOF
+{{ template "Brewfile" . }}
+EOF
