@@ -3,12 +3,12 @@
 
 set -eufo pipefail
 
-# macos-defaults.yaml hash:
-# {{ include (joinPath .chezmoi.homeDir "dotfiles/macos-defaults.yaml") | sha256sum }}
+# defaults.yaml.tmpl hash:
+# {{ include "dot_config/macos-defaults/defaults.yaml.tmpl" | sha256sum }}
 
 if command -v macos-defaults >/dev/null 2>&1; then
-  echo "Applying macOS defaults from ~/dotfiles/macos-defaults.yaml..."
-  macos-defaults apply "{{ .chezmoi.homeDir }}/dotfiles/macos-defaults.yaml"
+  echo "Applying macOS defaults from ~/.config/macos-defaults/defaults.yaml..."
+  macos-defaults apply "${HOME}/.config/macos-defaults/defaults.yaml"
 else
   echo "Warning: 'macos-defaults' tool not found. Skipping defaults application."
   echo "Ensure chezmoi's 'run_onchange_install.sh.tmpl' script is ran."

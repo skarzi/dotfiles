@@ -11,6 +11,7 @@ redshift.conf
 .bash_profile
 .config/brew/
 .config/karabiner/
+.config/macos-defaults/
 .config/yabai/
 .chezmoiscripts/darwin/
 {{- end }}
