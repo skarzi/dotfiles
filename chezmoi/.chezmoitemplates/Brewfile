@@ -1,3 +1,6 @@
+# CORE
+brew "mas"
+
 # MUSIC
 cask "spotify"
 
@@ -99,6 +102,7 @@ brew "xdot"
 cask "font-hack-nerd-font"
 cask "gpg-suite-no-mail"
 cask "karabiner-elements"
+mas "Amphetamine", id: 937984704
 
 # COMMUNICATION
 cask "signal"
