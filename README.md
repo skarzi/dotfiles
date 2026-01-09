@@ -17,7 +17,7 @@ git clone https://github.com/skarzi/dotfiles.git ~/dotfiles
 ./bin/bootstrap_chezmoi.sh
 
 # Apply dotfiles.
-chezmoi init --apply --verbose
+chezmoi init --apply --verbose --source ~/dotfiles/chezmoi
 ```
 
 ## Local Development
