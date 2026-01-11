@@ -78,9 +78,11 @@ brew "vale"
 brew "yq"
 
 # SYSTEM & UTILITIES
+tap "FelixKratz/formulae"
 tap "asmvik/formulae"
 tap "dsully/tap"
 brew "asmvik/formulae/yabai"
+brew "felixkratz/formulae/borders"
 brew "cairo"
 brew "chezmoi"
 brew "coreutils"
