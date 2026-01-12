@@ -18,12 +18,8 @@ install-node:
 install-rust:
 	@cargo install selene stylua $(EXTRA_ARGS)
 
-.PHONY: install-chezmoi
-install-chezmoi:
-	@bin/bootstrap_chezmoi.sh
-
 .PHONY: install
-install: install-python install-node install-rust install-chezmoi
+install: install-python install-node install-rust
 
 .PHONY: lint-commit-message
 lint-commit-message:
