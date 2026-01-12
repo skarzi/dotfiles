@@ -11,13 +11,10 @@ brew "docker"
 brew "kubectx"
 brew "kubernetes-cli"
 brew "skaffold"
-brew "terraform"
 brew "terragrunt"
 brew "tflint"
 cask "docker-desktop"
 cask "orbstack"
-# Plugin for AWS CLI to start and end sessions that connect to managed instances.
-cask "session-manager-plugin"
 
 ## Git
 brew "git"
@@ -53,8 +50,6 @@ cask "bruno"
 brew "checkmake"
 
 ## Build Tools & Libraries
-# C/C++ and Java libraries for Unicode and globalization.
-brew "icu4c@76"
 brew "libffi"
 brew "libtool"
 brew "mise"
@@ -70,7 +65,6 @@ brew "gemini-cli"
 brew "jq"
 brew "mkcert"
 brew "ripgrep"  # Search tool like grep and The Silver Searcher.
-brew "tctl"  # Temporal CLI (tctl).
 brew "tree-sitter"
 brew "tree-sitter-cli"
 brew "trufflehog"  # Find and verify credentials.
