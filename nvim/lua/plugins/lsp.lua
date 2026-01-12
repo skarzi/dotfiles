@@ -27,7 +27,6 @@ return {
 					"docker_language_server",
 					"dockerls",
 					"gopls",
-					"grammarly",
 					"html",
 					"jinja_lsp",
 					"lua_ls",
