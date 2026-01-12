@@ -71,6 +71,7 @@ add_to_path() {
 export HOMEBREW_BUNDLE_FILE_GLOBAL="${HOME}/.config/homebrew/Brewfile"
 export HOMEBREW_PREFIX="$(brew --prefix)"
 add_to_path "${HOMEBREW_PREFIX}/bin" "true"
+add_to_path "${HOMEBREW_PREFIX}/sbin" "true"
 
 # TERMINAL
 # NOTE: Use "rxvt-unicode-256color" for urxvt.
