@@ -2,7 +2,7 @@
     name = "Łukasz Skarżyński"
     email = github@skarzi.com
 [core]
-    editor = vim
+    editor = nvim
     eol = lf
     autocrlf = false
     excludesfile = "~/.config/git/global.gitignore"
@@ -10,10 +10,18 @@
     untrackedCache = true
 [init]
     defaultBranch = main
+[diff]
+    tool = nvimdiff
+    prompt=false
+[difftool "nvimdiff"]
+    cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
 [merge]
-    tool = vimdiff
+    tool = nvimdiff
+    prompt=false
+[mergetool "nvimdiff"]
+    cmd = nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c 'wincmd w' -c 'wincmd J'
 [push]
-  autoSetupRemote = true
+    autoSetupRemote = true
 [pull]
     rebase = false
 [alias]
