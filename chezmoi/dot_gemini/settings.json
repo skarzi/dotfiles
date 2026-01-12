@@ -14,7 +14,7 @@
   },
   "general": {
     "enablePromptCompletion": true,
-    "preferredEditor": "nvim",
+    "preferredEditor": "neovim",
     "previewFeatures": true,
     "vimMode": true
   },
