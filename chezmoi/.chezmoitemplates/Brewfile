@@ -116,8 +116,8 @@ cask "thunderbird"
 
 # DOCUMENTATION & READING
 brew "pandoc"
-cask "basictex"
 cask "calibre"
+cask "mactex-no-gui"
 
 # WEB & BROWSING
 cask "google-chrome"
