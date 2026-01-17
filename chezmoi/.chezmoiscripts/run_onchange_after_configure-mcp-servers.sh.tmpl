@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# shellcheck shell=bash
+
+set -eufo pipefail
+
+if ! command -v docker &>/dev/null; then
+  echo "Docker not found. Skipping MCP configuration."
+  exit 0
+fi
+if ! docker mcp version &>/dev/null; then
+  echo "Docker MCP plugin not found. Skipping MCP configuration."
+  exit 0
+fi
+
+echo "Ensure required MCP servers are enabled and configured..."
+docker mcp server enable sequentialthinking
+docker mcp server enable context7
+{{- if eq .env "personal" }}
+docker mcp server enable perplexity-ask
+{{- $_perplexity_api_key_pass_uri :=  printf "%s/%s" .pass_uri_prefix "perplexity personal docker mcp" -}}
+{{- $_perplexity_api_key_extra_fields := (protonPassJSON $_perplexity_api_key_pass_uri).item.content.extra_fields }}
+docker mcp secret set \
+  perplexity-ask.api_key={{ $_perplexity_api_key_extra_fields | jq "map(select(.name == \"Secret\")) | .[0].content.Hidden" | first }}
+{{- end }}

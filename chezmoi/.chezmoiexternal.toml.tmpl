@@ -1,0 +1,25 @@
+{{- $docker_compose_version := (gitHubLatestRelease "docker/compose").TagName -}}
+{{/* `docker/mcp-gateway` is not yet officially released, so we fetch the latest tag instead of the release. */}}
+{{- $mcp_gateway_latest_tag := (gitHubLatestTag "docker/mcp-gateway").Name -}}
+{{- $docker_compose_arch := .chezmoi.arch -}}
+{{- if eq .chezmoi.arch "arm64" -}}
+{{-   $docker_compose_arch = "aarch64" -}}
+{{- else if eq .chezmoi.arch "amd64" -}}
+{{-   $docker_compose_arch = "x86_64" -}}
+{{- end -}}
+
+# NOTE: These docker cli-plugins should be installed together with Docker
+# Desktop. But they are essential to my development workflow, so we download
+# them explicitly here.
+[".docker/cli-plugins/docker-compose"]
+    type = "file"
+    url = "https://github.com/docker/compose/releases/download/{{ $docker_compose_version }}/docker-compose-{{ .chezmoi.os }}-{{ $docker_compose_arch }}"
+    executable = true
+    refreshPeriod = "48h"
+
+[".docker/cli-plugins/docker-mcp"]
+    type = "archive-file"
+    url = "https://github.com/docker/mcp-gateway/releases/download/{{ $mcp_gateway_latest_tag }}/docker-mcp-{{ .chezmoi.os }}-{{ .chezmoi.arch }}.tar.gz"
+    executable = true
+    path = "docker-mcp"
+    refreshPeriod = "48h"
