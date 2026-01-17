@@ -103,4 +103,5 @@ Refer to `nvim/vim-to-neovim-migration-plan.md` for specific architectural decis
   Use `${HOME}` or relative paths.
 - **Do not** assume interactive input. Scripts should be capable of running
   non-interactively or via flags.
+- **Do not** perform any `git commit` unless explicitly instructed by the user.
 - **Lock Files:** Respect `package-lock.json` and other lock files.
