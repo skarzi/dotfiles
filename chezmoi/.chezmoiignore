@@ -1,6 +1,9 @@
 {{- if ne .env "work" }}
 .config/tmux/workspaces/rippling/
 {{- end }}
+{{- if eq .env "work" }}
+.chezmoiscripts/run_onchange_after_configure-mcp-servers.sh.tmpl
+{{- end }}
 {{- if eq .chezmoi.os "darwin" }}
 .Xmodmap
 .Xresources
