@@ -1,6 +1,7 @@
-# production
+# Production
 tmuxp==1.63.1
 
-# development
+# Development
 vim-vint==0.3.21
 yamllint==1.37.1
+check-jsonschema==0.36.0

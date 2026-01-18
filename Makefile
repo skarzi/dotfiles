@@ -4,6 +4,7 @@ STYLUA_CMD := stylua --respect-ignores --verify
 # Dynamically extract Makefile stages from .PHONY declarations.
 _MAKEFILE_TARGETS := $(shell grep -h '^.PHONY:' $(firstword $(MAKEFILE_LIST)) | sed 's/^.PHONY: //' | tr ' ' '\n' | sort -u)
 EXTRA_ARGS = $(filter-out $(_MAKEFILE_TARGETS),$(MAKECMDGOALS))
+GEMINI_SETTINGS_JSON_SCHEMA_URL := https://raw.githubusercontent.com/google-gemini/gemini-cli/main/schemas/settings.schema.json
 
 .PHONY: install-python
 install-python:
@@ -60,10 +61,16 @@ lint-fix-lua:
 lint-ssh-config:
 	@ssh -G -F chezmoi/dot_ssh/config dummy.host > /dev/null
 
+.PHONY: lint-gemini-settings
+lint-gemini-settings:
+	@check-jsonschema \
+		--schemafile $(GEMINI_SETTINGS_JSON_SCHEMA_URL) \
+		chezmoi/dot_gemini/settings.json
+
 .PHONY: lint
 lint: lint-yaml lint-vim lint-fix-shell-scripts lint-fix-markdown \
 	lint-github-actions lint-pre-commit-hook-config lint-fix-lua \
-	lint-ssh-config
+	lint-ssh-config lint-gemini-settings
 
 .PHONY: test-bin
 test-bin:

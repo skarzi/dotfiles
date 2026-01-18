@@ -97,3 +97,11 @@ repos:
         entry: make lint-ssh-config
         stages:
           - pre-commit
+      - id: lint-gemini-settings
+        name: Lint Gemini settings
+        language: system
+        files: '^chezmoi/dot_gemini/settings.json$'
+        pass_filenames: false
+        entry: make lint-gemini-settings
+        stages:
+          - pre-commit
