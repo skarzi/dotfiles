@@ -70,6 +70,7 @@ brew "tree-sitter-cli"
 brew "trufflehog"  # Find and verify credentials.
 brew "vale"
 brew "yq"
+cask "claude-code"
 
 # SYSTEM & UTILITIES
 tap "FelixKratz/formulae"
