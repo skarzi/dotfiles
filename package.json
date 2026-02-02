@@ -1,7 +1,7 @@
 {
   "type": "module",
   "dependencies": {
-    "@commitlint/cli": "^20.3.1",
+    "@commitlint/cli": "^20.4.0",
     "@commitlint/config-conventional": "^20.3.1",
     "markdownlint-cli2": "^0.20.0"
   },
