@@ -1,0 +1,11 @@
+[env]
+# Automatically create and activate Python venvs in the Python's projects using
+# `uv`.
+_.python.venv.path = """
+{%- set python_version_file = cwd ~ '/.python-version' -%}
+{%- set pyproject_file = cwd ~ '/pyproject.toml' -%}
+{%- if python_version_file is file or pyproject_file is file -%}
+{{ cwd ~ '/.venv' }}
+{%- endif -%}
+"""
+_.python.venv.create = true

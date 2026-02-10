@@ -10,19 +10,3 @@ node = "lts"
 python = "3.13.11"
 rust = "stable"
 uv = "latest"
-
-[env]
-# Automatically create and activate Python venvs in the `~/dev/` Python's
-# projects using `uv`.
-_.python.venv.path = """
-{%- set dev = env.HOME ~ '/dev/' -%}
-{%- set dev_len = dev | length -%}
-{%- if cwd | truncate(length=dev_len, end='') == dev -%}
-  {%- set python_version_file = cwd ~ '/.python-version' -%}
-  {%- set pyproject_file = cwd ~ '/pyproject.toml' -%}
-  {%- if python_version_file is file or pyproject_file is file -%}
-  {{ cwd ~ '/.venv' }}
-  {%- endif -%}
-{%- endif -%}
-"""
-_.python.venv.create = true
