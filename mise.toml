@@ -1,0 +1,7 @@
+[tools]
+go = "1.25.5"
+rust = "stable"
+
+[env]
+# Automatically create and activate Python venvs using 'uv'.
+_.python.venv = { path = ".venv", create = true }

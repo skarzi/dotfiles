@@ -8,8 +8,7 @@ GEMINI_SETTINGS_JSON_SCHEMA_URL := https://raw.githubusercontent.com/google-gemi
 
 .PHONY: install-python
 install-python:
-	@pip install --upgrade pip setuptools
-	@pip install --requirement requirements.txt
+	@uv sync
 
 .PHONY: install-node
 install-node:

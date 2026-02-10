@@ -1,0 +1,14 @@
+[project]
+name = "dotfiles"
+version = "0.1.0"
+requires-python = ">=3.12.12"
+dependencies = [
+    "tmuxp==1.64.0",
+]
+
+[dependency-groups]
+dev = [
+    "check-jsonschema==0.36.1",
+    "vim-vint==0.3.21",
+    "yamllint==1.38.0",
+]
