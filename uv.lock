@@ -3,15 +3,6 @@ revision = 3
 requires-python = ">=3.12.12"
 
 [[package]]
-name = "ansicolor"
-version = "0.3.3"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/eb/9e/1dd8400cb8bb63ee52ae08e4908bc4081bf68f8072e973be5d32d8aa648d/ansicolor-0.3.3.tar.gz", hash = "sha256:6de60837fb322b9fb8c8863061504688520bd0aa62defab43dbf4f2c011dafda", size = 10333, upload-time = "2026-01-30T22:26:05.178Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/c5/b2/ce431f51ba38706c38c31988d072f4bda48e5f34859714df513d58cf7913/ansicolor-0.3.3-py2.py3-none-any.whl", hash = "sha256:ef3e60b4700c822a1078732cc1962c62b21f7739bd89bea2614d757cacf3d279", size = 9850, upload-time = "2026-01-30T22:26:03.732Z" },
-]
-
-[[package]]
 name = "attrs"
 version = "25.4.0"
 source = { registry = "https://pypi.org/simple" }
@@ -27,15 +18,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/e0/2d/a891ca51311197f6ad14a7ef42e2399f36cf2f9bd44752b3dc4eab60fdc5/certifi-2026.1.4.tar.gz", hash = "sha256:ac726dd470482006e014ad384921ed6438c457018f4b3d204aea4281258b2120", size = 154268, upload-time = "2026-01-04T02:42:41.825Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/e6/ad/3cc14f097111b4de0040c83a525973216457bbeeb63739ef1ed275c1c021/certifi-2026.1.4-py3-none-any.whl", hash = "sha256:9943707519e4add1115f44c2bc244f782c0249876bf51b6599fee1ffbedd685c", size = 152900, upload-time = "2026-01-04T02:42:40.15Z" },
-]
-
-[[package]]
-name = "chardet"
-version = "5.2.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/f3/0d/f7b6ab21ec75897ed80c17d79b15951a719226b9fababf1e40ea74d69079/chardet-5.2.0.tar.gz", hash = "sha256:1b3b6ff479a8c414bc3fa2c0852995695c4a026dcd6d0633b2dd092ca39c1cf7", size = 2069618, upload-time = "2023-08-01T19:23:02.662Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/38/6f/f5fbc992a329ee4e0f288c1fe0e2ad9485ed064cac731ed2fe47dcc38cbf/chardet-5.2.0-py3-none-any.whl", hash = "sha256:e1cf59446890a00105fe7b7912492ea04b6e6f06d4b742b2c788469e34c82970", size = 199385, upload-time = "2023-08-01T19:23:00.661Z" },
 ]
 
 [[package]]
@@ -143,7 +125,6 @@ dependencies = [
 [package.dev-dependencies]
 dev = [
     { name = "check-jsonschema" },
-    { name = "vim-vint" },
     { name = "yamllint" },
 ]
 
@@ -153,7 +134,6 @@ requires-dist = [{ name = "tmuxp", specifier = "==1.64.0" }]
 [package.metadata.requires-dev]
 dev = [
     { name = "check-jsonschema", specifier = "==0.36.1" },
-    { name = "vim-vint", specifier = "==0.3.21" },
     { name = "yamllint", specifier = "==1.38.0" },
 ]
 
@@ -482,20 +462,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz", hash = "sha256:1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed", size = 435556, upload-time = "2026-01-07T16:24:43.925Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/39/08/aaaad47bc4e9dc8c725e68f9d04865dbcb2052843ff09c97b08904852d84/urllib3-2.6.3-py3-none-any.whl", hash = "sha256:bf272323e553dfb2e87d9bfd225ca7b0f467b919d7bbd355436d3fd37cb0acd4", size = 131584, upload-time = "2026-01-07T16:24:42.685Z" },
-]
-
-[[package]]
-name = "vim-vint"
-version = "0.3.21"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "ansicolor" },
-    { name = "chardet" },
-    { name = "pyyaml" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/9c/c7/d5fbe5f778edee83cba3aea8cc3308db327e4c161e0656e861b9cc2cb859/vim-vint-0.3.21.tar.gz", hash = "sha256:5dc59b2e5c2a746c88f5f51f3fafea3d639c6b0fdbb116bb74af27bf1c820d97", size = 65889, upload-time = "2019-05-13T23:05:01.995Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/c1/57/b174313406c08fb5a4327e9f288ead04503c00d23c4f1765d88ca451977a/vim_vint-0.3.21-py2.py3-none-any.whl", hash = "sha256:61357ebbb41e909e194a4187419ad72bde9e67cc12eb13b31c578866b99d45c0", size = 89165, upload-time = "2019-05-13T23:05:00.001Z" },
 ]
 
 [[package]]
