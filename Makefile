@@ -37,10 +37,6 @@ lint-github-actions:
 lint-yaml:
 	@yamllint --format github .
 
-.PHONY: lint-vim
-lint-vim:
-	@vint .vim/.vimrc .vim/*.vim .vim/vundles/ .vim/settings/
-
 .PHONY: lint-fix-shell-scripts
 lint-fix-shell-scripts:
 	@_DEFAULT_FILES="$$(find . -type f -name '*.sh' | grep -Ev '(\.vim/bundle/|spec/)' | paste -sd ' ' -)" \
@@ -67,7 +63,7 @@ lint-gemini-settings:
 		chezmoi/dot_gemini/settings.json
 
 .PHONY: lint
-lint: lint-yaml lint-vim lint-fix-shell-scripts lint-fix-markdown \
+lint: lint-yaml lint-fix-shell-scripts lint-fix-markdown \
 	lint-github-actions lint-pre-commit-hook-config lint-fix-lua \
 	lint-ssh-config lint-gemini-settings
 

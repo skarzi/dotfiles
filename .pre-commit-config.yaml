@@ -62,14 +62,6 @@ repos:
         entry: make lint-github-actions --
         stages:
           - pre-commit
-      - id: lint-vim
-        name: Lint Vim scripts
-        language: system
-        files: '^\.vim/'
-        pass_filenames: false
-        entry: make lint-vim
-        stages:
-          - pre-commit
       - id: lint-fix-shell-scripts
         name: Lint and fix Shell scripts
         language: system
