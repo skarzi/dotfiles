@@ -2,7 +2,6 @@
 session_name: dotfiles
 start_directory: ${HOME}/dotfiles
 shell_command_before:
-  - cmd: workon dotfiles
   - cmd: clear
 windows:
   - window_name: main
