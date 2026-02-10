@@ -26,8 +26,7 @@
     "showLineNumbers": true,
     "showMemoryUsage": true,
     "showModelInfoInChat": true,
-    "showStatusInTitle": true,
-    "useFullWidth": true
+    "showStatusInTitle": true
   },
   "tools": {
     "shell": {
@@ -43,5 +42,8 @@
         "run"
       ]
     }
+  },
+  "experimental": {
+    "plan": true
   }
 }
