@@ -35,7 +35,7 @@ lint-github-actions:
 
 .PHONY: lint-yaml
 lint-yaml:
-	@yamllint --format github .
+	@uv run yamllint --format github .
 
 .PHONY: lint-fix-shell-scripts
 lint-fix-shell-scripts:
@@ -58,7 +58,7 @@ lint-ssh-config:
 
 .PHONY: lint-gemini-settings
 lint-gemini-settings:
-	@check-jsonschema \
+	@uv run check-jsonschema \
 		--schemafile $(GEMINI_SETTINGS_JSON_SCHEMA_URL) \
 		chezmoi/dot_gemini/settings.json
 
