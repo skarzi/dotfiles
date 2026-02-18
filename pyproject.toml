@@ -8,6 +8,6 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "check-jsonschema==0.36.1",
+    "check-jsonschema==0.36.2",
     "yamllint==1.38.0",
 ]
