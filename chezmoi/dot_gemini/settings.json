@@ -13,7 +13,6 @@
     }
   },
   "general": {
-    "enablePromptCompletion": true,
     "preferredEditor": "neovim",
     "vimMode": true
   },
