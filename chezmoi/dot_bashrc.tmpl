@@ -144,6 +144,10 @@ export DOCKER_CONFIG="${DOCKER_CONFIG:-${HOME}/.docker}"
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
 
+# OrbStack
+# shellcheck source=/dev/null  # External file, may not be accessible
+source "${HOME}/.orbstack/shell/init.bash" 2>/dev/null || :
+
 # colima
 # Uncomment to use Colima Docker socket.
 # export DOCKER_HOST="$(colima status --json | jq --raw-output .docker_socket)"

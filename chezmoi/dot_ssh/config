@@ -1,3 +1,6 @@
+# TODO(skarzi): Make it a template to add work-related hosts.
+Include ~/.orbstack/ssh/config
+
 Host *
   ConnectTimeout 30
   # NOTE: The `UseKeychain` option is specific to macOS.
