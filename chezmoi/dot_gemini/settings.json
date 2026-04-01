@@ -40,8 +40,5 @@
         "run"
       ]
     }
-  },
-  "experimental": {
-    "plan": true
   }
 }
