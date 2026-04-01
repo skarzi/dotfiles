@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# shellcheck shell=bash
+
+set -eufo pipefail
+
+if ! command -v gpg >/dev/null 2>&1; then
+  echo "GPG is not installed. Please install it first."
+  exit 1
+fi
+
+{{ template "import_gpg_key.sh" . }}
+{{- if eq .env "work" }}
+{{- $_pass_uri := printf "%s/GitHub work GPG key" .pass_uri_prefix -}}
+{{- $_extra_fields := (protonPassJSON $_pass_uri).item.content.extra_fields }}
+import_gpg_key {{ $_extra_fields | jq "map(select(.name == \"Username\")) | .[0].content.Text" | first | quote }} <<'EOF'
+{{ (protonPassJSON $_pass_uri).item.content.content.SshKey.private_key }}
+EOF
+{{- end }}
