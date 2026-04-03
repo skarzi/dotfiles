@@ -1,4 +1,4 @@
-{{- if eq .chezmoi.os "darwin" }}
+{{- if eq .chezmoi.os "darwin" -}}
 # Files that might appear in the root of a volume
 .DocumentRevisions-V100
 .fseventsd
@@ -14,7 +14,7 @@
 Network Trash Folder
 Temporary Items
 .apdisk
-{{- else if eq .chezmoi.os "linux" }}
+{{- else if eq .chezmoi.os "linux" -}}
 # Linux
 *~
 
@@ -41,3 +41,8 @@ Icon[]
 # Thumbnails
 ._*
 {{- end }}
+
+# AI AGENTS
+AGENTS.local.md
+CLAUDE.local.md
+**/.claude/settings.local.json
