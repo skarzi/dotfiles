@@ -8,19 +8,50 @@ return {
 			"hrsh7th/cmp-nvim-lsp",
 		},
 		config = function()
-			local lspconfig = require("lspconfig")
-			local mason_lspconfig = require("mason-lspconfig")
 			local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 			require("mason").setup()
 
-			local default_capabilities = cmp_nvim_lsp.default_capabilities()
+			vim.lsp.config("*", {
+				capabilities = cmp_nvim_lsp.default_capabilities(),
+			})
 
-			mason_lspconfig.setup({
+			vim.lsp.config("pyrefly", {
+				root_dir = function(bufnr, on_dir)
+					local projects = require("config.projects")
+					if projects.should_disable_tools(bufnr) then
+						return
+					end
+					local root = vim.fs.root(bufnr, {
+						"pyproject.toml",
+						"setup.py",
+						"setup.cfg",
+						"requirements.txt",
+						".git",
+					})
+					if root then
+						on_dir(root)
+					end
+				end,
+			})
+
+			vim.lsp.config("lua_ls", {
+				settings = {
+					Lua = {
+						runtime = { version = "LuaJIT" },
+						diagnostics = { globals = { "vim" } },
+						workspace = {
+							library = vim.api.nvim_get_runtime_file("", true),
+						},
+						telemetry = { enable = false },
+					},
+				},
+			})
+
+			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"ansiblels",
 					"bashls",
-					"jinja_lsp",
 					"cmake",
 					"djlsp",
 					"docker_compose_language_service",
@@ -36,59 +67,10 @@ return {
 					"vue_ls",
 					"yamlls",
 				},
-				automatic_installation = true,
-				handlers = {
-					function(server_name)
-						lspconfig[server_name].setup({
-							capabilities = default_capabilities,
-						})
-					end,
-					["lua_ls"] = function()
-						lspconfig.lua_ls.setup({
-							capabilities = default_capabilities,
-							settings = {
-								Lua = {
-									runtime = { version = "LuaJIT" },
-									diagnostics = { globals = { "vim" } },
-									workspace = {
-										library = vim.api.nvim_get_runtime_file(
-											"",
-											true
-										),
-									},
-									telemetry = { enable = false },
-								},
-							},
-						})
-					end,
-					["pyrefly"] = function()
-						local lsp_utils = require("lspconfig.util")
-						lspconfig.pyrefly.setup({
-							capabilities = default_capabilities,
-							-- Do not start LSP for single file (outside of
-							-- project context).
-							single_file_support = false,
-							-- TODO(skarzi): Figure out how to really disable
-							-- pyrefly for and other heavy LSPs for huge
-							-- projects.
-							root_dir = function(bufnr, on_dir)
-								local projects = require("config.projects")
-								if not projects.should_disable_tools(bufnr) then
-									on_dir(
-										lsp_utils.root_pattern(
-											".git",
-											"pyproject.toml",
-											"setup.py",
-											"setup.cfg",
-											"requirements.txt"
-										)(
-											vim.api.nvim_buf_get_name(bufnr)
-										)
-									)
-								end
-							end,
-						})
-					end,
+				automatic_enable = {
+					exclude = {
+						"rust_analyzer", -- Managed by `rustaceanvim`.
+					},
 				},
 			})
 		end,
