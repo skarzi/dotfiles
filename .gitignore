@@ -1,5 +1,8 @@
-# Tools
+# AI Agents
+.claude/
 .gemini/
+AGENTS.local.md
+CLAUDE.local.md
 
 # Window Managers
 .i3/i3log
