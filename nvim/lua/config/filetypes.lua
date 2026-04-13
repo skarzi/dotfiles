@@ -1,69 +1,43 @@
 local M = {}
 
-local group =
-	vim.api.nvim_create_augroup("config_filetypes_autocmds", { clear = true })
-
-M.setup = function()
-	local function set_filetype(filetype)
-		return function()
-			vim.bo.filetype = filetype
-		end
-	end
-
-	vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-		group = group,
-		pattern = "Jenkinsfile.*",
-		callback = set_filetype("groovy"),
-		desc = "Set filetype for Jenkinsfile",
-	})
-
-	vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-		group = group,
-		pattern = {
-			"*/ansible/hosts",
-			"*/playbooks/*.y(a)?ml",
+function M.setup()
+	vim.filetype.add({
+		filename = {
+			[".importlinter"] = "cfg",
 		},
-		callback = set_filetype("yaml.ansible"),
-		desc = "Set filetype for Ansible",
-	})
-
-	vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-		group = group,
-		pattern = "*/.github/actions/*.y(a)?ml",
-		callback = set_filetype("yaml.ghaction"),
-		desc = "Set filetype for GitHub Actions",
-	})
-
-	vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-		group = group,
 		pattern = {
-			"*.y(a)?ml.(example|sample|ex)",
-			".?ansible-lint",
-			".?yamllint",
+			-- Jenkinsfile and variants (e.g. Jenkinsfile.staging).
+			["Jenkinsfile.*"] = "groovy",
+			-- Ansible inventory and playbooks.
+			[".*/ansible/hosts"] = "yaml.ansible",
+			[".*/playbooks/.*%.yml"] = "yaml.ansible",
+			[".*/playbooks/.*%.yaml"] = "yaml.ansible",
+			-- GitHub Actions workflow and composite action files.
+			[".*/.github/workflows/.*%.yml"] = "yaml.ghaction",
+			[".*/.github/workflows/.*%.yaml"] = "yaml.ghaction",
+			[".*/.github/actions/.*%.yml"] = "yaml.ghaction",
+			[".*/.github/actions/.*%.yaml"] = "yaml.ghaction",
+			-- YAML example/sample/template files.
+			[".*%.yml%.example"] = "yaml",
+			[".*%.yml%.sample"] = "yaml",
+			[".*%.yml%.ex"] = "yaml",
+			[".*%.yaml%.example"] = "yaml",
+			[".*%.yaml%.sample"] = "yaml",
+			[".*%.yaml%.ex"] = "yaml",
+			-- YAML tool dotfiles.
+			["%.?ansible%-lint"] = "yaml",
+			["%.?yamllint"] = "yaml",
+			-- Python template/example files.
+			[".*%.py%.template"] = "python",
+			[".*%.py%.example"] = "python",
+			[".*%.py%.sample"] = "python",
+			[".*%.py%.ex"] = "python",
+			-- INI template/example files.
+			[".*%.ini%.template"] = "dosini",
+			[".*%.ini%.example"] = "dosini",
+			[".*%.ini%.sample"] = "dosini",
+			[".*%.ini%.ex"] = "dosini",
 		},
-		callback = set_filetype("yaml"),
-		desc = "Set filetype for YAML configs",
-	})
-
-	vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-		group = group,
-		pattern = ".importlinter",
-		callback = set_filetype("cfg"),
-		desc = "Set filetype for Python import-linter",
-	})
-
-	vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-		group = group,
-		pattern = { "*.py.template", "*.py.(example|sample|ex)" },
-		callback = set_filetype("python"),
-		desc = "Set filetype for Python templates",
-	})
-
-	vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-		group = group,
-		pattern = { "*.ini.(example|sample|ex)", "*.ini.template" },
-		callback = set_filetype("dosini"),
-		desc = "Set filetype for INI templates",
 	})
 end
 
