@@ -32,7 +32,7 @@ Migrated from broken autocmd glob patterns to
 `.github/workflows/` pattern and fixed
 `function M.setup()` style.
 
-### 1.2 `flake8` listed as Python formatter in `formatting.lua`
+### 1.2 [DONE] `flake8` listed as Python formatter in `formatting.lua`
 
 **Files**: `nvim/lua/plugins/formatting.lua` (line 39)
 

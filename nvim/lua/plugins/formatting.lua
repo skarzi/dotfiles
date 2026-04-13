@@ -29,14 +29,11 @@ return {
 			lua = { "stylua" },
 			markdown = { "prettier", "markdownlint-cli2" },
 			python = function(bufnr)
-				return lists.flatten({
-					lists.pick_first_available(bufnr, {
-						"ruff_organize_imports",
-						"ruff_format",
-						"ruff_fix",
-					}, { "black", "isort" }),
-					"flake8",
-				})
+				return lists.pick_first_available(bufnr, {
+					"ruff_organize_imports",
+					"ruff_format",
+					"ruff_fix",
+				}, { "black", "isort" })
 			end,
 			rust = { "rustfmt" },
 			sh = { "shfmt" },
