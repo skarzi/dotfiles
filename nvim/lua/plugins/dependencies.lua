@@ -2,7 +2,7 @@ return {
 	{
 		"whoissethdaniel/mason-tool-installer.nvim",
 		dependencies = {
-			"williamboman/mason.nvim",
+			"mason-org/mason.nvim",
 		},
 		cmd = {
 			"MasonToolsInstall",

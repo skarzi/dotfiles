@@ -89,7 +89,7 @@ plugin loads.
 },
 ```
 
-### 1.4 Mason org mismatch
+### 1.4 [DONE] Mason org mismatch
 
 **Files**: `nvim/lua/plugins/dependencies.lua` (line 5)
 
