@@ -18,6 +18,11 @@ install-node:
 install-rust:
 	@cargo install selene stylua $(EXTRA_ARGS)
 
+.PHONY: install-pre-commit
+install-pre-commit:
+	@uv tool install pre-commit
+	@uv tool run pre-commit install
+
 .PHONY: install
 install: install-python install-node install-rust
 
@@ -27,7 +32,7 @@ lint-commit-message:
 
 .PHONY: lint-pre-commit-hook-config
 lint-pre-commit-hook-config:
-	@pre-commit validate-config .pre-commit-config.yaml
+	@uv tool run pre-commit validate-config .pre-commit-config.yaml
 
 .PHONY: lint-github-actions
 lint-github-actions:
