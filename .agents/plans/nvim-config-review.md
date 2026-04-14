@@ -23,7 +23,7 @@ once implemented and verified.
 
 ## Phase 1: Critical Bugs (Must Fix)
 
-### [DONE] 1.1 Broken glob patterns in `config/filetypes.lua`
+### 1.1 [DONE] Broken glob patterns in `config/filetypes.lua`
 
 **Files**: `nvim/lua/config/filetypes.lua`
 
@@ -96,7 +96,7 @@ plugin loads.
 Change `"williamboman/mason.nvim"` to
 `"mason-org/mason.nvim"`.
 
-### 1.5 Duplicate Docker LSP in `lsp.lua`
+### 1.5 [DONE] Duplicate Docker LSP in `lsp.lua`
 
 **Files**: `nvim/lua/plugins/lsp.lua` (lines 58-59)
 
