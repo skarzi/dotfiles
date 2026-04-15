@@ -1,6 +1,11 @@
--- Buffers
-vim.keymap.set("n", "<leader>]", ":n!<cr>", { desc = "Next buffer" })
-vim.keymap.set("n", "<leader>[", ":prev!<cr>", { desc = "Previous buffer" })
+-- Tabs
+vim.keymap.set("n", "<leader>]", "<cmd>tabnext<cr>", { desc = "Next tab" })
+vim.keymap.set(
+	"n",
+	"<leader>[",
+	"<cmd>tabprevious<cr>",
+	{ desc = "Previous tab" }
+)
 
 -- Search
 vim.keymap.set(

@@ -131,7 +131,7 @@ With only `relativenumber = true`, the current line
 displays `0`. This is almost never intentional. The
 standard setup is both enabled together.
 
-### 2.2 `:n!`/`:prev!` are arglist commands, not buffer commands
+### 2.2 [DONE] `:n!`/`:prev!` are arglist commands, not buffer commands
 
 **Files**: `nvim/lua/core/keymaps.lua` (lines 2-3)
 
