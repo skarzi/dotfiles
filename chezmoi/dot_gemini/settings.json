@@ -14,12 +14,18 @@
   },
   "general": {
     "preferredEditor": "neovim",
-    "vimMode": true
+    "vimMode": true,
+    "enableNotifications": true,
+    "plan": {
+      "directory": ".agents/plans"
+    }
   },
   "ui": {
     "footer": {
       "hideContextPercentage": false
     },
+    "inlineThinkingMode": "full",
+    "loadingPhrases": "tips",
     "showCitations": true,
     "showLineNumbers": true,
     "showMemoryUsage": true,
@@ -40,5 +46,12 @@
         "run"
       ]
     }
+  },
+  "model": {
+    "name": "gemini-3-pro-preview"
+  },
+  "experimental": {
+    "worktrees": true,
+    "modelSteering": true
   }
 }
