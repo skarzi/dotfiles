@@ -64,6 +64,7 @@ lint-ssh-config:
 .PHONY: lint-gemini-settings
 lint-gemini-settings:
 	@uv run check-jsonschema \
+		--no-cache \
 		--schemafile $(GEMINI_SETTINGS_JSON_SCHEMA_URL) \
 		chezmoi/dot_gemini/settings.json
 
