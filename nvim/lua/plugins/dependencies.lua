@@ -4,6 +4,7 @@ return {
 		dependencies = {
 			"mason-org/mason.nvim",
 		},
+		event = "VeryLazy",
 		cmd = {
 			"MasonToolsInstall",
 			"MasonToolsInstallSync",

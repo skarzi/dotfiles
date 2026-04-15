@@ -103,7 +103,7 @@ Change `"williamboman/mason.nvim"` to
 `docker_language_server` is the mason-lspconfig v2 name.
 `dockerls` is legacy. Remove `dockerls`.
 
-### 1.6 `mason-tool-installer` lazy-loads via `cmd` but expects `run_on_start`
+### 1.6 [DONE] `mason-tool-installer` lazy-loads via `cmd` but expects `run_on_start`
 
 **Files**: `nvim/lua/plugins/dependencies.lua`
 
