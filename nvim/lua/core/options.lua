@@ -4,6 +4,7 @@ vim.g.editorconfig = true
 -- Appearance
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
+vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.showcmd = true
 vim.opt.cursorline = true

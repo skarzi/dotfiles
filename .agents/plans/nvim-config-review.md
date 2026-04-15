@@ -114,7 +114,7 @@ actually triggers.
 
 ## Phase 2: High Priority Improvements
 
-### 2.1 Missing `vim.opt.number = true`
+### 2.1 [DONE] Missing `vim.opt.number = true`
 
 **Files**: `nvim/lua/core/options.lua`
 
