@@ -178,7 +178,7 @@ vim.keymap.set("n", "<leader>[",
     "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 ```
 
-### 2.3 Harpoon v1 to v2 migration
+### 2.3 [DONE] Harpoon v1 to v2 migration
 
 **Files**: `nvim/lua/plugins/productivity.lua` (lines
 80-126)

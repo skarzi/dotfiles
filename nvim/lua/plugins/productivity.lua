@@ -78,51 +78,63 @@ return {
 	},
 	{
 		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		keys = {
-			{
-				"<leader>mm",
-				function()
-					require("harpoon.mark").add_file()
-				end,
-				desc = "Harpoon: Add file",
-			},
-			{
-				"<leader>mo",
-				function()
-					require("harpoon.ui").toggle_quick_menu()
-				end,
-				desc = "Harpoon: Toggle menu",
-			},
-			{
-				"<leader>m1",
-				function()
-					require("harpoon.ui").nav_file(1)
-				end,
-				desc = "Harpoon: File 1",
-			},
-			{
-				"<leader>m2",
-				function()
-					require("harpoon.ui").nav_file(2)
-				end,
-				desc = "Harpoon: File 2",
-			},
-			{
-				"<leader>m3",
-				function()
-					require("harpoon.ui").nav_file(3)
-				end,
-				desc = "Harpoon: File 3",
-			},
-			{
-				"<leader>m4",
-				function()
-					require("harpoon.ui").nav_file(4)
-				end,
-				desc = "Harpoon: File 4",
-			},
-		},
+		keys = (function()
+			local harpoon_keys = {
+				{
+					"<leader>mm",
+					function()
+						require("harpoon"):list():add()
+					end,
+					desc = "Harpoon: Add file",
+				},
+				{
+					"<leader>mo",
+					function()
+						local harpoon = require("harpoon")
+						harpoon.ui:toggle_quick_menu(harpoon:list())
+					end,
+					desc = "Harpoon: Toggle menu",
+				},
+				{
+					"<leader>mn",
+					function()
+						require("harpoon"):list():next()
+					end,
+					desc = "Harpoon: Next file",
+				},
+				{
+					"<leader>mp",
+					function()
+						require("harpoon"):list():prev()
+					end,
+					desc = "Harpoon: Prev file",
+				},
+			}
+
+			for mark_number = 1, 4 do
+				table.insert(harpoon_keys, {
+					"<leader>m" .. mark_number,
+					function()
+						require("harpoon"):list():select(mark_number)
+					end,
+					desc = "Harpoon: File " .. mark_number,
+				})
+				table.insert(harpoon_keys, {
+					"<leader>md" .. mark_number,
+					function()
+						require("harpoon"):list():remove_at(mark_number)
+					end,
+					desc = "Harpoon: Remove file " .. mark_number,
+				})
+			end
+
+			return harpoon_keys
+		end)(),
+		config = function()
+			require("harpoon"):setup()
+		end,
 	},
 	{
 		"rmagatti/auto-session",
