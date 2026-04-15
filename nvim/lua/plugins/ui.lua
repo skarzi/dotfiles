@@ -19,8 +19,12 @@ return {
 				lualine_c = { "filename" },
 				lualine_x = {
 					{
-						require("noice").api.status.mode.get,
-						cond = require("noice").api.status.mode.has,
+						function() -- Display function.
+							return require("noice").api.status.mode.get()
+						end,
+						cond = function()
+							return require("noice").api.status.mode.has()
+						end,
 						color = { fg = "DarkOrange" },
 					},
 					"venv-selector",

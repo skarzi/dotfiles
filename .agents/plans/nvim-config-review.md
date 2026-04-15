@@ -39,7 +39,7 @@ Migrated from broken autocmd glob patterns to
 flake8 is a linter, not a formatter. Remove from Python
 formatter function.
 
-### 1.3 Lualine requires noice at module parse time
+### 1.3 [DONE] Lualine requires noice at module parse time
 
 **Files**: `nvim/lua/plugins/ui.lua` (lines 22-23)
 
