@@ -271,7 +271,7 @@ Key API changes:
   sequential navigation
 - v2 requires `harpoon:setup()` call in config
 
-### 2.4 Remove `FixCursorHold.nvim`
+### 2.4 [DONE] Remove `FixCursorHold.nvim`
 
 **Files**: `nvim/lua/plugins/testing.lua` (line 7)
 
