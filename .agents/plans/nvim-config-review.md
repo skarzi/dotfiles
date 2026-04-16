@@ -295,7 +295,7 @@ Unmaintained since ~2020. Replace with
 silently ignored when `config` function is present
 (lazy.nvim only runs one or the other).
 
-### 2.7 DAP keymaps won't trigger lazy loading
+### 2.7 [DONE] DAP keymaps won't trigger lazy loading
 
 **Files**: `nvim/lua/plugins/debugging.lua`
 
