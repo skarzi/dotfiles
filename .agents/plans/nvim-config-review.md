@@ -278,7 +278,7 @@ Key API changes:
 The CursorHold bug was fixed in Neovim 0.8. Remove from
 neotest dependencies.
 
-### 2.5 Remove `Comment.nvim`
+### 2.5 [DONE] Remove `Comment.nvim`
 
 **Files**: `nvim/lua/plugins/core.lua` (lines 100-104)
 

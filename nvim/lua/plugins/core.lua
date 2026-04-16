@@ -97,9 +97,4 @@ return {
 		event = "VeryLazy",
 		opts = {},
 	},
-	{
-		"numToStr/Comment.nvim",
-		event = { "BufReadPost", "BufNewFile" },
-		opts = {},
-	},
 }
