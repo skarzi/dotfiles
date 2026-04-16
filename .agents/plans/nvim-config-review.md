@@ -286,7 +286,7 @@ Neovim 0.10+ has built-in `gc`/`gcc` with treesitter
 support. With `opts = {}`, the plugin adds nothing.
 Drop-in removal, same keymaps work natively.
 
-### 2.6 Replace `norcalli/nvim-colorizer.lua`
+### 2.6 [DONE] Replace `norcalli/nvim-colorizer.lua`
 
 **Files**: `nvim/lua/plugins/editing.lua` (lines 14-34)
 

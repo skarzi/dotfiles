@@ -12,11 +12,10 @@ return {
 		},
 	},
 	{
-		"norcalli/nvim-colorizer.lua",
+		"catgoose/nvim-colorizer.lua",
 		event = { "BufReadPre", "BufNewFile" },
-		opts = {},
-		config = function()
-			require("colorizer").setup({
+		opts = {
+			filetypes = {
 				"bash",
 				"css",
 				"html",
@@ -30,8 +29,8 @@ return {
 				"typescriptreact",
 				"vue",
 				"yaml",
-			})
-		end,
+			},
+		},
 	},
 	{
 		"windwp/nvim-autopairs",
