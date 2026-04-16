@@ -34,7 +34,7 @@ return {
 	},
 	{
 		"windwp/nvim-autopairs",
-		event = "InsertCharPre",
+		event = "InsertEnter",
 		opts = {},
 	},
 }

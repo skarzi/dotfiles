@@ -301,7 +301,7 @@ silently ignored when `config` function is present
 
 Move keymaps to `keys` spec. Add missing `step_out`.
 
-### 2.8 `nvim-autopairs` wrong event
+### 2.8 [DONE] `nvim-autopairs` wrong event
 
 **Files**: `nvim/lua/plugins/editing.lua` (line 39)
 
