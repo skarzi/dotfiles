@@ -37,9 +37,9 @@
     pul = "pull"
     pullbase = "!f() { \
             base_branch=${1-main}; \
-        git checkout $base_branch \
+        git switch $base_branch \
         && git pull \
-        && git checkout - \
+        && git switch - \
         && git rebase -i $base_branch; \
         }; f"
     l = log
