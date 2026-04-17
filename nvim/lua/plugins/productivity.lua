@@ -37,14 +37,16 @@ return {
 	},
 	{
 		"aznhe21/actions-preview.nvim",
-		config = function()
-			vim.keymap.set(
-				{ "v", "n" },
+		keys = {
+			{
 				"<leader>ca",
-				require("actions-preview").code_actions,
-				{ desc = "Code Actions Preview" }
-			)
-		end,
+				function()
+					require("actions-preview").code_actions()
+				end,
+				mode = { "v", "n" },
+				desc = "Code Actions Preview",
+			},
+		},
 	},
 	{
 		"folke/todo-comments.nvim",

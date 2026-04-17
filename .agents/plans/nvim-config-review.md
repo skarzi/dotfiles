@@ -312,7 +312,7 @@ AFTER the first keystroke in insert mode. The first `(`
 typed won't auto-close because autopairs hasn't initialized
 yet.
 
-### 2.9 `actions-preview.nvim` has no lazy loading
+### 2.9 [DONE] `actions-preview.nvim` has no lazy loading
 
 **Files**: `nvim/lua/plugins/productivity.lua` (lines 38-48)
 
