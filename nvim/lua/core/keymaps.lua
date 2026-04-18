@@ -11,7 +11,7 @@ vim.keymap.set(
 vim.keymap.set(
 	"n",
 	"<leader><space>",
-	":nohlsearch<cr>",
+	"<cmd>nohlsearch<cr>",
 	{ desc = "Clear search highlight" }
 )
 
@@ -39,7 +39,7 @@ vim.keymap.set("n", "|", "<C-w>|", { desc = "Maximize window horizontally" })
 vim.keymap.set("n", "_", "<C-w>_", { desc = "Maximize window vertically" })
 
 -- File explorer
-vim.keymap.set("n", "-", ":Ex<cr>", { desc = "Explore current directory" })
+vim.keymap.set("n", "-", "<cmd>Ex<cr>", { desc = "Explore current directory" })
 
 -- System clipboard
 vim.keymap.set(

@@ -349,7 +349,7 @@ the first time.
 
 ## Phase 3: Medium Priority Improvements
 
-### 3.1 Use `<cmd>` instead of `:` in keymap RHS
+### 3.1 [DONE] Use `<cmd>` instead of `:` in keymap RHS
 
 **Files**: `nvim/lua/core/keymaps.lua`
 
