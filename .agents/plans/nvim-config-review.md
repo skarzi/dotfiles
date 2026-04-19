@@ -463,7 +463,7 @@ dependency declaration; let the main telescope spec in
 `core.lua` control the branch. Dependency declarations
 should not override the primary spec's branch.
 
-### 3.7 Treesitter: remove contradictory `event` when `lazy = false`
+### 3.7 [DONE] Treesitter: remove contradictory `event` when `lazy = false`
 
 **Files**: `nvim/lua/plugins/core.lua` (lines 7-9)
 

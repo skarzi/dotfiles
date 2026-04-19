@@ -6,7 +6,6 @@ return {
 		branch = "main",
 		lazy = false,
 		build = ":TSUpdate",
-		event = { "BufReadPost", "BufNewFile" },
 		config = function()
 			local treesitter_langs = {
 				"bash",
