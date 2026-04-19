@@ -74,6 +74,7 @@ return {
 	},
 	{
 		"nvim-telescope/telescope.nvim",
+		version = "*",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		cmd = "Telescope",
 		keys = {

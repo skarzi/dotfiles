@@ -432,7 +432,7 @@ Option A is better because it improves startup time.
 Same issue. Remove `lazy = false` to properly lazy-load
 via `ft = "python"`.
 
-### 3.6 Remove Telescope `branch = "0.1.x"` pin from venv-selector
+### 3.6 [DONE] Remove Telescope `branch = "0.1.x"` pin from venv-selector
 
 **Files**: `nvim/lua/plugins/python.lua` (line 10)
 
