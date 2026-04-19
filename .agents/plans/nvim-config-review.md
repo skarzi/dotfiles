@@ -377,7 +377,7 @@ edge-case noise from commands that produce output.
 you do that, `silent = true` becomes optional but still a
 good defensive default for any keymap running an Ex command.
 
-### 3.3 Use `1` not `true` for netrw disable
+### 3.3 [DONE] Use `1` not `true` for netrw disable
 
 **Files**: `nvim/lua/core/options.lua` (lines 40-41)
 

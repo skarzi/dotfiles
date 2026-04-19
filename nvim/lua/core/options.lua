@@ -38,8 +38,8 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 -- netrw
-vim.g.loaded_netrw = true
-vim.g.loaded_netrwPlugin = true
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- Status
 vim.opt.laststatus = 3 -- Global status line.
