@@ -425,7 +425,7 @@ at startup.
 
 Option A is better because it improves startup time.
 
-### 3.5 `venv-selector.nvim` contradictory `lazy = false` + `ft`
+### 3.5 [DONE] `venv-selector.nvim` contradictory `lazy = false` + `ft`
 
 **Files**: `nvim/lua/plugins/python.lua` (lines 14-15)
 

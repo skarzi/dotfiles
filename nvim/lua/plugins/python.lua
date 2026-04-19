@@ -11,7 +11,6 @@ return {
 				dependencies = { "nvim-lua/plenary.nvim" },
 			},
 		},
-		lazy = false,
 		ft = "python",
 		keys = {
 			{
