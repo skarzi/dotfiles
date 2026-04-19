@@ -486,7 +486,7 @@ Your config already uses `branch = "main"` and
 plugin at startup, before any buffer events fire. Remove
 the `event` field.
 
-### 3.8 Python linters: ruff + flake8
+### 3.8 [DONE] Python linters: ruff + flake8
 
 **Files**: `nvim/lua/plugins/linting.lua` (line 12)
 

@@ -8,6 +8,7 @@ return {
 			lint.linters_by_ft = {
 				cpp = { "cpplint", "cppcheck" },
 				lua = { "selene" },
+				-- NOTE: flake8 runs plugins not covered by ruff.
 				python = { "ruff", "flake8", "bandit" },
 				sh = { "shellcheck" },
 				bash = { "shellcheck" },
