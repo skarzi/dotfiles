@@ -356,7 +356,7 @@ the first time.
 Change `:nohlsearch<cr>`, `:Ex<cr>`, `:n!<cr>`,
 `:prev!<cr>` to `<cmd>` form.
 
-### 3.2 Add `silent = true` to normal-mode command keymaps
+### 3.2 [DONE] Add `silent = true` to normal-mode command keymaps
 
 **Files**: `nvim/lua/core/keymaps.lua`
 
