@@ -395,7 +395,7 @@ context), but anyone reading the config who knows the
 convention will pause and wonder if it's intentional or a
 mistake.
 
-### 3.4 `nvim-tree` contradictory `lazy = false` + `cmd`/`keys`
+### 3.4 [DONE] `nvim-tree` contradictory `lazy = false` + `cmd`/`keys`
 
 **Files**: `nvim/lua/plugins/ui.lua` (lines 49-57)
 

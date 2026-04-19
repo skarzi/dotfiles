@@ -50,8 +50,13 @@ return {
 	},
 	{
 		"nvim-tree/nvim-tree.lua",
-		lazy = false,
-		cmd = { "NvimTreeOpen", "NvimTreeToggle", "NvimTreeFocus" },
+		cmd = {
+			"NvimTreeOpen",
+			"NvimTreeToggle",
+			"NvimTreeFocus",
+			"Explore",
+			"Ex",
+		},
 		keys = {
 			{
 				"<leader>e",
