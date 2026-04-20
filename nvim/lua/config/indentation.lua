@@ -18,7 +18,7 @@ function M.setup()
 
 	vim.api.nvim_create_autocmd("FileType", {
 		group = group,
-		pattern = { "make", "Makefile" },
+		pattern = "make",
 		callback = function()
 			vim.opt_local.tabstop = 8
 			vim.opt_local.softtabstop = 8

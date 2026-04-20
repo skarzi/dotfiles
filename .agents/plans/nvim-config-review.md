@@ -797,7 +797,7 @@ Add `desc = "Run linters on buffer events."`.
 
 **Files**: `nvim/lua/config/mise.lua`
 
-### 3.15 `"Makefile"` in FileType pattern is dead code
+### 3.15 [DONE] `"Makefile"` in FileType pattern is dead code
 
 **Files**: `nvim/lua/config/indentation.lua` (line 20)
 
