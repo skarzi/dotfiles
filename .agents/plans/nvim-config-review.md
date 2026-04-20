@@ -783,7 +783,7 @@ unless you want to customize which hints appear.
 **Moved to Phase 5** (see 5.4). Keymap tasks grouped together
 to coordinate prefix assignments and avoid conflicts.
 
-### 4.6 Aerial telescope + lualine integration
+### 4.6 [DONE] Aerial telescope + lualine integration
 
 **Files**: `nvim/lua/plugins/navigation.lua`
 
