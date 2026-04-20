@@ -793,7 +793,7 @@ entirely.
 
 Add `desc = "Run linters on buffer events."`.
 
-### 3.14 Guard against duplicate PATH prepending in `mise.lua`
+### 3.14 [DONE] Guard against duplicate PATH prepending in `mise.lua`
 
 **Files**: `nvim/lua/config/mise.lua`
 
