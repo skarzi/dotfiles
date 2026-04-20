@@ -839,7 +839,7 @@ lualine_c = { "filename", "aerial" },
 This shows the current function/class name in the
 statusline.
 
-### 4.7 Consistent `function M.setup()` style
+### 4.7 [DONE] Consistent `function M.setup()` style
 
 **Files**: `nvim/lua/config/filetypes.lua`
 
