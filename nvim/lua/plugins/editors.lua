@@ -8,14 +8,18 @@ return {
 		end,
 	},
 	{
-		"junegunn/goyo.vim",
-		cmd = "Goyo",
+		"folke/zen-mode.nvim",
+		cmd = "ZenMode",
 		keys = {
 			{
 				"<leader>G",
-				"<cmd>Goyo<cr>",
-				desc = "Toggle Goyo (Distraction-free)",
+				"<cmd>ZenMode<cr>",
+				desc = "Toggle Zen Mode (distraction-free)",
 			},
+		},
+		opts = {
+			window = { width = 80 },
+			plugins = { gitsigns = { enabled = true } },
 		},
 	},
 }

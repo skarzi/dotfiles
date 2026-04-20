@@ -636,7 +636,7 @@ Reducing to 250ms makes everything feel much snappier. The
 only cost is slightly more frequent disk writes (swap
 file), which is negligible on modern storage.
 
-### 4.2 Replace `goyo.vim` with `zen-mode.nvim`
+### 4.2 [DONE] Replace `goyo.vim` with `zen-mode.nvim`
 
 **Files**: `nvim/lua/plugins/editors.lua` (lines 28-37)
 
