@@ -787,7 +787,7 @@ CAN coexist, but need adjustment:
 If you never convert RST/textile, you can remove both
 entirely.
 
-### 3.13 Lint autocmd missing `desc` field
+### 3.13 [DONE] Lint autocmd missing `desc` field
 
 **Files**: `nvim/lua/plugins/linting.lua` (line 30)
 

@@ -32,6 +32,7 @@ return {
 				{ "BufEnter", "BufWritePost", "InsertLeave" },
 				{
 					group = lint_augroup,
+					desc = "Run linters on buffer events",
 					callback = function(event)
 						if projects.should_disable_tools(event.buf) then
 							return
