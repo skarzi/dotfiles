@@ -1,5 +1,14 @@
 return {
 	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {
+			library = {
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+			},
+		},
+	},
+	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
@@ -40,9 +49,6 @@ return {
 					Lua = {
 						runtime = { version = "LuaJIT" },
 						diagnostics = { globals = { "vim" } },
-						workspace = {
-							library = vim.api.nvim_get_runtime_file("", true),
-						},
 						telemetry = { enable = false },
 					},
 				},
@@ -189,6 +195,7 @@ return {
 					["<CR>"] = cmp.mapping.confirm({ select = false }),
 				}),
 				sources = cmp.config.sources({
+					{ name = "lazydev", group_index = 0 },
 					{ name = "copilot", group_index = DEFAULT_GROUP_INDEX },
 					{ name = "nvim_lsp", group_index = DEFAULT_GROUP_INDEX },
 					{ name = "luasnip", group_index = DEFAULT_GROUP_INDEX },

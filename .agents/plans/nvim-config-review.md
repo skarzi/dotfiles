@@ -495,7 +495,7 @@ runs plugins not supported by ruff. **No change needed.**
 Consider adding a comment explaining this to prevent future
 reviewers (or AI agents) from flagging it as redundant.
 
-### 3.9 `lua_ls` workspace.library is expensive
+### 3.9 [DONE] `lua_ls` workspace.library is expensive
 
 **Files**: `nvim/lua/plugins/lsp.lua` (line 44)
 
@@ -549,6 +549,14 @@ vim.lsp.config("lua_ls", {
 
 Remove the `workspace.library` block entirely; lazydev
 handles it.
+
+Also add `lazydev` as an nvim-cmp source with
+`group_index = 0` (highest priority) for enhanced Lua
+completions:
+
+```lua
+{ name = "lazydev", group_index = 0 },
+```
 
 ### 3.10 Gitsigns has no keymaps
 
