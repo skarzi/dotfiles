@@ -599,7 +599,7 @@ Change `pattern = { "make", "Makefile" }` to
 
 ## Phase 4: Low Priority / Nice-to-Have
 
-### 4.1 Missing recommended options
+### 4.1 [DONE] Missing recommended options
 
 **Files**: `nvim/lua/core/options.lua`
 

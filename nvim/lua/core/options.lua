@@ -43,3 +43,9 @@ vim.g.loaded_netrwPlugin = 1
 
 -- Status
 vim.opt.laststatus = 3 -- Global status line.
+vim.opt.signcolumn = "yes" -- Always show; prevents text jitter on diagnostic change.
+vim.opt.updatetime = 250 -- Faster CursorHold (gitsigns, LSP hover). Default: 4000.
+vim.opt.scrolloff = 8 -- Keep 8 lines above/below cursor when scrolling.
+
+-- Persistence
+vim.opt.undofile = true -- Persist undo history across sessions.
