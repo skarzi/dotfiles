@@ -560,232 +560,23 @@ completions:
 
 ### 3.10 Gitsigns has no keymaps
 
-**Files**: `nvim/lua/plugins/ui.lua` (lines 37-39)
-
-**Explanation**: With just `opts = {}`, gitsigns only shows
-signs in the gutter (green `+` for added, blue `~` for
-changed, red `-` for deleted lines). It provides zero
-interactive functionality. You can see changes but cannot:
-
-- Jump between hunks (navigate to next/previous changed
-  section)
-- Stage a single hunk (git add just one change, not the
-  whole file)
-- Reset a hunk (discard a single change)
-- Preview what changed in a hunk (inline diff popup)
-- Toggle inline blame (who changed this line and when)
-- Diff against HEAD or index
-
-Without keymaps, all these operations require either
-fugitive commands or terminal `git`. The `on_attach`
-callback pattern is how gitsigns recommends defining
-buffer-local keymaps:
-
-**Proposed config** (adapted to your conventions,
-`<leader>h` prefix for hunk operations):
-
-```lua
-{
-    "lewis6991/gitsigns.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    opts = {
-        on_attach = function(bufnr)
-            local gitsigns = require("gitsigns")
-            local function map(mode, lhs, rhs, desc)
-                vim.keymap.set(mode, lhs, rhs, {
-                    buffer = bufnr,
-                    desc = desc,
-                })
-            end
-
-            -- Navigation (diff-mode aware).
-            map("n", "]c", function()
-                if vim.wo.diff then
-                    vim.cmd.normal({ "]c", bang = true })
-                else
-                    gitsigns.nav_hunk("next")
-                end
-            end, "Jump to next hunk")
-            map("n", "[c", function()
-                if vim.wo.diff then
-                    vim.cmd.normal({ "[c", bang = true })
-                else
-                    gitsigns.nav_hunk("prev")
-                end
-            end, "Jump to previous hunk")
-
-            -- Stage/reset.
-            map("n", "<leader>hs", gitsigns.stage_hunk, "Stage hunk")
-            map("n", "<leader>hr", gitsigns.reset_hunk, "Reset hunk")
-            map("v", "<leader>hs", function()
-                gitsigns.stage_hunk({
-                    vim.fn.line("."),
-                    vim.fn.line("v"),
-                })
-            end, "Stage selected hunk")
-            map("v", "<leader>hr", function()
-                gitsigns.reset_hunk({
-                    vim.fn.line("."),
-                    vim.fn.line("v"),
-                })
-            end, "Reset selected hunk")
-            map("n", "<leader>hS", gitsigns.stage_buffer, "Stage entire buffer")
-            map("n", "<leader>hR", gitsigns.reset_buffer, "Reset entire buffer")
-            map("n", "<leader>hu", gitsigns.undo_stage_hunk, "Undo stage hunk")
-
-            -- Preview/inspect.
-            map("n", "<leader>hp", gitsigns.preview_hunk, "Preview hunk")
-            map("n", "<leader>hb", function()
-                gitsigns.blame_line({ full = true })
-            end, "Show blame for line")
-            map("n", "<leader>tb",
-                gitsigns.toggle_current_line_blame,
-                "Toggle line blame")
-
-            -- Diff.
-            map("n", "<leader>hd", gitsigns.diffthis, "Diff against index")
-            map("n", "<leader>hD", function()
-                gitsigns.diffthis("~")
-            end, "Diff against HEAD")
-
-            -- Text object.
-            map({ "o", "x" }, "ih", gitsigns.select_hunk, "Select hunk")
-        end,
-    },
-},
-```
+**Moved to Phase 5** (see 5.2). Keymap tasks grouped together
+to coordinate prefix assignments and avoid conflicts.
 
 ### 3.11 Neotest keymaps
 
-**Files**: `nvim/lua/plugins/testing.lua`
+**Moved to Phase 5** (see 5.3). Keymap tasks grouped together
+to coordinate prefix assignments and avoid conflicts.
 
-Analyzing your existing keymap conventions:
-
-- `<leader>d*` for debugging (db, dc, di, do, dt)
-- `<leader>x*` for diagnostics/trouble (xx, xX, xs, xl,
-  xL)
-- `<leader>v*` for vimux
-- `<leader>m*` for harpoon marks
-- `<leader>h*` for git hunks (proposed above)
-
-For testing, `<leader>t*` is the natural prefix (consistent
-with `<leader>d` for debug, `<leader>x` for diagnostics).
-But `<leader>tb` is used by gitsigns toggle blame. Use
-`<leader>tn/tf/td/ts/to/tS` for test operations:
-
-**Proposed config:**
-
-```lua
-{
-    "nvim-neotest/neotest",
-    dependencies = {
-        "nvim-neotest/nvim-nio",
-        "nvim-lua/plenary.nvim",
-        "nvim-treesitter/nvim-treesitter",
-        "nvim-neotest/neotest-python",
-        "nvim-neotest/neotest-go",
-    },
-    keys = {
-        {
-            "<leader>tn",
-            function()
-                require("neotest").run.run()
-            end,
-            desc = "Run nearest test",
-        },
-        {
-            "<leader>tf",
-            function()
-                require("neotest").run.run(vim.fn.expand("%"))
-            end,
-            desc = "Run file tests",
-        },
-        {
-            "<leader>td",
-            function()
-                require("neotest").run.run({ strategy = "dap" })
-            end,
-            desc = "Debug nearest test",
-        },
-        {
-            "<leader>ts",
-            function()
-                require("neotest").run.stop()
-            end,
-            desc = "Stop test run",
-        },
-        {
-            "<leader>to",
-            function()
-                require("neotest").output.open({ enter = true })
-            end,
-            desc = "Show test output",
-        },
-        {
-            "<leader>tS",
-            function()
-                require("neotest").summary.toggle()
-            end,
-            desc = "Toggle test summary",
-        },
-    },
-    config = function()
-        require("neotest").setup({
-            adapters = {
-                require("neotest-python")({
-                    dap = { justMyCode = false },
-                }),
-                require("neotest-go"),
-            },
-        })
-    end,
-}
-```
-
-### 3.12 vim-pandoc conflicts with render-markdown.nvim
+### 3.12 [DONE] vim-pandoc conflicts with render-markdown.nvim
 
 **Files**: `nvim/lua/plugins/editors.lua`,
 `nvim/lua/plugins/ai.lua`
 
-**Research findings**: These serve different purposes and
-CAN coexist, but need adjustment:
-
-- **render-markdown.nvim**: Treesitter-based visual
-  rendering (bold, headings, code blocks). Required by
-  avante.nvim for `ft = "Avante"`.
-- **vim-pandoc**: Provides `:Pandoc` conversion commands
-  (markdown -> pdf, docx, etc.)
-- **vim-pandoc-syntax**: Custom syntax highlighting. THIS
-  is what conflicts with render-markdown.nvim and
-  treesitter for markdown files.
-
-**Best solution**:
-
-1. Keep `vim-pandoc` for its conversion commands, but
-   restrict to non-markdown pandoc formats
-2. Remove `vim-pandoc-syntax` or restrict to RST/textile
-   only (render-markdown.nvim handles markdown rendering
-   better via treesitter)
-3. Keep render-markdown.nvim for markdown + Avante
-
-```lua
--- Keep vim-pandoc for conversion only, disable its syntax module.
-{
-    "vim-pandoc/vim-pandoc",
-    ft = { "pandoc", "rst", "textile" },
-    init = function()
-        vim.g["pandoc#modules#disabled"] = { "folding", "formatting" }
-    end,
-},
--- Remove vim-pandoc-syntax for markdown (treesitter handles it).
-{
-    "vim-pandoc/vim-pandoc-syntax",
-    ft = { "rst", "textile" },
-},
-```
-
-If you never convert RST/textile, you can remove both
-entirely.
+**Resolution**: Removed both `vim-pandoc` and
+`vim-pandoc-syntax` entirely from `editors.lua`.
+Expanded `render-markdown.nvim` opts with `indent`,
+`completions.lsp`, and `nvim-web-devicons` dependency.
 
 ### 3.13 [DONE] Lint autocmd missing `desc` field
 
@@ -989,55 +780,8 @@ unless you want to customize which hints appear.
 
 ### 4.5 Fugitive keymaps
 
-**Files**: `nvim/lua/plugins/git.lua`
-
-Gitsigns handles hunk-level operations (`<leader>h*`).
-Fugitive should focus on repo-level git operations. Using
-`<leader>g*` prefix:
-
-```lua
-{
-    "tpope/vim-fugitive",
-    dependencies = { "tpope/vim-rhubarb" },
-    keys = {
-        -- Core status window (the main entry point for staging, committing).
-        { "<leader>gs", "<cmd>Git<cr>", desc = "Git status" },
-
-        -- Blame: see who changed each line and when.
-        { "<leader>gb", "<cmd>Git blame<cr>", desc = "Git blame" },
-
-        -- Diff: opens a vertical split showing staged vs working copy.
-        { "<leader>gd", "<cmd>Gdiffsplit<cr>", desc = "Git diff split" },
-
-        -- Browse: opens the current file/selection on GitHub/GitLab.
-        -- Requires vim-rhubarb for GitHub support.
-        { "<leader>go", "<cmd>GBrowse<cr>",
-            desc = "Open on remote" },
-        { "<leader>go", "<cmd>GBrowse<cr>",
-            mode = "v",
-            desc = "Open selection on remote" },
-
-        -- Stage current file (equivalent to git add %).
-        { "<leader>gw", "<cmd>Gwrite<cr>", desc = "Stage current file" },
-
-        -- Checkout current file (discard working changes).
-        { "<leader>gx", "<cmd>Gread<cr>", desc = "Checkout current file" },
-
-        -- Git log for current file.
-        { "<leader>gl",
-            "<cmd>Git log --oneline %<cr>",
-            desc = "Git log for file" },
-    },
-    cmd = {
-        "Git",
-        "Gdiffsplit",
-        "GBrowse",
-        "Gwrite",
-        "Gread",
-    },
-    lazy = true,
-},
-```
+**Moved to Phase 5** (see 5.4). Keymap tasks grouped together
+to coordinate prefix assignments and avoid conflicts.
 
 ### 4.6 Aerial telescope + lualine integration
 
@@ -1117,36 +861,8 @@ Change `config/filetypes.lua` line 6 from
 
 ### 4.8 Move `-` keymap coupling
 
-**Files**: `nvim/lua/core/keymaps.lua` (line 37)
-
-Not just the `-` -> `:Ex` keymap. The full coupling chain
-is:
-
-1. `core/options.lua` disables netrw
-   (`vim.g.loaded_netrw = 1`)
-2. `plugins/ui.lua` (nvim-tree) creates `:Explore` and
-   `:Ex` user commands
-3. `core/keymaps.lua` maps `-` to `:Ex<cr>`
-
-If nvim-tree fails to load: `:Ex` doesn't exist (netrw is
-disabled), `-` errors.
-
-The `-` keymap is the only one with this fragile
-dependency. `<leader>e` in nvim-tree uses
-`<cmd>NvimTreeToggle<cr>` directly (no coupling).
-
-**Fix**: Move `-` into nvim-tree's config or change it to
-`<cmd>NvimTreeToggle<cr>`:
-
-```lua
--- In nvim-tree keys spec (or config function):
-vim.keymap.set("n", "-", "<cmd>Ex<cr>", {
-    desc = "Explore current directory",
-})
-```
-
-This way the keymap only exists when nvim-tree is loaded
-(which also creates `:Ex`).
+**Moved to Phase 5** (see 5.5). Keymap tasks grouped together
+to coordinate prefix assignments and avoid conflicts.
 
 ### 4.9 `after/ftplugin/` for indentation
 
@@ -1343,6 +1059,221 @@ Move `<leader>cz` to `keys` spec for proper lazy loading.
   (`plugins/linting.lua`): Add desc
 - Emoji in code (`python.lua` line 40)
   (`plugins/python.lua`): Style guide says avoid
+
+---
+
+## Phase 5: Keymap Audit
+
+All keymap additions grouped here to coordinate prefix
+assignments and avoid conflicts. Existing prefix map:
+
+| Prefix | Domain |
+| ------ | ------ |
+| `<leader>d*` | Debugging (DAP) |
+| `<leader>x*` | Diagnostics / Trouble |
+| `<leader>v*` | Vimux |
+| `<leader>m*` | Harpoon marks |
+| `<leader>f*` | Telescope find |
+| `<leader>c*` | Code actions |
+| `<leader>r*` | Rust (rustaceanvim) |
+| `<leader>h*` | Git hunks (gitsigns) |
+| `<leader>g*` | Git repo (fugitive) |
+| `<leader>t*` | Tests (neotest) |
+
+### 5.1 Keymap conflict audit
+
+Before implementing 5.2-5.5, verify no collisions:
+
+- `<leader>tb` (gitsigns toggle blame) conflicts with any
+  `<leader>t*` neotest key -- use `<leader>tB` for blame
+  toggle instead.
+- `<leader>h` alone (window move left, `keymaps.lua:37`)
+  gets a timeout delay once `<leader>h*` hunks exist.
+  Low impact -- window moves rarely used vs hunk ops.
+- `<leader>g*` (fugitive) must not collide with `<leader>gs`
+  if gitsigns also uses that. Gitsigns uses `<leader>hs`
+  for stage hunk, so `<leader>gs` is free for fugitive
+  Git status.
+
+### 5.2 Gitsigns keymaps
+
+**Files**: `nvim/lua/plugins/ui.lua`
+
+`opts = {}` makes gitsigns a read-only gutter. Add
+`on_attach` for buffer-local keymaps using `<leader>h*`
+prefix for hunks. Navigation (`]c`/`[c`) must be
+diff-mode-aware (fall back to native `]c` in diff view).
+
+```lua
+opts = {
+    on_attach = function(bufnr)
+        local gitsigns = require("gitsigns")
+        local function map(mode, lhs, rhs, desc)
+            vim.keymap.set(mode, lhs, rhs, {
+                buffer = bufnr,
+                desc = desc,
+            })
+        end
+
+        -- Navigation (diff-mode aware).
+        map("n", "]c", function()
+            if vim.wo.diff then
+                vim.cmd.normal({ "]c", bang = true })
+            else
+                gitsigns.nav_hunk("next")
+            end
+        end, "Jump to next hunk")
+        map("n", "[c", function()
+            if vim.wo.diff then
+                vim.cmd.normal({ "[c", bang = true })
+            else
+                gitsigns.nav_hunk("prev")
+            end
+        end, "Jump to previous hunk")
+
+        -- Stage/reset.
+        map("n", "<leader>hs", gitsigns.stage_hunk, "Stage hunk")
+        map("n", "<leader>hr", gitsigns.reset_hunk, "Reset hunk")
+        map("v", "<leader>hs", function()
+            gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+        end, "Stage selected hunk")
+        map("v", "<leader>hr", function()
+            gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+        end, "Reset selected hunk")
+        map("n", "<leader>hS", gitsigns.stage_buffer, "Stage entire buffer")
+        map("n", "<leader>hR", gitsigns.reset_buffer, "Reset entire buffer")
+        map("n", "<leader>hu", gitsigns.undo_stage_hunk, "Undo stage hunk")
+
+        -- Preview/inspect.
+        map("n", "<leader>hp", gitsigns.preview_hunk, "Preview hunk")
+        map("n", "<leader>hb", function()
+            gitsigns.blame_line({ full = true })
+        end, "Blame line (full)")
+        map("n", "<leader>tB",
+            gitsigns.toggle_current_line_blame,
+            "Toggle line blame")
+
+        -- Diff.
+        map("n", "<leader>hd", gitsigns.diffthis, "Diff against index")
+        map("n", "<leader>hD", function()
+            gitsigns.diffthis("~")
+        end, "Diff against HEAD")
+
+        -- Text object.
+        map({ "o", "x" }, "ih", gitsigns.select_hunk, "Select hunk")
+    end,
+},
+```
+
+Note: toggle blame moved to `<leader>tB` (capital B) to
+avoid clash with neotest `<leader>t*` keys.
+
+### 5.3 Neotest keymaps
+
+**Files**: `nvim/lua/plugins/testing.lua`
+
+Prefix `<leader>t*` for tests. Avoid `<leader>tB`
+(gitsigns toggle blame). Use `keys` spec for lazy loading.
+
+```lua
+keys = {
+    {
+        "<leader>tn",
+        function() require("neotest").run.run() end,
+        desc = "Run nearest test",
+    },
+    {
+        "<leader>tf",
+        function() require("neotest").run.run(vim.fn.expand("%")) end,
+        desc = "Run file tests",
+    },
+    {
+        "<leader>td",
+        function() require("neotest").run.run({ strategy = "dap" }) end,
+        desc = "Debug nearest test",
+    },
+    {
+        "<leader>ts",
+        function() require("neotest").run.stop() end,
+        desc = "Stop test run",
+    },
+    {
+        "<leader>to",
+        function() require("neotest").output.open({ enter = true }) end,
+        desc = "Show test output",
+    },
+    {
+        "<leader>tS",
+        function() require("neotest").summary.toggle() end,
+        desc = "Toggle test summary",
+    },
+},
+config = function()
+    require("neotest").setup({
+        adapters = {
+            require("neotest-python")({ dap = { justMyCode = false } }),
+            require("neotest-go"),
+        },
+    })
+end,
+```
+
+### 5.4 Fugitive keymaps
+
+**Files**: `nvim/lua/plugins/git.lua`
+
+Prefix `<leader>g*` for repo-level git ops. Gitsigns
+uses `<leader>h*` for hunk-level ops -- no collision.
+
+```lua
+{
+    "tpope/vim-fugitive",
+    dependencies = { "tpope/vim-rhubarb" },
+    keys = {
+        { "<leader>gs", "<cmd>Git<cr>", desc = "Git status" },
+        { "<leader>gb", "<cmd>Git blame<cr>", desc = "Git blame" },
+        { "<leader>gd", "<cmd>Gdiffsplit<cr>", desc = "Git diff split" },
+        { "<leader>go", "<cmd>GBrowse<cr>", desc = "Open on remote" },
+        {
+            "<leader>go",
+            "<cmd>GBrowse<cr>",
+            mode = "v",
+            desc = "Open selection on remote",
+        },
+        { "<leader>gw", "<cmd>Gwrite<cr>", desc = "Stage current file" },
+        { "<leader>gx", "<cmd>Gread<cr>", desc = "Checkout current file" },
+        {
+            "<leader>gl",
+            "<cmd>Git log --oneline %<cr>",
+            desc = "Git log for file",
+        },
+    },
+    cmd = { "Git", "Gdiffsplit", "GBrowse", "Gwrite", "Gread" },
+    lazy = true,
+},
+```
+
+### 5.5 Move `-` keymap coupling
+
+**Files**: `nvim/lua/core/keymaps.lua`, `nvim/lua/plugins/ui.lua`
+
+The `-` -> `:Ex` keymap in `keymaps.lua` depends on
+nvim-tree loading (creates `:Ex` in its config). If
+nvim-tree fails, `-` errors (netrw is disabled). The
+`Ex`/`Explore` cmd stubs added in 3.4 reduce the risk,
+but the coupling is still fragile.
+
+**Fix**: Move `-` into nvim-tree's `keys` spec, remove
+it from `keymaps.lua`:
+
+```lua
+-- In ui.lua nvim-tree keys spec:
+{ "-", "<cmd>Ex<cr>", desc = "Explore current directory" },
+```
+
+This makes the keymap exist only after nvim-tree loads
+(same place that creates `:Ex`). Remove corresponding
+line from `core/keymaps.lua`.
 
 ---
 

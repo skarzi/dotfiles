@@ -13,7 +13,6 @@ return {
 				sh = { "shellcheck" },
 				bash = { "shellcheck" },
 				yaml = { "yamllint" },
-				markdown = { "markdownlint-cli2", "vale" },
 				make = { "checkmake" },
 				["yaml.ghaction"] = { "yamllint", "actionlint" },
 				["yaml.ansible"] = { "yamllint", "ansible-lint" },
