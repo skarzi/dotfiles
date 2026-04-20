@@ -691,7 +691,7 @@ file), which is negligible on modern storage.
 },
 ```
 
-### 4.3 Rename `benmills/vimux` to `preservim/vimux`
+### 4.3 [DONE] Rename `benmills/vimux` to `preservim/vimux`
 
 **Files**: `nvim/lua/plugins/dev.lua`
 

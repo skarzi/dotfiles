@@ -4,7 +4,7 @@ return {
 		event = "VeryLazy",
 	},
 	{
-		"benmills/vimux",
+		"preservim/vimux",
 		cmd = {
 			"VimuxRunLastCommand",
 			"VimuxPromptCommand",
