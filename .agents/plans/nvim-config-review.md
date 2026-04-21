@@ -864,7 +864,7 @@ Change `config/filetypes.lua` line 6 from
 **Moved to Phase 5** (see 5.5). Keymap tasks grouped together
 to coordinate prefix assignments and avoid conflicts.
 
-### 4.9 `after/ftplugin/` for indentation
+### 4.9 [DONE] `after/ftplugin/` for indentation
 
 **Files**: `nvim/lua/config/indentation.lua`
 
@@ -1033,7 +1033,7 @@ The practical impact is that after that date, any bug in
 plenary won't be fixed upstream, but it's mature enough
 that critical bugs are unlikely.
 
-### 4.12 `lazyredraw = false` is the default
+### 4.12 [DONE] `lazyredraw = false` is the default
 
 **Files**: `nvim/lua/core/options.lua` (line 10)
 

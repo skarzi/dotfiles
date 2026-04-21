@@ -9,7 +9,6 @@ vim.opt.relativenumber = true
 vim.opt.showcmd = true
 vim.opt.cursorline = true
 vim.opt.wildmenu = true
-vim.opt.lazyredraw = false
 vim.opt.textwidth = 80
 vim.opt.colorcolumn = "+0"
 
