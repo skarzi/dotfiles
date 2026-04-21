@@ -2,12 +2,16 @@ return {
 	{
 		"xvzc/chezmoi.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		config = function()
-			require("chezmoi").setup({})
-			vim.keymap.set("n", "<leader>cz", function()
-				require("chezmoi.pick").telescope()
-			end, { desc = "Search all chezmoi files" })
-		end,
+		keys = {
+			{
+				"<leader>cz",
+				function()
+					require("chezmoi.pick").telescope()
+				end,
+				desc = "Search all chezmoi files",
+			},
+		},
+		opts = {},
 	},
 	{
 		"alker0/chezmoi.vim",

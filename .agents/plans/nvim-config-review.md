@@ -1039,7 +1039,7 @@ that critical bugs are unlikely.
 
 Either add comment explaining why or remove.
 
-### 4.13 `chezmoi.nvim` keymap inside config
+### 4.13 [DONE] `chezmoi.nvim` keymap inside config
 
 **Files**: `nvim/lua/plugins/chezmoi.lua`
 
