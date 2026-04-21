@@ -1010,28 +1010,25 @@ no maintenance.
 | `plenary.scandir` | `vim.fs.dir()`, `vim.fs.find()` |
 | `plenary.filetype` | `vim.filetype` |
 
-**Your plugins that depend on plenary:**
+**Your plugins that depend on plenary (verified 2026-04-21):**
 
-- telescope.nvim (heaviest user)
-- harpoon (v1 and v2 both use it)
-- todo-comments.nvim
-- chezmoi.nvim
-- neotest
+| Plugin | plenary usage | Removable? |
+| --- | --- | --- |
+| telescope.nvim | 28+ files (job, path, async, scandir) | No |
+| avante.nvim | 24 files (llm, sidebar, clipboard, providers) | No |
+| todo-comments.nvim | search.lua, init.lua (reload, ripgrep) | No |
+| neotest | subprocess, file I/O, positions | No |
+| harpoon2 | data.lua (plenary.path for file I/O) | No |
+| chezmoi.nvim | log, util, edit commands | No |
 
-**Migration path**: This resolves naturally. As plugins
-update to drop plenary:
+Note: folke added snacks.nvim as a picker option in
+todo-comments, but plenary is still required for core
+functionality.
 
-- telescope -> if you migrate to snacks.picker, plenary
-  dependency goes away
-- harpoon2 -> ThePrimeagen has discussed dropping plenary
-  in future
-- todo-comments -> folke will likely update
-- chezmoi.nvim -> small dependency, easy to update
-
-**No action needed now.** Monitor the June 2026 deadline.
-The practical impact is that after that date, any bug in
-plenary won't be fixed upstream, but it's mature enough
-that critical bugs are unlikely.
+**No action possible now.** All 6 plugins still actively
+`require("plenary.*")` in source. No config-side removal
+is safe. Monitor the June 2026 deadline. Plenary will
+persist as long as telescope depends on it.
 
 ### 4.12 [DONE] `lazyredraw = false` is the default
 
