@@ -278,13 +278,18 @@ Key API changes:
 The CursorHold bug was fixed in Neovim 0.8. Remove from
 neotest dependencies.
 
-### 2.5 [DONE] Remove `Comment.nvim`
+### 2.5 [DONE] Remove `Comment.nvim`, add `ts-comments.nvim`
 
-**Files**: `nvim/lua/plugins/core.lua` (lines 100-104)
+**Files**: `nvim/lua/plugins/core.lua`
 
-Neovim 0.10+ has built-in `gc`/`gcc` with treesitter
-support. With `opts = {}`, the plugin adds nothing.
-Drop-in removal, same keymaps work natively.
+Neovim 0.10+ has built-in `gc`/`gcc`. Comment.nvim's
+`gc`/`gcc` were redundant, but removal also dropped `gb`
+(blockwise commenting). Added `folke/ts-comments.nvim`
+to enhance built-in commenting with treesitter-aware
+commentstring (JSX/TSX, Vue SFC, embedded languages).
+`gb` blockwise commenting is not replaced (rarely needed
+for Python/Go/Rust; JSX uses block comments via `gc`
+with correct commentstring from ts-comments).
 
 ### 2.6 [DONE] Replace `norcalli/nvim-colorizer.lua`
 
