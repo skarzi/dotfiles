@@ -128,8 +128,9 @@ cask "google-chrome"
 brew "protonpass/tap/pass-cli"
 {{- if eq .env "personal" }}
 cask "nordvpn"
-{{- end -}}
+{{- end }}
 
-{{- if eq .env "work" -}}
+{{- if eq .env "work" }}
+
 {{ include ".encrypted_data/work/Brewfile.age" | decrypt }}
-{{- end -}}
+{{- end }}
