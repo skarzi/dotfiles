@@ -1,23 +1,23 @@
 -- Tabs
 vim.keymap.set(
-	"n",
-	"<leader>]",
-	"<cmd>tabnext<cr>",
-	{ silent = true, desc = "Next tab" }
+    "n",
+    "<leader>]",
+    "<cmd>tabnext<cr>",
+    { silent = true, desc = "Next tab" }
 )
 vim.keymap.set(
-	"n",
-	"<leader>[",
-	"<cmd>tabprevious<cr>",
-	{ silent = true, desc = "Previous tab" }
+    "n",
+    "<leader>[",
+    "<cmd>tabprevious<cr>",
+    { silent = true, desc = "Previous tab" }
 )
 
 -- Search
 vim.keymap.set(
-	"n",
-	"<leader><space>",
-	"<cmd>nohlsearch<cr>",
-	{ silent = true, desc = "Clear search highlight" }
+    "n",
+    "<leader><space>",
+    "<cmd>nohlsearch<cr>",
+    { silent = true, desc = "Clear search highlight" }
 )
 
 -- Selection
@@ -45,63 +45,63 @@ vim.keymap.set("n", "_", "<C-w>_", { desc = "Maximize window vertically" })
 
 -- File explorer
 vim.keymap.set(
-	"n",
-	"-",
-	"<cmd>Ex<cr>",
-	{ silent = true, desc = "Explore current directory" }
+    "n",
+    "-",
+    "<cmd>Ex<cr>",
+    { silent = true, desc = "Explore current directory" }
 )
 
 -- System clipboard
 vim.keymap.set(
-	{ "n", "v" },
-	"<leader>y",
-	'"+y',
-	{ desc = "Yank into system clipboard" }
+    { "n", "v" },
+    "<leader>y",
+    '"+y',
+    { desc = "Yank into system clipboard" }
 )
 vim.keymap.set(
-	"n",
-	"<leader>Y",
-	'"+y$',
-	{ desc = "Yank until end of line into system clipboard" }
+    "n",
+    "<leader>Y",
+    '"+y$',
+    { desc = "Yank until end of line into system clipboard" }
 )
 vim.keymap.set(
-	"n",
-	"<leader>yy",
-	'"+yy',
-	{ desc = "Yank current line into system clipboard" }
+    "n",
+    "<leader>yy",
+    '"+yy',
+    { desc = "Yank current line into system clipboard" }
 )
 vim.keymap.set(
-	{ "n", "v" },
-	"<leader>p",
-	'"+p',
-	{ desc = "Paste after cursor from system clipboard" }
+    { "n", "v" },
+    "<leader>p",
+    '"+p',
+    { desc = "Paste after cursor from system clipboard" }
 )
 vim.keymap.set(
-	{ "n", "v" },
-	"<leader>P",
-	'"+P',
-	{ desc = "Paste before cursor from system clipboard" }
+    { "n", "v" },
+    "<leader>P",
+    '"+P',
+    { desc = "Paste before cursor from system clipboard" }
 )
 
 -- Command line mode
 vim.keymap.set("c", "%%", "<C-R>=fnameescape(expand('%:h')).'/'<cr>", {
-	noremap = true,
-	silent = true,
-	desc = "Expand current file directory",
+    noremap = true,
+    silent = true,
+    desc = "Expand current file directory",
 })
 
 -- Visual mode macros
 -- Reference: https://www.rockyourcode.com/run-macro-on-multiple-lines-in-vim/
 vim.api.nvim_create_user_command("ExecuteMacroOverVisualRange", function()
-	vim.cmd('echo "@"')
-	local char = vim.fn.getchar()
-	if type(char) == "string" then
-		char = vim.fn.char2nr(char)
-	end
-	local macro_char = vim.fn.nr2char(char)
-	vim.cmd(string.format(":'<,'>normal @%s", macro_char))
+    vim.cmd('echo "@"')
+    local char = vim.fn.getchar()
+    if type(char) == "string" then
+        char = vim.fn.char2nr(char)
+    end
+    local macro_char = vim.fn.nr2char(char)
+    vim.cmd(string.format(":'<,'>normal @%s", macro_char))
 end, {
-	desc = "Execute macro over visual range",
+    desc = "Execute macro over visual range",
 })
 
 -- NOTE: The string keymap is used to ensure Neovim behaves exactly like
@@ -118,6 +118,6 @@ end, {
 --    ensure it hits every line in the selection.
 -- 4. `<cr>` - Enter key (Carriage Return). Immediately execute the command.
 vim.keymap.set("x", "@", ":<C-u>ExecuteMacroOverVisualRange<cr>", {
-	silent = true,
-	desc = "Execute macro over visual range",
+    silent = true,
+    desc = "Execute macro over visual range",
 })
