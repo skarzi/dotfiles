@@ -43,7 +43,7 @@ make install
 All linters run via pre-commit hooks. To run them manually:
 
 ```bash
-make lint
+make lint-fix
 ```
 
 To run all pre-commit hooks against all files:

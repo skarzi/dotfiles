@@ -63,7 +63,7 @@ A task is NOT complete until all checks pass.
 | **Run Everything** | `make all` | **Required** Runs all linters and tests |
 | **Run Pre-commit** | `pre-commit run --all-files` | Alternative `make all` |
 | **Run Tests** | `make test` | Runs `shellspec` tests in `spec/` |
-| **Lint/Fix All** | `make lint` | Runs all configured linters |
+| **Lint/Fix All** | `make lint-fix` | Runs all configured linters |
 | **Lint/Fix Shell** | `make lint-fix-shell-scripts` | Uses `shellcheck` |
 | **Lint/Fix Lua** | `make lint-fix-lua` | Uses `selene` and `stylua` |
 | **Lint/Fix Markdown** | `make lint-fix-markdown` | Uses `markdownlint-cli2` |

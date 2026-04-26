@@ -85,8 +85,8 @@ lint-gemini-settings:
 		chezmoi/dot_gemini/settings.json
 
 #: Lint and fix the whole project.
-.PHONY: lint
-lint: lint-yaml lint-fix-shell-scripts lint-fix-markdown \
+.PHONY: lint-fix
+lint-fix: lint-yaml lint-fix-shell-scripts lint-fix-markdown \
 	lint-github-actions lint-pre-commit-hook-config lint-fix-lua \
 	lint-ssh-config lint-gemini-settings
 
@@ -106,7 +106,7 @@ clean:
 
 #: Install, lint, and test.
 .PHONY: all
-all: install lint test
+all: install lint-fix test
 
 #: Show available targets.
 .PHONY: help

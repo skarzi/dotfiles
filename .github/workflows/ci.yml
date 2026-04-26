@@ -71,7 +71,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install --yes shellcheck
           make install
-      - name: "Lint"
+      - name: "Lint and fix"
         run: pre-commit run --all-files
       - name: "Test shell scripts"
         run: make test-bin
