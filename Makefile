@@ -6,83 +6,89 @@ _MAKEFILE_TARGETS := $(shell grep -h '^.PHONY:' $(firstword $(MAKEFILE_LIST)) | 
 EXTRA_ARGS = $(filter-out $(_MAKEFILE_TARGETS),$(MAKECMDGOALS))
 GEMINI_SETTINGS_JSON_SCHEMA_URL := https://raw.githubusercontent.com/google-gemini/gemini-cli/main/schemas/settings.schema.json
 
+.DEFAULT_GOAL := help
+
 .PHONY: install-python
-install-python:
+install-python:  #: Install Python dependencies.
 	@uv sync --locked --dev
 
 .PHONY: install-node
-install-node:
+install-node:  #: Install Node dependencies.
 	@npm install
 
 .PHONY: install-rust
-install-rust:
+install-rust:  #: Install Rust dependencies.
 	@cargo install selene stylua $(EXTRA_ARGS)
 
 .PHONY: install-pre-commit
-install-pre-commit:
+install-pre-commit:  #: Install pre-commit dependency and hook.
 	@uv tool install pre-commit
 	@uv tool run pre-commit install
 
-.PHONY: install
+.PHONY: install  #: Install all dependencies.
 install: install-python install-node install-rust
 
 .PHONY: lint-commit-message
-lint-commit-message:
+lint-commit-message:  #: Lint commit message.
 	@npm run lint:commit-message
 
 .PHONY: lint-pre-commit-hook-config
-lint-pre-commit-hook-config:
+lint-pre-commit-hook-config:  #: Lint pre-commit config.
 	@uv tool run pre-commit validate-config .pre-commit-config.yaml
 
 .PHONY: lint-github-actions
-lint-github-actions:
+lint-github-actions:  #: Lint GitHub Actions files.
 	@actionlint $(EXTRA_ARGS)
 
 .PHONY: lint-yaml
-lint-yaml:
+lint-yaml:  #: Lint YAML files.
 	@uv run yamllint --format github .
 
 .PHONY: lint-fix-shell-scripts
-lint-fix-shell-scripts:
+lint-fix-shell-scripts:  #: Lint and fix shell scripts.
 	@_DEFAULT_FILES="$$(find . -type f -name '*.sh' | grep -Ev '(\.vim/bundle/|spec/)' | paste -sd ' ' -)" \
 	&& shellcheck $(or $(EXTRA_ARGS),$${_DEFAULT_FILES}) \
 	&& shfmt --write --diff $(or $(EXTRA_ARGS),$${_DEFAULT_FILES})
 
 .PHONY: lint-fix-markdown
-lint-fix-markdown:
+lint-fix-markdown:  #: Lint and fix Markdown files.
 	@npm run lint:md -- $(or $(EXTRA_ARGS),"**/*.md")
 
 .PHONY: lint-fix-lua
-lint-fix-lua:
+lint-fix-lua:  #: Lint and fix Lua files.
 	@selene $(or $(EXTRA_ARGS),nvim/)
 	@$(STYLUA_CMD) --check $(or $(EXTRA_ARGS),nvim/) || ($(STYLUA_CMD) $(or $(EXTRA_ARGS),nvim/) && exit 1)
 
 .PHONY: lint-ssh-config
-lint-ssh-config:
+lint-ssh-config:  #: Lint SSH config.
 	@ssh -G -F chezmoi/dot_ssh/config dummy.host > /dev/null
 
 .PHONY: lint-gemini-settings
-lint-gemini-settings:
+lint-gemini-settings:  #: Lint gemini-cli settings.
 	@uv run check-jsonschema \
 		--no-cache \
 		--schemafile $(GEMINI_SETTINGS_JSON_SCHEMA_URL) \
 		chezmoi/dot_gemini/settings.json
 
-.PHONY: lint
+.PHONY: lint  #: Lint the whole project.
 lint: lint-yaml lint-fix-shell-scripts lint-fix-markdown \
 	lint-github-actions lint-pre-commit-hook-config lint-fix-lua \
 	lint-ssh-config lint-gemini-settings
 
 .PHONY: test-bin
-test-bin:
+test-bin:  #: Test project's binaries.
 	@shellspec $(EXTRA_ARGS)
 
-.PHONY: test
+.PHONY: test  #: Run all project's tests.
 test: test-bin
 
 .PHONY: clean
-clean:
+clean:  #: Clean up the project.
 	@rm -rf node_modules/
 
-.PHONY: all
+.PHONY: all  #: Install, lint and test.
 all: install lint test
+
+.PHONY: help
+help: #: Show available targets
+	@grep -E '^[a-zA-Z_-]+:.*?#: .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?#: "}; {printf "\033[36m%-28s\033[0m %s\n", $$1, $$2}'
