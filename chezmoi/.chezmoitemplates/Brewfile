@@ -71,6 +71,7 @@ brew "trufflehog"  # Find and verify credentials.
 brew "vale"
 brew "yq"
 cask "claude-code"
+cask "codex"
 
 # SYSTEM & UTILITIES
 tap "FelixKratz/formulae"
