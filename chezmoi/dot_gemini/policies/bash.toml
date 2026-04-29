@@ -1,0 +1,10 @@
+[[rule]]
+toolName = "run_shell_command"
+commandPrefix = [
+  "ls",
+  "find",
+  "tail",
+  "head"
+]
+decision = "allow"
+priority = 100

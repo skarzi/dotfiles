@@ -15,6 +15,10 @@ repos:
         name: Check for added large files
         stages:
           - pre-commit
+      - id: check-toml
+        name: Lint TOML files
+        stages:
+          - pre-commit
   - repo: local
     hooks:
       - id: lint-commit-message

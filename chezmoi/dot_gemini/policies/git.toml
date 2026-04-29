@@ -1,0 +1,12 @@
+[[rule]]
+toolName = "run_shell_command"
+commandPrefix = [
+  "git status",
+  "git diff",
+  "gh pr diff",
+  "gh pr view",
+  "gh pr status",
+  "gh pr list"
+]
+decision = "allow"
+priority = 100

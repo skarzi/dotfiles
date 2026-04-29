@@ -1,0 +1,10 @@
+[[rule]]
+toolName = [
+  "mcp_MCP_DOCKER_perplexity_ask",
+  "mcp_MCP_DOCKER_perplexity_reason",
+  "mcp_MCP_DOCKER_perplexity_research",
+  "mcp_MCP_DOCKER_resolve-library-id",
+  "mcp_MCP_DOCKER_get-library-docs"
+]
+decision = "allow"
+priority = 100
