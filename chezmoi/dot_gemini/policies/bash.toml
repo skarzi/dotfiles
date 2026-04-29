@@ -1,10 +1,5 @@
 [[rule]]
-toolName = "run_shell_command"
-commandPrefix = [
-  "ls",
-  "find",
-  "tail",
-  "head"
-]
-decision = "allow"
-priority = 100
+commandPrefix = [ "find", "head", "ls", "tail" ]
+decision      = "allow"
+priority      = 100
+toolName      = "run_shell_command"

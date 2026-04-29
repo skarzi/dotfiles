@@ -1,13 +1,12 @@
 [project]
-name = "dotfiles"
-version = "0.1.0"
+name            = "dotfiles"
+version         = "0.1.0"
 requires-python = ">=3.12.12"
-dependencies = [
-    "tmuxp==1.67.0",
-]
+dependencies    = [ "tmuxp==1.67.0" ]
 
 [dependency-groups]
 dev = [
-    "check-jsonschema==0.37.1",
-    "yamllint==1.38.0",
+  "check-jsonschema==0.37.1",
+  "tombi>=0.9.26",
+  "yamllint==1.38.0",
 ]

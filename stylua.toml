@@ -1,10 +1,10 @@
-indent_type = "Spaces"
-indent_width = 4
-column_width = 80
-quote_style = "AutoPreferDouble"
-call_parentheses = "Always"
+call_parentheses           = "Always"
+collapse_simple_statement  = "Never"
+column_width               = 80
+indent_type                = "Spaces"
+indent_width               = 4
+quote_style                = "AutoPreferDouble"
 space_after_function_names = "Never"
-collapse_simple_statement = "Never"
 
 [sort_requires]
 enabled = true

@@ -3,19 +3,19 @@ size = 10.0
 
 [font.normal]
 family = "Hack Nerd Font"
-style = "Regular"
+style  = "Regular"
 
 [[keyboard.bindings]]
 action = "ToggleViMode"
-key = "Escape"
-mode = "~Search"
+key    = "Escape"
+mode   = "~Search"
 # NOTE: Update to "Super" on Linux.
-mods = "Command"
+mods   = "Command"
 
 [scrolling]
 # Maximum number of lines in the scrollback buffer.
 # Specifying '0' will disable scrolling.
-history = 7500
+history    = 7500
 multiplier = 3
 
 [colors.cursor]
@@ -26,25 +26,25 @@ cursor = "#cda804"
 
 # Colors (User Provided - Warmer)
 [colors.primary]
-background = '#232326'
-foreground = '#a7aab0'
+background = "#232326"
+foreground = "#a7aab0"
 
 [colors.normal]
-black   = '#101012'
-red     = '#de5d68'
-green   = '#8fb573'
-yellow  = '#dbb671'
-blue    = '#57a5e5'
-magenta = '#bb70d2'
-cyan    = '#51a8b3'
-white   = '#a7aab0'
+black   = "#101012"
+blue    = "#57a5e5"
+cyan    = "#51a8b3"
+green   = "#8fb573"
+magenta = "#bb70d2"
+red     = "#de5d68"
+white   = "#a7aab0"
+yellow  = "#dbb671"
 
 [colors.bright]
-black   = '#5a5b5e'
-red     = '#de5d68'
-green   = '#8fb573'
-yellow  = '#dbb671'
-blue    = '#57a5e5'
-magenta = '#bb70d2'
-cyan    = '#51a8b3'
-white   = '#a7aab0'
+black   = "#5a5b5e"
+blue    = "#57a5e5"
+cyan    = "#51a8b3"
+green   = "#8fb573"
+magenta = "#bb70d2"
+red     = "#de5d68"
+white   = "#a7aab0"
+yellow  = "#dbb671"

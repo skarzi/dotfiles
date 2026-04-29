@@ -1,12 +1,12 @@
 [settings]
-idiomatic_version_file_enable_tools = ["go", "node", "python"]
+idiomatic_version_file_enable_tools = [ "go", "node", "python" ]
 # Automatically create and activate Python venvs using 'uv' in all `uv`
 # projects.
-python.uv_venv_auto = "create|source"
+python.uv_venv_auto                 = "create|source"
 
 [tools]
-go = "1.25.5"
-node = "lts"
+go     = "1.25.5"
+node   = "lts"
 python = "3.13.11"
-rust = "stable"
-uv = "latest"
+rust   = "stable"
+uv     = "latest"

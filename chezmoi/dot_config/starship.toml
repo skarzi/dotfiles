@@ -1,9 +1,9 @@
-"$schema" = 'https://starship.rs/config-schema.json'
+"$schema" = "https://starship.rs/config-schema.json"
 
-add_newline = false
-scan_timeout = 50
+add_newline     = false
 command_timeout = 2000
+scan_timeout    = 50
 
 [character]
-success_symbol = '[❯](bold dimmed green)'
-error_symbol = '[✗](bold red)'
+error_symbol   = "[✗](bold red)"
+success_symbol = "[❯](bold dimmed green)"

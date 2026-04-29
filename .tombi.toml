@@ -1,0 +1,24 @@
+toml-version = "v1.0.0"
+
+[files]
+exclude = [ "uv.lock" ]
+
+[format]
+[format.rules]
+array-bracket-space-width         = 1
+indent-style                      = "space"
+indent-width                      = 2
+inline-table-brace-space-width    = 1
+key-value-equals-sign-alignment   = true
+key-value-equals-sign-space-width = 1
+line-ending                       = "lf"
+line-width                        = 80
+string-quote-style                = "double"
+trailing-comment-alignment        = false
+trailing-comment-space-width      = 2
+
+[lint]
+[lint.rules]
+dotted-keys-out-of-order = "error"
+key-empty                = "warn"
+tables-out-of-order      = "error"

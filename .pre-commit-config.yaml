@@ -15,10 +15,6 @@ repos:
         name: Check for added large files
         stages:
           - pre-commit
-      - id: check-toml
-        name: Lint TOML files
-        stages:
-          - pre-commit
   - repo: local
     hooks:
       - id: lint-commit-message
@@ -96,8 +92,17 @@ repos:
       - id: lint-gemini-settings
         name: Lint Gemini settings
         language: system
-        files: '^chezmoi/dot_gemini/settings.json$'
+        files: '^chezmoi/dot_gemini/settings\.json$'
         pass_filenames: false
         entry: make lint-gemini-settings
+        stages:
+          - pre-commit
+      - id: lint-fix-toml
+        name: Lint and fix TOML files
+        language: system
+        types:
+          - toml
+        pass_filenames: true
+        entry: make lint-fix-toml --
         stages:
           - pre-commit

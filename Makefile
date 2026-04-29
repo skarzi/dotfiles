@@ -84,11 +84,20 @@ lint-gemini-settings:
 		--schemafile $(GEMINI_SETTINGS_JSON_SCHEMA_URL) \
 		chezmoi/dot_gemini/settings.json
 
+#: Lint and fix TOML files.
+.PHONY: lint-fix-toml
+lint-fix-toml:
+	@uv run tombi format --check $(or $(EXTRA_ARGS),) >/dev/null 2>&1; FORMAT_STATUS=$$? \
+	&& uv run tombi format $(or $(EXTRA_ARGS),) \
+	&& uv run tombi lint $(or $(EXTRA_ARGS),); LINT_STATUS=$$?; \
+	if [ "$$FORMAT_STATUS" -ne 0 ]; then exit $$FORMAT_STATUS; \
+  else exit $$LINT_STATUS; fi
+
 #: Lint and fix the whole project.
 .PHONY: lint-fix
 lint-fix: lint-yaml lint-fix-shell-scripts lint-fix-markdown \
 	lint-github-actions lint-pre-commit-hook-config lint-fix-lua \
-	lint-ssh-config lint-gemini-settings
+	lint-ssh-config lint-gemini-settings lint-fix-toml
 
 #: Test the project's binaries.
 .PHONY: test-bin
