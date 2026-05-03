@@ -80,6 +80,11 @@ alias dc_run='docker compose run --rm'
 alias tm='tmux'
 alias tat='tmux attach -t'
 
+{{- if eq .chezmoi.os "darwin" }}
+# Brew
+alias bbg="brew bundle --global"
+{{- end }}
+
 {{- if eq .chezmoi.os "linux" }}
 # Display Configuration
 alias xrandr_home="xmodmap \${HOME}/.Xmodmap \
