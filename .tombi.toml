@@ -1,7 +1,8 @@
 toml-version = "v1.0.0"
 
 [files]
-exclude = [ "uv.lock" ]
+exclude              = [ "uv.lock" ]
+respect-ignore-files = true
 
 [format]
 [format.rules]
