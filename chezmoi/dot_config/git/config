@@ -82,6 +82,10 @@
     switchp = "!f() { \
       git switch ${1:-main} && git pull; \
     }; f"
+    sswitchp = "!f() { \
+      git stash && git switchp ${1} && git stash pop; \
+    }; f"
+
 
 [includeIf "gitdir:**/work/**"]
     path = "~/.config/git/work.gitconfig"
