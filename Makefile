@@ -8,6 +8,18 @@ GEMINI_SETTINGS_JSON_SCHEMA_URL := https://raw.githubusercontent.com/google-gemi
 
 .DEFAULT_GOAL := help
 
+#: Install all mise dependencies.
+.PHONY: install-mise
+install-mise:
+	@mise trust
+	@mise install
+
+#: Install pre-commit dependency and hook.
+.PHONY: install-pre-commit
+install-pre-commit:
+	@uv tool install pre-commit
+	@uv tool run pre-commit install
+
 #: Install Python dependencies.
 .PHONY: install-python
 install-python:
@@ -23,15 +35,14 @@ install-node:
 install-rust:
 	@cargo install selene stylua $(EXTRA_ARGS)
 
-#: Install pre-commit dependency and hook.
-.PHONY: install-pre-commit
-install-pre-commit:
-	@uv tool install pre-commit
-	@uv tool run pre-commit install
-
 #: Install all dependencies.
 .PHONY: install
-install: install-python install-node install-rust
+install: \
+	install-mise \
+	install-pre-commit \
+	install-python \
+	install-node \
+	install-rust
 
 #: Lint the commit message.
 .PHONY: lint-commit-message
@@ -102,7 +113,7 @@ lint-fix: lint-yaml lint-fix-shell-scripts lint-fix-markdown \
 #: Test the project's binaries.
 .PHONY: test-bin
 test-bin:
-	@shellspec $(EXTRA_ARGS)
+	@SHELL="/usr/bin/env bash" shellspec $(EXTRA_ARGS)
 
 #: Run all project tests.
 .PHONY: test

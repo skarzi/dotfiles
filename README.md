@@ -22,17 +22,9 @@ chezmoi init --apply --verbose --source ~/dotfiles/chezmoi
 
 ## Local Development
 
-Local development requires the following tools:
+Local development requires [mise](https://mise.jdx.dev/).
 
-+ [mise](https://mise.jdx.dev/) - Polyglot tool version manager
-+ [checkmake](https://github.com/checkmake/checkmake) - Makefile linter
-+ [shellcheck](https://github.com/koalaman/shellcheck) - Shell script linter
-+ [actionlint](https://github.com/rhysd/actionlint) - GitHub Actions linter
-+ [shellspec](https://github.com/shellspec/shellspec) - Shell script testing framework
-+ [pre-commit](https://github.com/pre-commit/pre-commit) - Pre-commit hooks manager
-
-After installing the required tools, install all necessary dependencies
-with the following command:
+Install all tools and dependencies:
 
 ```bash
 make install

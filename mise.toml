@@ -1,3 +1,11 @@
 [tools]
-go   = "1.25.5"
-rust = "stable"
+go         = "1.25.5"
+rust       = "stable"
+uv         = "latest"
+node       = "22.21.1"
+# Linters and formatters.
+actionlint = "latest"
+checkmake  = "latest"
+shellcheck = "latest"
+shellspec  = "latest"
+shfmt      = "latest"
