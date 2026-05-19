@@ -125,6 +125,7 @@ fi
 add_to_path "${HOME}/.local/bin"
 
 # Android Development
+{{- if eq .env "personal" }}
 export ANDROID_HOME="${HOME}/Android/Sdk"
 export JAVA_HOME="${HOMEBREW_PREFIX}/opt/openjdk"
 if [[ -d "${ANDROID_HOME}" ]]; then
@@ -133,6 +134,7 @@ if [[ -d "${ANDROID_HOME}" ]]; then
   add_to_path "${ANDROID_HOME}/platform-tools"
 fi
 add_to_path "${HOMEBREW_PREFIX}/gradle/gradle-4.10.2/bin"
+{{- end }}
 
 # fzf
 if command -v fzf >/dev/null 2>&1; then

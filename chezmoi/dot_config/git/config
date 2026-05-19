@@ -85,6 +85,9 @@
     sswitchp = "!f() { \
       git stash && git switchp ${1} && git stash pop; \
     }; f"
+    sswitch = "!f() { \
+      git stash && git switch ${1} && git stash pop; \
+    }; f"
 
 
 [includeIf "gitdir:**/work/**"]
