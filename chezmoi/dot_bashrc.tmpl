@@ -124,8 +124,8 @@ fi
 # uv
 add_to_path "${HOME}/.local/bin"
 
-# Android Development
 {{- if eq .env "personal" }}
+# Android Development
 export ANDROID_HOME="${HOME}/Android/Sdk"
 export JAVA_HOME="${HOMEBREW_PREFIX}/opt/openjdk"
 if [[ -d "${ANDROID_HOME}" ]]; then
