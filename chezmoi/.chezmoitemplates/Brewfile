@@ -57,11 +57,13 @@ brew "pkgconf"
 brew "protobuf"
 
 ## Development Tools
+tap "1jehuang/jcode"
 brew "bat"  # Clone of cat(1) with syntax highlighting and Git integration.
 brew "ctags"  # Reimplementation of ctags(1).
 brew "fd"
 brew "fzf"
 brew "gemini-cli"
+brew "jcode"
 brew "jq"
 brew "mkcert"
 brew "ripgrep"  # Search tool like grep and The Silver Searcher.
