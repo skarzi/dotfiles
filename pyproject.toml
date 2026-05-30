@@ -2,7 +2,7 @@
 name            = "dotfiles"
 version         = "0.1.0"
 requires-python = ">=3.12.12"
-dependencies    = [ "tmuxp==1.68.0" ]
+dependencies    = [ "tmuxp==1.70.0" ]
 
 [dependency-groups]
 dev = [
