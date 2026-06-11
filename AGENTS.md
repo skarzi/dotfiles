@@ -41,6 +41,8 @@ workflows for AI agents working on this `dotfiles` repository.
 - `.github/`: CI workflows and Dependabot config.
 - `git/`: Global git configuration and ignores.
 - `.agents/`: Configuration and guides for AI agents.
+- `chezmoi/dot_agents/skills/`: Canonical agent skills (agentskills.io spec).
+  Installed to `~/.agents/skills/` via chezmoi; symlinked into Claude Code.
 
 ## 4. Operational Workflows
 
@@ -96,6 +98,7 @@ Refer to `nvim/vim-to-neovim-migration-plan.md` for specific architectural decis
   Includes guidelines for encryption and secret management.
 - **Lua:** Follow [`.agents/lua-styleguide.md`](.agents/lua-styleguide.md).
   Strictly `selene` and `stylua` compliant.
+- **Skills:** Follow [`.agents/skills-styleguide.md`](.agents/skills-styleguide.md).
 
 ## 6. Specific Constraints
 

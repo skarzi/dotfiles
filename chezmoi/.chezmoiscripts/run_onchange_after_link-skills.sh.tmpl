@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+# shellcheck shell=bash
+#
+# Link agentskills.io-spec skills from `${HOME}/.agents/skills/` into
+# `${HOME}/.claude/skills/` so Claude Code can discover them, then prune
+# dangling symlinks left behind by skills removed from the canonical source.
+
+set -euo pipefail
+shopt -s nullglob
+
+# Skills hash:
+# {{ $sourceDir := .chezmoi.sourceDir }}{{ range (glob (joinPath $sourceDir "dot_agents/skills/*/SKILL.md")) }}{{ trimPrefix (printf "%s/" $sourceDir) . }} {{ include . | sha256sum }}
+# {{ end }}
+
+# Symlink every skill directory under `${HOME}/.agents/skills/` into
+# `${HOME}/.claude/skills/`.
+# Globals:
+#   HOME
+# Arguments:
+#   None
+# Returns:
+#   `0` on success.
+link_skills() {
+  local skill_dir
+  local skill_name
+
+  for skill_dir in "${HOME}/.agents/skills/"*/; do
+    skill_name="${skill_dir%/}"
+    skill_name="${skill_name##*/}"
+    ln -snf "${skill_dir%/}" "${HOME}/.claude/skills/${skill_name}"
+  done
+  return 0
+}
+
+# Remove dangling symlinks from `${HOME}/.claude/skills/`.
+# Globals:
+#   HOME
+# Arguments:
+#   None
+# Returns:
+#   `0` on success.
+cleanup_dangling_symlinks() {
+  local link
+
+  for link in "${HOME}/.claude/skills/"*; do
+    if [[ -L "${link}" && ! -e "${link}" ]]; then
+      rm "${link}"
+    fi
+  done
+  return 0
+}
+
+main() {
+  link_skills
+  cleanup_dangling_symlinks
+  return 0
+}
+
+main "${@}"

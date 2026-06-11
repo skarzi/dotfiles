@@ -95,6 +95,9 @@ lint-gemini-settings:
 		--schemafile $(GEMINI_SETTINGS_JSON_SCHEMA_URL) \
 		chezmoi/dot_gemini/settings.json
 
+# TODO(skarzi): introduce skills validation (e.g. skills-ref or equivalent)
+# and wire a `lint-skills` target into the `lint-fix` aggregate below.
+
 #: Lint and fix TOML files.
 .PHONY: lint-fix-toml
 lint-fix-toml:

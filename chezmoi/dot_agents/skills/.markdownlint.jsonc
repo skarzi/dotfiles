@@ -1,0 +1,5 @@
+{
+  // The agentskills.io spec does not require a top-level heading, and forcing
+  // one would bloat every skill with ceremonial content.
+  "MD041": false
+}
