@@ -57,7 +57,7 @@ brew "pkgconf"
 brew "protobuf"
 
 ## Development Tools
-tap "1jehuang/jcode"
+tap "1jehuang/jcode", trusted: true
 brew "bat"  # Clone of cat(1) with syntax highlighting and Git integration.
 brew "ctags"  # Reimplementation of ctags(1).
 brew "fd"
@@ -76,9 +76,10 @@ cask "claude-code"
 cask "codex"
 
 # SYSTEM & UTILITIES
-tap "FelixKratz/formulae"
-tap "asmvik/formulae"
-tap "dsully/tap"
+tap "FelixKratz/formulae", trusted: true
+tap "asmvik/formulae", trusted: true
+tap "dsully/tap", trusted: true
+tap "smudge/smudge", trusted: true
 brew "asmvik/formulae/yabai"
 brew "cairo"
 brew "chezmoi"
@@ -97,7 +98,7 @@ brew "poppler"
 brew "qemu"
 brew "rage"
 brew "rsync"
-brew "smudge/smudge/nightlight"
+brew "smudge/smudge/nightlight", trusted: true
 brew "watch"
 brew "wget"
 brew "xdot"
@@ -128,7 +129,8 @@ cask "mactex-no-gui"
 cask "google-chrome"
 
 # SECURITY & PRIVACY
-brew "protonpass/tap/pass-cli"
+tap "protonpass/tap", trusted: true
+brew "protonpass/tap/pass-cli", trusted: true
 {{- if eq .env "personal" }}
 cask "nordvpn"
 {{- end }}
