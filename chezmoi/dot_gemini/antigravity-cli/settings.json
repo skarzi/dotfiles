@@ -24,5 +24,9 @@
     ]
   },
   "showFeedbackSurvey": false,
+  "statusLine": {
+    "type": "command",
+    "command": "~/.gemini/antigravity-cli/statusline.sh"
+  },
   "toolPermission": "proceed-in-sandbox"
 }
