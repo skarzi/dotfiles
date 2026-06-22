@@ -10,7 +10,7 @@ windows:
     panes:
       - focus: true
       - shell_command:
-          - cmd: gemini
+          - cmd: agy
             enter: false
   - window_name: tools
     layout: even-horizontal

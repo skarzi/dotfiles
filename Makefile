@@ -4,7 +4,6 @@ STYLUA_CMD := stylua --respect-ignores --verify
 # Dynamically extract Makefile stages from .PHONY declarations.
 _MAKEFILE_TARGETS := $(shell grep -h '^.PHONY:' $(firstword $(MAKEFILE_LIST)) | sed 's/^.PHONY: //' | tr ' ' '\n' | sort -u)
 EXTRA_ARGS = $(filter-out $(_MAKEFILE_TARGETS),$(MAKECMDGOALS))
-GEMINI_SETTINGS_JSON_SCHEMA_URL := https://raw.githubusercontent.com/google-gemini/gemini-cli/main/schemas/settings.schema.json
 
 .DEFAULT_GOAL := help
 
@@ -87,13 +86,6 @@ lint-fix-lua:
 lint-ssh-config:
 	@ssh -G -F chezmoi/dot_ssh/config dummy.host > /dev/null
 
-#: Lint Gemini CLI settings.
-.PHONY: lint-gemini-settings
-lint-gemini-settings:
-	@uv run check-jsonschema \
-		--no-cache \
-		--schemafile $(GEMINI_SETTINGS_JSON_SCHEMA_URL) \
-		chezmoi/dot_gemini/settings.json
 
 # TODO(skarzi): introduce skills validation (e.g. skills-ref or equivalent)
 # and wire a `lint-skills` target into the `lint-fix` aggregate below.
@@ -111,7 +103,7 @@ lint-fix-toml:
 .PHONY: lint-fix
 lint-fix: lint-yaml lint-fix-shell-scripts lint-fix-markdown \
 	lint-github-actions lint-pre-commit-hook-config lint-fix-lua \
-	lint-ssh-config lint-gemini-settings lint-fix-toml
+	lint-ssh-config lint-fix-toml
 
 #: Test the project's binaries.
 .PHONY: test-bin

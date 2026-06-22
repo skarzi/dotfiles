@@ -1,7 +1,7 @@
 # Agent Skills Style Guide
 
 Standards for custom AI agent skills authored in
-`chezmoi/dot_agents/skills/` and consumed by Claude Code, Codex CLI, Gemini
+`chezmoi/dot_agents/skills/` and consumed by Claude Code, Codex CLI, Antigravity
 CLI, and Cursor.
 
 ## 1. Discovery Matrix
@@ -13,16 +13,16 @@ Canonical source lives in `chezmoi/dot_agents/skills/`. Chezmoi installs it to
 | :--- | :--- | :--- | :--- |
 | Claude Code | User | `${HOME}/.claude/skills/` | Symlinked |
 | Codex CLI | USER | `${HOME}/.agents/skills/` | Native |
-| Gemini CLI | User tier | `${HOME}/.agents/skills/` | Native alias |
+| Antigravity CLI | User tier | `${HOME}/.agents/skills/` | Native alias |
 | Cursor | User | `${HOME}/.agents/skills/` | Direct read (verify post-apply) |
 
 - Claude Code reads its native path. This repo symlinks each skill from
   `${HOME}/.agents/skills/`.
-- Codex CLI USER, Gemini CLI, and Cursor read the chezmoi-installed path
+- Codex CLI USER, Antigravity CLI, and Cursor read the chezmoi-installed path
   directly.
 
-Gemini documents the user-tier `${HOME}/.agents/skills/` alias in
-[Discovery tiers](https://geminicli.com/docs/cli/skills/#discovery-tiers).
+Antigravity documents the user-tier `${HOME}/.agents/skills/` alias in
+[Discovery tiers](https://antigravity.google/docs/skills/#discovery-tiers).
 
 ## 2. agentskills.io Spec
 

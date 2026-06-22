@@ -1,0 +1,28 @@
+{
+  "artifactReviewPolicy": "agent-decides",
+  "enableTerminalSandbox": true,
+  "notifications": true,
+  "permissions": {
+    "allow": [
+      "write_file(*/.agents/plans/*)",
+      "command(find)",
+      "command(head)",
+      "command(ls)",
+      "command(tail)",
+      "command(grep)",
+      "command(gh pr diff)",
+      "command(gh pr list)",
+      "command(gh pr status)",
+      "command(gh pr view)",
+      "command(git diff)",
+      "command(git status)",
+      "mcp(MCP_DOCKER/get-library-docs)",
+      "mcp(MCP_DOCKER/perplexity_ask)",
+      "mcp(MCP_DOCKER/perplexity_reason)",
+      "mcp(MCP_DOCKER/perplexity_research)",
+      "mcp(MCP_DOCKER/resolve-library-id)"
+    ]
+  },
+  "showFeedbackSurvey": false,
+  "toolPermission": "proceed-in-sandbox"
+}

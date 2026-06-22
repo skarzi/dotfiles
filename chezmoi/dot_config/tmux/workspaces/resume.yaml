@@ -13,7 +13,7 @@ windows:
           - cmd: nvim resume.tex
             enter: false
       - shell_command:
-          - cmd: gemini
+          - cmd: agy
             enter: false
   - window_name: ci
     layout: even-horizontal

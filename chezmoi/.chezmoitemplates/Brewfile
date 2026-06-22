@@ -62,7 +62,6 @@ brew "bat"  # Clone of cat(1) with syntax highlighting and Git integration.
 brew "ctags"  # Reimplementation of ctags(1).
 brew "fd"
 brew "fzf"
-brew "gemini-cli"
 brew "jcode"
 brew "jq"
 brew "mkcert"
@@ -72,6 +71,7 @@ brew "tree-sitter-cli"
 brew "trufflehog"  # Find and verify credentials.
 brew "vale"
 brew "yq"
+cask "antigravity-cli"
 cask "claude-code"
 cask "codex"
 

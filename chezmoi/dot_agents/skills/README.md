@@ -13,12 +13,10 @@ Canonical agentskills.io source for custom agent skills. Chezmoi installs it to
 
 ## Consumed By
 
-| Tool        | Path                | Notes               |
-| ----------- | ------------------- | ------------------- |
-| Claude Code | `~/.claude/skills/` | Symlinked from here |
-| Codex CLI   | `~/.agents/skills/` | USER scope, native  |
-| Gemini CLI  | `~/.agents/skills/` | User-tier alias     |
-| Cursor      | `~/.agents/skills/` | Direct read         |
+| Claude Code      | `~/.claude/skills/` | Symlinked from here |
+| Codex CLI        | `~/.agents/skills/` | USER scope, native  |
+| Antigravity CLI  | `~/.agents/skills/` | User-tier alias     |
+| Cursor           | `~/.agents/skills/` | Direct read         |
 
 `SKILL.md` requires YAML frontmatter:
 
