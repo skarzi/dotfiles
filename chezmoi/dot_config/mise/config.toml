@@ -10,3 +10,7 @@ node   = "lts"
 python = "3.13.11"
 rust   = "stable"
 uv     = "latest"
+
+# Global NPM packages.
+# TODO(skarzi): Consider using `bun` for 3-5 tines speedup.
+"npm:context-mode" = "latest"

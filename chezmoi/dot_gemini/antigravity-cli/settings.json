@@ -1,6 +1,5 @@
 {
   "artifactReviewPolicy": "agent-decides",
-  "enableTerminalSandbox": true,
   "notifications": true,
   "permissions": {
     "allow": [
@@ -20,7 +19,8 @@
       "mcp(MCP_DOCKER/perplexity_ask)",
       "mcp(MCP_DOCKER/perplexity_reason)",
       "mcp(MCP_DOCKER/perplexity_research)",
-      "mcp(MCP_DOCKER/resolve-library-id)"
+      "mcp(MCP_DOCKER/resolve-library-id)",
+      "mcp(context-mode/*)"
     ]
   },
   "showFeedbackSurvey": false,
@@ -28,5 +28,5 @@
     "type": "command",
     "command": "~/.gemini/antigravity-cli/statusline.sh"
   },
-  "toolPermission": "proceed-in-sandbox"
+  "toolPermission": "request-review"
 }
