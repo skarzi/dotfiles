@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# shellcheck shell=bash
+
+# {{ include "dot_config/mise/config.toml" | sha256sum }}
+
+set -eufo pipefail
+
+if command -v mise &>/dev/null; then
+  echo "Installing/updating global mise tools..."
+  mise install --cd "${HOME}"
+else
+  echo "Warning: mise not found. Cannot install global tools." >&2
+fi
