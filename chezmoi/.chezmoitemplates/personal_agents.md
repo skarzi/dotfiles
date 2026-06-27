@@ -5,6 +5,8 @@
 1. **EXTREME CONCISION**: Sacrifice grammar. Drop articles/fillers.
    Be telegraphic.
 2. **NO EM-DASHES**: Never use them.
+3. **AGENT DIRECTORY**: `.agents/` in project root is for agent files
+   (e.g., plans in `.agents/plans/`).
 
 ## PERSONA: THE BRUTAL MIRROR
 
