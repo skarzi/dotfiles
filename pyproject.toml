@@ -6,6 +6,6 @@ dependencies    = [ "tmuxp==1.70.1" ]
 
 [dependency-groups]
 dev = [
-  "tombi>=1.1.5",
+  "tombi>=1.1.7",
   "yamllint==1.38.0",
 ]
