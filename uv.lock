@@ -17,7 +17,7 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tmuxp", specifier = "==1.70.1" }]
+requires-dist = [{ name = "tmuxp", specifier = "==1.74.0" }]
 
 [package.metadata.requires-dev]
 dev = [
@@ -27,11 +27,11 @@ dev = [
 
 [[package]]
 name = "libtmux"
-version = "0.58.1"
+version = "0.61.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/c7/58/346776e0491ede33e1554a4bff9b545dbe9f3164e45abac483195938a1cf/libtmux-0.58.1.tar.gz", hash = "sha256:a294dd585aa419d4ecce36f3e55df656693743c97a0b5b5bb1e5fea31ada2482", size = 519541, upload-time = "2026-06-17T00:03:31.81Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/72/c2/6abbac4420c35b3f1140c72607117236b160173f74fd86941f99b28375d5/libtmux-0.61.0.tar.gz", hash = "sha256:2d6081081a629b9236a36a64f874667533811d2ce5a1b0caa9c821f4d9d2e618", size = 546122, upload-time = "2026-07-04T12:57:36.401Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/22/4d/e44ada32edfe947c40d4dfc596a6f5355400a16d08be06016bd754375e41/libtmux-0.58.1-py3-none-any.whl", hash = "sha256:ab0f47d03a59d674962bc23e36e188fcfa4a82b0f270d474afab519e3076839b", size = 113653, upload-time = "2026-06-17T00:03:30.48Z" },
+    { url = "https://files.pythonhosted.org/packages/73/14/934d0d9076d1d46fcc71f3397daea7921363781674337084b15d1bbcbf84/libtmux-0.61.0-py3-none-any.whl", hash = "sha256:b9315db6600757f840a8f16438725103e579aaa4be3c32728c105f2c284330df", size = 118059, upload-time = "2026-07-04T12:57:34.598Z" },
 ]
 
 [[package]]
@@ -91,15 +91,15 @@ wheels = [
 
 [[package]]
 name = "tmuxp"
-version = "1.70.1"
+version = "1.74.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "libtmux" },
     { name = "pyyaml" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/78/02/5e5c1e67652742aed7e7a586ab1ff23566ad697e1e605ad326180a6183af/tmuxp-1.70.1.tar.gz", hash = "sha256:ed29a9d286bfc81b8ec338a804414a54959f8cbccc0f83ebcc1f323fa55e7a95", size = 1053432, upload-time = "2026-06-17T00:37:40.882Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/78/96/6493430a31ecb2c6e36292b758be70655e01802575008d0de77d728f271e/tmuxp-1.74.0.tar.gz", hash = "sha256:9e0480ea012999602635887e0461d395c2d8aa6e36a85b5a6d1d65dcd6c7809c", size = 1112085, upload-time = "2026-07-04T13:51:20.45Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/00/84/2dab5aafa65b1b8149d3704a90cc74d09b61a2c75c50208c75a27e201397/tmuxp-1.70.1-py3-none-any.whl", hash = "sha256:45a251a5fb9e56bd2f2f8573d0c33dcbba6a6d94f49d68b036e9c4545d4f6679", size = 98803, upload-time = "2026-06-17T00:37:39.418Z" },
+    { url = "https://files.pythonhosted.org/packages/1a/b7/61069c7aee3f60755059d79637ec6c69e8ab093dfff7c8cbbde9f950e1ce/tmuxp-1.74.0-py3-none-any.whl", hash = "sha256:ec23e1809a5bea0c10f533b8ed680432274ccf87d6098117eff23f4c1b5d3878", size = 108950, upload-time = "2026-07-04T13:51:18.689Z" },
 ]
 
 [[package]]
