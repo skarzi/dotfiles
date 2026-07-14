@@ -114,6 +114,11 @@ test-bin:
 .PHONY: test
 test: test-bin
 
+#: Run GitHub Actions Workflow(s) locally using `act`.
+.PHONY: act
+act:
+	@act $(or $(EXTRA_ARGS), push)
+
 #: Clean up the project.
 .PHONY: clean
 clean:
