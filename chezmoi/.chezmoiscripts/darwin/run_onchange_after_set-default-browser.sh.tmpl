@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# shellcheck shell=bash
+
+set -eufo pipefail
+
+{{- if eq .env "work" }}
+# Set the default macOS handler for a URL scheme to the given app.
+# Globals:
+#   None.
+# Arguments:
+#   ${1}: URL scheme to register (e.g. "https").
+#   ${2}: Bundle identifier of the target application.
+# Returns:
+#   Exit status of the underlying `osascript` invocation.
+set_default_browser_scheme() {
+  local scheme="${1}"
+  local bundle_id="${2}"
+
+  osascript -l JavaScript <<EOF
+ObjC.import('AppKit');
+
+const ws = $.NSWorkspace.sharedWorkspace;
+const appURL = ws.URLForApplicationWithBundleIdentifier("${bundle_id}");
+
+if (!appURL) {
+  throw new Error("No app URL for bundle id: ${bundle_id}");
+}
+
+ws.setDefaultApplicationAtURLToOpenURLsWithSchemeCompletionHandler(
+  appURL,
+  "${scheme}",
+  null
+);
+EOF
+}
+
+_FINICKY_BUNDLE_ID="$(osascript -e 'id of app "Finicky"')"
+
+set_default_browser_scheme "http" "${_FINICKY_BUNDLE_ID}"
+set_default_browser_scheme "https" "${_FINICKY_BUNDLE_ID}"
+{{- end }}

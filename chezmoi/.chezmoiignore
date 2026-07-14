@@ -1,5 +1,6 @@
 {{- if ne .env "work" }}
 .config/tmux/workspaces/rippling/
+.config/finicky.ts
 {{- end }}
 {{- if eq .env "work" }}
 .chezmoiscripts/configure-mcp-servers.sh
