@@ -28,6 +28,7 @@ brew "actionlint"
 ## Shell
 brew "bash"
 brew "bash-completion@2"
+brew "pam-reattach"
 brew "shellcheck"
 brew "shellspec"
 brew "shfmt"
