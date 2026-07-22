@@ -3,7 +3,6 @@
   "notifications": true,
   "permissions": {
     "allow": [
-      "write_file(*/.agents/plans/*)",
       "command(find)",
       "command(head)",
       "command(ls)",
