@@ -2,10 +2,13 @@
   "mcpServers": {
     "MCP_DOCKER": {
       "command": "docker",
+      "type": "stdio",
       "args": [
         "mcp",
         "gateway",
-        "run"
+        "run",
+        "--profile",
+        "default"
       ]
     }
   }
