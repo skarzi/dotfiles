@@ -1,3 +1,12 @@
+#!/usr/bin/env bash
+# shellcheck shell=bash
+
+set -euo pipefail
+
+EXISTING_CONFIG="$(cat)"
+
+BASE_CONFIG=$(
+  cat <<EOF
 {
   "artifactReviewPolicy": "agent-decides",
   "notifications": true,
@@ -25,7 +34,18 @@
   "showFeedbackSurvey": false,
   "statusLine": {
     "type": "command",
-    "command": "~/.gemini/antigravity-cli/statusline.sh"
+    "command": "{{ .chezmoi.homeDir }}/.gemini/antigravity-cli/statusline.sh"
   },
   "toolPermission": "request-review"
 }
+EOF
+)
+
+if [[ -z "${EXISTING_CONFIG}" ]]; then
+  echo "${BASE_CONFIG}"
+else
+  jq -n \
+    --argjson existing "${EXISTING_CONFIG}" \
+    --argjson base "${BASE_CONFIG}" \
+    '($existing * $base) | .permissions.allow = (($existing.permissions.allow // []) + ($base.permissions.allow // []) | unique)'
+fi
