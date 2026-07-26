@@ -23,6 +23,10 @@ use_memories = true
 [tui]
 vim_mode_default = true
 
+[mcp_servers.MCP_DOCKER]
+command = "docker"
+args = ["mcp", "gateway", "run", "--profile", "default"]
+
 [projects."{{ .chezmoi.homeDir }}/dotfiles"]
 trust_level = "trusted"
 EOF
