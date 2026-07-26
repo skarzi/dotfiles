@@ -6,9 +6,9 @@ set -eufo pipefail
 # Install plugins using `agy` CLI from GitHub URLs.
 if command -v agy &>/dev/null; then
   echo "Installing plugins via agy CLI..."
-  agy plugin install https://github.com/mksglu/context-mode.git
   agy plugin install \
     https://github.com/mksglu/context-mode/tree/main/configs/antigravity-cli
+  agy plugin install https://github.com/wakatime/antigravity-cli-wakatime
 else
   echo "Warning: agy CLI not found. Skipping plugin installations." >&2
 fi
