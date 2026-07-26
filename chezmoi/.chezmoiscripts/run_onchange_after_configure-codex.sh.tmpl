@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# shellcheck shell=bash
+
+set -eufo pipefail
+
+# Configure plugin marketplaces and install plugins using `codex` CLI.
+if command -v codex &>/dev/null; then
+  echo "Configuring plugin marketplaces and installing plugins via codex CLI..."
+  codex plugin marketplace add https://github.com/mksglu/context-mode
+  codex plugin add context-mode@context-mode
+
+  codex plugin marketplace add https://github.com/wakatime/codex-cli-wakatime
+  codex plugin add codex-cli-wakatime@wakatime
+else
+  echo "Warning: codex CLI not found. Skipping plugin installations." >&2
+fi
