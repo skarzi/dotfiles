@@ -1,0 +1,11 @@
+[settings]
+debug=false
+hidefilenames = false
+ignore =
+    COMMIT_EDITMSG$
+    PULLREQ_EDITMSG$
+    MERGE_MSG$
+    TAG_EDITMSG$
+{{- $_wakatime_pass_uri := printf "%s/wakatime-api-key" .pass_uri_prefix -}}
+{{- $_wakatime_extra_fields := (protonPassJSON $_wakatime_pass_uri).item.content.extra_fields }}
+api_key={{ $_wakatime_extra_fields | jq "map(select(.name == \"API Key\")) | .[0].content.Hidden" | first }}
