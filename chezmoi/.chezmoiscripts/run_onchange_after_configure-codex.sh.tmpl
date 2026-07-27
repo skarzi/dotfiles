@@ -11,6 +11,9 @@ if command -v codex &>/dev/null; then
 
   codex plugin marketplace add https://github.com/wakatime/codex-cli-wakatime
   codex plugin add codex-cli-wakatime@wakatime
+
+  codex plugin marketplace add DietrichGebert/ponytail
+  codex plugin add ponytail@ponytail
 else
   echo "Warning: codex CLI not found. Skipping plugin installations." >&2
 fi
