@@ -10,9 +10,6 @@ brew "awscli"
 brew "docker"
 brew "kubectx"
 brew "kubernetes-cli"
-brew "skaffold"
-brew "terragrunt"
-brew "tflint"
 cask "docker-desktop"
 cask "orbstack"
 
@@ -23,15 +20,11 @@ brew "git-delta"  # Syntax-highlighting pager for git and diff output.
 ## GitHub
 brew "gh"
 brew "act"
-brew "actionlint"
 
 ## Shell
 brew "bash"
 brew "bash-completion@2"
 brew "pam-reattach"
-brew "shellcheck"
-brew "shellspec"
-brew "shfmt"
 brew "starship"
 brew "tmux"
 cask "alacritty"
@@ -70,7 +63,6 @@ brew "ripgrep"  # Search tool like grep and The Silver Searcher.
 brew "tree-sitter"
 brew "tree-sitter-cli"
 brew "trufflehog"  # Find and verify credentials.
-brew "vale"
 brew "yq"
 cask "antigravity-cli"
 cask "claude-code"
