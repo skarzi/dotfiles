@@ -22,12 +22,10 @@ return {
                     -- Linters and formatters
                     "actionlint",
                     "ansible-lint",
-                    "bandit",
                     "checkmake",
                     "cpplint",
                     "dotenv-linter",
                     "eslint_d",
-                    "flake8",
                     "markdownlint-cli2",
                     "ruff",
                     "selene",
