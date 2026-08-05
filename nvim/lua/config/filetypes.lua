@@ -6,6 +6,11 @@ function M.setup()
             [".importlinter"] = "cfg",
         },
         pattern = {
+            -- Various .env examples or overrides.
+            [".*%.env%.example"] = "env",
+            [".*%.env%.sample"] = "env",
+            [".*%.env%.local"] = "env",
+            [".*%.env%.override"] = "env",
             -- Jenkinsfile and variants (e.g. Jenkinsfile.staging).
             ["Jenkinsfile.*"] = "groovy",
             -- Ansible inventory and playbooks.
