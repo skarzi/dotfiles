@@ -1,24 +1,24 @@
-# Setup
-yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
-sudo yabai --load-sa
 # Debug
-yabai -m config debug_output on
+yabai -m config debug_output off
+
 # General
 yabai -m config layout bsp
-# Workspaces
-yabai -m space 1 --label dotfiles
-yabai -m space 2 --label dev0
-yabai -m space 3 --label dev1
-yabai -m space 4 --label dev2
-yabai -m space 5 --label slack
-yabai -m space 6 --label email
-yabai -m space 7 --label comet
-yabai -m space 8 --label spotify
-yabai -m space 9 --label chats
-yabai -m space 10 --label other
+yabai -m config window_animation_duration 0.0
+yabai -m config window_origin_display focused
+
+# Workspaces (Labels applied to existing spaces)
+yabai -m space 1 --label dotfiles 2>/dev/null || true
+yabai -m space 2 --label dev0 2>/dev/null || true
+yabai -m space 3 --label dev1 2>/dev/null || true
+yabai -m space 4 --label dev2 2>/dev/null || true
+yabai -m space 5 --label slack 2>/dev/null || true
+yabai -m space 6 --label email 2>/dev/null || true
+yabai -m space 7 --label comet 2>/dev/null || true
+yabai -m space 8 --label spotify 2>/dev/null || true
+yabai -m space 9 --label chats 2>/dev/null || true
+yabai -m space 10 --label other 2>/dev/null || true
+
 # Windows/panes
-# Keep floating windows always on top.
-yabai -m config window_topmost on
 # Shadow only floating windows
 yabai -m config window_shadow float
 # New window spawns to the right if vertical split, or bottom if horizontal one.
@@ -27,19 +27,20 @@ yabai -m config window_opacity on
 yabai -m config active_window_opacity 1.0
 yabai -m config normal_window_opacity 0.85
 yabai -m config insert_feedback_color 0x0FFFFFFF
-# Borders
-borders style=round active_color=0xFF51A8B3 inactive_color=0xFFA7AAB width=5.0 &
 
-# Apps
-yabai -m rule --add app="^System Preferences$" sticky=on sub-layer=above manage=off
-yabai -m rule --add app="^Karabiner-" sticky=on sub-layer=above manage=off
-yabai -m rule --add app="^Finder$" sticky=on sub-layer=above manage=off
-yabai -m rule --add app="^Disk Utility$" sticky=on sub-layer=above manage=off
-yabai -m rule --add app="^System Information$" sticky=on sub-layer=above manage=off
-yabai -m rule --add app="^Activity Monitor$" sticky=on sub-layer=above manage=off
-yabai -m rule --add app="^Zwift(App)?$" sticky=on sub-layer=above manage=off
-yabai -m rule --add app="^NordVPN$" sticky=on sub-layer=above manage=off
-yabai -m rule --add app="^Loom$" sticky=on sub-layer=above manage=off
-yabai -m rule --add app="^Docker\s" sticky=on sub-layer=above manage=off
+# Borders
+borders style=round active_color=0xFF51A8B3 inactive_color=0xFFA7AAB0 width=5.0 &
+
+# Apps (manage=off works without Scripting Addition)
+yabai -m rule --add app="^(System Settings|System Preferences)$" manage=off
+yabai -m rule --add app="^Karabiner-" manage=off
+yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="^Disk Utility$" manage=off
+yabai -m rule --add app="^System Information$" manage=off
+yabai -m rule --add app="^Activity Monitor$" manage=off
+yabai -m rule --add app="^Zwift(App)?$" manage=off
+yabai -m rule --add app="^NordVPN$" manage=off
+yabai -m rule --add app="^Loom$" manage=off
+yabai -m rule --add app="^Docker\s" manage=off
 yabai -m rule --add app="^Path Finder$" manage=off
 yabai -m rule --add app="^AWS VPN Client$" manage=off
