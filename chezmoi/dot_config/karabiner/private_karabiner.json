@@ -33,33 +33,6 @@
                 },
                 "rules": [
                     {
-                        "description": "Remap Caps-Lock to Escape",
-                        "manipulators": [
-                            {
-                                "from": { "key_code": "caps_lock" },
-                                "to": [
-                                    {
-                                        "key_code": "escape",
-                                        "repeat": true
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "escape",
-                                        "repeat": true
-                                    }
-                                ],
-                                "to_if_held_down": [
-                                    {
-                                        "key_code": "escape",
-                                        "repeat": true
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "yabai",
                         "manipulators": [
                             {
@@ -70,7 +43,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "nohup /Applications/Alacritty.app/Contents/MacOS/alacritty > /dev/null 2>&1 &"
+                                        "shell_command": "open --new -a Alacritty"
                                     }
                                 ],
                                 "type": "basic"
@@ -83,7 +56,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "launchctl kickstart -k \"gui/${UID}/homebrew.mxcl.yabai\""
+                                        "shell_command": "/opt/homebrew/bin/yabai --restart-service"
                                     }
                                 ],
                                 "type": "basic"
