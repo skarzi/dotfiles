@@ -1,0 +1,68 @@
+[env]
+TERM = "alacritty"
+
+[font]
+size = 10.0
+
+[font.normal]
+family = "Hack Nerd Font"
+style  = "Regular"
+
+[window]
+dynamic_padding = true
+{{- if eq .chezmoi.os "darwin" }}
+option_as_alt   = "Both"
+{{- end }}
+padding         = { x = 6, y = 6 }
+
+[scrolling]
+history    = 7500
+multiplier = 3
+
+[cursor.style]
+blinking = "Off"
+shape    = "Block"
+
+# One Dark Warmer color schema.
+# Reference: https://github.com/navarasu/onedark.nvim
+[colors.primary]
+background = "#232326"
+foreground = "#a7aab0"
+
+[colors.cursor]
+cursor = "#09bfdf"
+text   = "#232326"
+
+[colors.vi_mode_cursor]
+cursor = "#cda804"
+text   = "#232326"
+
+[colors.selection]
+background = "#404247"
+text       = "#a7aab0"
+
+[colors.normal]
+black   = "#101012"
+blue    = "#57a5e5"
+cyan    = "#51a8b3"
+green   = "#8fb573"
+magenta = "#bb70d2"
+red     = "#de5d68"
+white   = "#a7aab0"
+yellow  = "#dbb671"
+
+[colors.bright]
+black   = "#5a5b5e"
+blue    = "#74b3e9"
+cyan    = "#6eb8c2"
+green   = "#a3c38b"
+magenta = "#c786da"
+red     = "#e57881"
+white   = "#c5c8cf"
+yellow  = "#e2c385"
+
+[[keyboard.bindings]]
+action = "ToggleViMode"
+key    = "Escape"
+mode   = "~Search"
+mods   = {{ if eq .chezmoi.os "darwin" }}"Option"{{ else }}"Super"{{ end }}
