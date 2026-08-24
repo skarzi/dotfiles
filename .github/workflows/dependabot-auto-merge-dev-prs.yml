@@ -1,0 +1,28 @@
+---
+name: Auto-approve dependabot dev dependencies PRs
+"on": pull_request_target
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  dependabot:
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - id: dependabot-metadata
+        uses: dependabot/fetch-metadata@v3
+
+      - if: >-
+          steps.dependabot-metadata.outputs.dependency-type
+          == 'direct:development'
+        env:
+          GH_TOKEN: "${{ github.token }}"
+          PR_URL: "${{ github.event.pull_request.html_url }}"
+        run: |
+          review_decision="$(
+            gh pr view "${PR_URL}" --json reviewDecision --jq .reviewDecision
+          )"
+          if [ "${review_decision}" != "APPROVED" ]; then
+            gh pr review --approve "${PR_URL}"
+          fi
+          gh pr merge --auto --squash "${PR_URL}"
