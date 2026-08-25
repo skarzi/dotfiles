@@ -81,6 +81,14 @@ lint-fix-lua:
 	@selene $(or $(EXTRA_ARGS),nvim/)
 	@$(STYLUA_CMD) --check $(or $(EXTRA_ARGS),nvim/) || ($(STYLUA_CMD) $(or $(EXTRA_ARGS),nvim/) && exit 1)
 
+#: Lint and fix Objective-C files.
+.PHONY: lint-fix-objective-c
+lint-fix-objective-c:
+	@_DEFAULT_FILES="$$(find . -type f -name '*.m' | paste -sd ' ' -)" \
+	&& FILES="$(or $(EXTRA_ARGS),$${_DEFAULT_FILES})" \
+	&& clang-format --dry-run --Werror $${FILES} \
+	|| (clang-format -i $${FILES} && exit 1)
+
 #: Lint SSH config.
 .PHONY: lint-ssh-config
 lint-ssh-config:
@@ -103,7 +111,7 @@ lint-fix-toml:
 .PHONY: lint-fix
 lint-fix: lint-yaml lint-fix-shell-scripts lint-fix-markdown \
 	lint-github-actions lint-pre-commit-hook-config lint-fix-lua \
-	lint-ssh-config lint-fix-toml
+	lint-fix-objective-c lint-ssh-config lint-fix-toml
 
 #: Test the project's binaries.
 .PHONY: test-bin

@@ -160,6 +160,24 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "keyboard light",
+                        "manipulators": [
+                            {
+                                "description": "fn + b: Toggle keyboard backlight",
+                                "from": {
+                                    "key_code": "b",
+                                    "modifiers": { "mandatory": ["fn"] }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "\"${HOME}/dotfiles/bin/keyboard_light.sh\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
                     }
                 ]
             },

@@ -84,6 +84,15 @@ repos:
         entry: make lint-fix-lua --
         stages:
           - pre-commit
+      - id: lint-fix-objective-c
+        name: Lint and fix Objective-C files
+        language: system
+        types:
+          - objective-c
+        pass_filenames: true
+        entry: make lint-fix-objective-c --
+        stages:
+          - pre-commit
       - id: lint-ssh-config
         name: Lint SSH config
         language: system

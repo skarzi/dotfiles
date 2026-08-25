@@ -69,6 +69,7 @@ A task is NOT complete until all checks pass.
 | **Lint/Fix Shell** | `make lint-fix-shell-scripts` | Uses `shellcheck` |
 | **Lint/Fix Lua** | `make lint-fix-lua` | Uses `selene` and `stylua` |
 | **Lint/Fix Markdown** | `make lint-fix-markdown` | Uses `markdownlint-cli2` |
+| **Lint/Fix Objective-C** | `make lint-fix-objective-c` | Uses `clang-format` |
 | **Lint YAML** | `make lint-yaml` | Uses `yamllint` |
 
 **Targeting Specific Files:**
