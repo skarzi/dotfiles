@@ -1,6 +1,7 @@
 # AI Agents
 .claude/
 .gemini/
+.agents/reviews/
 AGENTS.local.md
 CLAUDE.local.md
 
