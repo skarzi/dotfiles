@@ -20,6 +20,28 @@ vim.keymap.set(
     { silent = true, desc = "Clear search highlight" }
 )
 
+-- LSP
+vim.keymap.set("n", "<leader>cd", function()
+    vim.api.nvim_open_win(0, true, { split = "right" })
+    vim.lsp.buf.definition()
+end, { desc = "Go to definition (in right split)" })
+vim.keymap.set("n", "<leader>cdl", function()
+    vim.api.nvim_open_win(0, true, { split = "left" })
+    vim.lsp.buf.definition()
+end, { desc = "Go to definition (in left split)" })
+vim.keymap.set(
+    "n",
+    "<leader>cn",
+    vim.lsp.buf.rename,
+    { desc = "Rename symbol" }
+)
+vim.keymap.set(
+    "n",
+    "<leader>cx",
+    vim.lsp.codelens.run,
+    { desc = "Run code lens" }
+)
+
 -- Selection
 vim.keymap.set("n", "gV", "`[v`]", { desc = "Select last inserted text" })
 

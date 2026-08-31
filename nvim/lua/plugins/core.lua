@@ -83,6 +83,36 @@ return {
         dependencies = { "nvim-lua/plenary.nvim" },
         cmd = "Telescope",
         keys = {
+            {
+                "<leader>cc",
+                "<cmd>Telescope lsp_incoming_calls<cr>",
+                desc = "List incoming calls",
+            },
+            {
+                "<leader>ci",
+                "<cmd>Telescope lsp_implementations<cr>",
+                desc = "List implementations",
+            },
+            {
+                "<leader>co",
+                "<cmd>Telescope lsp_outgoing_calls<cr>",
+                desc = "List outgoing calls",
+            },
+            {
+                "<leader>cr",
+                "<cmd>Telescope lsp_references<cr>",
+                desc = "List references",
+            },
+            {
+                "<leader>cs",
+                "<cmd>Telescope lsp_document_symbols<cr>",
+                desc = "List document symbols",
+            },
+            {
+                "<leader>ct",
+                "<cmd>Telescope lsp_type_definitions<cr>",
+                desc = "List type definitions",
+            },
             { "<C-p>", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
             {
                 "<leader>fg",

@@ -44,7 +44,7 @@ return {
                     require("actions-preview").code_actions()
                 end,
                 mode = { "v", "n" },
-                desc = "Code Actions Preview",
+                desc = "List code actions",
             },
         },
     },
