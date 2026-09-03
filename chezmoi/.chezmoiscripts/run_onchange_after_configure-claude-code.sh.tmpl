@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# shellcheck shell=bash
+
+set -eufo pipefail
+
+# Configure plugin marketplaces and install plugins using `claude` CLI.
+# Claude CLI: {{ lookPath "claude" }}
+if command -v claude &>/dev/null; then
+  echo "Configuring plugin marketplaces and installing plugins via claude CLI..."
+  claude plugin marketplace add mksglu/context-mode
+  claude plugin install context-mode@context-mode
+
+  claude plugin marketplace add wakatime/claude-code-wakatime
+  claude plugin install claude-code-wakatime@wakatime
+
+  claude plugin marketplace add DietrichGebert/ponytail
+  claude plugin install ponytail@ponytail
+else
+  echo "Warning: claude CLI not found. Skipping plugin installations." >&2
+fi

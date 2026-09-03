@@ -1,0 +1,190 @@
+{
+  "version": 3,
+  "lines": [
+    [
+      {
+        "id": "5ace8c53-9820-4fe4-abba-6562cd3e6abb",
+        "type": "model",
+        "color": "brightMagenta",
+        "rawValue": true
+      },
+      {
+        "id": "fb747be5-b5d9-4e1d-beb9-a927b836fb89",
+        "type": "custom-symbol",
+        "customSymbol": " (",
+        "dim": true,
+        "color": "magenta"
+      },
+      {
+        "id": "830e1b7d-4a26-471d-8fcf-780bcddfdaf7",
+        "type": "thinking-effort",
+        "rawValue": true,
+        "dim": true,
+        "color": "magenta"
+      },
+      {
+        "id": "a5c01606-b141-4dfe-bcbd-0145d21294c8",
+        "type": "custom-symbol",
+        "customSymbol": ")",
+        "dim": true,
+        "color": "magenta"
+      },
+      {
+        "id": "87a36dde-28cf-4a56-9010-91f495789637",
+        "type": "separator"
+      },
+      {
+        "id": "906e706f-5ef0-4577-9ca6-e32d8d7a98a9",
+        "type": "custom-symbol",
+        "customSymbol": "↳",
+        "color": "blue"
+      },
+      {
+        "id": "f494bd73-12b0-463c-bef0-3c43a48e695c",
+        "type": "tokens-input",
+        "color": "cyan",
+        "rawValue": true
+      },
+      {
+        "id": "3d106536-add9-422b-984e-f08456486d1a",
+        "type": "custom-symbol",
+        "customSymbol": " ↲",
+        "color": "blue"
+      },
+      {
+        "id": "5b913c04-06d4-416f-8385-3c2a748c8187",
+        "type": "tokens-output",
+        "color": "brightCyan",
+        "rawValue": true
+      },
+      {
+        "id": "e6f7a98c-89a0-4b1c-9d2e-3f4a5b6c7d8e",
+        "type": "custom-symbol",
+        "customSymbol": " · ",
+        "color": "brightBlack"
+      },
+      {
+        "id": "bd5a9287-0c1d-4e2f-8a3b-9c7d6e5f4a3b",
+        "type": "output-speed",
+        "rawValue": true,
+        "dim": true,
+        "color": "cyan"
+      },
+      {
+        "id": "3afcebd5-194f-4d7f-8be2-c1c5181b3d03",
+        "type": "separator"
+      },
+      {
+        "id": "9fd4dd4a-dc7b-404f-bb14-4fd6c0ab12d2",
+        "type": "tokens-cached",
+        "color": "brightBlack",
+        "rawValue": true
+      },
+      {
+        "id": "66d2c221-8fe9-4f87-b42b-3c99276bdb27",
+        "type": "custom-symbol",
+        "customSymbol": " / ",
+        "dim": true,
+        "color": "brightBlack"
+      },
+      {
+        "id": "64debee5-e862-40f3-9e26-7c453defe535",
+        "type": "tokens-total",
+        "color": "brightBlack",
+        "rawValue": true
+      },
+      {
+        "id": "c2d89af2-1c24-4fa3-bb5c-1d8f60fb7616",
+        "type": "separator"
+      },
+      {
+        "id": "a8b08ab0-934f-4c65-9033-46bc6acf6976",
+        "type": "context-percentage-usable",
+        "color": "yellow",
+        "rawValue": true,
+        "bold": true
+      },
+      {
+        "id": "c5577067-76b1-4f16-96fc-d2462d406de9",
+        "type": "separator",
+        "character": " "
+      },
+      {
+        "id": "ae6e3b1d-d011-4cfa-95e8-b38279d9bdb6",
+        "type": "compaction-counter",
+        "color": "yellow",
+        "rawValue": true,
+        "dim": true,
+        "metadata": {
+          "showTriggers": "false",
+          "showReclaimed": "true",
+          "hideZero": "false"
+        }
+      },
+      {
+        "id": "70cfa704-b442-4903-bb66-a55a7f327dd4",
+        "type": "separator"
+      },
+      {
+        "id": "092d6cec-9d3a-4b71-8b82-e200589e926d",
+        "type": "session-clock",
+        "rawValue": true,
+        "color": "brightGreen"
+      },
+      {
+        "id": "146ee4e1-1f6d-4faf-89d3-4bdae08bba90",
+        "type": "custom-symbol",
+        "dim": true,
+        "color": "brightGreen",
+        "customSymbol": " ("
+      },
+      {
+        "id": "366a43c0-ac53-4e95-a894-aa1f34234ef0",
+        "type": "session-cost",
+        "color": "brightGreen",
+        "rawValue": true,
+        "dim": true
+      },
+      {
+        "id": "e2f8d337-8cb2-4262-8063-94ae1e60342c",
+        "type": "custom-symbol",
+        "dim": true,
+        "color": "brightGreen",
+        "customSymbol": ")"
+      },
+      {
+        "id": "dcf7fc0e-cd05-4470-a018-57be60c4dae8",
+        "type": "flex-separator"
+      },
+      {
+        "id": "8c3029d5-c15b-444a-abd8-f7231fe90f03",
+        "type": "vim-mode",
+        "metadata": {
+          "format": "word"
+        },
+        "dim": true
+      }
+    ]
+  ],
+  "flexMode": "full-minus-40",
+  "compactThreshold": 60,
+  "colorLevel": 2,
+  "inheritSeparatorColors": false,
+  "globalBold": false,
+  "gitCacheTtlSeconds": 5,
+  "minimalistMode": false,
+  "defaultPaddingSide": "both",
+  "powerline": {
+    "enabled": false,
+    "separators": [
+      ""
+    ],
+    "separatorInvertBackground": [
+      false
+    ],
+    "startCaps": [],
+    "endCaps": [],
+    "autoAlign": false,
+    "continueThemeAcrossLines": false
+  }
+}
