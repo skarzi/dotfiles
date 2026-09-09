@@ -5,11 +5,14 @@ return {
     -- + Integrate `mcphub`. Reference:
     --   https://ravitemer.github.io/mcphub.nvim/extensions/avante.html
     -- + Check Zen Mode. Reference:
-    --   https://github.com/yetone/avante.nvim?tab=readme-ov-file#avante-zen-mode
+    --   https://github.com/avante-corp/avante.nvim?tab=readme-ov-file#avante-zen-mode
     {
-        "yetone/avante.nvim",
+        "avante-corp/avante.nvim",
         build = "make",
         event = "VeryLazy",
+        init = function()
+            vim.g.avante = { log_level = "warn" }
+        end,
         version = false,
         dependencies = {
             -- Required.
