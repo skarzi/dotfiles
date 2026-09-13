@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "lines": [
     [
       {
@@ -117,8 +117,7 @@
         "dim": true,
         "metadata": {
           "showTriggers": "false",
-          "showReclaimed": "true",
-          "hideZero": "false"
+          "showReclaimed": "true"
         }
       },
       {
