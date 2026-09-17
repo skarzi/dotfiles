@@ -12,6 +12,14 @@ model = "gpt-5.6-sol"
 model_reasoning_effort = "high"
 model_verbosity = "low"
 plan_mode_reasoning_effort = "xhigh"
+default_permissions = "workspace-agent-artifacts-write"
+
+[permissions.workspace-agent-artifacts-write]
+extends = ":workspace"
+
+[permissions.workspace-agent-artifacts-write.filesystem.":workspace_roots"]
+".agents/plans" = "write"
+".agents/reviews" = "write"
 
 [features]
 memories = true

@@ -11,6 +11,12 @@ BASE_CONFIG=$(
   "editorMode": "vim",
   "effortLevel": "xhigh",
   "model": "sonnet",
+  "permissions": {
+    "allow": [
+      "Edit(~/**/.agents/plans/**)",
+      "Edit(~/**/.agents/reviews/**)"
+    ]
+  },
   "statusLine": {
     "type": "command",
     "command": "npx -y ccstatusline@latest",
@@ -28,5 +34,5 @@ else
   jq -n \
     --argjson existing "${EXISTING_CONFIG}" \
     --argjson base "${BASE_CONFIG}" \
-    '$existing * $base'
+    '($existing * $base) | .permissions.allow = (($existing.permissions.allow // []) + ($base.permissions.allow // []) | unique)'
 fi
