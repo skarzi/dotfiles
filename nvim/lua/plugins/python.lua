@@ -16,8 +16,12 @@ return {
             },
         },
         opts = {
-            search = {},
             options = {
+                enable_default_searches = false,
+                enable_cached_venvs = true,
+                cached_venv_automatic_activation = true,
+                require_lsp_activation = true,
+                search_timeout = 3,
                 statusline_func = {
                     ---Returns a formatted string representing the current
                     ---Python virtual environment. If the environment is named
@@ -38,6 +42,14 @@ return {
                         end
                         return ""
                     end,
+                },
+            },
+            search = {
+                workspace = {
+                    command = "fd '/bin/python$' '$WORKSPACE_PATH' --full-path --color never --exclude .git --hidden --no-ignore",
+                },
+                cwd = {
+                    command = "fd '/bin/python$' '$CWD' --full-path --color never --exclude .git --hidden --no-ignore",
                 },
             },
         },
