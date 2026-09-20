@@ -1,0 +1,19 @@
+# Legacy Poetry configuration.
+# NOTE: Maintained strictly for legacy project support.
+# DO NOT use Poetry for new projects. Modern projects must use `uv`.
+#
+# TROUBLESHOOTING & WORKFLOW:
+# 1. Rebuild broken venv:
+#    `rm -rf .venv && poetry env use $(which python) && poetry install`
+# 2. Virtualenv should be auto-activated via `mise`.
+
+[virtualenvs]
+# Build `.venv` directly in project root for O(1) discovery by editor and shell.
+in-project        = true
+# Use project-pinned Python binary rather than Poetry's internal runtime.
+use-poetry-python = false
+
+[keyring]
+# Disabled: Prevents macOS Keychain GUI deadlocks in headless/terminal subshells.
+# Pass private repository tokens via envs `POETRY_PYPI_TOKEN_*` instead.
+enabled = false

@@ -1,8 +1,13 @@
 [settings]
 idiomatic_version_file_enable_tools = [ "go", "node", "python" ]
 # Automatically create and activate Python venvs using 'uv' in all `uv`
-# projects.
+# projects (requires `uv.lock`).
 python.uv_venv_auto                 = "create|source"
+
+[env]
+# Auto-activate existing in-project .venv globally across all projects (Poetry, UV, vanilla).
+"_.python.venv.path"   = ".venv"
+"_.python.venv.create" = false
 
 [tools]
 go     = "1.25.5"
