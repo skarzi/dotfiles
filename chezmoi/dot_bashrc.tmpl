@@ -73,17 +73,6 @@ export HOMEBREW_PREFIX="$(brew --prefix)"
 add_to_path "${HOMEBREW_PREFIX}/bin" "true"
 add_to_path "${HOMEBREW_PREFIX}/sbin" "true"
 
-# TERMINAL
-# NOTE: Use "rxvt-unicode-256color" for urxvt.
-export TERM="xterm-256color"
-export CLICOLOR=1
-export ALACRITTY_HOME="${HOME}/alacritty"
-
-# starship
-if command -v starship >/dev/null 2>&1; then
-  eval "$(starship init bash)"
-fi
-
 # SHELL ENHANCEMENTS
 # BASH completion
 {{- if eq .chezmoi.os "linux" }}
@@ -154,6 +143,17 @@ source "${HOME}/.orbstack/shell/init.bash" 2>/dev/null || :
 # Uncomment to use Colima Docker socket.
 # export DOCKER_HOST="$(colima status --json | jq --raw-output .docker_socket)"
 # export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
+
+# TERMINAL
+# NOTE: Use "rxvt-unicode-256color" for urxvt.
+export TERM="xterm-256color"
+export CLICOLOR=1
+export ALACRITTY_HOME="${HOME}/alacritty"
+
+# starship
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init bash)"
+fi
 
 # ALIAS LOADING
 if [[ -f "${HOME}/.bash_aliases" ]]; then
