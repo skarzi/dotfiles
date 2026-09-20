@@ -5,7 +5,12 @@
 # TROUBLESHOOTING & WORKFLOW:
 # 1. Rebuild broken venv:
 #    `rm -rf .venv && poetry env use $(which python) && poetry install`
-# 2. Virtualenv should be auto-activated via `mise`.
+# 2. To auto-activate `.venv` on `cd`, add to project `.mise.toml`:
+#    ```toml
+#    [env._.python.venv]
+#    path   = ".venv"
+#    create = false
+#    ```
 
 [virtualenvs]
 # Build `.venv` directly in project root for O(1) discovery by editor and shell.
