@@ -11,7 +11,6 @@ brew "docker"
 brew "kubectx"
 brew "kubernetes-cli"
 cask "docker-desktop"
-cask "orbstack"
 
 ## Git
 brew "git"
@@ -48,21 +47,17 @@ brew "libffi"
 brew "libtool"
 brew "mise"
 brew "pkgconf"
-brew "protobuf"
 
 ## Development Tools
-tap "1jehuang/jcode", trusted: true
 brew "bat"  # Clone of cat(1) with syntax highlighting and Git integration.
 brew "ctags"  # Reimplementation of ctags(1).
 brew "fd"
 brew "fzf"
-brew "jcode"
 brew "jq"
 brew "mkcert"
 brew "ripgrep"  # Search tool like grep and The Silver Searcher.
 brew "tree-sitter"
 brew "tree-sitter-cli"
-brew "trufflehog"  # Find and verify credentials.
 brew "yq"
 cask "antigravity-cli"
 cask "claude-code"
