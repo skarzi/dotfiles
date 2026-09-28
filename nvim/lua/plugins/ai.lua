@@ -18,6 +18,10 @@ return {
             -- Required.
             "nvim-lua/plenary.nvim",
             "MunifTanjim/nui.nvim",
+            {
+                "ColinKennedy/mega.cmdparse",
+                dependencies = { "ColinKennedy/mega.logging" },
+            },
             -- Optional.
             "nvim-telescope/telescope.nvim",
             "HakonHarnes/img-clip.nvim",
