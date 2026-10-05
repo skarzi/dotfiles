@@ -26,7 +26,9 @@ brew "bash-completion@2"
 brew "pam-reattach"
 brew "starship"
 brew "tmux"
+{{- if eq .env "personal" }}
 cask "alacritty"
+{{- end }}
 
 ## Editors
 brew "neovim"
@@ -93,11 +95,12 @@ brew "xdot"
 cask "font-hack-nerd-font"
 cask "gpg-suite-no-mail"
 cask "karabiner-elements"
+{{- if eq .env "personal" }}
 mas "Amphetamine", id: 937984704
+{{- end }}
 
 # COMMUNICATION
 cask "signal"
-cask "slack"
 cask "telegram"
 {{- if eq .env "personal" }}
 cask "zoom"
@@ -113,8 +116,10 @@ brew "pandoc"
 cask "calibre"
 cask "mactex-no-gui"
 
+{{- if eq .env "personal" }}
 # WEB & BROWSING
 cask "google-chrome"
+{{- end }}
 
 # SECURITY & PRIVACY
 tap "protonpass/tap", trusted: true
