@@ -95,6 +95,23 @@
     sswitch = "!f() { \
       git stash && git switch ${1} && git stash pop; \
     }; f"
+    # Global `.gitignore` live in `${HOME}/.config/git/global.gitignore`.
+    # `.local.gitignore` is per repository, and this alias points
+    # `.git/info/exclude` at it.
+    # A repository-local `core.excludesFile` shouldn't be edited, as it will
+    # replace the global file.
+    # Run this in the main worktree. Linked worktrees share that `info/exclude`
+    # file.
+    setup-local-gitignore = "!f() { \
+      local local_exclude_path=\".git/info/exclude\"; \
+      if [[ -f \"${local_exclude_path}\" && ! -L \"${local_exclude_path}\" ]] && grep -qsvE '^[[:space:]]*(#|$)' \"${local_exclude_path}\"; then \
+        echo \"${local_exclude_path} has patterns. Move them to '.local.gitignore' first.\" >&2; \
+        return 1; \
+      fi; \
+      touch .local.gitignore || return 1; \
+      ln -sf ../../.local.gitignore \"${local_exclude_path}\" || return 1; \
+      return 0; \
+    }; f"
 
 
 [includeIf "gitdir:**/work/**"]
