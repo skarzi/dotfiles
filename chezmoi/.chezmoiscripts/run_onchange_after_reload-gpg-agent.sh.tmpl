@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# shellcheck shell=bash
+
+set -eufo pipefail
+
+# gpg-agent.conf hash:
+# {{ include "private_dot_gnupg/private_gpg-agent.conf.tmpl" | sha256sum }}
+
+gpgconf --reload gpg-agent
