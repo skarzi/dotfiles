@@ -40,7 +40,5 @@ yabai -m rule --add app="^System Information$" manage=off
 yabai -m rule --add app="^Activity Monitor$" manage=off
 yabai -m rule --add app="^Zwift(App)?$" manage=off
 yabai -m rule --add app="^NordVPN$" manage=off
-yabai -m rule --add app="^Loom$" manage=off
 yabai -m rule --add app="^Docker\s" manage=off
 yabai -m rule --add app="^Path Finder$" manage=off
-yabai -m rule --add app="^AWS VPN Client$" manage=off
