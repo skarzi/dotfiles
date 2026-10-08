@@ -1,5 +1,5 @@
 {{- if ne .env "work" }}
-.config/tmux/workspaces/rippling/
+.config/tmux/workspaces/work/
 .config/finicky.ts
 {{- end }}
 {{- if eq .env "work" }}
