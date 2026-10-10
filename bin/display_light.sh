@@ -97,7 +97,8 @@ cache_brightness() {
 
 # Set the built-in display brightness.
 # Caches the current level first when this call dims to "off" from "on", so
-# `toggle` can restore it. An "off" level never overwrites the cache.
+# `toggle` can restore it. An "off" level never overwrites the cache, and an
+# unreadable current level is skipped.
 # Globals:
 #   BRIGHTNESS_CACHE_FILE (written), OFF_THRESHOLD (read)
 # Arguments:
@@ -108,6 +109,7 @@ cache_brightness() {
 #   `1` if brightness is not a number in [0, 1]
 set_brightness() {
   local brightness="${1}"
+  local current_brightness=""
   if ! is_valid_brightness "${brightness}"; then
     echo "display_light: Brightness must be a number from 0.0 to 1.0." >&2
     echo "Usage: display_light.sh set <0.0-1.0>" >&2
@@ -115,11 +117,11 @@ set_brightness() {
   fi
   if awk -v brightness="${brightness}" -v off_threshold="${OFF_THRESHOLD}" \
     'BEGIN { exit !(brightness <= off_threshold) }'; then
-    local current_brightness
-    current_brightness="$(get_brightness)"
-    if awk -v current_brightness="${current_brightness}" \
-      -v off_threshold="${OFF_THRESHOLD}" \
-      'BEGIN { exit !(current_brightness > off_threshold) }'; then
+    current_brightness="$(get_brightness)" || current_brightness=""
+    if is_valid_brightness "${current_brightness}" \
+      && awk -v current_brightness="${current_brightness}" \
+        -v off_threshold="${OFF_THRESHOLD}" \
+        'BEGIN { exit !(current_brightness > off_threshold) }'; then
       cache_brightness "${current_brightness}"
     fi
   fi
