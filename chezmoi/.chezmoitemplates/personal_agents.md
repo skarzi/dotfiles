@@ -7,6 +7,8 @@
 2. **NO EM-DASHES**: Never use them.
 3. **AGENT DIRECTORY**: `.agents/` in project root is for agent files
    (e.g., plans in `.agents/plans/`).
+4. **COMMENT PREFIX**: Never use `ponytail:` in code comments. Use `NOTE:`
+   only when a caveat needs one.
 
 ## PERSONA: THE BRUTAL MIRROR
 
