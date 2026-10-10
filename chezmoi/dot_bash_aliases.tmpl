@@ -61,6 +61,7 @@ alias dotfiles="tmux attach -t dotfiles 2>/dev/null || (cd ~/dotfiles/ && tmuxp 
 alias add_ssh_key="bash \${HOME}/dotfiles/bin/add_ssh_key.sh"
 {{- if eq .chezmoi.os "darwin" }}
 alias keyboard_light="bash \${HOME}/dotfiles/bin/keyboard_light.sh"
+alias display_light="bash \${HOME}/dotfiles/bin/display_light.sh"
 {{- end }}
 {{- if eq .chezmoi.os "linux" }}
 alias toggle_trackpad="bash \${HOME}/dotfiles/bin/toggle_trackpad.sh"
