@@ -162,17 +162,56 @@
                         ]
                     },
                     {
-                        "description": "keyboard light",
+                        "description": "display and keyboard light",
                         "manipulators": [
                             {
-                                "description": "fn + b: Toggle keyboard backlight",
+                                "description": "fn + opt + l: Toggle keyboard and display light",
                                 "from": {
-                                    "key_code": "b",
-                                    "modifiers": { "mandatory": ["fn"] }
+                                    "key_code": "l",
+                                    "modifiers": { "mandatory": ["fn", "left_option"] }
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "\"${HOME}/dotfiles/bin/keyboard_light.sh\""
+                                        "shell_command": "\"${HOME}/dotfiles/bin/keyboard_light.sh\" toggle; \"${HOME}/dotfiles/bin/display_light.sh\" toggle"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "fn + opt + k: Toggle keyboard light",
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": { "mandatory": ["fn", "left_option"] }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "\"${HOME}/dotfiles/bin/keyboard_light.sh\" toggle"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "fn + opt + d: Toggle display light",
+                                "from": {
+                                    "key_code": "d",
+                                    "modifiers": { "mandatory": ["fn", "left_option"] }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "\"${HOME}/dotfiles/bin/display_light.sh\" toggle"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "fn + opt + x: Start lumos bedtime for 12h",
+                                "from": {
+                                    "key_code": "x",
+                                    "modifiers": { "mandatory": ["fn", "left_option"] }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "\"${HOME}/dotfiles/bin/lumos.sh\" bedtime 12h"
                                     }
                                 ],
                                 "type": "basic"
