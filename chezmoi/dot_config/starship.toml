@@ -7,3 +7,8 @@ scan_timeout    = 50
 [character]
 error_symbol   = "[✗](bold red)"
 success_symbol = "[❯](bold dimmed green)"
+
+[custom.lumos]
+command = '"${HOME}"/dotfiles/bin/lumos.sh status --short 2>/dev/null'
+when    = true
+format  = "([💡$output ](yellow))"
