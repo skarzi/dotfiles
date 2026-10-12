@@ -25,8 +25,7 @@ Usage: lumos <command> [options]
 
 Durations: 30s, 15m, 2h. `-d` also keeps the display on. `stop` does not
 restore brightness. `-i` does not block clamshell sleep on battery
-(`caffeinate -s` needs AC power). A `caffeinate` you started that reuses the
-recorded PID would pass the ownership check.
+(`caffeinate -s` needs AC power).
 EOF
 }
 
@@ -92,19 +91,20 @@ parse_display() {
   return 0
 }
 
-# Loads the live session into `session_pid`, `session_kind`, `session_value` and
-# `session_flags`, removing stale state. Call only inside `if`: the return
+# The name `caffeinate` runs under (`exec -a`), so only lumos sessions match.
+CAFFEINATE_PROCESS_NAME="lumos-caffeinate"
+
+# Reads the live session into `session_pid`, `session_kind`, `session_value` and
+# `session_flags` without changing anything. Call only inside `if`: the return
 # status (`0` active, `1` not) is the answer.
-# Stale: malformed state, dead or non-`caffeinate` process, or an expired timed
-# session (the `caffeinate -t` timer pauses in sleep, so it can outlive it);
-# that one is also terminated.
-# NOTE: PID reuse by another user-started `caffeinate` passes this check
-# (fix: compare `ps -o lstart=`).
-# TODO(skarzi): A poll (`status`, tmux, starship) between fork and exec sees
-# lumos in `ps` and drops the new state; also accept `bash\ *lumos.sh*`.
-load_session() {
+# Not live: no state, malformed state, a dead or foreign process, or an expired
+# timed session (also sets `session_expired` to `true`: the `caffeinate -t`
+# timer pauses in sleep, so it can outlive it). A `bash ...lumos.sh` process is
+# the new `caffeinate` between `fork` and `exec`.
+read_session() {
   local file now process_command state_number_pattern='^[1-9][0-9]{0,11}$'
 
+  session_expired=false
   file="$(state_file)"
   if [[ ! -f "${file}" ]]; then
     return 1
@@ -117,26 +117,48 @@ load_session() {
     ${session_value} =~ ${state_number_pattern} ]] \
     || [[ "${session_kind}" != "timed" && "${session_kind}" != "watch" ]] \
     || [[ "${session_flags}" != "-i" && "${session_flags}" != "-i -d" ]]; then
-    rm -f "${file}"
     return 1
   fi
 
   process_command="$(ps -p "${session_pid}" -o command= 2> /dev/null || true)"
   case "${process_command}" in
-    caffeinate\ * | nohup\ caffeinate\ * | /usr/bin/caffeinate\ *) ;;
-    *)
-      rm -f "${file}"
-      return 1
-      ;;
+    "${CAFFEINATE_PROCESS_NAME}"\ * | *bash\ *lumos.sh*) ;;
+    *) return 1 ;;
   esac
 
   now="$(date +%s)"
   if [[ "${session_kind}" == "timed" ]] && ((session_value <= now)); then
-    kill -TERM "${session_pid}" 2> /dev/null || true
-    rm -f "${file}"
+    session_expired=true
     return 1
   fi
   return 0
+}
+
+# Like `read_session`, but also repairs: removes stale state and terminates an
+# expired session. Call only inside `if`.
+load_session() {
+  local file
+
+  if read_session; then
+    return 0
+  fi
+  if [[ "${session_expired}" == true ]]; then
+    kill -TERM "${session_pid}" 2> /dev/null || true
+  fi
+  file="$(state_file)"
+  if [[ -f "${file}" ]]; then
+    rm -f "${file}"
+  fi
+  return 1
+}
+
+# Starts `caffeinate "$@"` in the background as `${CAFFEINATE_PROCESS_NAME}`,
+# ignoring hangup like `nohup` does. The PID is in `$!`.
+start_caffeinate() {
+  (
+    trap '' HUP
+    exec -a "${CAFFEINATE_PROCESS_NAME}" caffeinate "$@"
+  ) > /dev/null 2>&1 &
 }
 
 # Starts a new `caffeinate`, records it, then terminates the previous one.
@@ -169,10 +191,10 @@ launch() {
 
   if [[ "${new_kind}" == "timed" ]]; then
     # shellcheck disable=SC2086  # Flags are intentionally split.
-    nohup caffeinate ${new_flags} -t $((new_value - now)) > /dev/null 2>&1 &
+    start_caffeinate ${new_flags} -t $((new_value - now))
   else
     # shellcheck disable=SC2086  # Flags are intentionally split.
-    nohup caffeinate ${new_flags} -w "${new_value}" > /dev/null 2>&1 &
+    start_caffeinate ${new_flags} -w "${new_value}"
   fi
   new_pid=$!
 
@@ -180,7 +202,7 @@ launch() {
   # state meanwhile.
   # TODO(skarzi): A parallel `launch` writing between this read and the `mv`
   # still orphans its `caffeinate`; fix by wrapping `launch` in a `mkdir` lock.
-  if load_session && [[ "${session_pid}" != "${previous_pid}" ]]; then
+  if read_session && [[ "${session_pid}" != "${previous_pid}" ]]; then
     concurrent_pid="${session_pid}"
   fi
   if ! printf '%s %s %s %s\n' "${new_pid}" "${new_kind}" "${new_value}" \
@@ -324,7 +346,7 @@ command_stop() {
 print_short_status() {
   local remaining
 
-  load_session || return 0
+  read_session || return 0
   remaining=$((session_value - $(date +%s)))
   if [[ "${session_kind}" == "watch" ]]; then
     echo "watch"
@@ -348,8 +370,12 @@ command_status() {
     report_bad_arguments "The status command takes only the --short option."
     return 1
   fi
-  if ! load_session; then
-    echo "Lumos inactive"
+  if ! read_session; then
+    if [[ "${session_expired}" == true ]]; then
+      echo "Lumos expired, but caffeinate is still running. Run \`lumos stop\`."
+    else
+      echo "Lumos inactive"
+    fi
     return 0
   fi
 

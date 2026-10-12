@@ -56,7 +56,7 @@ FAKE
 #!/bin/sh
 if [ "$1" = "-p" ]; then
   if [ -n "$2" ] && [ "$2" = "${LUMOS_FAKE_PID}" ]; then
-    if [ "$3" = "-o" ]; then echo "${LUMOS_FAKE_COMMAND:-caffeinate -i -t 60}"; fi
+    if [ "$3" = "-o" ]; then echo "${LUMOS_FAKE_COMMAND:-lumos-caffeinate -i -t 60}"; fi
     exit 0
   fi
   exit 1
@@ -154,6 +154,11 @@ write_stale_state() {
     other)
       spawn_fake_process
       export LUMOS_FAKE_COMMAND="nvim caffeinate.md"
+      write_session_state "${LUMOS_FAKE_PID} timed ${future} -i"
+      ;;
+    foreign)
+      spawn_fake_process
+      export LUMOS_FAKE_COMMAND="caffeinate -i -t 60"
       write_session_state "${LUMOS_FAKE_PID} timed ${future} -i"
       ;;
     garbage) write_session_state "garbage" ;;
