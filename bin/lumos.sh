@@ -19,7 +19,7 @@ Usage: lumos <command> [options]
   lumos watch <pid> [-d|--display]          Stay awake while <pid> is running.
   lumos run [-d|--display] -- <command...>  Stay awake while <command> runs.
   lumos stop                                Stop the session.
-  lumos status                              Show the session.
+  lumos status [--short]                    Show the session (--short: compact).
   lumos bedtime [duration]                  Dim the lights, stay awake (12h).
   lumos help                                Show this help.
 
@@ -99,8 +99,9 @@ parse_display() {
 # session (the `caffeinate -t` timer pauses in sleep, so it can outlive it);
 # that one is also terminated.
 # NOTE: PID reuse by another user-started `caffeinate` passes this check
-# (fix: compare `ps -o lstart=`). Between fork and exec `ps` shows lumos
-# itself, so a `status` landing then drops the state.
+# (fix: compare `ps -o lstart=`).
+# TODO(skarzi): A poll (`status`, tmux, starship) between fork and exec sees
+# lumos in `ps` and drops the new state; also accept `bash\ *lumos.sh*`.
 load_session() {
   local file now process_command state_number_pattern='^[1-9][0-9]{0,11}$'
 
@@ -319,10 +320,34 @@ command_stop() {
   fi
 }
 
-# Report current `lumos` state status.
+# Prints `1h 59m`, `12m`, `<1m` or `watch` for prompts; nothing if inactive.
+print_short_status() {
+  local remaining
+
+  load_session || return 0
+  remaining=$((session_value - $(date +%s)))
+  if [[ "${session_kind}" == "watch" ]]; then
+    echo "watch"
+  elif ((remaining >= 3600)); then
+    echo "$((remaining / 3600))h $((remaining % 3600 / 60))m"
+  elif ((remaining >= 60)); then
+    echo "$((remaining / 60))m"
+  else
+    echo "<1m"
+  fi
+}
+
+# Shows the session; `--short` prints only the compact form.
 command_status() {
   local now remaining
 
+  if [[ "${1:-}" == "--short" && $# -eq 1 ]]; then
+    print_short_status
+    return 0
+  elif [[ $# -gt 0 ]]; then
+    report_bad_arguments "The status command takes only the --short option."
+    return 1
+  fi
   if ! load_session; then
     echo "Lumos inactive"
     return 0
@@ -376,7 +401,8 @@ main() {
     watch) command_watch "$@" ;;
     run) command_run "$@" ;;
     bedtime) command_bedtime "$@" ;;
-    stop | status | help)
+    status) command_status "$@" ;;
+    stop | help)
       if [[ $# -gt 0 ]]; then
         report_bad_arguments "The ${subcommand} command takes no arguments."
         return 1

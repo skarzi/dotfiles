@@ -31,7 +31,6 @@ Describe 'main'
   Describe 'extra arguments'
     Parameters
       stop
-      status
       help
     End
 
@@ -40,6 +39,23 @@ Describe 'main'
 
       The status should be failure
       The stderr should include "lumos: The $1 command takes no arguments."
+      The stderr should include 'Usage:'
+    End
+  End
+
+  Describe 'status'
+    It 'routes status --short to the compact status'
+      When call main status --short
+
+      The status should be success
+      The output should eq ''
+    End
+
+    It 'rejects other arguments for status'
+      When call main status now
+
+      The status should be failure
+      The stderr should include 'lumos: The status command takes only the --short option.'
       The stderr should include 'Usage:'
     End
   End
