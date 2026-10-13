@@ -18,7 +18,7 @@ setup_test_environment() {
   export LUMOS_FAKE_NOW=1791597600
   export LUMOS_CAFFEINATE_LOG="${LUMOS_TEST_DIRECTORY}/caffeinate.log"
   export LUMOS_KILL_LOG="${LUMOS_TEST_DIRECTORY}/kill.log"
-  unset LUMOS_FAKE_COMMAND
+  unset LUMOS_FAKE_COMMAND LUMOS_LOCK_ATTEMPTS
   umask 022
 
   # Fakes are written once per spec file (macOS scans fresh scripts on first
@@ -37,18 +37,10 @@ setup_test_environment() {
 # `${LUMOS_FAKE_EXECUTABLES_DIRECTORY}`.
 write_fake_executables() {
   mkdir -p "${LUMOS_FAKE_EXECUTABLES_DIRECTORY}"
-  # Logs its arguments; with `--` it runs the wrapped command like `caffeinate`
-  # does.
+  # Logs its arguments and exits.
   cat > "${LUMOS_FAKE_EXECUTABLES_DIRECTORY}/caffeinate" << 'FAKE'
 #!/bin/sh
 echo "$*" >> "${LUMOS_CAFFEINATE_LOG}"
-for argument in "$@"; do
-  if [ "${argument}" = "--" ]; then
-    while [ "$1" != "--" ]; do shift; done
-    shift
-    exec "$@"
-  fi
-done
 exit 0
 FAKE
   # Only the fake PID is alive; anything else behaves like a dead PID.
@@ -80,6 +72,7 @@ teardown_test_environment() {
     wait "${LUMOS_FAKE_PID}" 2> /dev/null || true
   fi
   unset -f kill
+  unset LUMOS_LOCK_ATTEMPTS
   PATH="${LUMOS_ORIGINAL_PATH}"
   rm -rf "${LUMOS_TEST_DIRECTORY}"
 }
@@ -95,6 +88,27 @@ spawn_fake_process() {
 write_session_state() {
   mkdir -p "${XDG_STATE_HOME}/lumos"
   printf '%s\n' "${1}" > "${XDG_STATE_HOME}/lumos/session"
+}
+
+# Holds the lock, and after 0.3 seconds writes a session state for the fake
+# process and releases the lock, like a parallel `launch` finishing.
+hold_lock_then_write_session() {
+  mkdir -p "${XDG_STATE_HOME}/lumos/session.lock"
+  (
+    sleep 0.3
+    printf '%s\n' "${LUMOS_FAKE_PID} timed $((LUMOS_FAKE_NOW + 3600)) -i" \
+      > "${XDG_STATE_HOME}/lumos/session"
+    rmdir "${XDG_STATE_HOME}/lumos/session.lock"
+  ) > /dev/null 2>&1 &
+}
+
+# Prints `lock=present|absent` for the lock directory.
+report_lock() {
+  if [[ -e "${XDG_STATE_HOME}/lumos/session.lock" ]]; then
+    echo "lock=present"
+  else
+    echo "lock=absent"
+  fi
 }
 
 # Replaces `bedtime_start` with a logger that records whether the session
@@ -120,11 +134,11 @@ mock_kill() {
   }
 }
 
-# Prints the `caffeinate` log once it has `${1:-1}` lines (max 20 x 0.05s).
+# Prints the `caffeinate` log once it has `${1:-1}` lines (max 50 x 0.05s).
 caffeinate_log() {
   local want="${1:-1}" tries=0
   touch "${LUMOS_CAFFEINATE_LOG}"
-  while ((tries < 20)) && (($(wc -l < "${LUMOS_CAFFEINATE_LOG}") < want)); do
+  while ((tries < 50)) && (($(wc -l < "${LUMOS_CAFFEINATE_LOG}") < want)); do
     sleep 0.05
     tries=$((tries + 1))
   done

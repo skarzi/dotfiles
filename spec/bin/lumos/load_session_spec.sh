@@ -51,6 +51,28 @@ Describe 'load_session'
     End
   End
 
+  It 'accepts a run session'
+    spawn_fake_process
+    write_session_state "${LUMOS_FAKE_PID} run 4242 -i"
+
+    When call command_status
+
+    The output should eq "Lumos active: running a command (PID ${LUMOS_FAKE_PID}, -i)"
+  End
+
+  It 'treats a run session of a dead process as stale'
+    write_session_state "999999 run 4242 -i"
+    stop_and_report_state() {
+      command_stop
+      report_state_and_kills
+    }
+
+    When call stop_and_report_state
+
+    The line 1 of output should eq 'Lumos inactive'
+    The line 2 of output should eq 'state=absent'
+  End
+
   Describe 'expired but still running'
     Parameters
       10

@@ -42,6 +42,15 @@ Describe 'command_status'
     The output should eq "Lumos active: watching PID 4242 (PID ${LUMOS_FAKE_PID}, -i -d)"
   End
 
+  It 'shows a command run without a countdown'
+    spawn_fake_process
+    write_session_state "${LUMOS_FAKE_PID} run 4242 -i -d"
+
+    When call command_status
+
+    The output should eq "Lumos active: running a command (PID ${LUMOS_FAKE_PID}, -i -d)"
+  End
+
   Describe '--short'
     It 'prints nothing without a session'
       When call command_status --short
@@ -78,13 +87,22 @@ Describe 'command_status'
       The output should eq "$2"
     End
 
-    It 'prints watch for a watch session'
+    It 'prints w- and the watched PID for a watch session'
       spawn_fake_process
       write_session_state "${LUMOS_FAKE_PID} watch 4242 -i"
 
       When call command_status --short
 
-      The output should eq 'watch'
+      The output should eq 'w-4242'
+    End
+
+    It 'prints r- and the PID of lumos for a run session'
+      spawn_fake_process
+      write_session_state "${LUMOS_FAKE_PID} run 4242 -i"
+
+      When call command_status --short
+
+      The output should eq 'r-4242'
     End
 
     It 'prints nothing and drops the state of a dead process'

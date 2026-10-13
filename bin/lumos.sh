@@ -24,8 +24,8 @@ Usage: lumos <command> [options]
   lumos help                                Show this help.
 
 Durations: 30s, 15m, 2h. `-d` also keeps the display on. `stop` does not
-restore brightness. `-i` does not block clamshell sleep on battery
-(`caffeinate -s` needs AC power).
+restore brightness. `run` fails while a session is active. `-i` does not block
+clamshell sleep on battery (`caffeinate -s` needs AC power).
 EOF
 }
 
@@ -103,6 +103,7 @@ CAFFEINATE_PROCESS_NAME="lumos-caffeinate"
 # the new `caffeinate` between `fork` and `exec`.
 read_session() {
   local file now process_command state_number_pattern='^[1-9][0-9]{0,11}$'
+  local kind_pattern='^(timed|watch|run)$'
 
   session_expired=false
   file="$(state_file)"
@@ -115,7 +116,7 @@ read_session() {
     < "${file}" || true
   if ! [[ ${session_pid} =~ ${state_number_pattern} &&
     ${session_value} =~ ${state_number_pattern} ]] \
-    || [[ "${session_kind}" != "timed" && "${session_kind}" != "watch" ]] \
+    || ! [[ ${session_kind} =~ ${kind_pattern} ]] \
     || [[ "${session_flags}" != "-i" && "${session_flags}" != "-i -d" ]]; then
     return 1
   fi
@@ -161,19 +162,46 @@ start_caffeinate() {
   ) > /dev/null 2>&1 &
 }
 
-# Starts a new `caffeinate`, records it, then terminates the previous one.
-# Callers must keep errexit active (no `||`/`if` context). `umask 077` is here,
-# not in the main guard, so `command_run` leaves the caller's umask alone.
+# Takes the `mkdir` lock `$(state_file).lock`, so `launch` and `command_stop`
+# run one at a time. Retries `${LUMOS_LOCK_ATTEMPTS:-20}` times 0.1 seconds
+# apart, then steals the lock as stale.
+# NOTE: A holder killed inside the lock (even by Ctrl-C) leaves it stale, so
+# the next call pauses about 2 seconds. Two waiters stealing at once can both
+# enter. `command_adjust` reads outside the lock, so it can still race.
+acquire_lock() {
+  local lock attempt=0 attempts="${LUMOS_LOCK_ATTEMPTS:-20}"
+  lock="$(state_file).lock"
+  [[ ${attempts} =~ ^(0|[1-9][0-9]{0,3})$ ]] || attempts=20
+  while ! mkdir "${lock}" 2> /dev/null; do
+    if ((attempt >= attempts)); then
+      mkdir "${lock}" 2> /dev/null || true
+      return 0
+    fi
+    attempt=$((attempt + 1))
+    sleep 0.1
+  done
+}
+
+# Drops the lock of `acquire_lock`.
+release_lock() {
+  rmdir "$(state_file).lock" 2> /dev/null || true
+}
+
+# Starts a new `caffeinate`, records it, then terminates the previous one, all
+# under the lock. Callers must keep errexit active (no `||`/`if` context).
+# `umask 077` is here, not in the main guard: `command_run` calls `launch` in a
+# subshell so its command keeps the umask.
 # Arguments:
-#   ${1}: Kind, `timed` or `watch`.
-#   ${2}: Expiry epoch (`timed`) or watched PID (`watch`).
+#   ${1}: Kind, `timed`, `watch` or `run`.
+#   ${2}: Expiry epoch (`timed`) or watched PID (`watch`, `run`).
 #   ${3}: Flags, `-i` or `-i -d`.
 # Returns:
-#   `1` if the state cannot be written (the new `caffeinate` is terminated).
+#   `1` if the state cannot be written (the new `caffeinate` is terminated), or
+#   for a `run` while a session is active (nothing is replaced).
 launch() {
   umask 077
   local new_kind="${1}" new_value="${2}" new_flags="${3}" previous_pid=""
-  local concurrent_pid="" stale_pid new_pid now file
+  local new_pid now file
   now="$(date +%s)"
   file="$(state_file)"
 
@@ -181,14 +209,19 @@ launch() {
     print_error "The session would end immediately."
     return 1
   fi
-  if load_session; then
-    previous_pid="${session_pid}"
-  fi
   if ! mkdir -p "$(dirname "${file}")"; then
     print_error "Cannot create the state directory."
     return 1
   fi
-
+  acquire_lock
+  if load_session; then
+    previous_pid="${session_pid}"
+    if [[ "${new_kind}" == "run" ]]; then
+      release_lock
+      print_error "A session is already active. Run \`lumos stop\` first."
+      return 1
+    fi
+  fi
   if [[ "${new_kind}" == "timed" ]]; then
     # shellcheck disable=SC2086  # Flags are intentionally split.
     start_caffeinate ${new_flags} -t $((new_value - now))
@@ -197,27 +230,17 @@ launch() {
     start_caffeinate ${new_flags} -w "${new_value}"
   fi
   new_pid=$!
-
-  # Also terminate the `caffeinate` of a parallel `launch` that replaced the
-  # state meanwhile.
-  # TODO(skarzi): A parallel `launch` writing between this read and the `mv`
-  # still orphans its `caffeinate`; fix by wrapping `launch` in a `mkdir` lock.
-  if read_session && [[ "${session_pid}" != "${previous_pid}" ]]; then
-    concurrent_pid="${session_pid}"
-  fi
   if ! printf '%s %s %s %s\n' "${new_pid}" "${new_kind}" "${new_value}" \
     "${new_flags}" > "${file}.$$" || ! mv "${file}.$$" "${file}"; then
     kill -TERM "${new_pid}" 2> /dev/null || true
+    release_lock
     print_error "Cannot write the session state."
     return 1
   fi
-
-  for stale_pid in "${previous_pid}" "${concurrent_pid}"; do
-    if [[ -n "${stale_pid}" ]]; then
-      kill -TERM "${stale_pid}" 2> /dev/null || true
-    fi
-  done
-  return 0
+  if [[ -n "${previous_pid}" ]]; then
+    kill -TERM "${previous_pid}" 2> /dev/null || true
+  fi
+  release_lock
 }
 
 # Dims the display and the keyboard; edit to taste. Failures are ignored so
@@ -305,8 +328,9 @@ command_watch() {
   echo "Lumos watching PID ${pid} (${flags})"
 }
 
-# Runs `${@}` after `--` with `caffeinate`, optional `-d|--display` before it.
-# Stateless; returns the command's exit status.
+# Runs `${@}` after `--` (optional `-d|--display` before it) as a `run` session:
+# `caffeinate -w` watches this shell, so the session ends with it, however it
+# ends. Refuses to replace an active session. Returns the command's status.
 command_run() {
   local flags="-i" unknown_option=""
 
@@ -327,29 +351,37 @@ command_run() {
   fi
   shift
 
-  # shellcheck disable=SC2086  # Flags are intentionally split.
-  caffeinate ${flags} -- "${@}" || return "$?"
+  (launch run "$$" "${flags}")
+  # `command` skips shell functions, so `run -- usage` runs the real `usage`.
+  command -- "${@}" || return "$?"
 }
 
 # Stops the active session and prints the result. Brightness is untouched.
 command_stop() {
-  if load_session; then
-    kill -TERM "${session_pid}" 2> /dev/null || true
-    rm -f "$(state_file)"
-    echo "Lumos stopped"
-  else
-    echo "Lumos inactive"
+  local file message="Lumos inactive"
+
+  file="$(state_file)"
+  if [[ -d "${file%/*}" ]]; then
+    acquire_lock
+    if load_session; then
+      kill -TERM "${session_pid}" 2> /dev/null || true
+      rm -f "${file}"
+      message="Lumos stopped"
+    fi
+    release_lock
   fi
+  echo "${message}"
 }
 
-# Prints `1h 59m`, `12m`, `<1m` or `watch` for prompts; nothing if inactive.
+# Prints `1h 59m`, `12m`, `<1m`, `w-<PID>` or `r-<PID>` for prompts; empty if
+# idle.
 print_short_status() {
   local remaining
 
   read_session || return 0
   remaining=$((session_value - $(date +%s)))
-  if [[ "${session_kind}" == "watch" ]]; then
-    echo "watch"
+  if [[ "${session_kind}" != "timed" ]]; then
+    echo "${session_kind:0:1}-${session_value}"
   elif ((remaining >= 3600)); then
     echo "$((remaining / 3600))h $((remaining % 3600 / 60))m"
   elif ((remaining >= 60)); then
@@ -361,7 +393,7 @@ print_short_status() {
 
 # Shows the session; `--short` prints only the compact form.
 command_status() {
-  local now remaining
+  local now activity
 
   if [[ "${1:-}" == "--short" && $# -eq 1 ]]; then
     print_short_status
@@ -380,14 +412,12 @@ command_status() {
   fi
 
   now="$(date +%s)"
-  if [[ "${session_kind}" == "timed" ]]; then
-    remaining="$(format_remaining $((session_value - now)))"
-    echo "Lumos active: ${remaining} remaining" \
-      "(PID ${session_pid}, ${session_flags})"
-  else
-    echo "Lumos active: watching PID ${session_value}" \
-      "(PID ${session_pid}, ${session_flags})"
-  fi
+  case "${session_kind}" in
+    timed) activity="$(format_remaining $((session_value - now))) remaining" ;;
+    watch) activity="watching PID ${session_value}" ;;
+    run) activity="running a command" ;;
+  esac
+  echo "Lumos active: ${activity} (PID ${session_pid}, ${session_flags})"
 }
 
 # Stays awake with `-i` for the duration `${1}` (`12h` by default), then dims

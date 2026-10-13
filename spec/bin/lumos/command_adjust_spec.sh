@@ -145,23 +145,30 @@ Describe 'command_adjust'
     The stderr should eq 'lumos: There is no active timed session to adjust.'
   End
 
-  It 'fails on a watch session and leaves it alone'
-    spawn_fake_process
-    write_session_state "${LUMOS_FAKE_PID} watch 4242 -i"
-    mock_kill
-    adjust_watch_session_and_report_state() {
-      local status=0
-      command_adjust 30m || status=$?
-      report_state_and_kills
-      return "${status}"
-    }
+  Describe 'session that is not timed'
+    Parameters
+      watch
+      run
+    End
 
-    When call adjust_watch_session_and_report_state
+    It "fails on a $1 session and leaves it alone"
+      spawn_fake_process
+      write_session_state "${LUMOS_FAKE_PID} $1 4242 -i"
+      mock_kill
+      adjust_untimed_session_and_report_state() {
+        local status=0
+        command_adjust 30m || status=$?
+        report_state_and_kills
+        return "${status}"
+      }
 
-    The status should be failure
-    The stderr should eq 'lumos: There is no active timed session to adjust.'
-    The line 1 of output should eq 'state=present'
-    The line 2 of output should eq 'kills=0'
+      When call adjust_untimed_session_and_report_state
+
+      The status should be failure
+      The stderr should eq 'lumos: There is no active timed session to adjust.'
+      The line 1 of output should eq 'state=present'
+      The line 2 of output should eq 'kills=0'
+    End
   End
 
   Describe 'invalid adjustments'
