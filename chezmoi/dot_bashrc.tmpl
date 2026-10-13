@@ -18,10 +18,13 @@ HISTCONTROL="ignoreboth"
 shopt -s histappend
 export HISTSIZE="2000"
 export HISTFILESIZE="10000"
-# Share history between all bash sessions using custom script.
-# To revert previous behavior, use the following command:
-# `history -a; history -r; $PROMPT_COMMAND`
-export PROMPT_COMMAND="bash ${HOME}/dotfiles/bin/manage_bash_history.sh"
+# Share history between all bash sessions using a `PROMPT_COMMAND` hook.
+# For plain sharing without session-first ordering, use:
+# `PROMPT_COMMAND="history -a; history -c; history -r"`
+if [[ -r "${HOME}/dotfiles/bin/history.sh" ]]; then
+  # shellcheck source=/dev/null  # External file, may not be accessible
+  source "${HOME}/dotfiles/bin/history.sh"
+fi
 
 # Check the window size after each command and update it, if necessary.
 shopt -s checkwinsize

@@ -25,4 +25,4 @@ jobs:
       - name: "Lint and fix"
         run: uv tool run pre-commit run --all-files
       - name: "Test shell scripts"
-        run: make test-bin
+        run: make test

@@ -33,7 +33,8 @@ workflows for AI agents working on this `dotfiles` repository.
 
 ## 3. Directory Structure Map
 
-- `bin/`: Utility scripts added to `${PATH}`.
+- `bin/`: Utility scripts added to `${PATH}`. `bin/history.sh` is the
+  exception: sourced from `.bashrc`, errors when executed.
 - `spec/`: Tests for `bin/` scripts (ShellSpec).
 - `nvim/`: Neovim configuration (symlinked to `~/.config/nvim`).
 - `.vim/`: Vim configuration (symlinked to `~/.vim`).

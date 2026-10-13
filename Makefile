@@ -116,7 +116,7 @@ lint-fix: lint-yaml lint-fix-shell-scripts lint-fix-markdown \
 #: Test the project's binaries.
 .PHONY: test-bin
 test-bin:
-	@SHELL="/usr/bin/env bash" shellspec $(EXTRA_ARGS)
+	@SHELL="/usr/bin/env bash" shellspec $(or $(EXTRA_ARGS),spec/bin)
 
 #: Run all project tests.
 .PHONY: test
