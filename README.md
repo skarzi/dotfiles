@@ -20,6 +20,37 @@ git clone https://github.com/skarzi/dotfiles.git ~/dotfiles
 chezmoi init --apply --verbose --source ~/dotfiles/chezmoi
 ```
 
+## Manual Actions
+
+Steps `chezmoi` cannot automate. Perform them after `chezmoi init --apply`.
+
+### macOS: grant Alacritty Full Disk Access
+
+Required to access protected folders such as `~/Downloads` from Alacritty and
+tmux. This permission **cannot** be granted through `chezmoi` or macOS
+`defaults`.
+
+1. Install Alacritty and launch it once.
+2. Open `System Settings → Privacy & Security → Full Disk Access`:
+
+  ```bash
+  open "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"
+   ```
+
+1. Click `+`, select Alacritty, and enable its toggle.
+2. Fully quit Alacritty (`⌘Q`) and reopen it.
+3. Verify access, both directly and inside tmux:
+
+  ```bash
+  ls ~/Downloads
+  ```
+
+If access stops working despite the toggle being enabled, remove Alacritty
+from the list, add it again, and relaunch it.
+
+Existing tmux servers may also need restarting. Save your work first:
+`tmux kill-server` terminates all sessions and their running processes.
+
 ## Local Development
 
 Local development requires [mise](https://mise.jdx.dev/).
