@@ -42,6 +42,9 @@ function M.setup()
             [".*%.ini%.example"] = "dosini",
             [".*%.ini%.sample"] = "dosini",
             [".*%.ini%.ex"] = "dosini",
+            -- Chezmoi templates.
+            [".*/chezmoi/.*%.tmpl"] = "chezmoitmpl",
+            [".*/%.chezmoitemplates/.*"] = "chezmoitmpl",
         },
     })
 end
