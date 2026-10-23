@@ -15,7 +15,7 @@ return {
                 yaml = { "yamllint" },
                 make = { "checkmake" },
                 ["yaml.ghaction"] = { "yamllint", "actionlint" },
-                ["yaml.ansible"] = { "yamllint", "ansible-lint" },
+                ["yaml.ansible"] = { "yamllint", "ansible_lint" },
                 javascript = { "eslint_d" },
                 typescript = { "eslint_d" },
                 javascriptreact = { "eslint_d" },
@@ -23,6 +23,21 @@ return {
                 vue = { "eslint_d" },
             }
 
+            ---@param linter lint.Linter Linter instance to check.
+            ---@return boolean is_installed Information if linter is installed.
+            local function is_installed(linter)
+                local cmd = linter.cmd
+                if type(cmd) == "function" then
+                    local ok, resolved_cmd = pcall(cmd)
+                    if not ok then
+                        return false
+                    end
+                    cmd = resolved_cmd
+                end
+                return type(cmd) == "string" and vim.fn.executable(cmd) == 1
+            end
+
+            local lint_opts = { filter = is_installed }
             local lint_augroup =
                 vim.api.nvim_create_augroup("lint", { clear = true })
             local projects = require("config.projects")
@@ -36,13 +51,13 @@ return {
                         if projects.should_disable_tools(event.buf) then
                             return
                         end
-                        lint.try_lint()
+                        lint.try_lint(nil, lint_opts)
                     end,
                 }
             )
 
             vim.keymap.set("n", "<F7>", function()
-                lint.try_lint()
+                lint.try_lint(nil, lint_opts)
             end, { desc = "Lint current buffer" })
         end,
     },
