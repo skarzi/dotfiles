@@ -82,5 +82,5 @@ pre-commit run --all-files
 To run tests for bash scripts:
 
 ```bash
-make test-bin
+make test
 ```

@@ -113,11 +113,6 @@ lint-fix: lint-yaml lint-fix-shell-scripts lint-fix-markdown \
 	lint-github-actions lint-pre-commit-hook-config lint-fix-lua \
 	lint-fix-objective-c lint-ssh-config lint-fix-toml
 
-#: Test the project's binaries.
-.PHONY: test-bin
-test-bin:
-	@SHELL="/usr/bin/env bash" shellspec $(or $(EXTRA_ARGS),spec/bin)
-
 #: Run all project tests.
 .PHONY: test
 test:
