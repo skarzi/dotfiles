@@ -19,7 +19,8 @@ workflows for AI agents working on this `dotfiles` repository.
 - **Shell:** Bash (assumes Bash 5.3+ features).
 - **Management:** `.bashrc` sources modular files.
 - **Scripts:** Located in `bin/`.
-- **Testing:** `shellspec` is used for unit testing shell scripts in `spec/`.
+- **Testing:** `shellspec`, in `spec/`. Rules are in
+  [`spec/AGENTS.md`](spec/AGENTS.md).
 
 ### Editor Configuration
 
@@ -35,7 +36,7 @@ workflows for AI agents working on this `dotfiles` repository.
 
 - `bin/`: Utility scripts added to `${PATH}`. `bin/history.sh` is the
   exception: sourced from `.bashrc`, errors when executed.
-- `spec/`: Tests for `bin/` scripts (ShellSpec).
+- `spec/`: ShellSpec tests. Rules are in [`spec/AGENTS.md`](spec/AGENTS.md).
 - `nvim/`: Neovim configuration (symlinked to `~/.config/nvim`).
 - `.vim/`: Vim configuration (symlinked to `~/.vim`).
 - `.tmux/`: Tmux configuration and session management.
@@ -101,6 +102,7 @@ Refer to `nvim/vim-to-neovim-migration-plan.md` for specific architectural decis
 - **Lua:** Follow [`.agents/lua-styleguide.md`](.agents/lua-styleguide.md).
   Strictly `selene` and `stylua` compliant.
 - **Skills:** Follow [`.agents/skills-styleguide.md`](.agents/skills-styleguide.md).
+- **Tests:** Follow [`spec/AGENTS.md`](spec/AGENTS.md).
 
 ## 6. Specific Constraints
 
