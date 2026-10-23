@@ -23,18 +23,20 @@ Describe 'command_start'
 
   Describe 'with a display flag'
     Parameters
-      "-d"
-      "--display"
+      "30m" "-d"
+      "30m" "--display"
+      "-d" "30m"
+      "--display" "30m"
     End
 
-    It "adds the display flag with $1"
+    It "adds the display flag with $1 $2"
       start_with_flag_and_show_launch() {
-        command_start 30m "$1"
+        command_start "$1" "$2"
         caffeinate_log
         cat "$(state_file)"
       }
 
-      When call start_with_flag_and_show_launch "$1"
+      When call start_with_flag_and_show_launch "$1" "$2"
 
       The line 1 of output should eq 'Lumos started: 30m (-i -d)'
       The line 2 of output should eq '-i -d -t 1800'

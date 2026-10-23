@@ -22,17 +22,28 @@ Describe 'command_watch'
     The line 3 of output should match pattern "[0-9]* watch ${LUMOS_FAKE_PID} -i"
   End
 
-  It 'adds the display flag'
-    spawn_fake_process
-    watch_with_display_and_show_caffeinate_log() {
-      command_watch "${LUMOS_FAKE_PID}" -d
-      caffeinate_log
-    }
+  Describe 'with a display flag'
+    Parameters
+      after
+      before
+    End
 
-    When call watch_with_display_and_show_caffeinate_log
+    It "adds the display flag $1 the PID"
+      spawn_fake_process
+      watch_with_display_and_show_caffeinate_log() {
+        if [[ "$1" == "before" ]]; then
+          command_watch -d "${LUMOS_FAKE_PID}"
+        else
+          command_watch "${LUMOS_FAKE_PID}" -d
+        fi
+        caffeinate_log
+      }
 
-    The line 1 of output should eq "Lumos watching PID ${LUMOS_FAKE_PID} (-i -d)"
-    The line 2 of output should eq "-i -d -w ${LUMOS_FAKE_PID}"
+      When call watch_with_display_and_show_caffeinate_log "$1"
+
+      The line 1 of output should eq "Lumos watching PID ${LUMOS_FAKE_PID} (-i -d)"
+      The line 2 of output should eq "-i -d -w ${LUMOS_FAKE_PID}"
+    End
   End
 
   It 'rejects a dead PID'

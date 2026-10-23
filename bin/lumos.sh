@@ -14,9 +14,9 @@ command_help() {
   cat << 'EOF'
 Usage: lumos <command> [options]
 
-  lumos start <duration> [-d|--display]     Start a timed session.
+  lumos start [-d|--display] <duration>     Start a timed session.
   lumos adjust <+|-duration>                Add or remove time (timed sessions).
-  lumos watch <pid> [-d|--display]          Stay awake while <pid> is running.
+  lumos watch [-d|--display] <pid>          Stay awake while <pid> is running.
   lumos run [-d|--display] -- <command...>  Stay awake while <command> runs.
   lumos stop                                Stop the session.
   lumos status [--short]                    Show the session (--short: compact).
@@ -73,21 +73,27 @@ format_remaining() {
   fi
 }
 
-# Sets `display_flags` to `-i` or `-i -d` from `-d|--display` in `${@}`.
-# Returns `1` on any other argument.
-parse_display() {
+# Sets `display_flags` to `-i` or `-i -d` and `positional_args` to the other
+# words in `${@}`. Returns `1` on any other option.
+split_display_flag() {
   local argument
+  local -a positionals=()
 
   display_flags="-i"
+  positional_args=()
   for argument in "$@"; do
     case "${argument}" in
       -d | --display) display_flags="-i -d" ;;
-      *)
+      -*)
         report_bad_arguments "Unknown option: ${argument}."
         return 1
         ;;
+      *) positionals+=("${argument}") ;;
     esac
   done
+  if ((${#positionals[@]} > 0)); then
+    positional_args=("${positionals[@]}")
+  fi
   return 0
 }
 
@@ -250,15 +256,20 @@ bedtime_start() {
   "${HOME}/dotfiles/bin/keyboard_light.sh" set 0 || :
 }
 
-# Starts a timed session (`${1}` duration, optional `-d|--display`).
+# Starts a timed session (duration, optional `-d|--display`).
 command_start() {
-  local duration="${1:-}" seconds flags now
+  local duration seconds flags now
 
+  split_display_flag "$@" || return 1
+  if [[ ${#positional_args[@]} -gt 1 ]]; then
+    report_bad_arguments "Unknown option: ${positional_args[1]}."
+    return 1
+  fi
+  duration="${positional_args[0]:-}"
   if ! seconds="$(parse_duration "${duration}")"; then
     report_bad_arguments "Duration must look like 30s, 15m or 2h."
     return 1
   fi
-  parse_display "${@:2}" || return 1
   flags="${display_flags}"
 
   now="$(date +%s)"
@@ -313,15 +324,20 @@ command_adjust() {
     "$(format_remaining "${remaining}") remaining (${flags})"
 }
 
-# Stays awake while the PID `${1}` runs (optional `-d|--display`).
+# Stays awake while a PID runs (optional `-d|--display`).
 command_watch() {
-  local pid="${1:-}" flags pid_pattern='^[1-9][0-9]{0,9}$'
+  local pid flags pid_pattern='^[1-9][0-9]{0,9}$'
 
+  split_display_flag "$@" || return 1
+  if [[ ${#positional_args[@]} -gt 1 ]]; then
+    report_bad_arguments "Unknown option: ${positional_args[1]}."
+    return 1
+  fi
+  pid="${positional_args[0]:-}"
   if ! [[ ${pid} =~ ${pid_pattern} ]] || ! ps -p "${pid}" > /dev/null 2>&1; then
     report_bad_arguments "PID must belong to a running process."
     return 1
   fi
-  parse_display "${@:2}" || return 1
   flags="${display_flags}"
 
   launch watch "${pid}" "${flags}"
