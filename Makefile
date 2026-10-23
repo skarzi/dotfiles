@@ -66,7 +66,7 @@ lint-yaml:
 #: Lint and fix shell scripts.
 .PHONY: lint-fix-shell-scripts
 lint-fix-shell-scripts:
-	@_DEFAULT_FILES="$$(find . -type f -name '*.sh' | grep -Ev '(\.vim/bundle/|spec/)' | paste -sd ' ' -)" \
+	@_DEFAULT_FILES="$$(find . -type f \( -name '*.sh' -o -name '*.bash' \) | grep -Ev '(\.vim/bundle/|spec/)' | paste -sd ' ' -)" \
 	&& shellcheck $(or $(EXTRA_ARGS),$${_DEFAULT_FILES}) \
 	&& shfmt --write --diff $(or $(EXTRA_ARGS),$${_DEFAULT_FILES})
 
@@ -120,7 +120,8 @@ test-bin:
 
 #: Run all project tests.
 .PHONY: test
-test: test-bin
+test:
+	@SHELL="/usr/bin/env bash" shellspec $(or $(EXTRA_ARGS),spec)
 
 #: Run GitHub Actions Workflow(s) locally using `act`.
 .PHONY: act

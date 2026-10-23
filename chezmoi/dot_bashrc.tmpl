@@ -82,11 +82,13 @@ add_to_path "${HOMEBREW_PREFIX}/sbin" "true"
 
 # SHELL ENHANCEMENTS
 # BASH completion
-{{- if eq .chezmoi.os "linux" }}
-if ! shopt -oq posix; then
-  if [[ -f "${HOMEBREW_PREFIX}/share/bash-completion/bash_completion" ]]; then
+# User dirs, searched before Homebrew's own completions. Ours first.
+# On Linux, /etc/bash.bashrc has usually loaded bash-completion already.
+export BASH_COMPLETION_USER_DIR="${HOME}/.bash_completion.d:${XDG_DATA_HOME:-${HOME}/.local/share}/bash-completion"
+if ! shopt -oq posix && [[ -z "${BASH_COMPLETION_VERSINFO-}" ]]; then
+  if [[ -s "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
     # shellcheck source=/dev/null  # System file, may not be accessible
-    source "${HOMEBREW_PREFIX}/share/bash-completion/bash_completion"
+    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
   elif [[ -f /usr/share/bash-completion/bash_completion ]]; then
     # shellcheck source=/dev/null  # System file, may not be accessible
     source /usr/share/bash-completion/bash_completion
@@ -95,21 +97,6 @@ if ! shopt -oq posix; then
     source /etc/bash_completion
   fi
 fi
-if [[ -d "${HOME}/.bash_completion.d" ]]; then
-  # shellcheck source=/dev/null  # Wildcard pattern, files may not be accessible
-  for bcfile in "${HOME}"/.bash_completion.d/*; do
-    if [[ -r "${bcfile}" ]]; then
-      source "${bcfile}"
-    fi
-  done
-fi
-{{- else }}
-export BASH_COMPLETION_USER_DIR="${HOME}/.bash_completion.d"
-if [[ -s "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
-  # shellcheck source=/dev/null  # System file, may not be accessible
-  source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
-fi
-{{- end }}
 
 # TOOLS
 # mise
