@@ -21,6 +21,21 @@ Describe 'command_start'
     The line 3 of output should match pattern "[0-9]* timed 1791601200 -i"
   End
 
+  It 'starts caffeinate with days duration'
+    start_and_show_launch() {
+      command_start 2d
+      caffeinate_log
+      cat "$(state_file)"
+    }
+
+    When call start_and_show_launch
+
+    The status should be success
+    The line 1 of output should eq 'Lumos started: 2d (-i)'
+    The line 2 of output should eq '-i -t 172800'
+    The line 3 of output should match pattern "[0-9]* timed 1791770400 -i"
+  End
+
   Describe 'with a display flag'
     Parameters
       "30m" "-d"
@@ -48,7 +63,7 @@ Describe 'command_start'
     When call command_start 1h30m
 
     The status should be failure
-    The stderr should include 'lumos: Duration must look like 30s, 15m or 2h.'
+    The stderr should include 'lumos: Duration must look like 30s, 15m, 2h or 1d.'
     The stderr should include 'Usage:'
   End
 

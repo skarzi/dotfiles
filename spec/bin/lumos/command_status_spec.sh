@@ -15,6 +15,9 @@ Describe 'command_status'
 
   Describe 'timed session'
     Parameters
+      172800 "2d 0h"
+      90000 "1d 1h"
+      86400 "1d 0h"
       5400 "1h 30m"
       1 "0m 1s"
       3600 "1h 0m"
@@ -67,6 +70,10 @@ Describe 'command_status'
     End
 
     Parameters
+      172800 "2d 0h"
+      90000 "1d 1h"
+      86400 "1d 0h"
+      86399 "23h 59m"
       7200 "2h 0m"
       5400 "1h 30m"
       3600 "1h 0m"

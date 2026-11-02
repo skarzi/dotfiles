@@ -63,6 +63,17 @@ Describe 'command_adjust'
     End
   End
 
+  It 'adds days to a timed session'
+    spawn_fake_process
+    write_session_state "${LUMOS_FAKE_PID} timed $((LUMOS_FAKE_NOW + 3600)) -i"
+    mock_kill
+
+    When call command_adjust 1d
+
+    The status should be success
+    The output should eq 'Lumos adjusted: +1d, 1d 1h remaining (-i)'
+  End
+
   It 'accepts an adjustment that leaves one second'
     spawn_fake_process
     write_session_state "${LUMOS_FAKE_PID} timed $((LUMOS_FAKE_NOW + 61)) -i"
@@ -109,6 +120,9 @@ Describe 'command_adjust'
       "-0m"
       "0s"
       "0h"
+      "0d"
+      "+0d"
+      "-0d"
     End
 
     It "skips $1 with a notice and leaves the session untouched"
@@ -189,7 +203,7 @@ Describe 'command_adjust'
       When call command_adjust "$1"
 
       The status should be failure
-      The stderr should include 'lumos: Adjustment must look like +30m, -15m or 2h.'
+      The stderr should include 'lumos: Adjustment must look like +30m, -15m, 2h or 1d.'
       The stderr should include 'Usage:'
     End
   End

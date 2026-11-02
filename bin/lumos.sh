@@ -23,7 +23,7 @@ Usage: lumos <command> [options]
   lumos bedtime [duration]                  Dim the lights, stay awake (12h).
   lumos help                                Show this help.
 
-Durations: 30s, 15m, 2h. `-d` also keeps the display on. `stop` does not
+Durations: 30s, 15m, 2h, 1d. `-d` also keeps the display on. `stop` does not
 restore brightness. `run` fails while a session is active. `-i` does not block
 clamshell sleep on battery (`caffeinate -s` needs AC power).
 EOF
@@ -45,10 +45,10 @@ state_file() {
   printf '%s\n' "${XDG_STATE_HOME:-${HOME}/.local/state}/lumos/session"
 }
 
-# Prints the seconds in a duration like `30s`, `15m` or `2h`; returns `1` if
-# `${1}` is not one.
+# Prints the seconds in a duration like `30s`, `15m`, `2h` or `1d`; returns
+# `1` if `${1}` is not one.
 parse_duration() {
-  local duration_text="${1:-}" duration_pattern='^[1-9][0-9]{0,5}[smh]$'
+  local duration_text="${1:-}" duration_pattern='^[1-9][0-9]{0,5}[smhd]$'
   local amount="${duration_text%?}"
 
   if ! [[ ${duration_text} =~ ${duration_pattern} ]]; then
@@ -58,15 +58,19 @@ parse_duration() {
     *s) echo "${amount}" ;;
     *m) echo $((amount * 60)) ;;
     *h) echo $((amount * 3600)) ;;
+    *d) echo $((amount * 86400)) ;;
   esac
   return 0
 }
 
-# Prints seconds `${1}` as `Xh Ym` (1 hour or more) or `Xm Ys`.
+# Prints seconds `${1}` as `Xd Yh` (1 day or more), `Xh Ym` (1 hour or more) or
+# `Xm Ys`.
 format_remaining() {
   local seconds="${1}"
 
-  if ((seconds >= 3600)); then
+  if ((seconds >= 86400)); then
+    echo "$((seconds / 86400))d $((seconds % 86400 / 3600))h"
+  elif ((seconds >= 3600)); then
     echo "$((seconds / 3600))h $((seconds % 3600 / 60))m"
   else
     echo "$((seconds / 60))m $((seconds % 60))s"
@@ -267,7 +271,7 @@ command_start() {
   fi
   duration="${positional_args[0]:-}"
   if ! seconds="$(parse_duration "${duration}")"; then
-    report_bad_arguments "Duration must look like 30s, 15m or 2h."
+    report_bad_arguments "Duration must look like 30s, 15m, 2h or 1d."
     return 1
   fi
   flags="${display_flags}"
@@ -295,13 +299,13 @@ command_adjust() {
       ;;
   esac
   case "${argument}" in
-    0s | 0m | 0h)
+    0s | 0m | 0h | 0d)
       echo "Lumos unchanged: the adjustment is zero."
       return 0
       ;;
   esac
   if ! seconds="$(parse_duration "${argument}")"; then
-    report_bad_arguments "Adjustment must look like +30m, -15m or 2h."
+    report_bad_arguments "Adjustment must look like +30m, -15m, 2h or 1d."
     return 1
   fi
   if ! load_session || [[ "${session_kind}" != "timed" ]]; then
@@ -389,8 +393,8 @@ command_stop() {
   echo "${message}"
 }
 
-# Prints `1h 59m`, `12m`, `<1m`, `w-<PID>` or `r-<PID>` for prompts; empty if
-# idle.
+# Prints `1d 2h`, `1h 59m`, `12m`, `<1m`, `w-<PID>` or `r-<PID>` for prompts;
+# empty if idle.
 print_short_status() {
   local remaining
 
@@ -398,6 +402,8 @@ print_short_status() {
   remaining=$((session_value - $(date +%s)))
   if [[ "${session_kind}" != "timed" ]]; then
     echo "${session_kind:0:1}-${session_value}"
+  elif ((remaining >= 86400)); then
+    echo "$((remaining / 86400))d $((remaining % 86400 / 3600))h"
   elif ((remaining >= 3600)); then
     echo "$((remaining / 3600))h $((remaining % 3600 / 60))m"
   elif ((remaining >= 60)); then
@@ -448,7 +454,7 @@ command_bedtime() {
     return 1
   fi
   if ! seconds="$(parse_duration "${duration}")"; then
-    report_bad_arguments "Duration must look like 30s, 15m or 2h."
+    report_bad_arguments "Duration must look like 30s, 15m, 2h or 1d."
     return 1
   fi
   now="$(date +%s)"

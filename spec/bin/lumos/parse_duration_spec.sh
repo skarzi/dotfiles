@@ -13,6 +13,8 @@ Describe 'parse_duration'
       "90m" "5400"
       "2h" "7200"
       "12h" "43200"
+      "1d" "86400"
+      "5d" "432000"
       "999999s" "999999"
     End
 
@@ -27,10 +29,11 @@ Describe 'parse_duration'
   Describe 'invalid durations'
     Parameters
       "0m"
+      "0d"
       "-5m"
       "1.5h"
       "1h30m"
-      "5d"
+      "5w"
       "05m"
       ""
       "m"

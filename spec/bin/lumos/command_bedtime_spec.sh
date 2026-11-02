@@ -39,6 +39,7 @@ Describe 'command_bedtime'
 
   Describe 'with a duration'
     Parameters
+      1d 86400
       8h 28800
       90m 5400
       30s 30
@@ -59,7 +60,8 @@ Describe 'command_bedtime'
   Describe 'with a bad duration'
     Parameters
       "0m"
-      "5d"
+      "0d"
+      "5w"
       "abc"
       "-5m"
       "1h30m"
@@ -72,7 +74,7 @@ Describe 'command_bedtime'
       When call bedtime_and_report_state "$1"
 
       The status should be failure
-      The stderr should include 'lumos: Duration must look like 30s, 15m or 2h.'
+      The stderr should include 'lumos: Duration must look like 30s, 15m, 2h or 1d.'
       The stderr should include 'Usage:'
       The output should not include 'bedtime_start called'
       The output should include 'state=absent'
