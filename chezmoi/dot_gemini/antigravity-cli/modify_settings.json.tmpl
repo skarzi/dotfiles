@@ -9,6 +9,7 @@ BASE_CONFIG=$(
   cat <<EOF
 {
   "artifactReviewPolicy": "agent-decides",
+  "editorMode": "vim",
   "notifications": true,
   "permissions": {
     "allow": [
@@ -22,9 +23,11 @@ BASE_CONFIG=$(
       "command(gh pr status)",
       "command(gh pr view)",
       "command(git diff)",
+      "command(git grep)",
       "command(git log)",
       "command(git ls-files)",
       "command(git status)",
+      "command(which)",
       "mcp(MCP_DOCKER/get-library-docs)",
       "mcp(MCP_DOCKER/perplexity_ask)",
       "mcp(MCP_DOCKER/perplexity_reason)",
