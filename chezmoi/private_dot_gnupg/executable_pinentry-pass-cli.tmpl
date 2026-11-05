@@ -1,0 +1,114 @@
+#!/usr/bin/env bash
+# shellcheck shell=bash
+
+# Pinentry that reads the GPG key passphrase from Proton Pass CLI (`pass-cli`).
+#
+# The passphrase is fetched before the Assuan greeting is printed.
+# On any fetch failure nothing has been written to stdout yet, so we
+# can `exec` the curses pinentry and let it speak Assuan untouched.
+
+set -u
+
+readonly PASS_URI="{{ .pass_uri_prefix }}/GitHub work GPG key/Password"
+readonly FALLBACK_PINENTRY='{{ lookPath "pinentry-curses" }}'
+# Assuan error codes: `(GPG_ERR_SOURCE_PINENTRY << 24) | code`. See `gpg-error`.
+readonly ERR_CANCELLED=83886179     # 99 - operation cancelled.
+readonly ERR_NOT_CONFIRMED=83886194 # 114 - not confirmed.
+
+# Print an Assuan success response.
+# Arguments:
+#   ${1}: Optional success message.
+# Outputs:
+#   Writes the response line to stdout.
+report_success() {
+  if [[ $# -gt 0 ]]; then
+    printf 'OK %s\n' "${1}"
+  else
+    printf 'OK\n'
+  fi
+  return 0
+}
+
+# Print an Assuan error response.
+# Arguments:
+#   ${1}: Numeric Assuan error code.
+#   ${2}: Human-readable error description.
+# Outputs:
+#   Writes the response line to stdout.
+report_error() {
+  printf 'ERR %s %s\n' "${1}" "${2}"
+  return 0
+}
+
+# Percent-encode a value for an Assuan data line.
+# Arguments:
+#   ${1}: Raw value to encode.
+# Outputs:
+#   Writes the encoded value to stdout.
+encode_data_line() {
+  local value="${1}"
+  value="${value//\%/%25}"
+  value="${value//$'\r'/%0D}"
+  value="${value//$'\n'/%0A}"
+  value="${value// /%20}"
+  printf '%s' "${value}"
+  return 0
+}
+
+# Fetch the passphrase from Proton Pass CLI (`pass-cli`).
+# Outputs:
+#   Writes the passphrase to stdout, without a trailing newline.
+# Returns:
+#   `0` on success, `1` if `pass-cli` is missing or the fetch failed.
+fetch_passphrase() {
+  if ! command -v pass-cli >/dev/null 2>&1; then
+    return 1
+  fi
+  if command -v timeout >/dev/null 2>&1; then
+    # 15s cap so a hung CLI cannot block signing forever.
+    timeout 15 pass-cli item view "${PASS_URI}" 2>/dev/null || return 1
+  else
+    pass-cli item view "${PASS_URI}" 2>/dev/null || return 1
+  fi
+  return 0
+}
+
+pin=""
+# Command substitution strips the trailing newline `pass-cli` prints.
+pin="$(fetch_passphrase)" || pin=""
+
+if [[ -z "${pin}" ]]; then
+  exec "${FALLBACK_PINENTRY}" "$@"
+fi
+
+report_success "pinentry-pass-cli ready"
+
+pin_served="false"
+while IFS= read -r line || [[ -n "${line}" ]]; do
+  line="${line%$'\r'}"
+  case "${line}" in
+  GETPIN)
+    if [[ "${pin_served}" == "true" ]]; then
+      # The agent rejected this passphrase once, serving it again would loop.
+      report_error "${ERR_CANCELLED}" "cancelled"
+    else
+      pin_served="true"
+      printf 'D %s\n' "$(encode_data_line "${pin}")"
+      report_success
+    fi
+    ;;
+  CONFIRM* | MESSAGE*)
+    report_error "${ERR_NOT_CONFIRMED}" "not confirmed"
+    ;;
+  BYE)
+    report_success "closing connection"
+    break
+    ;;
+  *)
+    report_success
+    ;;
+  esac
+done
+
+pin=""
+exit 0
