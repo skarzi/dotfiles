@@ -1,6 +1,6 @@
 # shellcheck shell=bash
-Include "${SHELLSPEC_PROJECT_ROOT}/bin/lumos.sh"
-Include "${SHELLSPEC_PROJECT_ROOT}/spec/bin/lumos/spec_helper.sh"
+Include "${SHELLSPEC_PROJECT_ROOT}/bin/darwin/lumos.sh"
+Include "${SHELLSPEC_PROJECT_ROOT}/spec/bin/darwin/lumos/spec_helper.sh"
 
 # The fake `caffeinate` only logs: `command_run` starts it with `-w` on the
 # PID of lumos and runs the command itself as a normal foreground child.
@@ -186,7 +186,7 @@ Describe 'command_run'
   It 'leaves the umask of the caller to the command'
     umask 022
     run_lumos_script_printing_umask() {
-      "${SHELLSPEC_PROJECT_ROOT}/bin/lumos.sh" run -- sh -c umask
+      "${SHELLSPEC_PROJECT_ROOT}/bin/darwin/lumos.sh" run -- sh -c umask
     }
 
     When run run_lumos_script_printing_umask

@@ -14,7 +14,7 @@ to install prerequisites (`brew`, `chezmoi`, `rage`, `pass-cli`), populate
 git clone https://github.com/skarzi/dotfiles.git ~/dotfiles
 
 # Run the bootstrap script.
-./bin/bootstrap_chezmoi.sh
+./bin/darwin/bootstrap_chezmoi.sh
 
 # Apply dotfiles.
 chezmoi init --apply --verbose --source ~/dotfiles/chezmoi

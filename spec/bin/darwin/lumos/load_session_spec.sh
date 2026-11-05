@@ -1,6 +1,6 @@
 # shellcheck shell=bash
-Include "${SHELLSPEC_PROJECT_ROOT}/bin/lumos.sh"
-Include "${SHELLSPEC_PROJECT_ROOT}/spec/bin/lumos/spec_helper.sh"
+Include "${SHELLSPEC_PROJECT_ROOT}/bin/darwin/lumos.sh"
+Include "${SHELLSPEC_PROJECT_ROOT}/spec/bin/darwin/lumos/spec_helper.sh"
 
 # `load_session` and `read_session` must only be called inside `if`, so they
 # are exercised through `command_stop` (repairs) and `command_status` (reads).
@@ -126,8 +126,8 @@ Describe 'load_session'
 
   Describe 'process before exec'
     Parameters
-      "bash /Users/me/dotfiles/bin/lumos.sh start 1h"
-      "/bin/bash /Users/me/dotfiles/bin/lumos.sh bedtime"
+      "bash /Users/me/dotfiles/bin/darwin/lumos.sh start 1h"
+      "/bin/bash /Users/me/dotfiles/bin/darwin/lumos.sh bedtime"
       "/opt/homebrew/bin/bash /x/lumos.sh run -- ls"
     End
 

@@ -256,8 +256,8 @@ launch() {
 # Dims the display and the keyboard; edit to taste. Failures are ignored so
 # dimming never blocks the session. Restore manually with each `toggle`.
 bedtime_start() {
-  "${HOME}/dotfiles/bin/display_light.sh" set 0 || :
-  "${HOME}/dotfiles/bin/keyboard_light.sh" set 0 || :
+  "${HOME}/dotfiles/bin/darwin/display_light.sh" set 0 || :
+  "${HOME}/dotfiles/bin/darwin/keyboard_light.sh" set 0 || :
 }
 
 # Starts a timed session (duration, optional `-d|--display`).

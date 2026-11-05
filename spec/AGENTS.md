@@ -4,9 +4,12 @@ ShellSpec tests live in `spec/`. `make test` runs them.
 
 ## Layout
 
-- `spec/bin/<script>/` tests `bin/<script>.sh`. Lumos uses one file per
-  function (`command_start_spec.sh`) and a shared `spec_helper.sh`. A smaller
-  script can stay in one file (`tmux_setup_sessions_spec.sh`).
+- `spec/bin/` mirrors the full path under `bin/`, including the platform
+  subdirectory: `spec/bin/darwin/lumos/` tests `bin/darwin/lumos.sh`, while
+  `spec/bin/tmux_setup_sessions_spec.sh` tests `bin/tmux_setup_sessions.sh`.
+  Lumos uses one file per function (`command_start_spec.sh`) and a shared
+  `spec_helper.sh`. A smaller script can stay in one file
+  (`tmux_setup_sessions_spec.sh`).
 - `spec/chezmoi/` mirrors the path under `chezmoi/`.
 - `spec/spec_helper.sh` is the ShellSpec entry required by `.shellspec`. It
   does not hold example helpers.

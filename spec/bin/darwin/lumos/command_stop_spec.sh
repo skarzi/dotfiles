@@ -1,6 +1,6 @@
 # shellcheck shell=bash
-Include "${SHELLSPEC_PROJECT_ROOT}/bin/lumos.sh"
-Include "${SHELLSPEC_PROJECT_ROOT}/spec/bin/lumos/spec_helper.sh"
+Include "${SHELLSPEC_PROJECT_ROOT}/bin/darwin/lumos.sh"
+Include "${SHELLSPEC_PROJECT_ROOT}/spec/bin/darwin/lumos/spec_helper.sh"
 
 Describe 'command_stop'
   BeforeEach 'setup_test_environment'

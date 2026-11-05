@@ -1,6 +1,6 @@
 # shellcheck shell=bash
-Include "${SHELLSPEC_PROJECT_ROOT}/bin/lumos.sh"
-Include "${SHELLSPEC_PROJECT_ROOT}/spec/bin/lumos/spec_helper.sh"
+Include "${SHELLSPEC_PROJECT_ROOT}/bin/darwin/lumos.sh"
+Include "${SHELLSPEC_PROJECT_ROOT}/spec/bin/darwin/lumos/spec_helper.sh"
 
 Describe 'command_bedtime'
   BeforeEach 'setup_test_environment'
@@ -107,19 +107,19 @@ Describe 'command_bedtime'
 
   It 'keeps going when the dimming scripts fail, after the session started'
     export LUMOS_TEST_DIRECTORY
-    mkdir -p "${LUMOS_TEST_DIRECTORY}/home/dotfiles/bin"
+    mkdir -p "${LUMOS_TEST_DIRECTORY}/home/dotfiles/bin/darwin"
     for dimmer in display_light.sh keyboard_light.sh; do
-      cat > "${LUMOS_TEST_DIRECTORY}/home/dotfiles/bin/${dimmer}" << 'FAKE'
+      cat > "${LUMOS_TEST_DIRECTORY}/home/dotfiles/bin/darwin/${dimmer}" << 'FAKE'
 #!/bin/sh
 state=absent
 if [ -e "${XDG_STATE_HOME}/lumos/session" ]; then state=present; fi
 echo "$(basename "$0") $* state=${state}" >> "${LUMOS_TEST_DIRECTORY}/dimming.log"
 exit 7
 FAKE
-      chmod +x "${LUMOS_TEST_DIRECTORY}/home/dotfiles/bin/${dimmer}"
+      chmod +x "${LUMOS_TEST_DIRECTORY}/home/dotfiles/bin/darwin/${dimmer}"
     done
     run_lumos_script_bedtime_with_failing_dimmers() {
-      HOME="${LUMOS_TEST_DIRECTORY}/home" "${SHELLSPEC_PROJECT_ROOT}/bin/lumos.sh" bedtime 1h
+      HOME="${LUMOS_TEST_DIRECTORY}/home" "${SHELLSPEC_PROJECT_ROOT}/bin/darwin/lumos.sh" bedtime 1h
     }
 
     When run run_lumos_script_bedtime_with_failing_dimmers

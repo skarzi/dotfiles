@@ -12,4 +12,4 @@ if ! command -v clang >/dev/null 2>&1; then
 fi
 
 echo "Applying macOS text replacements from '~/.config/macos-defaults/text-replacements.plist'..."
-"${HOME}/dotfiles/bin/text_replacements.sh" apply "${HOME}/.config/macos-defaults/text-replacements.plist"
+"${HOME}/dotfiles/bin/darwin/text_replacements.sh" apply "${HOME}/.config/macos-defaults/text-replacements.plist"

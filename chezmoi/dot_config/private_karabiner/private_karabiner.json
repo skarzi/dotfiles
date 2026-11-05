@@ -172,7 +172,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "\"${HOME}/dotfiles/bin/keyboard_light.sh\" toggle; \"${HOME}/dotfiles/bin/display_light.sh\" toggle"
+                                        "shell_command": "\"${HOME}/dotfiles/bin/darwin/keyboard_light.sh\" toggle; \"${HOME}/dotfiles/bin/darwin/display_light.sh\" toggle"
                                     }
                                 ],
                                 "type": "basic"
@@ -185,7 +185,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "\"${HOME}/dotfiles/bin/keyboard_light.sh\" toggle"
+                                        "shell_command": "\"${HOME}/dotfiles/bin/darwin/keyboard_light.sh\" toggle"
                                     }
                                 ],
                                 "type": "basic"
@@ -198,7 +198,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "\"${HOME}/dotfiles/bin/display_light.sh\" toggle"
+                                        "shell_command": "\"${HOME}/dotfiles/bin/darwin/display_light.sh\" toggle"
                                     }
                                 ],
                                 "type": "basic"
@@ -211,7 +211,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "\"${HOME}/dotfiles/bin/lumos.sh\" bedtime 12h"
+                                        "shell_command": "\"${HOME}/dotfiles/bin/darwin/lumos.sh\" bedtime 12h"
                                     }
                                 ],
                                 "type": "basic"
