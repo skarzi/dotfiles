@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# shellcheck shell=bash
+
+set -eufo pipefail
+
+# `text-replacements.plist.tmpl` hash:
+# {{ include "dot_config/macos-defaults/text-replacements.plist.tmpl" | sha256sum }}
+
+if ! command -v clang >/dev/null 2>&1; then
+  echo "Warning: 'clang' not found. Skipping text replacements application."
+  exit 0
+fi
+
+echo "Applying macOS text replacements from '~/.config/macos-defaults/text-replacements.plist'..."
+"${HOME}/dotfiles/bin/text_replacements.sh" apply "${HOME}/.config/macos-defaults/text-replacements.plist"
