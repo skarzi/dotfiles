@@ -1,0 +1,143 @@
+{{- if eq .chezmoi.os "darwin" -}}
+{{- $release := gitHubLatestRelease "alacritty/alacritty" -}}
+{{- $dmgUrl := "" -}}
+{{- range $release.Assets -}}
+  {{- if and (hasPrefix "Alacritty" .Name) (hasSuffix ".dmg" .Name) -}}
+    {{- $dmgUrl = .BrowserDownloadURL -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $dmgUrl -}}
+  {{- fail "Alacritty release DMG asset not found" -}}
+{{- end -}}
+#!/usr/bin/env bash
+# shellcheck shell=bash
+
+# Release: {{ $release.TagName }}.
+
+set -eufo pipefail
+
+_RELEASE_TAG={{ $release.TagName | quote }}
+_DMG_URL={{ $dmgUrl | quote }}
+_TARGET_APP="/Applications/Alacritty.app"
+_TMP_DIR=""
+_MOUNT_DIR=""
+_DMG_FILE=""
+_STAGING_APP=""
+_BACKUP_APP=""
+
+# Clean up temporary files, safely detach disk image, and rollback on failure.
+# Globals:
+#   _TARGET_APP
+#   _BACKUP_APP
+#   _STAGING_APP
+#   _MOUNT_DIR
+#   _TMP_DIR
+#   _DMG_FILE
+# Arguments:
+#   None.
+# Returns:
+#   Original exit code.
+cleanup() {
+  local exit_code=$?
+  set +e
+
+  if [[ -n "${_BACKUP_APP}" && ! -e "${_TARGET_APP}" && -e "${_BACKUP_APP}" ]]; then
+    echo "Restoring previous Alacritty.app from backup..." >&2
+    sudo mv "${_BACKUP_APP}" "${_TARGET_APP}" || true
+  fi
+
+  if [[ -n "${_STAGING_APP}" && -e "${_STAGING_APP}" && "${_STAGING_APP}" == /Applications/.Alacritty.app.staging.* ]]; then
+    sudo rm -rf "${_STAGING_APP}" || true
+  fi
+
+  if [[ -n "${_BACKUP_APP}" && -e "${_BACKUP_APP}" && "${_BACKUP_APP}" == /Applications/.Alacritty.app.backup.* ]]; then
+    sudo rm -rf "${_BACKUP_APP}" || true
+  fi
+
+  if [[ -n "${_MOUNT_DIR}" ]]; then
+    if hdiutil detach "${_MOUNT_DIR}" -quiet 2>/dev/null || hdiutil detach "${_MOUNT_DIR}" -force -quiet 2>/dev/null; then
+      if [[ -n "${_TMP_DIR}" && -d "${_TMP_DIR}" ]]; then
+        rm -rf "${_TMP_DIR}"
+      fi
+    else
+      echo "Warning: Failed to detach ${_MOUNT_DIR}. Preserving mountpoint." >&2
+      if [[ -n "${_DMG_FILE}" && -f "${_DMG_FILE}" ]]; then
+        rm -f "${_DMG_FILE}"
+      fi
+    fi
+  elif [[ -n "${_TMP_DIR}" && -d "${_TMP_DIR}" ]]; then
+    rm -rf "${_TMP_DIR}"
+  fi
+
+  return "${exit_code}"
+}
+
+# Ensure CLI symlink, terminfo definitions, and shell completions are installed.
+# Globals:
+#   _TARGET_APP
+#   HOME
+# Arguments:
+#   None.
+# Returns:
+#   0 on success.
+install_auxiliary_artifacts() {
+  mkdir -p "${HOME}/.local/bin" "${HOME}/.terminfo/61" "${HOME}/.bash_completion.d/completions"
+  ln -sf "${_TARGET_APP}/Contents/MacOS/alacritty" "${HOME}/.local/bin/alacritty"
+  cp -f "${_TARGET_APP}/Contents/Resources/61/"* "${HOME}/.terminfo/61/" 2>/dev/null || true
+  cp -f "${_TARGET_APP}/Contents/Resources/completions/alacritty.bash" "${HOME}/.bash_completion.d/completions/" 2>/dev/null || true
+  return 0
+}
+
+# Exit early if target version is already installed.
+if [[ -d "${_TARGET_APP}" ]]; then
+  _INSTALLED_VERSION="$(defaults read "${_TARGET_APP}/Contents/Info.plist" CFBundleShortVersionString 2>/dev/null || true)"
+  if [[ "${_INSTALLED_VERSION}" == "${_RELEASE_TAG#v}" ]]; then
+    echo "Alacritty ${_INSTALLED_VERSION} is already installed."
+    install_auxiliary_artifacts
+    exit 0
+  fi
+fi
+
+if pgrep -x "Alacritty" >/dev/null 2>&1; then
+  echo "Warning: Alacritty is currently running. For best results, quit Alacritty before upgrading." >&2
+fi
+
+_TMP_DIR="$(mktemp -d)"
+_MOUNT_DIR="${_TMP_DIR}/mount"
+_DMG_FILE="${_TMP_DIR}/Alacritty.dmg"
+_STAGING_APP="/Applications/.Alacritty.app.staging.$$"
+_BACKUP_APP="/Applications/.Alacritty.app.backup.$$"
+
+trap cleanup EXIT
+trap 'exit 1' HUP INT TERM
+
+echo "Downloading Alacritty ${_RELEASE_TAG}..."
+curl -fsSL --retry 3 "${_DMG_URL}" -o "${_DMG_FILE}"
+
+mkdir -p "${_MOUNT_DIR}"
+hdiutil attach "${_DMG_FILE}" -mountpoint "${_MOUNT_DIR}" -nobrowse -quiet
+
+if [[ ! -d "${_MOUNT_DIR}/Alacritty.app" ]]; then
+  echo "Error: Alacritty.app missing from disk image" >&2
+  exit 1
+fi
+
+echo "Installing Alacritty.app (administrator password may be requested)..."
+sudo ditto "${_MOUNT_DIR}/Alacritty.app" "${_STAGING_APP}"
+
+if [[ -e "${_TARGET_APP}" ]]; then
+  sudo mv "${_TARGET_APP}" "${_BACKUP_APP}"
+fi
+
+sudo mv "${_STAGING_APP}" "${_TARGET_APP}"
+
+if [[ -e "${_BACKUP_APP}" && "${_BACKUP_APP}" == /Applications/.Alacritty.app.backup.* ]]; then
+  sudo rm -rf "${_BACKUP_APP}"
+fi
+
+hdiutil detach "${_MOUNT_DIR}" -quiet 2>/dev/null || hdiutil detach "${_MOUNT_DIR}" -force -quiet 2>/dev/null || true
+
+install_auxiliary_artifacts
+
+echo "Alacritty ${_RELEASE_TAG} installed successfully."
+{{- end }}

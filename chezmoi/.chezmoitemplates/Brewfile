@@ -26,9 +26,6 @@ brew "bash-completion@2"
 brew "pam-reattach"
 brew "starship"
 brew "tmux"
-{{- if eq .env "personal" }}
-cask "alacritty"
-{{- end }}
 
 ## Editors
 brew "neovim"
