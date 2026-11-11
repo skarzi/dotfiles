@@ -11,4 +11,4 @@ success_symbol = "[❯](bold dimmed green)"
 [custom.lumos]
 command = '"${HOME}"/dotfiles/bin/darwin/lumos.sh status --short 2>/dev/null'
 when    = true
-format  = "([💡$output ](yellow))"
+format  = "([🪄$output ](yellow))"
