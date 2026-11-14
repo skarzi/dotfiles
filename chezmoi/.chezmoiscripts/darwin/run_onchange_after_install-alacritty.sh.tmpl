@@ -103,7 +103,7 @@ if pgrep -x "Alacritty" >/dev/null 2>&1; then
 fi
 
 _TMP_DIR="$(mktemp -d)"
-_MOUNT_DIR="${_TMP_DIR}/mount"
+_MOUNT_TARGET_DIR="${_TMP_DIR}/mount"
 _DMG_FILE="${_TMP_DIR}/Alacritty.dmg"
 _STAGING_APP="/Applications/.Alacritty.app.staging.$$"
 _BACKUP_APP="/Applications/.Alacritty.app.backup.$$"
@@ -114,8 +114,9 @@ trap 'exit 1' HUP INT TERM
 echo "Downloading Alacritty ${_RELEASE_TAG}..."
 curl -fsSL --retry 3 "${_DMG_URL}" -o "${_DMG_FILE}"
 
-mkdir -p "${_MOUNT_DIR}"
-hdiutil attach "${_DMG_FILE}" -mountpoint "${_MOUNT_DIR}" -nobrowse -quiet
+mkdir -p "${_MOUNT_TARGET_DIR}"
+hdiutil attach "${_DMG_FILE}" -mountpoint "${_MOUNT_TARGET_DIR}" -nobrowse -quiet
+_MOUNT_DIR="${_MOUNT_TARGET_DIR}"
 
 if [[ ! -d "${_MOUNT_DIR}/Alacritty.app" ]]; then
   echo "Error: Alacritty.app missing from disk image" >&2
@@ -134,8 +135,6 @@ sudo mv "${_STAGING_APP}" "${_TARGET_APP}"
 if [[ -e "${_BACKUP_APP}" && "${_BACKUP_APP}" == /Applications/.Alacritty.app.backup.* ]]; then
   sudo rm -rf "${_BACKUP_APP}"
 fi
-
-hdiutil detach "${_MOUNT_DIR}" -quiet 2>/dev/null || hdiutil detach "${_MOUNT_DIR}" -force -quiet 2>/dev/null || true
 
 install_auxiliary_artifacts
 
