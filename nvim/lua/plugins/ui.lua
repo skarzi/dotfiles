@@ -50,6 +50,8 @@ return {
     },
     {
         "nvim-tree/nvim-tree.lua",
+        -- Load at startup so `hijack_directories` catches `nvim <dir>`.
+        lazy = false,
         cmd = {
             "NvimTreeOpen",
             "NvimTreeToggle",
@@ -65,7 +67,28 @@ return {
             },
         },
         config = function()
+            -- Keys in the tree (defaults, no tabs): <CR> open in place
+            -- (replace the tree buffer; overridden below), <C-v> vertical
+            -- split, <C-x> horizontal split, <C-e> same as <CR>, g? all keys.
+            local function on_attach(bufnr)
+                local api = require("nvim-tree.api")
+                api.map.on_attach.default(bufnr)
+                vim.keymap.set("n", "<CR>", api.node.open.replace_tree_buffer, {
+                    desc = "nvim-tree: Open: In Place",
+                    buffer = bufnr,
+                    noremap = true,
+                    silent = true,
+                    nowait = true,
+                })
+                -- Undo defaults: H/M/L are screen motions, not filters
+                -- (dotfiles/bookmark/group empty); do not close on q.
+                for _, key in ipairs({ "H", "M", "L", "q" }) do
+                    vim.keymap.del("n", key, { buffer = bufnr })
+                end
+            end
+
             require("nvim-tree").setup({
+                on_attach = on_attach,
                 disable_netrw = true,
                 hijack_netrw = true,
                 renderer = { group_empty = true },
